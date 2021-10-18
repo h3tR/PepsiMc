@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "pepsimc:pepsican"
+    },
+    "title": "The sacred drink",
+    "description": "drink a can of pepsi",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "pepsimc:pepsican",
+          "count": 1
+        }
+      }
+    }
+  }
+}
