@@ -9,7 +9,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod("pepsimc")
 public class PepsiMC {
 
-	public void PepsiMc() {
+	public PepsiMC() {
 		
     	IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
     	item.ITEMS.register(bus);
