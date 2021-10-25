@@ -1,0 +1,36 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minecraft:white_tulip"
+        },
+        {
+            "item": "minecraft:white_tulip"
+        },
+        {
+            "item": "minecraft:white_tulip"
+        },
+        {
+            "item": "minecraft:white_tulip"
+        },
+        {
+            "item": "minecraft:white_tulip"
+        },
+        {
+            "item": "minecraft:white_tulip"
+        },
+        {
+            "item": "minecraft:white_tulip"
+        },
+        {
+            "item": "minecraft:white_tulip"
+        },
+        {
+            "item": "minecraft:white_tulip"
+        }
+    ],
+    "result": {
+        "item": "pepsimc:stevia",
+        "count": 2
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minecraft:sugar"
+        },
+        {
+            "item": "minecraft:coal"
+        },
+        {
+            "item": "pepsimc:phosphoric_acid"
+        },
+        {
+            "item": "minecraft:water_bucket"
+        },
+        {
+            "item": "pepsimc:caramel"
+        },
+        {
+            "item": "pepsimc:caffeine"
+        }
+    ],
+    "result": {
+        "item": "pepsimc:pepsican",
+        "count": 1
+    }
+}

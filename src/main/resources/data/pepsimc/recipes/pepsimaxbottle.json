@@ -1,0 +1,30 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "pepsimc:stevia"
+        }, 
+        {
+            "item": "pepsimc:stevia"
+        },
+        {
+            "item": "minecraft:coal"
+        },
+        {
+            "item": "pepsimc:phosphoric_acid"
+        },
+        {
+            "item": "minecraft:potion"
+        },
+        {
+            "item": "pepsimc:caffeine"
+        },
+        {
+            "item": "pepsimc:caffeine"
+        }
+    ],
+    "result": {
+        "item": "pepsimc:pepsimaxbottle",
+        "count": 1
+    }
+}

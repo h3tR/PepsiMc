@@ -1,6 +1,9 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.item;
 
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.block;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.fluid.fluid;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -94,6 +97,21 @@ public class item {
 					.effect(()->new EffectInstance(Effects.MOVEMENT_SPEED, 800, 2),1)
 					.build())));
 
+	
+
+	public static final RegistryObject<Item> PEPSITEINGOT = ITEMS.register("pepsite_ingot", ()-> new Item(new Item.Properties()
+			.tab(ItemGroup.TAB_MATERIALS)
+			.fireResistant())); 
+	
+	public static final RegistryObject<Item> PEPSI_FLUID_BUCKET = ITEMS.register("pepsi_bucket", ()-> new BucketItem(()->fluid.PEPSI_FLUID.get(),new Item.Properties()
+			.tab(ItemGroup.TAB_MATERIALS)
+			.stacksTo(1))); 
+	public static final RegistryObject<Item> PEPSI_MAX_FLUID_BUCKET = ITEMS.register("pepsi_max_bucket", ()-> new BucketItem(()->fluid.PEPSI_MAX_FLUID.get(),new Item.Properties()
+			.tab(ItemGroup.TAB_MATERIALS)
+			.stacksTo(1))); 
+	
+	//blockItems
+	
 	public static final RegistryObject<BlockItem> PEPSITEBLOCK = ITEMS.register("pepsite_block", ()-> new BlockItem(block.PEPSITEBLOCK.get(), new Item.Properties()
 			.tab(ItemGroup.TAB_BUILDING_BLOCKS)
 			.fireResistant()));
@@ -101,8 +119,8 @@ public class item {
 	public static final RegistryObject<BlockItem> PEPSITEORE = ITEMS.register("pepsite_ore", ()-> new BlockItem(block.PEPSITEORE.get(), new Item.Properties()
 			.tab(ItemGroup.TAB_BUILDING_BLOCKS)
 			.fireResistant()));
-
-	public static final RegistryObject<Item> PEPSITEINGOT = ITEMS.register("pepsite_ingot", ()-> new Item(new Item.Properties()
-			.tab(ItemGroup.TAB_MATERIALS)
-			.fireResistant())); 
+	
+	public static final RegistryObject<BlockItem> BOTTLER = ITEMS.register("bottler", ()-> new BlockItem(block.BOTTLER.get(), new Item.Properties()
+			.tab(ItemGroup.TAB_DECORATIONS)
+			.fireResistant()));
 }

@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:smelting",
+	"ingredient": {
+		"item": "minecraft:cocoa_beans"
+	},
+	"result": "pepsimc:caffeine",
+	"experience": 0.1,
+	"cookingtime": 200
+}

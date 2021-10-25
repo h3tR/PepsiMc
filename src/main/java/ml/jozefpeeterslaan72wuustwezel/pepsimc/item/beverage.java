@@ -1,4 +1,4 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.item;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
