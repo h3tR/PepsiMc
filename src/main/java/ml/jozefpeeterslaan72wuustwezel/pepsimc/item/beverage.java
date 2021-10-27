@@ -4,9 +4,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
 
-public class beverage extends Item{
+public class Beverage extends Item{
 
-	public beverage(Properties p_i48487_1_) {
+	public Beverage(Properties p_i48487_1_) {
 		super(p_i48487_1_);
 		// TODO Auto-generated constructor stub
 	}

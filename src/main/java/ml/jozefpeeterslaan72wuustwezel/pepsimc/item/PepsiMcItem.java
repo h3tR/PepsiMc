@@ -1,7 +1,7 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.item;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.block;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.fluid.fluid;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.PepsiMcBlock;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.fluid.PepsiMcFluid;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Food;
@@ -13,10 +13,10 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class item {
+public class PepsiMcItem {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "pepsimc");
 	
-	public static final RegistryObject<beverage> PEPSICAN = ITEMS.register("pepsican", ()-> new beverage(new Item.Properties()
+	public static final RegistryObject<Beverage> PEPSICAN = ITEMS.register("pepsican", ()-> new Beverage(new Item.Properties()
 			.tab(ItemGroup.TAB_FOOD)
 			.food(new Food.Builder()
 					.nutrition(2)
@@ -32,7 +32,7 @@ public class item {
 					.build()
 					).fireResistant()));
 	
-	public static final RegistryObject<beverage> PEPSIBOTTLE = ITEMS.register("pepsibottle", ()-> new beverage(new Item.Properties()
+	public static final RegistryObject<Beverage> PEPSIBOTTLE = ITEMS.register("pepsibottle", ()-> new Beverage(new Item.Properties()
 			.tab(ItemGroup.TAB_FOOD)
 			.food(new Food.Builder()
 					.nutrition(2)
@@ -66,7 +66,7 @@ public class item {
 	public static final RegistryObject<Item> STEVIA = ITEMS.register("stevia", ()-> new Item(new Item.Properties()
 			.tab(ItemGroup.TAB_MISC)));
 	
-	public static final RegistryObject<beverage> PEPSIMAXBOTTLE = ITEMS.register("pepsimaxbottle", ()-> new beverage(new Item.Properties()
+	public static final RegistryObject<Beverage> PEPSIMAXBOTTLE = ITEMS.register("pepsimaxbottle", ()-> new Beverage(new Item.Properties()
 			.tab(ItemGroup.TAB_FOOD)
 			.food(new Food.Builder()
 					.nutrition(2)
@@ -82,7 +82,7 @@ public class item {
 					.build()
 			).fireResistant()));
 	
-	public static final RegistryObject<beverage> PEPSIMAXCAN = ITEMS.register("pepsimaxcan", ()-> new beverage(new Item.Properties()
+	public static final RegistryObject<Beverage> PEPSIMAXCAN = ITEMS.register("pepsimaxcan", ()-> new Beverage(new Item.Properties()
 			.tab(ItemGroup.TAB_FOOD)
 			.food(new Food.Builder()
 					.nutrition(2)
@@ -103,24 +103,24 @@ public class item {
 			.tab(ItemGroup.TAB_MATERIALS)
 			.fireResistant())); 
 	
-	public static final RegistryObject<Item> PEPSI_FLUID_BUCKET = ITEMS.register("pepsi_bucket", ()-> new BucketItem(()->fluid.PEPSI_FLUID.get(),new Item.Properties()
+	public static final RegistryObject<Item> PEPSI_FLUID_BUCKET = ITEMS.register("pepsi_bucket", ()-> new BucketItem(()->PepsiMcFluid.PEPSI_FLUID.get(),new Item.Properties()
 			.tab(ItemGroup.TAB_MATERIALS)
 			.stacksTo(1))); 
-	public static final RegistryObject<Item> PEPSI_MAX_FLUID_BUCKET = ITEMS.register("pepsi_max_bucket", ()-> new BucketItem(()->fluid.PEPSI_MAX_FLUID.get(),new Item.Properties()
+	public static final RegistryObject<Item> PEPSI_MAX_FLUID_BUCKET = ITEMS.register("pepsi_max_bucket", ()-> new BucketItem(()->PepsiMcFluid.PEPSI_MAX_FLUID.get(),new Item.Properties()
 			.tab(ItemGroup.TAB_MATERIALS)
 			.stacksTo(1))); 
 	
 	//blockItems
 	
-	public static final RegistryObject<BlockItem> PEPSITEBLOCK = ITEMS.register("pepsite_block", ()-> new BlockItem(block.PEPSITEBLOCK.get(), new Item.Properties()
+	public static final RegistryObject<BlockItem> PEPSITEBLOCK = ITEMS.register("pepsite_block", ()-> new BlockItem(PepsiMcBlock.PEPSITEBLOCK.get(), new Item.Properties()
 			.tab(ItemGroup.TAB_BUILDING_BLOCKS)
 			.fireResistant()));
 	
-	public static final RegistryObject<BlockItem> PEPSITEORE = ITEMS.register("pepsite_ore", ()-> new BlockItem(block.PEPSITEORE.get(), new Item.Properties()
+	public static final RegistryObject<BlockItem> PEPSITEORE = ITEMS.register("pepsite_ore", ()-> new BlockItem(PepsiMcBlock.PEPSITEORE.get(), new Item.Properties()
 			.tab(ItemGroup.TAB_BUILDING_BLOCKS)
 			.fireResistant()));
 	
-	public static final RegistryObject<BlockItem> BOTTLER = ITEMS.register("bottler", ()-> new BlockItem(block.BOTTLER.get(), new Item.Properties()
+	public static final RegistryObject<BlockItem> BOTTLER = ITEMS.register("bottler", ()-> new BlockItem(PepsiMcBlock.BOTTLER.get(), new Item.Properties()
 			.tab(ItemGroup.TAB_DECORATIONS)
 			.fireResistant()));
 }

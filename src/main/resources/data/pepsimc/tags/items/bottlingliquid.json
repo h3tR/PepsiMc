@@ -1,0 +1,7 @@
+{
+	"replace": false,
+	"values": [
+	 "pepsimc:pepsi_bucket",
+	 "pepsimc:pepsi_max_bucket"
+	]
+}

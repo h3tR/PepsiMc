@@ -17,5 +17,6 @@
 	"block.pepsimc.bottler":"Bottler",
 		//Misc
 	"fluid.pepsimc.pepsi_fluid_block":"Pepsi",
-	"fluid.pepsimc.pepsi_max_fluid_block":"Pepsi Max"
+	"fluid.pepsimc.pepsi_max_fluid_block":"Pepsi Max",
+	"screen.pepsimc.bottler":"Bottler"
 }

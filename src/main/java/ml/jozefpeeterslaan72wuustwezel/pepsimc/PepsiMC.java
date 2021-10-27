@@ -1,8 +1,12 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.block;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.fluid.fluid;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.item.item;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.PepsiMcBlock;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.fluid.PepsiMcFluid;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.item.PepsiMcItem;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.PepsiMcTileEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.container.PepsiMcContainer;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.screen.BottlerScreen;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.common.MinecraftForge;
@@ -20,22 +24,25 @@ public class PepsiMC {
 		    	
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		bus.addListener(this::doClientStuff);
-    	item.ITEMS.register(bus);
-    	block.BLOCKS.register(bus);
-    	fluid.FLUIDS.register(bus);
-
-    	MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, worldgen::OreGen);
+    	PepsiMcItem.ITEMS.register(bus);
+    	PepsiMcBlock.BLOCKS.register(bus);
+    	PepsiMcFluid.FLUIDS.register(bus);
+    	PepsiMcTileEntity.TILE_ENTITIES.register(bus);
+    	PepsiMcContainer.CONTAINERS.register(bus);
+    	
+    	MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldGen::OreGen);
         MinecraftForge.EVENT_BUS.register(this);
     }
 	
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		event.enqueueWork(()->{
-			RenderTypeLookup.setRenderLayer(block.PEPSI_FLUID_BLOCK.get(), RenderType.translucent());
-			RenderTypeLookup.setRenderLayer(fluid.PEPSI_FLUID.get(), RenderType.translucent());
-			RenderTypeLookup.setRenderLayer(fluid.PEPSI_FLOW.get(), RenderType.translucent());
-			RenderTypeLookup.setRenderLayer(block.PEPSI_MAX_FLUID_BLOCK.get(), RenderType.translucent());
-			RenderTypeLookup.setRenderLayer(fluid.PEPSI_MAX_FLUID.get(), RenderType.translucent());
-			RenderTypeLookup.setRenderLayer(fluid.PEPSI_MAX_FLOW.get(), RenderType.translucent());
+			RenderTypeLookup.setRenderLayer(PepsiMcBlock.PEPSI_FLUID_BLOCK.get(), RenderType.translucent());
+			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_FLUID.get(), RenderType.translucent());
+			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_FLOW.get(), RenderType.translucent());
+			RenderTypeLookup.setRenderLayer(PepsiMcBlock.PEPSI_MAX_FLUID_BLOCK.get(), RenderType.translucent());
+			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_MAX_FLUID.get(), RenderType.translucent());
+			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_MAX_FLOW.get(), RenderType.translucent());
+			ScreenManager.register(PepsiMcContainer.BOTTLER_CONTAINER.get(), BottlerScreen::new);
 		});
 		
 	}
