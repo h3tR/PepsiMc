@@ -1,0 +1,10 @@
+{
+    "type": "pepsimc:bottler",
+    "label": { "item": "pepsimc:pepsi_label" },
+    "container": { "item": "pepsimc:empty_bottle" }, 
+    "fluid": { "item": "pepsimc:pepsi_bucket" },  
+    "result": {
+        "item": "pepsimc:pepsi_bottle",
+        "count": 1
+    }
+}

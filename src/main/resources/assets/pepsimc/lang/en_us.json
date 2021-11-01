@@ -1,9 +1,9 @@
 {
 		//Items
-	"item.pepsimc.pepsican":"Pepsi Can",
-	"item.pepsimc.pepsibottle":"Pepsi Bottle",
-	"item.pepsimc.pepsimaxbottle":"Pepsi Max Bottle",
-	"item.pepsimc.pepsimaxcan":"Pepsi Max Can",
+	"item.pepsimc.pepsi_can":"Can of Pepsi ",
+	"item.pepsimc.pepsi_bottle":"Bottle ofPepsi",
+	"item.pepsimc.pepsi_max_bottle":"Bottle of Pepsi Max",
+	"item.pepsimc.pepsimax_can":"Can of Pepsi Max",
 	"item.pepsimc.caramel":"Caramel",
 	"item.pepsimc.phosphoric_acid":"Phosphoric Acid",
 	"item.pepsimc.stevia":"Stevia Sweetener",
@@ -11,6 +11,10 @@
 	"item.pepsimc.pepsite_ingot":"Pepsite Ingot",
 	"item.pepsimc.pepsi_bucket":"Bucket of Pepsi",
 	"item.pepsimc.pepsi_max_bucket":"Bucket of Pepsi Max",
+	"item.pepsimc.pepsi_label":"Pepsi Label",
+	"item.pepsimc.pepsi_max_label":"Pepsi Max Label",
+	"item.pepsimc.empty_bottle":"Empty Bottle",
+	"item.pepsimc.empty_can":"Empty Can",
 		//blocks
 	"block.pepsimc.pepsite_block":"Pepsite Block",
 	"block.pepsimc.pepsite_ore":"Pepsite Ore",

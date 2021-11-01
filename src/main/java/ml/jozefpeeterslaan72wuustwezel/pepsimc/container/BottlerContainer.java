@@ -1,4 +1,4 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.container;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.container;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.PepsiMcBlock;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,16 +30,18 @@ public class BottlerContainer extends Container{
 
 		if(TE !=null) {
 			TE.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h->{
-				addSlot(new SlotItemHandler(h,0,11,14));
-				addSlot(new SlotItemHandler(h,1,29,14));
-				addSlot(new SlotItemHandler(h,2,11,42));
-				addSlot(new SlotItemHandler(h,3,142,29));
-
+				addSlot(new SlotItemHandler(h,0,12,15));
+				addSlot(new SlotItemHandler(h,1,30,15));
+				addSlot(new SlotItemHandler(h,2,12,43));
+				addSlot(new SlotItemHandler(h,3,143,30));
+				
 			});
 		}
 		
 	}
-	
+	public boolean slotHasItem(int slotIndex) {
+		return !inv.getStackInSlot(slotIndex).isEmpty();
+	}
     private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {
         for (int i = 0; i < amount; i++) {
             addSlot(new SlotItemHandler(handler, index, x, y));

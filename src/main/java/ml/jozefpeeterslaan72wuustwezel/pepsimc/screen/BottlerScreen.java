@@ -1,10 +1,11 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.screen;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.screen;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 //import ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.BottlerTile;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.container.BottlerContainer;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.container.BottlerContainer;
+//import ml.jozefpeeterslaan72wuustwezel.pepsimc.container.PepsiMcContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -27,15 +28,7 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 		this.renderTooltip(stack, X, Y);
 	}
 	
-	/*if(BottlerTile.slotHasItem(0)) {
-	this.blit(stack, i+61, j+35, 173, 0, 3, 3);
-}
-if (BottlerTile.slotHasItem(1)) {
-	this.blit(stack, i+64, j+35, 173, 0, 3, 3);
-}
-if (BottlerTile.slotHasItem(2)) {
-	this.blit(stack, i+67, j+35, 173, 0, 3, 3);
-}*/
+
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void renderBg(MatrixStack stack, float Ptick, int X, int Y) {
@@ -44,7 +37,15 @@ if (BottlerTile.slotHasItem(2)) {
 		int i = this.getGuiLeft();
 		int j = this.getGuiTop();
 		this.blit(stack, i, j, 0, 0, this.getXSize(), this.getYSize());
-		
+		/*if(PepsiMcContainer.BOTTLER_CONTAINER.get(). .slotHasItem(0)) {
+			this.blit(stack, i+61, j+35, 173, 0, 3, 3);
+		}
+		if (BottlerContainer.slotHasItem(1)) {
+			this.blit(stack, i+64, j+35, 173, 0, 3, 3);
+		}
+		if (BottlerContainer.slotHasItem(2)) {
+			this.blit(stack, i+67, j+35, 173, 0, 3, 3);
+		}*/
 	}
 	
 }

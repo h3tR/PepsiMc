@@ -1,11 +1,14 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc;
 
+
+
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.fluid.PepsiMcFluid;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.item.PepsiMcItem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.PepsiMcTileEntity;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.container.PepsiMcContainer;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.screen.BottlerScreen;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.container.PepsiMcContainer;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.data.recipes.PepsiMcRecipeType;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.screen.BottlerScreen;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -18,17 +21,16 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod("pepsimc")
 public class PepsiMC {
-
+	
 	public PepsiMC() {
-		
-		    	
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		bus.addListener(this::doClientStuff);
-    	PepsiMcItem.ITEMS.register(bus);
-    	PepsiMcBlock.BLOCKS.register(bus);
-    	PepsiMcFluid.FLUIDS.register(bus);
-    	PepsiMcTileEntity.TILE_ENTITIES.register(bus);
-    	PepsiMcContainer.CONTAINERS.register(bus);
+    	PepsiMcItem.register(bus);
+    	PepsiMcBlock.register(bus);
+    	PepsiMcFluid.register(bus);
+    	PepsiMcTileEntity.register(bus);
+    	PepsiMcContainer.register(bus);
+    	PepsiMcRecipeType.register(bus);
     	
     	MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldGen::OreGen);
         MinecraftForge.EVENT_BUS.register(this);

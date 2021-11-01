@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.BottlerTile;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.PepsiMcTileEntity;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.container.BottlerContainer;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.container.BottlerContainer;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -100,6 +100,12 @@ public class Bottler extends Block {
 		// TODO Auto-generated method stub
 		return PepsiMcTileEntity.BOTTLER_TILE.get().create();
 	}
+	  
+	@Override
+	public boolean hasTileEntity(BlockState state) {
+		// TODO Auto-generated method stub
+		return true;
+	}
 	
 	@Override
 	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity plr, Hand hand, BlockRayTraceResult RT) {
@@ -109,8 +115,8 @@ public class Bottler extends Block {
 					if(TE instanceof BottlerTile) {
 						INamedContainerProvider containerProvider = createContainerProvider(world, pos);
 						NetworkHooks.openGui(((ServerPlayerEntity)plr), containerProvider, pos );
-					/*} else {
-						throw new IllegalStateException("Container provider is missing.");*/
+					} else {
+						throw new IllegalStateException("Container provider is missing.");
 					}
 				}
 		}

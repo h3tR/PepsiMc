@@ -8,14 +8,15 @@ import net.minecraftforge.common.Tags;
 public class PepsiMcTags {
 	public static class Items{
 		
-		public static final Tags.IOptionalNamedTag<Item> BOTTLING_LIQUID = createTag("bottlingliquid");
+		public static final Tags.IOptionalNamedTag<Item> BOTTLING_LIQUID = createTag("bottling_liquid");
 		
-		public static final Tags.IOptionalNamedTag<Item> BOTTLING_CONTAINER = createTag("bottlingcontainer");
+		public static final Tags.IOptionalNamedTag<Item> BOTTLING_CONTAINER = createTag("bottling_container");
 		
-		public static final Tags.IOptionalNamedTag<Item> BOTTLING_LABEL = createTag("bottlinglabel");
+		public static final Tags.IOptionalNamedTag<Item> BOTTLING_LABEL = createTag("bottling_label");
 		
 		private static Tags.IOptionalNamedTag<Item> createTag(String name){
 			return ItemTags.createOptional(new ResourceLocation("pepsimc", name));
 		}
+
 	}
 }
