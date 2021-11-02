@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "pepsimc:pepsican"
+      "item": "pepsimc:pepsi_can"
     },
     "title": "The sacred drink",
     "description": "drink a can of pepsi",
@@ -16,7 +16,7 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "pepsimc:pepsican",
+          "item": "pepsimc:pepsi_can",
           "count": 1
         }
       }

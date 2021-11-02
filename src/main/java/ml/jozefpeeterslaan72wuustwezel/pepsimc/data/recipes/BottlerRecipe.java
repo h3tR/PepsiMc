@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import com.google.gson.JsonObject;
 
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.PepsiMcBlock;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -19,7 +20,6 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class BottlerRecipe implements IBottlerRecipe{
 	
-	@SuppressWarnings("unused")
 	private final ResourceLocation id;
 	private final ItemStack out;
 	private final NonNullList<Ingredient> in;
@@ -32,8 +32,8 @@ public class BottlerRecipe implements IBottlerRecipe{
 	
 	@Override
 	public boolean matches(IInventory inv, World Win) {
-		if(in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1))&&in.get(2).test(inv.getItem(2))) {
-			return true;
+		if(in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1))) {
+			return in.get(2).test(inv.getItem(2));
 		}
 		return false;
 	}
@@ -60,12 +60,13 @@ public class BottlerRecipe implements IBottlerRecipe{
 	@Override
 	public ResourceLocation getId() {
 		// TODO Auto-generated method stub
-		return null;
+		return id;
 	}
+	
 	@Override
 	public ItemStack getToastSymbol() {
 		// TODO Auto-generated method stub
-		return IBottlerRecipe.super.getToastSymbol();
+		return new ItemStack(PepsiMcBlock.BOTTLER.get());
 	}
 	
 	public static class BottlerRecipeType implements IRecipeType<BottlerRecipe>{
