@@ -16,6 +16,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
@@ -44,43 +45,43 @@ public class Bottler extends Block {
 	private static final DirectionProperty FACING = HorizontalBlock.FACING;
 	
 	
-	private static final VoxelShape ShN = Stream.of(
-			Block.box(5, 7, 5, 6, 9, 6),
-			Block.box(5, 7, 10, 6, 9, 11),
-			Block.box(10, 7, 10, 11, 9, 11),
-			Block.box(10, 7, 5, 11, 9, 6),
-			Block.box(4, 7, 6, 5, 9, 10),
-			Block.box(11, 7, 6, 12, 9, 10),
-			Block.box(6, 7, 13, 10, 18, 15),
-			Block.box(6, 7, 1, 10, 18, 3),
-			Block.box(6, 7, 4, 10, 9, 5),
-			Block.box(0, 7, 13, 6, 9, 14),
-			Block.box(6, 7, 11, 10, 9, 12),
-			Block.box(7, 15, 7, 9, 20, 9),
-			Block.box(6, 16, 3, 10, 17, 13),
-			Block.box(0, 7, 2, 6, 9, 3),
-			Block.box(10, 7, 13, 16, 9, 14),
-			Block.box(10, 7, 2, 16, 9, 3),
-			Block.box(0, 0, 0, 16, 7, 16)
-			).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
-	
-	private static final VoxelShape ShE = Stream.of(
+	private static final VoxelShape ShW = Stream.of(
 			Block.box(5, 7, 10, 6, 9, 11),
 			Block.box(10, 7, 10, 11, 9, 11),
 			Block.box(10, 7, 5, 11, 9, 6),
 			Block.box(5, 7, 5, 6, 9, 6),
 			Block.box(6, 7, 11, 10, 9, 12),
 			Block.box(6, 7, 4, 10, 9, 5),
-			Block.box(13, 7, 6, 15, 18, 10),
-			Block.box(1, 7, 6, 3, 18, 10),
+			Block.box(13, 5, 6, 15, 16, 10),
+			Block.box(1, 5, 6, 3, 16, 10),
 			Block.box(4, 7, 6, 5, 9, 10),
 			Block.box(13, 7, 10, 14, 9, 16),
 			Block.box(11, 7, 6, 12, 9, 10),
-			Block.box(7, 15, 7, 9, 20, 9),
-			Block.box(3, 16, 6, 13, 17, 10),
+			Block.box(7, 12, 7, 9, 16, 9),
+			Block.box(3, 14, 6, 13, 15, 10),
 			Block.box(2, 7, 10, 3, 9, 16),
 			Block.box(13, 7, 0, 14, 9, 6),
 			Block.box(2, 7, 0, 3, 9, 6),
+			Block.box(0, 0, 0, 16, 7, 16)
+			).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+	
+	private static final VoxelShape ShL = Stream.of(
+			Block.box(10, 7, 10, 11, 9, 11),
+			Block.box(10, 7, 5, 11, 9, 6),
+			Block.box(5, 7, 5, 6, 9, 6),
+			Block.box(5, 7, 10, 6, 9, 11),
+			Block.box(11, 7, 6, 12, 9, 10),
+			Block.box(4, 7, 6, 5, 9, 10),
+			Block.box(6, 5, 1, 10, 16, 3),
+			Block.box(6, 5, 13, 10, 16, 15),
+			Block.box(6, 7, 11, 10, 9, 12),
+			Block.box(10, 7, 2, 16, 9, 3),
+			Block.box(6, 7, 4, 10, 9, 5),
+			Block.box(7, 12, 7, 9, 16, 9),
+			Block.box(6, 14, 3, 10, 15, 13),
+			Block.box(10, 7, 13, 16, 9, 14),
+			Block.box(0, 7, 2, 6, 9, 3),
+			Block.box(0, 7, 13, 6, 9, 14),
 			Block.box(0, 0, 0, 16, 7, 16)
 			).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
 			
@@ -97,15 +98,27 @@ public class Bottler extends Block {
 	@Nullable
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		// TODO Auto-generated method stub
 		return PepsiMcTileEntity.BOTTLER_TILE.get().create();
 	}
 	  
 	@Override
 	public boolean hasTileEntity(BlockState state) {
-		// TODO Auto-generated method stub
 		return true;
 	}
+	
+	@SuppressWarnings("deprecation")
+	public void onRemove(BlockState state, World level, BlockPos pos, BlockState secondState, boolean p_196243_5_) {
+	      if (!state.is(secondState.getBlock())) {
+	         TileEntity tileentity = level.getBlockEntity(pos);
+	         if (tileentity instanceof BottlerTile) {
+		         BottlerTile bottlerTile = (BottlerTile)tileentity;
+	            InventoryHelper.dropContents(level, pos, bottlerTile.getNNLInv());
+	            level.updateNeighbourForOutputSignal(pos, this);
+	         }
+
+	         super.onRemove(state, level, pos, secondState, p_196243_5_);
+	      }
+	   }
 	
 	@Override
 	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity plr, Hand hand, BlockRayTraceResult RT) {
@@ -141,15 +154,15 @@ public class Bottler extends Block {
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos p, ISelectionContext context) {
 		 switch (state.getValue(FACING)) {
 		 	case NORTH:
-		 		return ShN;
+		 		return ShW;
 		 	case EAST:
-		 		return ShE;
+		 		return ShL;
 		 	case SOUTH:
-		 		return ShN;
+		 		return ShW;
 		 	case WEST:
-		 		return ShE;
+		 		return ShL;
 		 	default:
-		 		return ShN;
+		 		return ShW;
 		 }
 	}
 	

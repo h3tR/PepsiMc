@@ -1,7 +1,7 @@
 {
     "type": "pepsimc:bottler",
     "label": { "item": "pepsimc:pepsi_label" },
-    "container": { "item": "pepsimc:empty_can" }, 
+   "container": { "item": "pepsimc:empty_can" }, 
     "fluid": { "item": "pepsimc:pepsi_bucket" },  
     "result": {
         "item": "pepsimc:pepsi_can"

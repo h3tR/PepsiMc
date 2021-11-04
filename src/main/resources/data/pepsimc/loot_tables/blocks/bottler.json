@@ -9,7 +9,12 @@
           "type": "minecraft:item",
           "name": "pepsimc:bottler"
         }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
       ]
-      }
+    }
   ]
 }

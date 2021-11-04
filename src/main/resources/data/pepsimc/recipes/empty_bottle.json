@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " g ",
+        "g g",
+        "ggg"
+    ],
+    "key": {
+        "g": {
+            "item": "minecraft:glass_pane"
+        }
+    },
+    "result": {
+        "item": "pepsimc:empty_bottle",
+        "count": 1
+    }
+}

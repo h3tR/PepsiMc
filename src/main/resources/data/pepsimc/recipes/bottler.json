@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "pdp",
+        "pbp",
+        "iii"
+    ],
+    "key": {
+        "p": {
+            "item": "pepsimc:pepsite_ingot"
+        },
+        "d": {
+            "item": "minecraft:dispenser"
+        }, 
+        "b": {
+            "item": "minecraft:bucket"
+        },
+        "i": {
+            "item": "pepsimc:pepsite_ingot"
+        }
+    },
+    "result": {
+        "item": "pepsimc:bottler",
+        "count": 1
+    }
+}

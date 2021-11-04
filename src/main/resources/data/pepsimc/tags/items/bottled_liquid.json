@@ -1,0 +1,9 @@
+{
+	"replace": false,
+	"values": [
+	"pepsimc:pepsi_max_can",
+	"pepsimc:pepsi_can",
+	"pepsimc:pepsi_bottle",
+	"pepsimc:pepsi_max_bottle"
+	]
+}

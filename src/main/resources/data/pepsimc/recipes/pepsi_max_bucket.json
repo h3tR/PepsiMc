@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "pepsimc:stevia"
+        }, 
+        {
+            "item": "minecraft:water_bucket"
+        },
+        {
+            "item": "pepsimc:phosphoric_acid"
+        },
+        {
+            "item": "pepsimc:caffeine"
+        }
+
+    ],
+    "result": {
+        "item": "pepsimc:pepsi_bucket",
+        "count": 1
+    }
+}

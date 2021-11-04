@@ -14,6 +14,8 @@ public class PepsiMcTags {
 		
 		public static final Tags.IOptionalNamedTag<Item> BOTTLING_LABEL = createTag("bottling_label");
 		
+		public static final Tags.IOptionalNamedTag<Item> BOTTLED_LIQUID = createTag("bottled_liquid");
+
 		private static Tags.IOptionalNamedTag<Item> createTag(String name){
 			return ItemTags.createOptional(new ResourceLocation("pepsimc", name));
 		}

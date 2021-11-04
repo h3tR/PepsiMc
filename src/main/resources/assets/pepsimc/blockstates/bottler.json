@@ -1,8 +1,8 @@
 {
     "variants": {
         "facing=north": { "model": "pepsimc:block/bottler" },
-        "facing=south": { "model": "pepsimc:block/bottler", "y":180 },
-        "facing=west": { "model": "pepsimc:block/bottler", "y":270 },
+        "facing=south": { "model": "pepsimc:block/bottler" },
+        "facing=west": { "model": "pepsimc:block/bottler", "y":90 },
         "facing=east": { "model": "pepsimc:block/bottler", "y":90 }
         
     }
