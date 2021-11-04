@@ -5,6 +5,9 @@
             "item": "pepsimc:stevia"
         }, 
         {
+            "item": "pepsimc:pepsite_ingot"
+        },
+        {
             "item": "minecraft:water_bucket"
         },
         {

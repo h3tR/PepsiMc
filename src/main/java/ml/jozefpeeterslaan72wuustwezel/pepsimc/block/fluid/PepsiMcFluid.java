@@ -1,5 +1,5 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.block.fluid;
-
+/*
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.item.PepsiMcItem;
 import net.minecraft.fluid.FlowingFluid;
@@ -11,11 +11,11 @@ import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fluids.ForgeFlowingFluid.Source;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ForgeRegistries;*/
 
 public class PepsiMcFluid {
 
-	public static DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, "pepsimc");
+	/*public static DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, "pepsimc");
 	
 	public static final RegistryObject<Source> PEPSI_FLUID = FLUIDS.register("pepsi_fluid", ()-> new ForgeFlowingFluid.Source(PepsiMcFluid.PEPSI_PROPERTIES));
 	
@@ -35,5 +35,5 @@ public class PepsiMcFluid {
 	
 	public static void register(IEventBus bus) {
 		FLUIDS.register(bus);
-	}
+	}*/
 }

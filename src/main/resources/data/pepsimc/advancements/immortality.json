@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "pepsimc:pepsi_can"
+    },
+    "title": "Immortality",
+    "description": "You drank all pepsi beverages!",
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "minecraft:husbandry/drank_can",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pepsimc:pepsi_can",
+            "pepsimc:pepsi_bottle",
+            "pepsimc:pepsi_max_can",
+            "pepsimc:pepsi_max_bottle"
+          ],
+          "count": 0
+        }
+      }
+    }
+  }
+}

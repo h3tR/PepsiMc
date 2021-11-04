@@ -5,6 +5,9 @@
             "item": "minecraft:sugar"
         }, 
         {
+            "item": "pepsimc:pepsite_ingot"
+        },
+        {
             "item": "minecraft:water_bucket"
         },
         {

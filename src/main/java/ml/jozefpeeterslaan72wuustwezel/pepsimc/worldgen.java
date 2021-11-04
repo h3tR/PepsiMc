@@ -17,7 +17,7 @@ public class WorldGen {
 	{
 		if(!(event.getCategory().equals(Biome.Category.NETHER)||event.getCategory().equals(Biome.Category.THEEND)))
 		{
-			genOre(event, OreFeatureConfig.FillerBlockType.NATURAL_STONE, PepsiMcBlock.PEPSITEORE.get().defaultBlockState(), 12, 5, 50, 45);
+			genOre(event, OreFeatureConfig.FillerBlockType.NATURAL_STONE, PepsiMcBlock.PEPSITEORE.get().defaultBlockState(), 5, 5, 50, 20);
 		}
 	}
 	

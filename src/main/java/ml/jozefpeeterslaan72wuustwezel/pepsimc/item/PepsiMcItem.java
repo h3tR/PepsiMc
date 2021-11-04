@@ -1,9 +1,9 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.item;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.PepsiMcBlock;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.fluid.PepsiMcFluid;
+//import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.fluid.PepsiMcFluid;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.BucketItem;
+//import net.minecraft.item.BucketItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -119,14 +119,20 @@ public class PepsiMcItem {
 	
 	public static final RegistryObject<Item> EMPTY_CAN = ITEMS.register("empty_can", ()-> new Item(new Item.Properties()
 			.tab(ItemGroup.TAB_MISC))); 
+	public static final RegistryObject<Item> PEPSI_FLUID_BUCKET = ITEMS.register("pepsi_bucket", ()-> new Item(new Item.Properties()
+			.tab(ItemGroup.TAB_MATERIALS)
+			.stacksTo(1))); 
+	public static final RegistryObject<Item> PEPSI_MAX_FLUID_BUCKET = ITEMS.register("pepsi_max_bucket", ()-> new Item(new Item.Properties()
+			.tab(ItemGroup.TAB_MATERIALS)
+			.stacksTo(1))); 
 	
-	public static final RegistryObject<Item> PEPSI_FLUID_BUCKET = ITEMS.register("pepsi_bucket", ()-> new BucketItem(()->PepsiMcFluid.PEPSI_FLUID.get(),new Item.Properties()
+	/*public static final RegistryObject<Item> PEPSI_FLUID_BUCKET = ITEMS.register("pepsi_bucket", ()-> new BucketItem(()->PepsiMcFluid.PEPSI_FLUID.get(),new Item.Properties()
 			.tab(ItemGroup.TAB_MATERIALS)
 			.stacksTo(1))); 
 	public static final RegistryObject<Item> PEPSI_MAX_FLUID_BUCKET = ITEMS.register("pepsi_max_bucket", ()-> new BucketItem(()->PepsiMcFluid.PEPSI_MAX_FLUID.get(),new Item.Properties()
 			.tab(ItemGroup.TAB_MATERIALS)
 			.stacksTo(1))); 
-	
+	*/
 	//blockItems
 	
 	public static final RegistryObject<BlockItem> PEPSITE_BLOCK = ITEMS.register("pepsite_block", ()-> new BlockItem(PepsiMcBlock.PEPSITEBLOCK.get(), new Item.Properties()
