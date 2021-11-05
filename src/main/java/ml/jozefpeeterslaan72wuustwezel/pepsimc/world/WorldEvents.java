@@ -7,36 +7,36 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import org.apache.logging.log4j.LogManager;
+//import org.apache.logging.log4j.LogManager;
 
-import com.mojang.serialization.Codec;
+//import com.mojang.serialization.Codec;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.world.structure.PepsiMcStructure;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
+//import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.ChunkGenerator;
+//import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.feature.structure.Structure;
+//import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.template.RuleTest;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
-import net.minecraft.world.gen.settings.DimensionStructuresSettings;
-import net.minecraft.world.gen.settings.StructureSeparationSettings;
-import net.minecraft.world.server.ServerWorld;
+//import net.minecraft.world.gen.settings.DimensionStructuresSettings;
+//import net.minecraft.world.gen.settings.StructureSeparationSettings;
+//import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
-import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+//import net.minecraftforge.event.world.WorldEvent;
+//import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+//import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 @Mod.EventBusSubscriber(modid = "pepsimc")
 public class WorldEvents {
@@ -75,7 +75,7 @@ public class WorldEvents {
 	
 	
 	
-	@SuppressWarnings("resource")
+	/*@SuppressWarnings("resource")
 	@SubscribeEvent
 	public static void DimSpace(final WorldEvent.Load event) {
 		if(event.getWorld() instanceof ServerWorld) {
@@ -101,7 +101,7 @@ public class WorldEvents {
 	            tempMap.putIfAbsent(PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get(), DimensionStructuresSettings.DEFAULTS.get(PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get()));
 	            serverWorld.getChunkSource().generator.getSettings().structureConfig().putAll(tempMap);
 		}
-	}
+	}*/
 	
 }
 
