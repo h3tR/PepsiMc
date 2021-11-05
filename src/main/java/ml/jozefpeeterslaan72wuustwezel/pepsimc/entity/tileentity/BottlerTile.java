@@ -1,4 +1,4 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.tileentity;
 
 
 import java.util.Optional;

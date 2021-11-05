@@ -15,7 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;*/
 
 public class PepsiMcFluid {
 
-	/*public static DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, "pepsimc");
+	/**public static DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, "pepsimc");
 	
 	public static final RegistryObject<Source> PEPSI_FLUID = FLUIDS.register("pepsi_fluid", ()-> new ForgeFlowingFluid.Source(PepsiMcFluid.PEPSI_PROPERTIES));
 	

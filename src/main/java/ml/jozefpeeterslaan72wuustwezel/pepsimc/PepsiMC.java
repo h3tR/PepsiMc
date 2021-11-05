@@ -2,12 +2,15 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc;
 
 
 
+
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.PepsiMcBlock;
 //import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.fluid.PepsiMcFluid;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.item.PepsiMcItem;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.PepsiMcTileEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.world.WorldEvents;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.world.structure.PepsiMcStructure;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.container.PepsiMcContainer;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.data.recipes.PepsiMcRecipeType;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.tileentity.PepsiMcTileEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.screen.BottlerScreen;
 import net.minecraft.client.gui.ScreenManager;
 //import net.minecraft.client.renderer.RenderType;
@@ -31,13 +34,17 @@ public class PepsiMC {
     	PepsiMcTileEntity.register(bus);
     	PepsiMcContainer.register(bus);
     	PepsiMcRecipeType.register(bus);
-    	
-    	MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldGen::OreGen);
+    	PepsiMcStructure.register(bus);
+
+    	MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldEvents::oreGen);
+    	//MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldEvents::structGen);
         MinecraftForge.EVENT_BUS.register(this);
-    }
+
+	}
 	
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		event.enqueueWork(()->{
+			PepsiMcStructure.setup();
 			/*RenderTypeLookup.setRenderLayer(PepsiMcBlock.PEPSI_FLUID_BLOCK.get(), RenderType.translucent());
 			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_FLUID.get(), RenderType.translucent());
 			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_FLOW.get(), RenderType.translucent());

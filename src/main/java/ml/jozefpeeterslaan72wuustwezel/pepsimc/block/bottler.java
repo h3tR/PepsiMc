@@ -4,9 +4,9 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.BottlerTile;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity.PepsiMcTileEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.container.BottlerContainer;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.tileentity.BottlerTile;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.tileentity.PepsiMcTileEntity;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

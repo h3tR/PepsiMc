@@ -1,4 +1,4 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.tileentity;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.tileentity;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.PepsiMcBlock;
 import net.minecraft.tileentity.TileEntityType;
