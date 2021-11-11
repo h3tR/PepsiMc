@@ -11,6 +11,9 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.world.structure.PepsiMcStructure;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.container.PepsiMcContainer;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.tileentity.PepsiMcTileEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.villager.PepsiMcProfession;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.villager.trades.PepsiMcTrades;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.villager.villagerPOI.PepsiMcVillagerPOI;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.screen.BottlerScreen;
 import net.minecraft.client.gui.ScreenManager;
 //import net.minecraft.client.renderer.RenderType;
@@ -35,9 +38,13 @@ public class PepsiMC {
     	PepsiMcContainer.register(bus);
     	PepsiMcRecipeType.register(bus);
     	PepsiMcStructure.register(bus);
+    	PepsiMcProfession.register(bus);
+    	PepsiMcVillagerPOI.register(bus);
 
     	MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldEvents::oreGen);
-    	//MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldEvents::structGen);
+    	MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldEvents::structGen);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, PepsiMcTrades::loadTrades);
+
         MinecraftForge.EVENT_BUS.register(this);
 
 	}

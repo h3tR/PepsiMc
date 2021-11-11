@@ -22,10 +22,10 @@ public class PepsiMcStructure {
 	public static final DeferredRegister<Structure<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES,"pepsimc");
 
 	public static final RegistryObject<Structure<NoFeatureConfig>> ABANDONED_BOTTLING_PLANT = 
-			STRUCTURES.register("pepsi_factory", ()-> (new abandonedBottlingPlantStructure(NoFeatureConfig.CODEC)));
+			STRUCTURES.register("abandoned_bottling_plant", ()-> (new abandonedBottlingPlantStructure(NoFeatureConfig.CODEC)));
 	
 	public static void setup() {
-		LandAndSpacing(ABANDONED_BOTTLING_PLANT.get(),new StructureSeparationSettings(10, 5, 1764348544),true);
+		LandAndSpacing(ABANDONED_BOTTLING_PLANT.get(),new StructureSeparationSettings(100, 50, 1764348544),true);
 	}
 	
 	@SuppressWarnings("deprecation")

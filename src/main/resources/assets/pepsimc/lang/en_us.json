@@ -20,6 +20,7 @@
 	"block.pepsimc.pepsite_ore":"Pepsite Ore",
 	"block.pepsimc.bottler":"Bottler",
 		//Misc
+	"entity.minecraft.villager.pepsimc.bottling_plant_operator":"Bottling Plant Operator",
 	"fluid.pepsimc.pepsi_fluid_block":"Pepsi",
 	"fluid.pepsimc.pepsi_max_fluid_block":"Pepsi Max",
 	"screen.pepsimc.bottler":"Bottler"
