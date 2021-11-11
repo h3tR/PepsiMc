@@ -6,7 +6,7 @@ import java.util.Optional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.data.recipes.BottlerRecipe;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.data.recipes.bottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.item.PepsiMcItem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.tags.PepsiMcTags;
@@ -27,15 +27,15 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class BottlerTile extends TileEntity implements ITickableTileEntity{
+public class bottlerTile extends TileEntity implements ITickableTileEntity{
 
 	private final ItemStackHandler itemHandler = createHandler();
 	private final LazyOptional<IItemHandler> handler = LazyOptional.of(()->itemHandler);
 	
-	public BottlerTile(TileEntityType<?> In) {
+	public bottlerTile(TileEntityType<?> In) {
 		super(In);
 	}
-	public BottlerTile() {
+	public bottlerTile() {
 		this(PepsiMcTileEntity.BOTTLER_TILE.get());
 	}
 	@Override
@@ -101,7 +101,7 @@ public class BottlerTile extends TileEntity implements ITickableTileEntity{
 			inv.setItem(i, itemHandler.getStackInSlot(i));
 		}
 		
-		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.BOTTLER_RECIPE, inv, world);
+		Optional<bottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.BOTTLER_RECIPE, inv, world);
 		
 		recipe.ifPresent(iRecipe->{
 			itemHandler.extractItem(0, 1, false);

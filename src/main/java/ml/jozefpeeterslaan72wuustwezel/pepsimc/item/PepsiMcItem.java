@@ -17,7 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class PepsiMcItem {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "pepsimc");
 	
-	public static final RegistryObject<Beverage> PEPSI_CAN = ITEMS.register("pepsi_can", ()-> new Beverage(new Item.Properties()
+	public static final RegistryObject<beverageItem> PEPSI_CAN = ITEMS.register("pepsi_can", ()-> new beverageItem(new Item.Properties()
 			.tab(ItemGroup.TAB_FOOD)
 			.craftRemainder(net.minecraft.item.Items.BUCKET)
 			.food(new Food.Builder()
@@ -34,7 +34,7 @@ public class PepsiMcItem {
 					.build()
 					).fireResistant()));
 	
-	public static final RegistryObject<Beverage> PEPSI_BOTTLE = ITEMS.register("pepsi_bottle", ()-> new Beverage(new Item.Properties()
+	public static final RegistryObject<beverageItem> PEPSI_BOTTLE = ITEMS.register("pepsi_bottle", ()-> new beverageItem(new Item.Properties()
 			.tab(ItemGroup.TAB_FOOD)
 			.craftRemainder(net.minecraft.item.Items.BUCKET)
 			.food(new Food.Builder()
@@ -69,7 +69,7 @@ public class PepsiMcItem {
 	public static final RegistryObject<Item> STEVIA = ITEMS.register("stevia", ()-> new Item(new Item.Properties()
 			.tab(ItemGroup.TAB_MISC)));
 	
-	public static final RegistryObject<Beverage> PEPSI_MAX_BOTTLE = ITEMS.register("pepsi_max_bottle", ()-> new Beverage(new Item.Properties()
+	public static final RegistryObject<beverageItem> PEPSI_MAX_BOTTLE = ITEMS.register("pepsi_max_bottle", ()-> new beverageItem(new Item.Properties()
 			.tab(ItemGroup.TAB_FOOD)
 			.craftRemainder(net.minecraft.item.Items.BUCKET)
 			.food(new Food.Builder()
@@ -86,7 +86,7 @@ public class PepsiMcItem {
 					.build()
 			).fireResistant()));
 	
-	public static final RegistryObject<Beverage> PEPSI_MAX_CAN = ITEMS.register("pepsi_max_can", ()-> new Beverage(new Item.Properties()
+	public static final RegistryObject<beverageItem> PEPSI_MAX_CAN = ITEMS.register("pepsi_max_can", ()-> new beverageItem(new Item.Properties()
 			.tab(ItemGroup.TAB_FOOD)
 			.craftRemainder(net.minecraft.item.Items.BUCKET)
 			.food(new Food.Builder()

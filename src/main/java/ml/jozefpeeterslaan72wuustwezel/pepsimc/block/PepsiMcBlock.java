@@ -32,7 +32,7 @@ public class PepsiMcBlock {
 	public static final RegistryObject<FlowingFluidBlock> PEPSI_MAX_FLUID_BLOCK = BLOCKS.register("pepsi_max", 
 			()-> new FlowingFluidBlock(()->PepsiMcFluid.PEPSI_MAX_FLUID.get(), AbstractBlock.Properties.of(Material.WATER).strength(100f).noDrops()));
 	*/
-	public static final RegistryObject<Block> BOTTLER = BLOCKS.register("bottler",Bottler::new);
+	public static final RegistryObject<Block> BOTTLER = BLOCKS.register("bottler",bottlerBlock::new);
 
 	public static void register(IEventBus bus) {
 		BLOCKS.register(bus);

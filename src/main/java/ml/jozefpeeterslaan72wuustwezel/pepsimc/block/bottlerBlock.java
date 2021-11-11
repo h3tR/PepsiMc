@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.container.BottlerContainer;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.tileentity.BottlerTile;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.tileentity.bottlerTile;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.tileentity.PepsiMcTileEntity;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -40,7 +40,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class Bottler extends Block {
+public class bottlerBlock extends Block {
 	
 	private static final DirectionProperty FACING = HorizontalBlock.FACING;
 	
@@ -85,7 +85,7 @@ public class Bottler extends Block {
 			Block.box(0, 0, 0, 16, 7, 16)
 			).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
 			
-	public Bottler() {
+	public bottlerBlock() {
 		super(AbstractBlock.Properties
 				.of(Material.PISTON)
 				.harvestLevel(2)
@@ -110,8 +110,8 @@ public class Bottler extends Block {
 	public void onRemove(BlockState state, World level, BlockPos pos, BlockState secondState, boolean p_196243_5_) {
 	      if (!state.is(secondState.getBlock())) {
 	         TileEntity tileentity = level.getBlockEntity(pos);
-	         if (tileentity instanceof BottlerTile) {
-		         BottlerTile bottlerTile = (BottlerTile)tileentity;
+	         if (tileentity instanceof bottlerTile) {
+		         bottlerTile bottlerTile = (bottlerTile)tileentity;
 	            InventoryHelper.dropContents(level, pos, bottlerTile.getNNLInv());
 	            level.updateNeighbourForOutputSignal(pos, this);
 	         }
@@ -125,7 +125,7 @@ public class Bottler extends Block {
 		if(!world.isClientSide) {
 			TileEntity TE = world.getBlockEntity(pos);
 				if(!plr.isCrouching()) {
-					if(TE instanceof BottlerTile) {
+					if(TE instanceof bottlerTile) {
 						INamedContainerProvider containerProvider = createContainerProvider(world, pos);
 						NetworkHooks.openGui(((ServerPlayerEntity)plr), containerProvider, pos );
 					} else {

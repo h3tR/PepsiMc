@@ -11,13 +11,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class PepsiMcRecipeType {
 	public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, "pepsimc");
 	
-	public static final RegistryObject<BottlerRecipe.Serializer> BOTTLER_SERIALIZER = RECIPE_SERIALIZER.register("bottler", BottlerRecipe.Serializer::new);
+	public static final RegistryObject<bottlerRecipe.Serializer> BOTTLER_SERIALIZER = RECIPE_SERIALIZER.register("bottler", bottlerRecipe.Serializer::new);
 	
-	public static IRecipeType<BottlerRecipe> BOTTLER_RECIPE = new BottlerRecipe.BottlerRecipeType();
+	public static IRecipeType<bottlerRecipe> BOTTLER_RECIPE = new bottlerRecipe.BottlerRecipeType();
 	
 	public static void register(IEventBus bus) {
 		RECIPE_SERIALIZER.register(bus);
-    	Registry.register(Registry.RECIPE_TYPE, BottlerRecipe.TYPE_ID, BOTTLER_RECIPE);
+    	Registry.register(Registry.RECIPE_TYPE, bottlerRecipe.TYPE_ID, BOTTLER_RECIPE);
 
 	}
 	
