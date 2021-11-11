@@ -44,7 +44,6 @@ public class PepsiMC {
     	MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldEvents::structGen);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, PepsiMcTrades::loadTrades);
 		bus.addListener(this::doClientStuff);
-
         MinecraftForge.EVENT_BUS.register(this);
 
 	}
@@ -58,8 +57,9 @@ public class PepsiMC {
 			RenderTypeLookup.setRenderLayer(PepsiMcBlock.PEPSI_MAX_FLUID_BLOCK.get(), RenderType.translucent());
 			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_MAX_FLUID.get(), RenderType.translucent());
 			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_MAX_FLOW.get(), RenderType.translucent());*/
-			ScreenManager.register(PepsiMcContainer.BOTTLER_CONTAINER.get(), BottlerScreen::new);
+		//	ScreenManager.register(PepsiMcContainer.BOTTLER_CONTAINER.get(), BottlerScreen::new);
 		});
-		
+		ScreenManager.register(PepsiMcContainer.BOTTLER_CONTAINER.get(), BottlerScreen::new);
+
 	}
 }
