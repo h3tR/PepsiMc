@@ -30,7 +30,6 @@ public class PepsiMC {
 	
 	public PepsiMC() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-		bus.addListener(this::doClientStuff);
     	PepsiMcItem.register(bus);
     	PepsiMcBlock.register(bus);
     	//PepsiMcFluid.register(bus);
@@ -44,6 +43,7 @@ public class PepsiMC {
     	MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldEvents::oreGen);
     	MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldEvents::structGen);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, PepsiMcTrades::loadTrades);
+		bus.addListener(this::doClientStuff);
 
         MinecraftForge.EVENT_BUS.register(this);
 

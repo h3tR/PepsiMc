@@ -1,6 +1,10 @@
 
 {
-    "variants": {
-        "": { "model": "pepsimc:block/pepsite_block" }
+   "variants": {
+        "facing=north": { "model": "pepsimc:block/pepsite_block" },
+        "facing=south": { "model": "pepsimc:block/pepsite_block", "y":180  },
+        "facing=west": { "model": "pepsimc:block/pepsite_block", "y":270 },
+        "facing=east": { "model": "pepsimc:block/pepsite_block", "y":90 }
+        
     }
 }
