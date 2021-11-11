@@ -19,13 +19,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class bottlerRecipe implements IBottlerRecipe{
+public class BottlerRecipe implements IBottlerRecipe{
 	
 	private final ResourceLocation id;
 	private final ItemStack out;
 	private final NonNullList<Ingredient> in;
 	
-	public bottlerRecipe(ResourceLocation Id, ItemStack Out, NonNullList<Ingredient> In) {
+	public BottlerRecipe(ResourceLocation Id, ItemStack Out, NonNullList<Ingredient> In) {
 		this.id = Id;
 		this.out = Out;
 		this.in = In;
@@ -66,18 +66,18 @@ public class bottlerRecipe implements IBottlerRecipe{
 		return new ItemStack(PepsiMcBlock.BOTTLER.get());
 	}
 	
-	public static class BottlerRecipeType implements IRecipeType<bottlerRecipe>{
+	public static class BottlerRecipeType implements IRecipeType<BottlerRecipe>{
 		@Override
 		public String toString() {
-			return bottlerRecipe.TYPE_ID.toString();
+			return BottlerRecipe.TYPE_ID.toString();
 		}
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<bottlerRecipe>{
+	public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<BottlerRecipe>{
 
 
 		@Override
-		public bottlerRecipe fromJson(ResourceLocation Id, JsonObject json) {
+		public BottlerRecipe fromJson(ResourceLocation Id, JsonObject json) {
 			ItemStack Out = ShapedRecipe.itemFromJson(JSONUtils.getAsJsonObject(json, "result"));
 			JsonObject Label = JSONUtils.getAsJsonObject(json, "label");
 			JsonObject Container = JSONUtils.getAsJsonObject(json, "container");
@@ -86,12 +86,12 @@ public class bottlerRecipe implements IBottlerRecipe{
 			In.set(0, Ingredient.fromJson(Label));
 			In.set(1, Ingredient.fromJson(Container));
 			In.set(2, Ingredient.fromJson(Fluid));
-			return new bottlerRecipe(Id, Out, In);
+			return new BottlerRecipe(Id, Out, In);
 		}
 
 		@Nullable
 		@Override
-		public bottlerRecipe fromNetwork(ResourceLocation Id, PacketBuffer buffer) {
+		public BottlerRecipe fromNetwork(ResourceLocation Id, PacketBuffer buffer) {
 			NonNullList<Ingredient> In = NonNullList.withSize(3, Ingredient.EMPTY);
 			
 			for(int i = 0;i<In.size(); i++) {
@@ -100,11 +100,11 @@ public class bottlerRecipe implements IBottlerRecipe{
 			
 			ItemStack Out = buffer.readItem();
 
-			return new bottlerRecipe(Id, Out, In);
+			return new BottlerRecipe(Id, Out, In);
 		}
 
 		@Override
-		public void toNetwork(PacketBuffer buffer, bottlerRecipe Recipe) {
+		public void toNetwork(PacketBuffer buffer, BottlerRecipe Recipe) {
 			buffer.writeInt(Recipe.getIngredients().size());
 			for(Ingredient ing : Recipe.getIngredients()) {
 				ing.toNetwork(buffer);

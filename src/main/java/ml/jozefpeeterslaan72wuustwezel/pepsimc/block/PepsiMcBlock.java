@@ -18,7 +18,7 @@ public class PepsiMcBlock {
 
 	
 			// regular blocks
-	public static final RegistryObject<Block> PEPSITEBLOCK = BLOCKS.register("pepsite_block",pepsiteBlock::new);
+	public static final RegistryObject<Block> PEPSITEBLOCK = BLOCKS.register("pepsite_block",PepsiteBlock::new);
 	
 	public static final RegistryObject<Block> PEPSITEORE = BLOCKS.register("pepsite_ore", 
 			()-> new Block(AbstractBlock.Properties.of(Material.STONE).harvestLevel(2).strength(4.5f, 15).sound(SoundType.STONE).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE)));
@@ -32,7 +32,7 @@ public class PepsiMcBlock {
 	public static final RegistryObject<FlowingFluidBlock> PEPSI_MAX_FLUID_BLOCK = BLOCKS.register("pepsi_max", 
 			()-> new FlowingFluidBlock(()->PepsiMcFluid.PEPSI_MAX_FLUID.get(), AbstractBlock.Properties.of(Material.WATER).strength(100f).noDrops()));
 	*/
-	public static final RegistryObject<Block> BOTTLER = BLOCKS.register("bottler",bottlerBlock::new);
+	public static final RegistryObject<Block> BOTTLER = BLOCKS.register("bottler",BottlerBlock::new);
 
 	public static void register(IEventBus bus) {
 		BLOCKS.register(bus);

@@ -15,11 +15,11 @@ import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraftforge.common.ToolType;
 
-public class pepsiteBlock extends Block {
+public class PepsiteBlock extends Block {
 	
 	private static final DirectionProperty FACING = HorizontalBlock.FACING;
 	
-	public pepsiteBlock() {
+	public PepsiteBlock() {
 		super(AbstractBlock.Properties.of(Material.HEAVY_METAL)
 				.harvestLevel(2)
 				.strength(5, 1200)
