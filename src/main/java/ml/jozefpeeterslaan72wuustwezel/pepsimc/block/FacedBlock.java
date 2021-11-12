@@ -2,30 +2,21 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.block;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
-import net.minecraftforge.common.ToolType;
 
-public class PepsiteBlock extends Block {
+public class FacedBlock extends Block{
 	
 	private static final DirectionProperty FACING = HorizontalBlock.FACING;
 	
-	public PepsiteBlock() {
-		super(AbstractBlock.Properties.of(Material.HEAVY_METAL)
-				.harvestLevel(2)
-				.strength(5, 1200)
-				.sound(SoundType.METAL)
-				.requiresCorrectToolForDrops()
-				.harvestTool(ToolType.PICKAXE));
+	public FacedBlock(Properties prop) {
+		super(prop);
 	}
 
 	@Nullable

@@ -23,6 +23,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod("pepsimc")
@@ -39,18 +40,24 @@ public class PepsiMC {
     	PepsiMcStructure.register(bus);
     	PepsiMcProfession.register(bus);
     	PepsiMcVillagerPOI.register(bus);
+    	bus.addListener(this::setup);
+		bus.addListener(this::doClientStuff);
 
     	MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldEvents::oreGen);
     	MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldEvents::structGen);
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, PepsiMcTrades::loadTrades);
-		bus.addListener(this::doClientStuff);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, PepsiMcTrades::loadTrades);
         MinecraftForge.EVENT_BUS.register(this);
 
 	}
 	
+	 private void setup(final FMLCommonSetupEvent event) {
+	        event.enqueueWork(() -> {
+	            PepsiMcStructure.setup();
+	        });
+	    }
+	
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		event.enqueueWork(()->{
-			PepsiMcStructure.setup();
 			/*RenderTypeLookup.setRenderLayer(PepsiMcBlock.PEPSI_FLUID_BLOCK.get(), RenderType.translucent());
 			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_FLUID.get(), RenderType.translucent());
 			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_FLOW.get(), RenderType.translucent());

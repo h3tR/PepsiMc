@@ -18,7 +18,14 @@ public class PepsiMcBlock {
 
 	
 			// regular blocks
-	public static final RegistryObject<Block> PEPSITEBLOCK = BLOCKS.register("pepsite_block",PepsiteBlock::new);
+	public static final RegistryObject<FacedBlock> PEPSITEBLOCK = BLOCKS.register("pepsite_block",
+			()->new FacedBlock(
+					AbstractBlock.Properties.of(Material.HEAVY_METAL)
+						.harvestLevel(2)
+						.strength(5, 1200)
+						.sound(SoundType.METAL)
+						.requiresCorrectToolForDrops()
+						.harvestTool(ToolType.PICKAXE)));
 	
 	public static final RegistryObject<Block> PEPSITEORE = BLOCKS.register("pepsite_ore", 
 			()-> new Block(AbstractBlock.Properties.of(Material.STONE).harvestLevel(2).strength(4.5f, 15).sound(SoundType.STONE).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE)));

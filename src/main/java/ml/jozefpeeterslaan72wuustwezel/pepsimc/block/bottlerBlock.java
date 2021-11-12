@@ -19,14 +19,10 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.IBooleanFunction;
@@ -40,10 +36,9 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class BottlerBlock extends Block {
+public class BottlerBlock extends FacedBlock {
 	
 	private static final DirectionProperty FACING = HorizontalBlock.FACING;
-	
 	
 	private static final VoxelShape ShW = Stream.of(
 			Block.box(5, 7, 10, 6, 9, 11),
@@ -166,30 +161,5 @@ public class BottlerBlock extends Block {
 		 }
 	}
 	
-	@Nullable
-	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context)
-	{
-		
-		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
-	}
-	
-	@Override
-	public BlockState rotate(BlockState state, Rotation rot)
-	{
-	 return state.setValue(FACING, rot.rotate(state.getValue(FACING)));	
-	}
-	
-	@SuppressWarnings("deprecation")
-	@Override
-	public BlockState mirror(BlockState state, Mirror mirror)
-	{
-	 return state.rotate(mirror.getRotation(state.getValue(FACING)));
-	}
-	
-	@Override
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-	  builder.add(FACING);
-	}
 	
 }

@@ -90,6 +90,8 @@ public class WorldEvents {
                         (Codec<? extends ChunkGenerator>)GETCODEC_METHOD.invoke(serverWorld.getChunkSource().generator));
 
                 if (cgRL != null && cgRL.getNamespace().equals("terraforged")) {
+                    LogManager.getLogger().info("yo");
+
                     return;
                 }
             } catch (Exception e) {

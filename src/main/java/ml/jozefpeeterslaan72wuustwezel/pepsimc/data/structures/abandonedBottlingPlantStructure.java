@@ -31,8 +31,8 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 
 public class abandonedBottlingPlantStructure extends Structure<NoFeatureConfig>{
 
-	public abandonedBottlingPlantStructure(Codec<NoFeatureConfig> codec) {
-		super(codec);
+	public abandonedBottlingPlantStructure() {
+		super(NoFeatureConfig.CODEC);
 	}
 
 	@Override
