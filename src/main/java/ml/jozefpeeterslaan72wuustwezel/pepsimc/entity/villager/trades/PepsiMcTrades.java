@@ -3,8 +3,11 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.villager.trades;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
+
+import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -13,11 +16,13 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.villager.PepsiMcProfession;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.item.PepsiMcItem;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.world.structure.PepsiMcStructure;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
 import net.minecraft.entity.merchant.villager.VillagerTrades.ITrade;
+import net.minecraft.item.FilledMapItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -25,6 +30,12 @@ import net.minecraft.item.MerchantOffer;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.Util;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.storage.MapData;
+import net.minecraft.world.storage.MapDecoration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
@@ -38,7 +49,7 @@ public class PepsiMcTrades {
 	        		new ItemsForEmeraldsTrade(PepsiMcItem.PEPSITE_INGOT.get(), 1, 2, 2),
 	    			new EmeraldForItemsTrade(PepsiMcItem.CAFFEINE.get(), 1, 16, 2),
 	    			new EmeraldForItemsTrade(PepsiMcItem.EMPTY_BOTTLE.get(), 5, 16, 2),
-
+	    			
 	        	}, 2, new VillagerTrades.ITrade[]{
 	        			new EmeraldForItemsTrade(PepsiMcItem.EMPTY_CAN.get(), 2, 16, 5),
 	        			new EmeraldForItemsTrade(PepsiMcItem.EMPTY_BOTTLE.get(), 5, 16, 5),
@@ -48,7 +59,8 @@ public class PepsiMcTrades {
 	            		new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_LABEL.get(), 10, 2, 10),
 	            		new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_LABEL.get(), 10, 2, 10),
 	            		new EmeraldForItemsTrade(PepsiMcItem.STEVIA.get(), 10, 2, 10),
-
+	            		new EmeraldForItemsTrade(PepsiMcItem.STEVIA.get(), 10, 2, 10),
+	            		new EmeraldForMapTrade(14, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get(), MapDecoration.Type.TARGET_POINT, 1, 10)
 
 	        	}, 4, new VillagerTrades.ITrade[]{
 	            		new ItemsForEmeraldsTrade(PepsiMcItem.CARAMEL.get(), 1, 8, 12),
@@ -152,6 +164,41 @@ public class PepsiMcTrades {
 
 	        public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
 	           return new MerchantOffer(new ItemStack(Items.EMERALD, this.emeraldCost), new ItemStack(this.itemStack.getItem(), this.numberOfItems), this.maxUses, this.villagerXp, this.priceMultiplier);
+	        }
+	     }
+	    
+	    static class EmeraldForMapTrade implements VillagerTrades.ITrade {
+	        private final int emeraldCost;
+	        private final Structure<?> destination;
+	        private final MapDecoration.Type destinationType;
+	        private final int maxUses;
+	        private final int villagerXp;
+
+	        public EmeraldForMapTrade(int cost, Structure<?> destination, MapDecoration.Type destinationType, int stock, int Xp) {
+	           this.emeraldCost = cost;
+	           this.destination = destination;
+	           this.destinationType = destinationType;
+	           this.maxUses = stock;
+	           this.villagerXp = Xp;
+	        }
+
+	        @Nullable
+	        public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
+	           if (!(p_221182_1_.level instanceof ServerWorld)) {
+	              return null;
+	           } else {
+	              ServerWorld serverworld = (ServerWorld)p_221182_1_.level;
+	              BlockPos blockpos = serverworld.findNearestMapFeature(this.destination, p_221182_1_.blockPosition(), 100, true);
+	              if (blockpos != null) {
+	                 ItemStack itemstack = FilledMapItem.create(serverworld, blockpos.getX(), blockpos.getZ(), (byte)2, true, true);
+	                 FilledMapItem.renderBiomePreviewMap(serverworld, itemstack);
+	                 MapData.addTargetDecoration(itemstack, blockpos, "+", this.destinationType);
+	                 itemstack.setHoverName(new TranslationTextComponent("filled_map." + this.destination.getFeatureName().toLowerCase(Locale.ROOT)));
+	                 return new MerchantOffer(new ItemStack(Items.EMERALD, this.emeraldCost), new ItemStack(Items.COMPASS), itemstack, this.maxUses, this.villagerXp, 0.2F);
+	              } else {
+	                 return null;
+	              }
+	           }
 	        }
 	     }
 	    

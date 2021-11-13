@@ -1,11 +1,11 @@
 {
-  "name": "pepsimc:pepsi_factory/start_pool",
+  "name": "pepsimc:abandoned_bottling_plant/start_pool",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
-        "location": "pepsimc:pepsi_factory",
+        "location": "pepsimc:abandoned_bottling_plant",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
