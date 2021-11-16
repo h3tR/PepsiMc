@@ -10,19 +10,19 @@
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "minecraft:husbandry/drank_can",
+  "parent": "pepsimc:pepsi_can",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
           "items": [
-            "pepsimc:pepsi_can",
+          	"pepsimc:pepsi_can",
             "pepsimc:pepsi_bottle",
             "pepsimc:pepsi_max_can",
-            "pepsimc:pepsi_max_bottle"
+			"pepsimc:pepsi_max_bottle"
           ],
-          "count": 0
+          "count": 1
         }
       }
     }

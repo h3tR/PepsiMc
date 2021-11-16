@@ -3,7 +3,7 @@
 	"item.pepsimc.pepsi_can":"Can of Pepsi ",
 	"item.pepsimc.pepsi_bottle":"Bottle of Pepsi",
 	"item.pepsimc.pepsi_max_bottle":"Bottle of Pepsi Max",
-	"item.pepsimc.pepsimax_can":"Can of Pepsi Max",
+	"item.pepsimc.pepsi_max_can":"Can of Pepsi Max",
 	"item.pepsimc.caramel":"Caramel",
 	"item.pepsimc.phosphoric_acid":"Phosphoric Acid",
 	"item.pepsimc.stevia":"Stevia Sweetener",
@@ -23,5 +23,6 @@
 	"entity.minecraft.villager.pepsimc.bottling_plant_operator":"Bottling Plant Operator",
 	"fluid.pepsimc.pepsi_fluid_block":"Pepsi",
 	"fluid.pepsimc.pepsi_max_fluid_block":"Pepsi Max",
-	"screen.pepsimc.bottler":"Bottler"
+	"screen.pepsimc.bottler":"Bottler",
+	"filledmap.pepsimc:abandoned_bottling_plant":"Abandoned pepsi plant location"
 }

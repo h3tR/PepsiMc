@@ -3,7 +3,6 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.world.structure;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
@@ -19,7 +18,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class PepsiMcStructure {
-	public static final DeferredRegister<Structure<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES,"pepsimc");
+	public static final DeferredRegister<Structure<?>> STRUCTURES = 
+			DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES,"pepsimc");
 
 	public static final RegistryObject<Structure<NoFeatureConfig>> ABANDONED_BOTTLING_PLANT = 
 			STRUCTURES.register("abandoned_bottling_plant", abandonedBottlingPlantStructure::new);
@@ -28,9 +28,9 @@ public class PepsiMcStructure {
 		LandAndSpacing(ABANDONED_BOTTLING_PLANT.get(),new StructureSeparationSettings(100, 50, 1764348544),true);
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static <F extends Structure<?>> void LandAndSpacing(F structure, StructureSeparationSettings structureSeparationSettings,
             boolean transformSurroundingLand) {
+
 	//add our structures into the map in Structure class
 	Structure.STRUCTURES_REGISTRY.put(structure.getRegistryName().toString(), structure);
 	
@@ -41,10 +41,12 @@ public class PepsiMcStructure {
 	*
 	*/
 		if (transformSurroundingLand) {
-			Structure.NOISE_AFFECTING_FEATURES.addAll(ImmutableList.<Structure<?>>builder()
-			.addAll(Structure.NOISE_AFFECTING_FEATURES)
-			.add(structure)
-			.build());
+
+			Structure.NOISE_AFFECTING_FEATURES =
+				ImmutableList.<Structure<?>>builder()
+					.addAll(Structure.NOISE_AFFECTING_FEATURES)
+					.add(structure)
+					.build();
 		}
 	
 	/*
@@ -60,7 +62,11 @@ public class PepsiMcStructure {
 	*
 	* DEFAULTS requires AccessTransformer  (See resources/META-INF/accesstransformer.cfg)
 	*/
-		DimensionStructuresSettings.DEFAULTS.putAll(ImmutableMap.<Structure<?>, StructureSeparationSettings>builder().putAll(DimensionStructuresSettings.DEFAULTS).put(structure, structureSeparationSettings).build());
+		DimensionStructuresSettings.DEFAULTS =
+				ImmutableMap.<Structure<?>, StructureSeparationSettings>builder()
+				.putAll(DimensionStructuresSettings.DEFAULTS)
+				.put(structure, structureSeparationSettings)
+				.build();
 	
 	/*
 	* There are very few mods that relies on seeing your structure in the
@@ -73,7 +79,9 @@ public class PepsiMcStructure {
 	* below instead if you must.
 	*/
 		WorldGenRegistries.NOISE_GENERATOR_SETTINGS.entrySet().forEach(settings -> {
-			Map<Structure<?>, StructureSeparationSettings> structureMap = settings.getValue().structureSettings().structureConfig();
+
+			Map<Structure<?>, StructureSeparationSettings> structureMap = 
+					settings.getValue().structureSettings().structureConfig();
 		/*
 		* Pre-caution in case a mod makes the structure map immutable like datapacks do.
 		* I take no chances myself. You never know what another mods does...
@@ -83,14 +91,16 @@ public class PepsiMcStructure {
 			if (structureMap instanceof ImmutableMap) {
 				Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(structureMap);
 				tempMap.put(structure, structureSeparationSettings);
-				settings.getValue().structureSettings().structureConfig().putAll(tempMap);;
+				settings.getValue().structureSettings().structureConfig();
 				
 			} else {
+
 				structureMap.put(structure, structureSeparationSettings);
 			}
 		});
 	}
 	public static void register(IEventBus bus) {
+
 		STRUCTURES.register(bus);
 	}
 }

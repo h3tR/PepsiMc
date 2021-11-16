@@ -3,14 +3,14 @@
     "icon": {
       "item": "pepsimc:bottler"
     },
-    "title": "Time to bottle!",
+    "title": "New Hobby?",
     "description": "You placed down a bottler.",
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": false,
-    "hidden": false
+    "hidden": false,
+    "background":"pepsimc:textures/blocks/pepsite_block_side.png"
   },
-  "parent": "minecraft:husbandry/root",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:placed_block",

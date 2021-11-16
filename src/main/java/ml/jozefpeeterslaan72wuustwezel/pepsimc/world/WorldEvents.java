@@ -34,6 +34,7 @@ import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -43,12 +44,14 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 @Mod.EventBusSubscriber(modid = "pepsimc")
 public class WorldEvents {
 	
-	public static void oreGen(final BiomeLoadingEvent event)
+	@SubscribeEvent
+	public static void Generate(final BiomeLoadingEvent event)
 	{
 		if(!(event.getCategory().equals(Biome.Category.NETHER)||event.getCategory().equals(Biome.Category.THEEND)))
 		{
 			genOre(event, OreFeatureConfig.FillerBlockType.NATURAL_STONE, PepsiMcBlock.PEPSITEORE.get().defaultBlockState(), 5, 5, 50, 20);
 		}
+		genStruct(event, BiomeDictionary.Type.PLAINS, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get().configured(IFeatureConfig.NONE));
 	}
 	
 	private static void genOre(final BiomeLoadingEvent event, RuleTest fillerType, BlockState state, int vein, int min, int max, int count)
@@ -61,54 +64,52 @@ public class WorldEvents {
 	}
 	
 	
-	public static void structGen(final BiomeLoadingEvent event)
-	{
+	public static void genStruct(final BiomeLoadingEvent event,Type biome, StructureFeature<?, ?> Configured) {
+
 		RegistryKey<Biome> key = RegistryKey.create(Registry.BIOME_REGISTRY, event.getName());
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
 
-        if(types.contains(BiomeDictionary.Type.PLAINS)) {
+        if(types.contains(biome)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
 
-            structures.add(() -> PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get().configured(IFeatureConfig.NONE));
+            structures.add(() -> Configured);
         }
 	}
 	
-	
-	
-	
-	
-	@SuppressWarnings("resource")
 	@SubscribeEvent
+	@SuppressWarnings("resource")
 	public static void DimSpace(final WorldEvent.Load event) {
+
 		if(event.getWorld() instanceof ServerWorld) {
 			ServerWorld serverWorld = (ServerWorld) event.getWorld();
 			try {
                 Method GETCODEC_METHOD =
-                        ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
+                        ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "func_230347_a_");
                 @SuppressWarnings("unchecked")
 				ResourceLocation cgRL = Registry.CHUNK_GENERATOR.getKey(
                         (Codec<? extends ChunkGenerator>)GETCODEC_METHOD.invoke(serverWorld.getChunkSource().generator));
 
                 if (cgRL != null && cgRL.getNamespace().equals("terraforged")) {
-                    LogManager.getLogger().info("yo");
 
                     return;
                 }
             } catch (Exception e) {
-                LogManager.getLogger().error("Was unable to check if " + serverWorld.dimension().location()
+            	LogManager.getLogger().error("Was unable to check if " + serverWorld.dimension().location()
                         + " is using Terraforged's ChunkGenerator.");
             }
 			
 			 if (serverWorld.getChunkSource().generator instanceof FlatChunkGenerator &&
 	                    serverWorld.dimension().equals(World.OVERWORLD)) {
+
 	                return;
 	            }
-			
+
 			Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
 	            tempMap.putIfAbsent(PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get(), DimensionStructuresSettings.DEFAULTS.get(PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get()));
 	            serverWorld.getChunkSource().generator.getSettings().structureConfig().putAll(tempMap);
 		}
 	}
+
 	
 }
 

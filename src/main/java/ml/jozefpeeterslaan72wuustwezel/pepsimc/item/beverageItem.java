@@ -15,5 +15,4 @@ public class BeverageItem extends Item{
 	 public UseAction getUseAnimation(ItemStack p_77661_1_) {
 	      return UseAction.DRINK;
 	   }
- 
 }

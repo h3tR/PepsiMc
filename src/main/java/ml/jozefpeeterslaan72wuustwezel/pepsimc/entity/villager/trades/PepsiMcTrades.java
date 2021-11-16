@@ -47,7 +47,7 @@ public class PepsiMcTrades {
 	    	Util.make(Maps.newHashMap(), (p_221237_0_) -> {
 	        p_221237_0_.put(PepsiMcProfession.BOTTLING_OPERATOR.get(), toIntMap(ImmutableMap.of(1, new VillagerTrades.ITrade[]{
 	        		new ItemsForEmeraldsTrade(PepsiMcItem.PEPSITE_INGOT.get(), 1, 2, 2),
-	    			new EmeraldForItemsTrade(PepsiMcItem.CAFFEINE.get(), 1, 16, 2),
+	    			new ItemsForEmeraldsTrade(PepsiMcItem.CAFFEINE.get(), 1, 16, 2),
 	    			new EmeraldForItemsTrade(PepsiMcItem.EMPTY_BOTTLE.get(), 5, 16, 2),
 	    			
 	        	}, 2, new VillagerTrades.ITrade[]{
@@ -66,7 +66,7 @@ public class PepsiMcTrades {
 	            		new ItemsForEmeraldsTrade(PepsiMcItem.CARAMEL.get(), 1, 8, 12),
 	            		new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_FLUID_BUCKET.get(), 10, 2, 15),
 	            		new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_FLUID_BUCKET.get(), 10, 2, 15),
-	        			new EmeraldForItemsTrade(PepsiMcItem.BOTTLER.get(), 32, 16, 15),
+	        			new ItemsForEmeraldsTrade(PepsiMcItem.BOTTLER.get(), 32, 16, 15),
 
 	        	}, 5, new VillagerTrades.ITrade[]{
 	        			new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_BOTTLE.get(), 48, 16, 20),

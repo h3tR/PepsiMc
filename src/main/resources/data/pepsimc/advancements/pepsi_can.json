@@ -10,12 +10,12 @@
     "announce_to_chat": false,
     "hidden": false
   },
-  "parent": "minecraft:husbandry/placed_bottler",
+  "parent": "pepsimc:placed_bottler",
   "criteria": {
     "requirement": {
       "trigger": "minecraft:consume_item",
       "conditions": {
-        "item": {
+        "items": {
           "item": "pepsimc:pepsi_can",
           "count": 1
         }

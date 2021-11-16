@@ -29,7 +29,6 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 	}
 	
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void renderBg(MatrixStack stack, float Ptick, int X, int Y) {
 		RenderSystem.color4f(1f, 1f, 1f, 1f);

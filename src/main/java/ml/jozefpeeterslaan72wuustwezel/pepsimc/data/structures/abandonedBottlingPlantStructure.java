@@ -3,7 +3,6 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.data.structures;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 
-import com.mojang.serialization.Codec;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
@@ -37,7 +36,7 @@ public class abandonedBottlingPlantStructure extends Structure<NoFeatureConfig>{
 
 	@Override
 	public GenerationStage.Decoration step() {
-	      return GenerationStage.Decoration.SURFACE_STRUCTURES;
+	      return GenerationStage.Decoration.TOP_LAYER_MODIFICATION;
 	   }
 	
 	@Override
@@ -56,6 +55,8 @@ public class abandonedBottlingPlantStructure extends Structure<NoFeatureConfig>{
 	
 	@Override
 	public IStartFactory<NoFeatureConfig> getStartFactory() {
+    	LogManager.getLogger().info("start");
+
 		return abandonedBottlingPlantStructure.Start::new;
 		
 	}
@@ -74,7 +75,8 @@ public class abandonedBottlingPlantStructure extends Structure<NoFeatureConfig>{
 	            // Turns the chunk coordinates into actual coordinates we can use. (Gets center of that chunk)
 	        	 int x = chunkX * 16;
 	             int z = chunkZ * 16;
-	             
+	            	LogManager.getLogger().info("genPiece");
+
 	            BlockPos centerPos = new BlockPos(x, 0, z);
 	            
 	            JigsawManager.addPieces(dynamicRegistryManager, 
@@ -91,21 +93,31 @@ public class abandonedBottlingPlantStructure extends Structure<NoFeatureConfig>{
 	            		true
 	            		);
 
-	            this.pieces.forEach(piece -> piece.move(0, 1, 0));
+	            this.pieces.forEach(piece -> {
+	            	piece.move(0, 1, 0);
+	            	LogManager.getLogger().info("piece");
+	            });
 
 	            Vector3i structureCenter = this.pieces.get(0).getBoundingBox().getCenter();
 	            int xOffset = centerPos.getX() - structureCenter.getX();
 	            int zOffset = centerPos.getZ() - structureCenter.getZ();
 	            for(StructurePiece structurePiece : this.pieces){
 	                structurePiece.move(xOffset, 0, zOffset);
+	            	LogManager.getLogger().info("StructPiece");
+
 	            }
 
 	            this.calculateBoundingBox();
 
-	            LogManager.getLogger().log(Level.DEBUG, "Structure -> pepsimc:pepsi_factory at " +
+	            LogManager.getLogger().log(Level.DEBUG, "Structure -> pepsimc:abandoned_bottling_plant at " +
 	                    this.pieces.get(0).getBoundingBox().x0 + " " +
 	                    this.pieces.get(0).getBoundingBox().y0 + " " +
 	                    this.pieces.get(0).getBoundingBox().z0);
 	        }
 	    }
+	 
+	 
+     
+
+
 }
