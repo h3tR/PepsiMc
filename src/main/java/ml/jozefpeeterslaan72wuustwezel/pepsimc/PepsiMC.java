@@ -14,6 +14,7 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.villager.PepsiMcProfession
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.villager.trades.PepsiMcTrades;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.villager.villagerPOI.PepsiMcVillagerPOI;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.screen.BottlerScreen;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.util.soundevent.PepsiMcSoundEvent;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -38,6 +39,7 @@ public class PepsiMC {
     	PepsiMcRecipeType.register(bus);
     	PepsiMcStructure.register(bus);
     	PepsiMcProfession.register(bus);
+    	PepsiMcSoundEvent.register(bus);
     	PepsiMcVillagerPOI.register(bus);
     	bus.addListener(this::setup);
 		bus.addListener(this::doClientStuff);
@@ -62,6 +64,10 @@ public class PepsiMC {
 			RenderTypeLookup.setRenderLayer(PepsiMcBlock.PEPSI_MAX_FLUID_BLOCK.get(), RenderType.translucent());
 			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_MAX_FLUID.get(), RenderType.translucent());
 			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_MAX_FLOW.get(), RenderType.translucent());
+			RenderTypeLookup.setRenderLayer(PepsiMcBlock.STEVIA_PLANT.get(), RenderType.cutout());
+			RenderTypeLookup.setRenderLayer(PepsiMcBlock.STEVIA_CROP.get(), RenderType.cutout());
+
+
 		});
 		ScreenManager.register(PepsiMcContainer.BOTTLER_CONTAINER.get(), BottlerScreen::new);
 

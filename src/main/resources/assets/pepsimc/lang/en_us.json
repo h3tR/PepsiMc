@@ -15,14 +15,22 @@
 	"item.pepsimc.pepsi_max_label":"Pepsi Max Label",
 	"item.pepsimc.empty_bottle":"Empty Bottle",
 	"item.pepsimc.empty_can":"Empty Can",
+	"item.pepsimc.pepsi_man_tune_disc":"Music Disc",
+	"item.pepsimc.pepsi_man_tune_disc.desc":"James Shimoji - Pepsi Man Theme Song",
+	"item.pepsimc.stevia_seeds":"Stevia Rebaudiana Seeds",
+	
 		//blocks
 	"block.pepsimc.pepsite_block":"Pepsite Block",
 	"block.pepsimc.pepsite_ore":"Pepsite Ore",
 	"block.pepsimc.bottler":"Bottler",
+	"block.pepsimc.stevia_plant":"Stevia Rebaudiana",
+	"block.pepsimc.stevia_crop":"Stevia Rebaudiana Seeds",
+	
 		//Misc
 	"entity.minecraft.villager.pepsimc.bottling_plant_operator":"Bottling Plant Operator",
 	"fluid.pepsimc.pepsi_fluid_block":"Pepsi",
 	"fluid.pepsimc.pepsi_max_fluid_block":"Pepsi Max",
 	"screen.pepsimc.bottler":"Bottler",
-	"filledmap.pepsimc:abandoned_bottling_plant":"Abandoned pepsi plant location"
+	"filled_map.pepsimc:abandoned_bottling_plant":"Abandoned pepsi plant location"
+	
 }

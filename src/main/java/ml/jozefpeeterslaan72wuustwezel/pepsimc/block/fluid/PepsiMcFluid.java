@@ -58,8 +58,12 @@ public class PepsiMcFluid {
 			FluidAttributes.builder(
 				new ResourceLocation("block/water_still"),
 				new ResourceLocation("block/water_flow"))
-			.density(6)
-			.luminosity(2).gaseous().viscosity(4).color(0xff241201))
+			.density(15)
+			.overlay(new ResourceLocation("block/water_overlay"))
+			.luminosity(2)
+			.gaseous().
+			viscosity(4)
+			.color(0xff241201))
 		.levelDecreasePerBlock(2)
 		.slopeFindDistance(6)
 		.bucket(()->PepsiMcItem.PEPSI_MAX_FLUID_BUCKET.get())

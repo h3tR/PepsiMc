@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.item.PepsiMcItem;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.tags.PepsiMcTags;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.util.tags.PepsiMcTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;

@@ -1,11 +1,15 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FlowerBlock;
 import net.minecraft.block.FlowingFluidBlock;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.crops.SteviaCrop;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.fluid.PepsiMcFluid;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.potion.Effects;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
@@ -46,7 +50,13 @@ public class PepsiMcBlock {
 			()-> new FlowingFluidBlock(()->PepsiMcFluid.PEPSI_MAX_FLUID.get(), AbstractBlock.Properties.of(Material.WATER).strength(100f).noDrops().noCollission()));
 	
 	public static final RegistryObject<Block> BOTTLER = BLOCKS.register("bottler",BottlerBlock::new);
+	
+	public static final RegistryObject<Block> STEVIA_PLANT = BLOCKS.register("stevia_plant", 
+			()-> new FlowerBlock(Effects.MOVEMENT_SPEED,2,AbstractBlock.Properties.copy(Blocks.POPPY)));
 
+	 public static final RegistryObject<Block> STEVIA_CROP = BLOCKS.register("stevia_crop",
+	            () -> new SteviaCrop(AbstractBlock.Properties.copy(Blocks.WHEAT)));
+	
 	public static void register(IEventBus bus) {
 		BLOCKS.register(bus);
 	}

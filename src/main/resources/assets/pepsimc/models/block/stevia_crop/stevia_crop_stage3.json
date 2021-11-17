@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "pepsimc:blocks/stevia_crop/stevia_crop_stage3"
+  }
+}

@@ -16,7 +16,6 @@ import net.minecraft.item.Item;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.StateContainer;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
@@ -90,7 +89,7 @@ public abstract class PepsiFluid extends FlowingFluid {
 	   }
 
 	   public boolean canBeReplacedWith(FluidState p_215665_1_, IBlockReader p_215665_2_, BlockPos p_215665_3_, Fluid p_215665_4_, Direction p_215665_5_) {
-	      return p_215665_5_ == Direction.DOWN && !p_215665_4_.is(FluidTags.WATER);
+	      return p_215665_5_ == Direction.DOWN;
 	   }
 
 	   protected float getExplosionResistance() {

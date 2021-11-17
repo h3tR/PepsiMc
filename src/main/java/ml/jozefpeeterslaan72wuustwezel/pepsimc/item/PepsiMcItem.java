@@ -2,11 +2,14 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.item;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.fluid.PepsiMcFluid;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.util.soundevent.PepsiMcSoundEvent;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.MusicDiscItem;
+import net.minecraft.item.Rarity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -69,6 +72,9 @@ public class PepsiMcItem {
 	public static final RegistryObject<Item> STEVIA = ITEMS.register("stevia", ()-> new Item(new Item.Properties()
 			.tab(ItemGroup.TAB_MISC)));
 	
+	public static final RegistryObject<Item> PEPSI_MAN_TUNE_DISC = ITEMS.register("pepsi_man_tune_disc", ()-> new MusicDiscItem(1,()->PepsiMcSoundEvent.PEPSI_MAN_TUNE.get(),new Item.Properties()
+			.tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE).stacksTo(1)));
+	
 	public static final RegistryObject<BeverageItem> PEPSI_MAX_BOTTLE = ITEMS.register("pepsi_max_bottle", ()-> new BeverageItem(new Item.Properties()
 			.tab(ItemGroup.TAB_FOOD)
 			.craftRemainder(net.minecraft.item.Items.BUCKET)
@@ -129,9 +135,15 @@ public class PepsiMcItem {
 	
 	//blockItems
 	
+	public static final RegistryObject<Item> STEVIA_SEEDS = ITEMS.register("stevia_seeds", ()-> new BlockItem(PepsiMcBlock.STEVIA_CROP.get(),new Item.Properties()
+			.tab(ItemGroup.TAB_MISC))); 
+	
 	public static final RegistryObject<BlockItem> PEPSITE_BLOCK = ITEMS.register("pepsite_block", ()-> new BlockItem(PepsiMcBlock.PEPSITEBLOCK.get(), new Item.Properties()
 			.tab(ItemGroup.TAB_BUILDING_BLOCKS)
 			.fireResistant()));
+	
+	public static final RegistryObject<BlockItem> STEVIA_PLANT = ITEMS.register("stevia_plant", ()-> new BlockItem(PepsiMcBlock.STEVIA_PLANT.get(), new Item.Properties()
+			.tab(ItemGroup.TAB_DECORATIONS)));
 	
 	public static final RegistryObject<BlockItem> PEPSITE_ORE = ITEMS.register("pepsite_ore", ()-> new BlockItem(PepsiMcBlock.PEPSITEORE.get(), new Item.Properties()
 			.tab(ItemGroup.TAB_BUILDING_BLOCKS)

@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import org.apache.logging.log4j.LogManager;
-
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
@@ -60,6 +58,5 @@ public class PepsiStore {
 		ResourceLocation name = old.getName();
 
 		Registry.register(WorldGenRegistries.TEMPLATE_POOL, pool, new JigsawPattern(pool, name, newPieceList));
-		LogManager.getLogger().info(WorldGenRegistries.TEMPLATE_POOL.get(pool).getRandomTemplate(new Random()));
 	}
 }

@@ -1,0 +1,11 @@
+{
+	"pepsi_man_tune":{
+		"sounds":[
+			{
+				"name":"pepsimc:pepsi_man_tune",
+				"stream":true
+			}
+		]
+	}
+
+}

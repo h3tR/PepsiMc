@@ -22,6 +22,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.GenerationStage.Decoration;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
@@ -39,6 +40,7 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 @Mod.EventBusSubscriber(modid = "pepsimc")
@@ -52,6 +54,8 @@ public class WorldEvents {
 			genOre(event, OreFeatureConfig.FillerBlockType.NATURAL_STONE, PepsiMcBlock.PEPSITEORE.get().defaultBlockState(), 5, 5, 50, 20);
 		}
 		genStruct(event, BiomeDictionary.Type.PLAINS, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get().configured(IFeatureConfig.NONE));
+		genStruct(event, BiomeDictionary.Type.SANDY, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get().configured(IFeatureConfig.NONE));
+		genFlowers(event);
 	}
 	
 	private static void genOre(final BiomeLoadingEvent event, RuleTest fillerType, BlockState state, int vein, int min, int max, int count)
@@ -63,6 +67,18 @@ public class WorldEvents {
 						.count(count));
 	}
 	
+	private static void genFlowers(final BiomeLoadingEvent event)
+	{
+		RegistryKey<Biome> key = RegistryKey.create(Registry.BIOME_REGISTRY, event.getName());
+        Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
+
+        if(types.contains(BiomeDictionary.Type.PLAINS)) {
+            List<Supplier<ConfiguredFeature<?, ?>>> base =
+                    event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
+
+            base.add(() -> PepsiMcConfiguredFeature.STEVIA_PLANT_CONFIG);
+        }
+	}
 	
 	public static void genStruct(final BiomeLoadingEvent event,Type biome, StructureFeature<?, ?> Configured) {
 
@@ -103,11 +119,17 @@ public class WorldEvents {
 
 	                return;
 	            }
+			 
+			 addToStructConfig(PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get(),serverWorld);
+	//		 addToStructConfig(PepsiMcStructure.EXCAVATION_SITE.get(),serverWorld);
 
-			Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
-	            tempMap.putIfAbsent(PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get(), DimensionStructuresSettings.DEFAULTS.get(PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get()));
-	            serverWorld.getChunkSource().generator.getSettings().structureConfig().putAll(tempMap);
 		}
+	}
+	@SuppressWarnings("resource")
+	private static void addToStructConfig(Structure<?> struct,ServerWorld server) {
+		Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(server.getChunkSource().generator.getSettings().structureConfig());
+        tempMap.putIfAbsent(struct, DimensionStructuresSettings.DEFAULTS.get(struct));
+        server.getChunkSource().generator.getSettings().structureConfig().putAll(tempMap);
 	}
 
 	

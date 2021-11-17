@@ -1,4 +1,4 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.tags;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.util.tags;
 
 import net.minecraft.item.Item;
 import net.minecraft.tags.ItemTags;

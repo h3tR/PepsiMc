@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "pepsimc:stevia_plant"
+        }
+    ],
+    "result": {
+        "item": "pepsimc:stevia",
+        "count": 1
+    }
+}

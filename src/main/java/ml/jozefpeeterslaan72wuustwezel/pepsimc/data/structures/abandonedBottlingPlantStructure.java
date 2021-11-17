@@ -1,7 +1,5 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.data.structures;
 
-import org.apache.logging.log4j.LogManager;
-
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
@@ -54,8 +52,6 @@ public class abandonedBottlingPlantStructure extends Structure<NoFeatureConfig>{
 	
 	@Override
 	public IStartFactory<NoFeatureConfig> getStartFactory() {
-    	LogManager.getLogger().info("start");
-
 		return abandonedBottlingPlantStructure.Start::new;
 		
 	}

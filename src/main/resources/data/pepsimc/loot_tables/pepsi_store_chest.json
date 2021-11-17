@@ -1,0 +1,197 @@
+{
+    "pools": [
+        {
+            "rolls": {
+                "min": 1,
+                "max": 30
+            },
+            "bonus_rolls": {
+                "min": 0,
+                "max": 5
+            },
+            "entries": [
+                {
+                    "type": "item",
+                    "weight": 20,
+                    "name": "pepsimc:caffeine",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 15
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "weight": 10,
+                    "name": "pepsimc:caramel",
+                    "quality": 2,
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 8
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "weight": 7,
+                    "name": "pepsimc:empty_can",
+                    "quality": 3,
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 3
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "weight": 7,
+                    "name": "pepsimc:empty_bottle",
+                    "quality": 3,
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "weight": 3,
+                    "name": "pepsimc:pepsi_max_bucket",
+                    "quality": 7
+                },
+                {
+                    "type": "item",
+                    "weight": 3,
+                    "name": "pepsimc:pepsi_bucket",
+                    "quality": 7
+                },
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "pepsimc:pepsi_max_bottle",
+                    "quality": 20
+                },
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "pepsimc:pepsi_man_tune_disc",
+                    "quality": 50
+                },
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "pepsimc:pepsi_max_can",
+                    "quality": 20
+                },
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "pepsimc:pepsi_bottle",
+                    "quality": 20
+                },
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "pepsimc:pepsi_can",
+                    "quality": 20
+                },
+                {
+                    "type": "item",
+                    "weight": 5,
+                    "name": "pepsimc:pepsite_ingot",
+                    "quality": 4,
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 6
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "weight": 20,
+                    "name": "pepsimc:stevia",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 8
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "weight": 5,
+                    "name": "pepsimc:phosphoric_acid",
+                    "quality": 4,
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 6
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "weight": 7,
+                    "name": "pepsimc:pepsi_label",
+                    "quality": 3,
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 5
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "weight": 7,
+                    "name": "pepsimc:pepsi_max_label",
+                    "quality": 3,
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 5
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "pepsimc:pepsite_block",
+                    "quality": 15
+                }
+            ]
+        }
+    ]
+}
