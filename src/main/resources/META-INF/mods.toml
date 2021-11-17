@@ -11,7 +11,7 @@ modId="pepsimc" #mandatory
 
 version="${file.jarVersion}" #mandatory
 
-displayName="Pepsi mod" #mandatory
+displayName="PepsiMc" #mandatory
 
 logoFile="pepsicon.png" #optional
 

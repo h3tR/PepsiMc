@@ -31,8 +31,7 @@ public class PepsiStore {
 		TaigaVillagePools.bootstrap();
 		for(String biome : new String[]{"plains", "snowy", "savanna", "desert", "taiga"}) {
 			addToPool(new ResourceLocation("village/"+biome+"/houses"),
-					new ResourceLocation("village/"+biome+"/houses/"+biome+"_pepsi_store_1"), 4);
-		LogManager.getLogger().info( WorldGenRegistries.TEMPLATE_POOL.get(new ResourceLocation("village/"+biome+"/houses")).getShuffledTemplates(new Random(0)));
+					new ResourceLocation("pepsimc:village/"+biome+"/houses/"+biome+"_pepsi_store_1"), 400);
 		}
 	}
 	private static void addToPool(ResourceLocation pool, ResourceLocation toAdd, int weight)
@@ -61,6 +60,6 @@ public class PepsiStore {
 		ResourceLocation name = old.getName();
 
 		Registry.register(WorldGenRegistries.TEMPLATE_POOL, pool, new JigsawPattern(pool, name, newPieceList));
-
+		LogManager.getLogger().info(WorldGenRegistries.TEMPLATE_POOL.get(pool).getRandomTemplate(new Random()));
 	}
 }
