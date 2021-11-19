@@ -70,30 +70,7 @@ public class BottlerTile extends TileEntity implements ITickableTileEntity{
 		return toReturn; 
 	}
 	
-	private ItemStack HardCodedRecipe(ItemStack Container, ItemStack Label, ItemStack Fluid) {
-		/**
-	     * No Recipes needed :D
-	     */
-		if(Label.sameItem(new ItemStack(PepsiMcItem.PEPSI_LABEL.get()))&&Fluid.sameItem(new ItemStack(PepsiMcItem.PEPSI_FLUID_BUCKET.get()))) {
-			if(Container.sameItem(new ItemStack(PepsiMcItem.EMPTY_BOTTLE.get()))) {
-				return new ItemStack(PepsiMcItem.PEPSI_BOTTLE.get());
-			}else if (Container.sameItem(new ItemStack(PepsiMcItem.EMPTY_CAN.get()))) {
-				return new ItemStack(PepsiMcItem.PEPSI_CAN.get());
-			}else {
-				return ItemStack.EMPTY;
-			}
-		}else if(Label.sameItem(new ItemStack(PepsiMcItem.PEPSI_MAX_LABEL.get()))&&Fluid.sameItem(new ItemStack(PepsiMcItem.PEPSI_MAX_FLUID_BUCKET.get()))) {
-			if(Container.sameItem(new ItemStack(PepsiMcItem.EMPTY_BOTTLE.get()))) {
-				return new ItemStack(PepsiMcItem.PEPSI_MAX_BOTTLE.get());
-			}else if (Container.sameItem(new ItemStack(PepsiMcItem.EMPTY_CAN.get()))) {
-				return new ItemStack(PepsiMcItem.PEPSI_MAX_CAN.get());
-			}else {
-				return ItemStack.EMPTY;
-			}
-		}else {
-			return ItemStack.EMPTY;
-		}
-	}
+	
 	
 	public void bottle(World world) {
 		Inventory inv = new Inventory(itemHandler.getSlots());
@@ -112,17 +89,6 @@ public class BottlerTile extends TileEntity implements ITickableTileEntity{
 			itemHandler.insertItem(3, iRecipe.getResultItem(), false);
 			setChanged();
 		});	
-		ItemStack resultItemStack = HardCodedRecipe(inv.getItem(0), inv.getItem(1), inv.getItem(2));
-		boolean freeSlot = inv.getItem(3)==ItemStack.EMPTY||inv.getItem(3).getItem()==resultItemStack.getItem();
-		if(resultItemStack!=ItemStack.EMPTY&&freeSlot) {
-			itemHandler.extractItem(0, 1, false);
-			itemHandler.extractItem(1, 1, false);
-			itemHandler.extractItem(2, 1, false);
-			itemHandler.insertItem(2, new ItemStack(Items.BUCKET), false);
-			itemHandler.insertItem(3, HardCodedRecipe(inv.getItem(0), inv.getItem(1), inv.getItem(2)), false);
-			setChanged();
-		}
-		
 	}
 
 	

@@ -6,7 +6,7 @@ import java.util.Map;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
-//import ml.jozefpeeterslaan72wuustwezel.pepsimc.data.structures.ExcavationSite;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.data.structures.ExcavationSite;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.data.structures.abandonedBottlingPlantStructure;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -25,12 +25,12 @@ public class PepsiMcStructure {
 	public static final RegistryObject<Structure<NoFeatureConfig>> ABANDONED_BOTTLING_PLANT = 
 			STRUCTURES.register("abandoned_bottling_plant", abandonedBottlingPlantStructure::new);
 	
-//	public static final RegistryObject<Structure<NoFeatureConfig>> EXCAVATION_SITE = 
-//			STRUCTURES.register("excavation_site", ExcavationSite::new);
+	public static final RegistryObject<Structure<NoFeatureConfig>> EXCAVATION_SITE = 
+			STRUCTURES.register("excavation_site", ExcavationSite::new);
 	
 	public static void setup() {
 		LandAndSpacing(ABANDONED_BOTTLING_PLANT.get(),new StructureSeparationSettings(100, 50, 1764348544),true);
-		//LandAndSpacing(EXCAVATION_SITE.get(),new StructureSeparationSettings(100, 50, 126431564),true);
+		LandAndSpacing(EXCAVATION_SITE.get(),new StructureSeparationSettings(100, 50, 126431564),true);
 
 	}
 	

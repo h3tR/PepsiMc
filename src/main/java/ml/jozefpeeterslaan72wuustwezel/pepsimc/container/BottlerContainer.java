@@ -1,12 +1,12 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.container;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.PepsiMcBlock;
-//import ml.jozefpeeterslaan72wuustwezel.pepsimc.tags.PepsiMcTags;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.util.tags.PepsiMcTags;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
-//import net.minecraft.inventory.container.Slot;
-//import net.minecraft.item.ItemStack;
+import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.math.BlockPos;
@@ -68,7 +68,7 @@ public class BottlerContainer extends Container{
     }
 
     
-    /* public ItemStack quickMoveStack(PlayerEntity plr, int index) {
+     public ItemStack quickMoveStack(PlayerEntity plr, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {
@@ -110,7 +110,7 @@ public class BottlerContainer extends Container{
         }
 
         return itemstack;
-     }*/
+     }
     
 	/*@Override
     public ItemStack quickMoveStack(PlayerEntity p_82846_1_, int p_82846_2_) {

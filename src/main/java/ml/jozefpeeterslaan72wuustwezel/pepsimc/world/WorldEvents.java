@@ -55,6 +55,8 @@ public class WorldEvents {
 		}
 		genStruct(event, BiomeDictionary.Type.PLAINS, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get().configured(IFeatureConfig.NONE));
 		genStruct(event, BiomeDictionary.Type.SANDY, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get().configured(IFeatureConfig.NONE));
+		genStruct(event, BiomeDictionary.Type.PLAINS, PepsiMcStructure.EXCAVATION_SITE.get().configured(IFeatureConfig.NONE));
+		genStruct(event, BiomeDictionary.Type.SANDY, PepsiMcStructure.EXCAVATION_SITE.get().configured(IFeatureConfig.NONE));
 		genFlowers(event);
 	}
 	
@@ -121,7 +123,7 @@ public class WorldEvents {
 	            }
 			 
 			 addToStructConfig(PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get(),serverWorld);
-	//		 addToStructConfig(PepsiMcStructure.EXCAVATION_SITE.get(),serverWorld);
+			 addToStructConfig(PepsiMcStructure.EXCAVATION_SITE.get(),serverWorld);
 
 		}
 	}

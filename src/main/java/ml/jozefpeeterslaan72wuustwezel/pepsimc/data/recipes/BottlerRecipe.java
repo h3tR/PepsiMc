@@ -33,7 +33,7 @@ public class BottlerRecipe implements IBottlerRecipe{
 	
 	@Override
 	public boolean matches(IInventory inv, World Win) {
-			return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1))&&in.get(2).test(inv.getItem(2));
+		return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1))&&in.get(2).test(inv.getItem(2));
 	}
 	
 	@Override
@@ -83,8 +83,8 @@ public class BottlerRecipe implements IBottlerRecipe{
 			JsonObject Container = JSONUtils.getAsJsonObject(json, "container");
 			JsonObject Fluid = JSONUtils.getAsJsonObject(json, "fluid");
 			NonNullList<Ingredient> In = NonNullList.withSize(3, Ingredient.EMPTY);
-			In.set(0, Ingredient.fromJson(Label));
-			In.set(1, Ingredient.fromJson(Container));
+			In.set(1, Ingredient.fromJson(Label));
+			In.set(0, Ingredient.fromJson(Container));
 			In.set(2, Ingredient.fromJson(Fluid));
 			return new BottlerRecipe(Id, Out, In);
 		}

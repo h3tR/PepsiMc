@@ -1,9 +1,9 @@
 {
-  "name": "pepsimc:abandoned_bottling_plant/start_pool",
+  "name": "pepsimc:excavation_site/elevator",
   "fallback": "minecraft:empty",
   "elements": [
     {
-      "weight": 3,
+      "weight": 5,
       "element": {
         "location": "pepsimc:excavation_site/elevator/mid-to-mid",
         "processors": "minecraft:empty",
@@ -28,7 +28,24 @@
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "pepsimc:excavation_site/elevator/end_1",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 3,
+      "element": {
+        "location": "pepsimc:excavation_site/elevator/end_2",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
     }
-    
   ]
 }
