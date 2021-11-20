@@ -8,6 +8,7 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.fluid.PepsiMcFluid;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.PepsiMcContainer;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.structures.village.common.houses.PepsiStore;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.effect.PepsiMcEffect;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.tileentity.PepsiMcTileEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcProfession;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.trades.PepsiMcTrades;
@@ -42,6 +43,7 @@ public class PepsiMC {
     	PepsiMcProfession.register(bus);
     	PepsiMcSoundEvent.register(bus);
     	PepsiMcVillagerPOI.register(bus);
+    	PepsiMcEffect.register(bus);
     	bus.addListener(this::setup);
 		bus.addListener(this::doClientStuff);
 

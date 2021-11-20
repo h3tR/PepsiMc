@@ -54,8 +54,8 @@ public class BottlerTile extends TileEntity implements ITickableTileEntity{
 	}
 	
 	public NonNullList<ItemStack> getNNLInv(){
-		NonNullList<ItemStack> toReturn = NonNullList.withSize(4, ItemStack.EMPTY);
-		for(int i=0;i<4;i++) {
+		NonNullList<ItemStack> toReturn = NonNullList.withSize(5, ItemStack.EMPTY);
+		for(int i=0;i<5;i++) {
 			toReturn.set(i, itemHandler.getStackInSlot(i));
 		}
 		return toReturn; 
@@ -74,7 +74,7 @@ public class BottlerTile extends TileEntity implements ITickableTileEntity{
 			itemHandler.extractItem(0, 1, false);
 			itemHandler.extractItem(1, 1, false);
 			itemHandler.extractItem(2, 1, false);
-			itemHandler.insertItem(2, new ItemStack(Items.BUCKET), false);
+			itemHandler.insertItem(4, new ItemStack(Items.BUCKET), false);
 			itemHandler.insertItem(3, iRecipe.getResultItem(), false);
 			setChanged();
 		});	
@@ -83,7 +83,7 @@ public class BottlerTile extends TileEntity implements ITickableTileEntity{
 	
 	private ItemStackHandler createHandler() {
 
-		return new ItemStackHandler(4) {
+		return new ItemStackHandler(5) {
 			
 			@Override
 			protected void onContentsChanged(int slot) {
@@ -100,8 +100,10 @@ public class BottlerTile extends TileEntity implements ITickableTileEntity{
 				switch (slot) {
 					case 0: return stack.getItem().is(PepsiMcTags.Items.BOTTLING_CONTAINER);
 					case 1: return stack.getItem().is(PepsiMcTags.Items.BOTTLING_LABEL);
-					case 2: return stack.getItem().is(PepsiMcTags.Items.BOTTLING_LIQUID)||stack.getItem() == Items.BUCKET;
+					case 2: return stack.getItem().is(PepsiMcTags.Items.BOTTLING_LIQUID);
 					case 3: return stack.getItem().is(PepsiMcTags.Items.BOTTLED_LIQUID);
+					case 4: return stack.getItem() == Items.BUCKET;
+
 					default:
 						return false;
 				

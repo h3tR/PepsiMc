@@ -47,32 +47,31 @@ public class PepsiMcTrades {
 	    	Util.make(Maps.newHashMap(), (p_221237_0_) -> {
 	        p_221237_0_.put(PepsiMcProfession.BOTTLING_OPERATOR.get(), toIntMap(ImmutableMap.of(1, new VillagerTrades.ITrade[]{
 	        		new ItemsForEmeraldsTrade(PepsiMcItem.PEPSITE_INGOT.get(), 1, 2, 2),
-	    			new ItemsForEmeraldsTrade(PepsiMcItem.CAFFEINE.get(), 1, 16, 2),
+	    			new ItemsForEmeraldsTrade(PepsiMcItem.CAFFEINE.get(), 16, 1, 2),
 	    			new EmeraldForItemsTrade(PepsiMcItem.EMPTY_BOTTLE.get(), 5, 16, 2),
 	    			
 	        	}, 2, new VillagerTrades.ITrade[]{
-	        			new EmeraldForItemsTrade(PepsiMcItem.EMPTY_CAN.get(), 2, 16, 5),
+	        			new EmeraldForItemsTrade(PepsiMcItem.EMPTY_CAN.get(), 4, 16, 5),
 	        			new EmeraldForItemsTrade(PepsiMcItem.EMPTY_BOTTLE.get(), 5, 16, 5),
-	            		new ItemsForEmeraldsTrade(PepsiMcItem.CARAMEL.get(), 10, 2, 5),
+	            		new ItemsForEmeraldsTrade(PepsiMcItem.CARAMEL.get(), 5, 1, 5),
 
 	        	}, 3, new VillagerTrades.ITrade[]{
-	            		new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_LABEL.get(), 10, 2, 10),
-	            		new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_LABEL.get(), 10, 2, 10),
-	            		new EmeraldForItemsTrade(PepsiMcItem.STEVIA.get(), 10, 2, 10),
-	            		new EmeraldForItemsTrade(PepsiMcItem.STEVIA.get(), 10, 2, 10),
-	            		new EmeraldForMapTrade(14, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get(), MapDecoration.Type.TARGET_POINT, 1, 10)
+	            		new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_LABEL.get(), 10, 2, 15),
+	            		new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_LABEL.get(), 10, 2, 15),
+	            		new EmeraldForItemsTrade(PepsiMcItem.STEVIA.get(), 10, 2, 15),
+	            		new EmeraldForMapTrade(32, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get(), MapDecoration.Type.TARGET_POINT, 1, 15)
 
 	        	}, 4, new VillagerTrades.ITrade[]{
 	            		new ItemsForEmeraldsTrade(PepsiMcItem.CARAMEL.get(), 1, 8, 12),
 	            		new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_FLUID_BUCKET.get(), 10, 2, 15),
 	            		new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_FLUID_BUCKET.get(), 10, 2, 15),
-	        			new ItemsForEmeraldsTrade(PepsiMcItem.BOTTLER.get(), 32, 16, 15),
+	        			new EmeraldForItemsTrade(PepsiMcItem.BOTTLER.get(), 1, 32, 15),
 
 	        	}, 5, new VillagerTrades.ITrade[]{
-	        			new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_BOTTLE.get(), 48, 16, 20),
-	        			new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_BOTTLE.get(), 48, 16, 20),
-	        			new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_CAN.get(), 48, 16, 20),
-	        			new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_CAN.get(), 48, 16, 20),
+	        			new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_BOTTLE.get(), 48, 1, 20),
+	        			new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_BOTTLE.get(), 48, 1, 20),
+	        			new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_CAN.get(), 48, 1, 20),
+	        			new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_CAN.get(), 48, 1, 20),
 
 	        	}
 	        	)));});

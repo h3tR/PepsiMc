@@ -5,6 +5,8 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.math.BlockPos;
@@ -22,6 +24,8 @@ public class BottlerContainer extends Container{
 	private SlotItemHandler LabelSlotItemHandler;
 	private SlotItemHandler FluidSlotItemHandler;
 	private SlotItemHandler OutSlotItemHandler;
+	private SlotItemHandler OutBucketItemHandler;
+
 
 	public BottlerContainer(int ID, World world, BlockPos pos, PlayerInventory inventory, PlayerEntity player) {
 		super(PepsiMcContainer.BOTTLER_CONTAINER.get(), ID);
@@ -35,10 +39,13 @@ public class BottlerContainer extends Container{
 				LabelSlotItemHandler=new SlotItemHandler(h,1,30,15);
 				FluidSlotItemHandler=new SlotItemHandler(h,2,12,43);
 				OutSlotItemHandler=new SlotItemHandler(h,3,143,30);
+				OutBucketItemHandler=new SlotItemHandler(h,4,143,51);
+				addSlot(OutBucketItemHandler);
 				addSlot(ContainerSlotItemHandler);
 				addSlot(LabelSlotItemHandler);
 				addSlot(FluidSlotItemHandler);
 				addSlot(OutSlotItemHandler);
+
 			});
 		}
 		
@@ -61,10 +68,10 @@ public class BottlerContainer extends Container{
 					}else {
 						return false;
 					}
-					
 				case 3:
 					return OutSlotItemHandler.hasItem();
-					
+				case 4:
+					return OutBucketItemHandler.hasItem();
 				default:
 					return false;
 			}
@@ -97,7 +104,7 @@ public class BottlerContainer extends Container{
         topRow += 58;
         addSlotRange(inv, 0, leftCol, topRow, 9, 18);
     }
-   /* 
+   
     @Override
     public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
 		ItemStack stack = ItemStack.EMPTY;
@@ -105,8 +112,8 @@ public class BottlerContainer extends Container{
 		if (slot != null && slot.hasItem()) {
 			ItemStack stack1 = slot.getItem();
 			stack = stack1.copy();
-			if (index < 4
-					&& !this.moveItemStackTo(stack1, 4, inv.getSlots()-1, true)) {
+			if (index < 5
+					&& !this.moveItemStackTo(stack1, 5, inv.getSlots()-1, true)) {
 				return ItemStack.EMPTY;
 			}
 			if (!this.moveItemStackTo(stack1, 0, inv.getSlots()-1, false)) {
@@ -122,7 +129,7 @@ public class BottlerContainer extends Container{
 		}
 		return stack;
 	}
-*/
+
 
 
     @Override

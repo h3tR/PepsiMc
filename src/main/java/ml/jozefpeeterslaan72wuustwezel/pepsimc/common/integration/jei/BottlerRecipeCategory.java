@@ -1,6 +1,9 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.integration.jei;
 
 
+
+import java.util.ArrayList;
+
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -10,6 +13,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 
 public class BottlerRecipeCategory implements IRecipeCategory<BottlerRecipe>{
@@ -54,8 +58,11 @@ public class BottlerRecipeCategory implements IRecipeCategory<BottlerRecipe>{
 
 	@Override
 	public void setIngredients(BottlerRecipe recipe, IIngredients ingredients) {
+		ArrayList<ItemStack> result = new ArrayList<ItemStack>();
+		result.add(recipe.getResultItem());
+		result.add(new ItemStack(Items.BUCKET));
 		ingredients.setInputIngredients(recipe.getIngredients());
-		ingredients.setOutput(VanillaTypes.ITEM, recipe.getResultItem());
+		ingredients.setOutputs(VanillaTypes.ITEM, result);
 		
 	}
 
@@ -65,6 +72,8 @@ public class BottlerRecipeCategory implements IRecipeCategory<BottlerRecipe>{
 		recipeLayout.getItemStacks().init(1, true, 29, 14);
 		recipeLayout.getItemStacks().init(2, true, 11, 42);
 		recipeLayout.getItemStacks().init(3, false, 142, 29);
+		recipeLayout.getItemStacks().init(4, false, 142, 50);
+
 		recipeLayout.getItemStacks().set(ingredients);
 		
 	}

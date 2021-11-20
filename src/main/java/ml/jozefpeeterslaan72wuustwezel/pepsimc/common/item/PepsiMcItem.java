@@ -2,6 +2,7 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.fluid.PepsiMcFluid;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.effect.PepsiMcEffect;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.soundevent.PepsiMcSoundEvent;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BucketItem;
@@ -34,6 +35,7 @@ public class PepsiMcItem {
 					.effect(()->new EffectInstance(Effects.ABSORPTION, 1600, 2),1)
 					.effect(()->new EffectInstance(Effects.DAMAGE_RESISTANCE, 1600, 2),1)
 					.effect(()->new EffectInstance(Effects.MOVEMENT_SPEED, 1600, 2),1)
+					.effect(()->new EffectInstance(PepsiMcEffect.INSOMNIA.get(), 1600), .3f)
 					.build()
 					).fireResistant()));
 	
@@ -51,6 +53,7 @@ public class PepsiMcItem {
 					.effect(()->new EffectInstance(Effects.ABSORPTION, 1600, 2),1)
 					.effect(()->new EffectInstance(Effects.DAMAGE_RESISTANCE, 1600, 2),1)
 					.effect(()->new EffectInstance(Effects.MOVEMENT_SPEED, 1600, 2),1)
+					.effect(()->new EffectInstance(PepsiMcEffect.INSOMNIA.get(), 1600), .3f)
 					.build()
 					).fireResistant()));
 	
@@ -67,7 +70,12 @@ public class PepsiMcItem {
 			.tab(ItemGroup.TAB_MISC)));
 	
 	public static final RegistryObject<Item> CAFFEINE = ITEMS.register("caffeine", ()-> new Item(new Item.Properties()
-			.tab(ItemGroup.TAB_MISC)));
+			.tab(ItemGroup.TAB_MISC).food(new Food.Builder()
+					.nutrition(0)
+					.saturationMod(0)
+					.effect(()->new EffectInstance(PepsiMcEffect.INSOMNIA.get(), 3200), 1)
+					.build()
+					)));
 	
 	public static final RegistryObject<Item> STEVIA = ITEMS.register("stevia", ()-> new Item(new Item.Properties()
 			.tab(ItemGroup.TAB_MISC)));
@@ -89,6 +97,7 @@ public class PepsiMcItem {
 					.effect(()->new EffectInstance(Effects.ABSORPTION, 800, 2),1)
 					.effect(()->new EffectInstance(Effects.DAMAGE_RESISTANCE, 800, 2),1)
 					.effect(()->new EffectInstance(Effects.MOVEMENT_SPEED, 800, 2),1)
+					.effect(()->new EffectInstance(PepsiMcEffect.INSOMNIA.get(), 1600), .3f)
 					.build()
 			).fireResistant()));
 	
@@ -106,6 +115,7 @@ public class PepsiMcItem {
 					.effect(()->new EffectInstance(Effects.ABSORPTION, 800, 2),1)
 					.effect(()->new EffectInstance(Effects.DAMAGE_RESISTANCE, 800, 2),1)
 					.effect(()->new EffectInstance(Effects.MOVEMENT_SPEED, 800, 2),1)
+					.effect(()->new EffectInstance(PepsiMcEffect.INSOMNIA.get(), 1600), .3f)
 					.build())));
 
 	
@@ -128,10 +138,10 @@ public class PepsiMcItem {
 	
 	public static final RegistryObject<Item> PEPSI_FLUID_BUCKET = ITEMS.register("pepsi_bucket", ()-> new BucketItem(()->PepsiMcFluid.PEPSI_FLUID.get(),new Item.Properties()
 			.tab(ItemGroup.TAB_MATERIALS)
-			.stacksTo(1))); 
+			.stacksTo(16))); 
 	public static final RegistryObject<Item> PEPSI_MAX_FLUID_BUCKET = ITEMS.register("pepsi_max_bucket", ()-> new BucketItem(()->PepsiMcFluid.PEPSI_MAX_FLUID.get(),new Item.Properties()
 			.tab(ItemGroup.TAB_MATERIALS)
-			.stacksTo(1))); 
+			.stacksTo(16))); 
 	
 	//blockItems
 	
