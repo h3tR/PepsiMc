@@ -28,8 +28,8 @@
 	
 		//Misc
 	"entity.minecraft.villager.pepsimc.bottling_plant_operator":"Bottling Plant Operator",
-	"fluid.pepsimc.pepsi_fluid_block":"Pepsi",
-	"fluid.pepsimc.pepsi_max_fluid_block":"Pepsi Max",
+	"fluid.pepsimc.pepsi_fluid":"Pepsi",
+	"fluid.pepsimc.pepsi_max_fluid":"Pepsi Max",
 	"screen.pepsimc.bottler":"Bottler",
 	"filled_map.pepsimc:abandoned_bottling_plant":"Abandoned pepsi plant location"
 	

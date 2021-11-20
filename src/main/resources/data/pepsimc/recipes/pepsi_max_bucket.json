@@ -16,10 +16,9 @@
         {
             "item": "pepsimc:caffeine"
         }
-
     ],
     "result": {
-        "item": "pepsimc:pepsi_bucket",
+        "item": "pepsimc:pepsi_max_bucket",
         "count": 1
     }
 }

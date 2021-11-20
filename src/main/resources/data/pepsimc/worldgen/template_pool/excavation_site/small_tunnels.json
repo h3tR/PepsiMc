@@ -5,7 +5,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "pepsimc:excavation_site/elevator/small_tunnel_1",
+        "location": "pepsimc:excavation_site/small_tunnels/small_tunnel_1",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -14,7 +14,7 @@
         {
       "weight": 1,
       "element": {
-        "location": "pepsimc:excavation_site/elevator/small_tunnel_2",
+        "location": "pepsimc:excavation_site/small_tunnels/small_tunnel_2",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -23,7 +23,7 @@
         {
       "weight": 1,
       "element": {
-        "location": "pepsimc:excavation_site/elevator/small_tunnel_3",
+        "location": "pepsimc:excavation_site/small_tunnels/small_tunnel_3",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

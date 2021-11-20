@@ -2,19 +2,20 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc;
 
 
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.PepsiMcBlock;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.block.fluid.PepsiMcFluid;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.item.PepsiMcItem;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.world.structure.PepsiMcStructure;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.container.PepsiMcContainer;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.data.recipes.PepsiMcRecipeType;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.data.structures.village.common.houses.PepsiStore;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.tileentity.PepsiMcTileEntity;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.villager.PepsiMcProfession;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.villager.trades.PepsiMcTrades;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.entity.villager.villagerPOI.PepsiMcVillagerPOI;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.screen.BottlerScreen;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.util.soundevent.PepsiMcSoundEvent;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.BottlerScreen;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.fluid.PepsiMcFluid;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.PepsiMcContainer;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.structures.village.common.houses.PepsiStore;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.tileentity.PepsiMcTileEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcProfession;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.trades.PepsiMcTrades;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.villagerPOI.PepsiMcVillagerPOI;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.PepsimcNetwork;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.soundevent.PepsiMcSoundEvent;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world.structure.PepsiMcStructure;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -50,6 +51,7 @@ public class PepsiMC {
 	}
 	
 	 private void setup(final FMLCommonSetupEvent event) {
+		 PepsimcNetwork.init();
 	        event.enqueueWork(() -> {
 	            PepsiMcStructure.setup();
 	            PepsiStore.init();
