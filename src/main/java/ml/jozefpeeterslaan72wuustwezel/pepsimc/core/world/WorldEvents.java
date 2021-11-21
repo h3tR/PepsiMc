@@ -13,35 +13,35 @@ import com.mojang.serialization.Codec;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world.structure.PepsiMcStructure;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.FlatChunkGenerator;
-import net.minecraft.world.gen.GenerationStage.Decoration;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.template.RuleTest;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraft.world.gen.placement.TopSolidRangeConfig;
-import net.minecraft.world.gen.settings.DimensionStructuresSettings;
-import net.minecraft.world.gen.settings.StructureSeparationSettings;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.FlatLevelSource;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
+import net.minecraft.world.level.levelgen.feature.configurations.RangeDecoratorConfiguration;
+import net.minecraft.world.level.levelgen.StructureSettings;
+import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 @Mod.EventBusSubscriber(modid = "pepsimc")
 public class WorldEvents {
@@ -49,12 +49,12 @@ public class WorldEvents {
 	@SubscribeEvent
 	public static void Generate(final BiomeLoadingEvent event)
 	{
-		if(!(event.getCategory().equals(Biome.Category.NETHER)||event.getCategory().equals(Biome.Category.THEEND)))
+		if(!(event.getCategory().equals(Biome.BiomeCategory.NETHER)||event.getCategory().equals(Biome.BiomeCategory.THEEND)))
 		{
-			genOre(event, OreFeatureConfig.FillerBlockType.NATURAL_STONE, PepsiMcBlock.PEPSITEORE.get().defaultBlockState(), 5, 5, 50, 20);
+			genOre(event, OreConfiguration.Predicates.NATURAL_STONE, PepsiMcBlock.PEPSITEORE.get().defaultBlockState(), 5, 5, 50, 20);
 		}
-		genStruct(event, BiomeDictionary.Type.PLAINS, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get().configured(IFeatureConfig.NONE));
-		genStruct(event, BiomeDictionary.Type.SANDY, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get().configured(IFeatureConfig.NONE));
+		genStruct(event, BiomeDictionary.Type.PLAINS, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get().configured(FeatureConfiguration.NONE));
+		genStruct(event, BiomeDictionary.Type.SANDY, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get().configured(FeatureConfiguration.NONE));
 	//	genStruct(event, BiomeDictionary.Type.PLAINS, PepsiMcStructure.EXCAVATION_SITE.get().configured(IFeatureConfig.NONE));
 	//	genStruct(event, BiomeDictionary.Type.SANDY, PepsiMcStructure.EXCAVATION_SITE.get().configured(IFeatureConfig.NONE));
 		genFlowers(event);
@@ -63,32 +63,32 @@ public class WorldEvents {
 	private static void genOre(final BiomeLoadingEvent event, RuleTest fillerType, BlockState state, int vein, int min, int max, int count)
 	{
 		event.getGeneration().addFeature(Decoration.UNDERGROUND_ORES, 
-				Feature.ORE.configured(new OreFeatureConfig(fillerType, state, vein))
-						.decorated(Placement.RANGE.configured(new TopSolidRangeConfig(min,0,max)))
+				Feature.ORE.configured(new OreConfiguration(fillerType, state, vein))
+						.decorated(FeatureDecorator.RANGE.configured(new RangeDecoratorConfiguration(min,0,max)))
 						.squared()
 						.count(count));
 	}
 	
 	private static void genFlowers(final BiomeLoadingEvent event)
 	{
-		RegistryKey<Biome> key = RegistryKey.create(Registry.BIOME_REGISTRY, event.getName());
+		ResourceKey<Biome> key = ResourceKey.create(Registry.BIOME_REGISTRY, event.getName());
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
 
         if(types.contains(BiomeDictionary.Type.PLAINS)) {
             List<Supplier<ConfiguredFeature<?, ?>>> base =
-                    event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
+                    event.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION);
 
             base.add(() -> PepsiMcConfiguredFeature.STEVIA_PLANT_CONFIG);
         }
 	}
 	
-	public static void genStruct(final BiomeLoadingEvent event,Type biome, StructureFeature<?, ?> Configured) {
+	public static void genStruct(final BiomeLoadingEvent event,Type biome, ConfiguredStructureFeature<?, ?> Configured) {
 
-		RegistryKey<Biome> key = RegistryKey.create(Registry.BIOME_REGISTRY, event.getName());
+		ResourceKey<Biome> key = ResourceKey.create(Registry.BIOME_REGISTRY, event.getName());
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
 
         if(types.contains(biome)) {
-            List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
+            List<Supplier<ConfiguredStructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
 
             structures.add(() -> Configured);
         }
@@ -98,8 +98,8 @@ public class WorldEvents {
 	@SuppressWarnings("resource")
 	public static void DimSpace(final WorldEvent.Load event) {
 
-		if(event.getWorld() instanceof ServerWorld) {
-			ServerWorld serverWorld = (ServerWorld) event.getWorld();
+		if(event.getWorld() instanceof ServerLevel) {
+			ServerLevel serverWorld = (ServerLevel) event.getWorld();
 			try {
                 Method GETCODEC_METHOD =
                         ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "func_230347_a_");
@@ -116,8 +116,8 @@ public class WorldEvents {
                         + " is using Terraforged's ChunkGenerator.");
             }
 			
-			 if (serverWorld.getChunkSource().generator instanceof FlatChunkGenerator &&
-	                    serverWorld.dimension().equals(World.OVERWORLD)) {
+			 if (serverWorld.getChunkSource().generator instanceof FlatLevelSource &&
+	                    serverWorld.dimension().equals(Level.OVERWORLD)) {
 
 	                return;
 	            }
@@ -128,9 +128,9 @@ public class WorldEvents {
 		}
 	}
 	@SuppressWarnings("resource")
-	private static void addToStructConfig(Structure<?> struct,ServerWorld server) {
-		Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(server.getChunkSource().generator.getSettings().structureConfig());
-        tempMap.putIfAbsent(struct, DimensionStructuresSettings.DEFAULTS.get(struct));
+	private static void addToStructConfig(StructureFeature<?> struct,ServerLevel server) {
+		Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap = new HashMap<>(server.getChunkSource().generator.getSettings().structureConfig());
+        tempMap.putIfAbsent(struct, StructureSettings.DEFAULTS.get(struct));
         server.getChunkSource().generator.getSettings().structureConfig().putAll(tempMap);
 	}
 

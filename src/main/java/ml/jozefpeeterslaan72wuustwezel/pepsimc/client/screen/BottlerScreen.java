@@ -3,33 +3,33 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.BottlerContainer;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.tileentity.BottlerTile;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.BottlerTile;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.PepsimcNetwork;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.packet.BottlerCraftPacket;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.widget.button.AbstractButton;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.components.AbstractButton;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-public class BottlerScreen extends ContainerScreen<BottlerContainer>{
+public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 
-	public BottlerScreen(BottlerContainer BC, PlayerInventory plrInv, ITextComponent Text) {
+	public BottlerScreen(BottlerContainer BC, Inventory plrInv, Component Text) {
 		super(BC, plrInv, Text);
 		// TODO Auto-generated constructor stub
 	}
@@ -38,7 +38,7 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 	
 
 	@Override
-	public void render(MatrixStack stack, int mouseX, int mouseY, float Ptick) {
+	public void render(PoseStack stack, int mouseX, int mouseY, float Ptick) {
 		this.renderBackground(stack);
 		super.render(stack, mouseX, mouseY, Ptick);
 		this.renderTooltip(stack, mouseX, mouseY);
@@ -51,9 +51,9 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 			for (int i = 0; i < 5; i++) {
 	    	   RenderSystem.depthFunc(516+i);
 				if(!this.menu.slotHasItem(3))
-	    	   AbstractGui.fill(stack, this.getGuiLeft()+143, this.getGuiTop()+30, this.getGuiLeft()+159, this.getGuiTop()+46,822083583);
+	    	   GuiComponent.fill(stack, this.getGuiLeft()+143, this.getGuiTop()+30, this.getGuiLeft()+159, this.getGuiTop()+46,822083583);
 				if(!this.menu.slotHasItem(4))
-				AbstractGui.fill(stack, this.getGuiLeft()+143, this.getGuiTop()+51, this.getGuiLeft()+159, this.getGuiTop()+67,822083583);
+				GuiComponent.fill(stack, this.getGuiLeft()+143, this.getGuiTop()+51, this.getGuiLeft()+159, this.getGuiTop()+67,822083583);
 			}
 			
 		
@@ -71,11 +71,11 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 		
 	}
 	
-	private ITextComponent createTooltip() {
+	private Component createTooltip() {
   	  BottlerTile TE = (BottlerTile) BottlerScreen.this.menu.TE;
-        World world = TE.getLevel();
-        Inventory inv = new Inventory(TE.itemHandler.getSlots());
-        ArrayList<ITextComponent> text = new ArrayList<ITextComponent>();
+        Level world = TE.getLevel();
+        SimpleContainer inv = new SimpleContainer(TE.itemHandler.getSlots());
+        ArrayList<Component> text = new ArrayList<Component>();
 		for(int i=0;i<TE.itemHandler.getSlots();i++) {
 			inv.setItem(i, TE.itemHandler.getStackInSlot(i));
 		}
@@ -93,8 +93,8 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
     }
 	private boolean hasRecipe() {
 		BottlerTile TE = (BottlerTile) BottlerScreen.this.menu.TE;
-        World world = TE.getLevel();
-        Inventory inv = new Inventory(TE.itemHandler.getSlots());
+        Level world = TE.getLevel();
+        SimpleContainer inv = new SimpleContainer(TE.itemHandler.getSlots());
         
 		for(int i=0;i<TE.itemHandler.getSlots();i++) {
 			inv.setItem(i, TE.itemHandler.getStackInSlot(i));
@@ -106,8 +106,8 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 	}
 	private ItemStack RecipeResult() {
 		BottlerTile TE = (BottlerTile) BottlerScreen.this.menu.TE;
-        World world = TE.getLevel();
-        Inventory inv = new Inventory(TE.itemHandler.getSlots());
+        Level world = TE.getLevel();
+        SimpleContainer inv = new SimpleContainer(TE.itemHandler.getSlots());
         ArrayList<ItemStack> result = new ArrayList<ItemStack>();
 		for(int i=0;i<TE.itemHandler.getSlots();i++) {
 			inv.setItem(i, TE.itemHandler.getStackInSlot(i));
@@ -123,7 +123,7 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	protected void renderBg(MatrixStack stack, float Ptick, int X, int Y) {
+	protected void renderBg(PoseStack stack, float Ptick, int X, int Y) {
 		RenderSystem.color4f(1f, 1f, 1f, 1f);
 		this.minecraft.getTextureManager().bind(GUI);
 		int i = this.getGuiLeft();
@@ -146,11 +146,11 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 	      private boolean selected;
 
 	      protected Button(int X, int Y, int SizeX,int SizeY) {
-	         super(X, Y, SizeX, SizeY, StringTextComponent.EMPTY);
+	         super(X, Y, SizeX, SizeY, TextComponent.EMPTY);
 	      }
 
 	      @SuppressWarnings("deprecation")
-		public void renderButton(MatrixStack stack, int X, int Y, float Ptick) {
+		public void renderButton(PoseStack stack, int X, int Y, float Ptick) {
 	         Minecraft.getInstance().getTextureManager().bind(BottlerScreen.GUI);
 	         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 	         int i = 219;
@@ -167,7 +167,7 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 	         this.renderIcon(stack);
 	      }
 
-	      protected abstract void renderIcon(MatrixStack stack);
+	      protected abstract void renderIcon(PoseStack stack);
 
 	      public boolean isSelected() {
 	         return this.selected;
@@ -201,7 +201,7 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 	      }
 
 	     
-	      protected void renderIcon(MatrixStack stack) {
+	      protected void renderIcon(PoseStack stack) {
 		         this.blit(stack, this.x + 2, this.y + 2, this.iconX, this.iconY, this.SizeX, this.SizeY);
 		      }
 	   }

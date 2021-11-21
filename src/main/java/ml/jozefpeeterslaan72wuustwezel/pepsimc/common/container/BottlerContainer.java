@@ -2,23 +2,23 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class BottlerContainer extends Container{
+public class BottlerContainer extends AbstractContainerMenu{
 	
-	public final TileEntity TE;
+	public final BlockEntity TE;
 	private final IItemHandler inv;
 	private SlotItemHandler ContainerSlotItemHandler;
 	private SlotItemHandler LabelSlotItemHandler;
@@ -27,7 +27,7 @@ public class BottlerContainer extends Container{
 	private SlotItemHandler OutBucketItemHandler;
 
 
-	public BottlerContainer(int ID, World world, BlockPos pos, PlayerInventory inventory, PlayerEntity player) {
+	public BottlerContainer(int ID, Level world, BlockPos pos, Inventory inventory, Player player) {
 		super(PepsiMcContainer.BOTTLER_CONTAINER.get(), ID);
 		this.TE = world.getBlockEntity(pos);
 		this.inv = new InvWrapper(inventory);
@@ -106,7 +106,7 @@ public class BottlerContainer extends Container{
     }
    
     @Override
-    public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(Player playerIn, int index) {
 		ItemStack stack = ItemStack.EMPTY;
 		Slot slot = this.getSlot(index);
 		if (slot != null && slot.hasItem()) {
@@ -133,8 +133,8 @@ public class BottlerContainer extends Container{
 
 
     @Override
-    public boolean stillValid(PlayerEntity playerIn) {
-        return super.stillValid(IWorldPosCallable.create(TE.getLevel(), TE.getBlockPos()), playerIn, PepsiMcBlock.BOTTLER.get());
+    public boolean stillValid(Player playerIn) {
+        return super.stillValid(ContainerLevelAccess.create(TE.getLevel(), TE.getBlockPos()), playerIn, PepsiMcBlock.BOTTLER.get());
     }
 
     

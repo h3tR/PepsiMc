@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "pepsimc:bottler",
+    "pepsimc:pepsite_block",
+    "pepsimc:pepsite_ore"
+  ]
+}

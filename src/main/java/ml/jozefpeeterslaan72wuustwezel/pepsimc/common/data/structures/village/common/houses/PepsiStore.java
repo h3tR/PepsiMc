@@ -11,18 +11,24 @@ import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.dirty_workaround.LegacySJP;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
-import net.minecraft.world.gen.feature.jigsaw.JigsawPiece;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
+import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.world.level.levelgen.feature.structures.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.feature.structures.StructurePoolElement;
 import net.minecraft.world.gen.feature.structure.*;
-import net.minecraft.world.gen.feature.template.ProcessorLists;
+import net.minecraft.data.worldgen.ProcessorLists;
 
+
+import net.minecraft.data.worldgen.DesertVillagePools;
+import net.minecraft.data.worldgen.PlainVillagePools;
+import net.minecraft.data.worldgen.SavannaVillagePools;
+import net.minecraft.data.worldgen.SnowyVillagePools;
+import net.minecraft.data.worldgen.TaigaVillagePools;
 
 public class PepsiStore {
 	public static void init() {
-		PlainsVillagePools.bootstrap();
+		PlainVillagePools.bootstrap();
 		SnowyVillagePools.bootstrap();
 		SavannaVillagePools.bootstrap();
 		DesertVillagePools.bootstrap();
@@ -34,29 +40,29 @@ public class PepsiStore {
 	}
 	private static void addToPool(ResourceLocation pool, ResourceLocation toAdd, int weight)
 	{
-		JigsawPattern old = WorldGenRegistries.TEMPLATE_POOL.get(pool);
+		StructureTemplatePool old = BuiltinRegistries.TEMPLATE_POOL.get(pool);
 
 		// Fixed seed to prevent inconsistencies between different worlds
-		List<JigsawPiece> shuffled;
+		List<StructurePoolElement> shuffled;
 		if(old!=null)
 			shuffled = old.getShuffledTemplates(new Random(0));
 		else
 			shuffled = ImmutableList.of();
 
-		Object2IntMap<JigsawPiece> newPieces = new Object2IntLinkedOpenHashMap<>();
-		for(JigsawPiece p : shuffled)
-			newPieces.computeInt(p, (JigsawPiece pTemp, Integer i) -> (i==null?0: i)+1);
+		Object2IntMap<StructurePoolElement> newPieces = new Object2IntLinkedOpenHashMap<>();
+		for(StructurePoolElement p : shuffled)
+			newPieces.computeInt(p, (StructurePoolElement pTemp, Integer i) -> (i==null?0: i)+1);
 
 		newPieces.put(new LegacySJP(
-				Either.left(toAdd), () -> ProcessorLists.EMPTY, JigsawPattern.PlacementBehaviour.RIGID
+				Either.left(toAdd), () -> ProcessorLists.EMPTY, StructureTemplatePool.Projection.RIGID
 		), weight);
 
-		List<Pair<JigsawPiece, Integer>> newPieceList = newPieces.object2IntEntrySet().stream()
+		List<Pair<StructurePoolElement, Integer>> newPieceList = newPieces.object2IntEntrySet().stream()
 				.map(e -> Pair.of(e.getKey(), e.getIntValue()))
 				.collect(Collectors.toList());
 
 		ResourceLocation name = old.getName();
 
-		Registry.register(WorldGenRegistries.TEMPLATE_POOL, pool, new JigsawPattern(pool, name, newPieceList));
+		Registry.register(BuiltinRegistries.TEMPLATE_POOL, pool, new StructureTemplatePool(pool, name, newPieceList));
 	}
 }

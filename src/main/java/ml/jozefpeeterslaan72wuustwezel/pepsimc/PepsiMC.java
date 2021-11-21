@@ -9,7 +9,7 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.PepsiMcContainer
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.structures.village.common.houses.PepsiStore;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.effect.PepsiMcEffect;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.tileentity.PepsiMcTileEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcProfession;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.trades.PepsiMcTrades;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.villagerPOI.PepsiMcVillagerPOI;
@@ -17,9 +17,9 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.PepsimcNetwork;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.soundevent.PepsiMcSoundEvent;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world.structure.PepsiMcStructure;
-import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -36,7 +36,7 @@ public class PepsiMC {
     	PepsiMcItem.register(bus);
     	PepsiMcBlock.register(bus);
     	PepsiMcFluid.register(bus);
-    	PepsiMcTileEntity.register(bus);
+    	PepsiMcBlockEntity.register(bus);
     	PepsiMcContainer.register(bus);
     	PepsiMcRecipeType.register(bus);
     	PepsiMcStructure.register(bus);
@@ -62,18 +62,18 @@ public class PepsiMC {
 	 
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		event.enqueueWork(()->{
-			RenderTypeLookup.setRenderLayer(PepsiMcBlock.PEPSI_FLUID_BLOCK.get(), RenderType.translucent());
-			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_FLUID.get(), RenderType.translucent());
-			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_FLOW.get(), RenderType.translucent());
-			RenderTypeLookup.setRenderLayer(PepsiMcBlock.PEPSI_MAX_FLUID_BLOCK.get(), RenderType.translucent());
-			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_MAX_FLUID.get(), RenderType.translucent());
-			RenderTypeLookup.setRenderLayer(PepsiMcFluid.PEPSI_MAX_FLOW.get(), RenderType.translucent());
-			RenderTypeLookup.setRenderLayer(PepsiMcBlock.STEVIA_PLANT.get(), RenderType.cutout());
-			RenderTypeLookup.setRenderLayer(PepsiMcBlock.STEVIA_CROP.get(), RenderType.cutout());
+			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.PEPSI_FLUID_BLOCK.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(PepsiMcFluid.PEPSI_FLUID.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(PepsiMcFluid.PEPSI_FLOW.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.PEPSI_MAX_FLUID_BLOCK.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(PepsiMcFluid.PEPSI_MAX_FLUID.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(PepsiMcFluid.PEPSI_MAX_FLOW.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.STEVIA_PLANT.get(), RenderType.cutout());
+			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.STEVIA_CROP.get(), RenderType.cutout());
 
 
 		});
-		ScreenManager.register(PepsiMcContainer.BOTTLER_CONTAINER.get(), BottlerScreen::new);
+		MenuScreens.register(PepsiMcContainer.BOTTLER_CONTAINER.get(), BottlerScreen::new);
 
 	}
 

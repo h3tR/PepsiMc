@@ -1,18 +1,17 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowerBlock;
-import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerBlock;
+import net.minecraft.world.level.block.LiquidBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.crops.SteviaCrop;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.fluid.PepsiMcFluid;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.potion.Effects;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -24,38 +23,35 @@ public class PepsiMcBlock {
 			// regular blocks
 	public static final RegistryObject<FacedBlock> PEPSITEBLOCK = BLOCKS.register("pepsite_block",
 			()->new FacedBlock(
-					AbstractBlock.Properties.of(Material.HEAVY_METAL)
-						.harvestLevel(2)
-						.strength(5, 1200)
-						.sound(SoundType.METAL)
-						.requiresCorrectToolForDrops()
-						.harvestTool(ToolType.PICKAXE)));
+					BlockBehaviour.Properties.of(Material.HEAVY_METAL)
+					.requiresCorrectToolForDrops()
+					.strength(5, 1200)
+					.sound(SoundType.METAL)
+					.requiresCorrectToolForDrops()));
 	
 	public static final RegistryObject<Block> PEPSITEORE = BLOCKS.register("pepsite_ore", 
 			()-> new Block(
-					AbstractBlock.Properties.of(Material.STONE)
-						.harvestLevel(2)
+					BlockBehaviour.Properties.of(Material.STONE)
 						.strength(4.5f, 15)
 						.sound(SoundType.STONE)
-						.requiresCorrectToolForDrops()
-						.harvestTool(ToolType.PICKAXE)));
+						.requiresCorrectToolForDrops()));
 
 	
 			// special blocks
 
-	public static final RegistryObject<FlowingFluidBlock> PEPSI_FLUID_BLOCK = BLOCKS.register("pepsi", 
-			()-> new FlowingFluidBlock(()->PepsiMcFluid.PEPSI_FLUID.get(), AbstractBlock.Properties.of(Material.WATER).noDrops().strength(100f).noCollission()));
+	public static final RegistryObject<LiquidBlock> PEPSI_FLUID_BLOCK = BLOCKS.register("pepsi", 
+			()-> new LiquidBlock(()->PepsiMcFluid.PEPSI_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER).noDrops().strength(100f).noCollission()));
 	
-	public static final RegistryObject<FlowingFluidBlock> PEPSI_MAX_FLUID_BLOCK = BLOCKS.register("pepsi_max", 
-			()-> new FlowingFluidBlock(()->PepsiMcFluid.PEPSI_MAX_FLUID.get(), AbstractBlock.Properties.of(Material.WATER).strength(100f).noDrops().noCollission()));
+	public static final RegistryObject<LiquidBlock> PEPSI_MAX_FLUID_BLOCK = BLOCKS.register("pepsi_max", 
+			()-> new LiquidBlock(()->PepsiMcFluid.PEPSI_MAX_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER).strength(100f).noDrops().noCollission()));
 	
 	public static final RegistryObject<Block> BOTTLER = BLOCKS.register("bottler",BottlerBlock::new);
 	
 	public static final RegistryObject<Block> STEVIA_PLANT = BLOCKS.register("stevia_plant", 
-			()-> new FlowerBlock(Effects.MOVEMENT_SPEED,2,AbstractBlock.Properties.copy(Blocks.POPPY)));
+			()-> new FlowerBlock(MobEffects.MOVEMENT_SPEED,2,BlockBehaviour.Properties.copy(Blocks.POPPY)));
 
 	 public static final RegistryObject<Block> STEVIA_CROP = BLOCKS.register("stevia_crop",
-	            () -> new SteviaCrop(AbstractBlock.Properties.copy(Blocks.WHEAT)));
+	            () -> new SteviaCrop(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
 	
 	public static void register(IEventBus bus) {
 		BLOCKS.register(bus);

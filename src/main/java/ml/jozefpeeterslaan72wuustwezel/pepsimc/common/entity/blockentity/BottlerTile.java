@@ -1,4 +1,4 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.tileentity;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity;
 
 
 import java.util.Optional;
@@ -9,42 +9,43 @@ import javax.annotation.Nullable;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
-import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
-import net.minecraft.world.World;
-import net.minecraft.block.BlockState;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.entity.TickingBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class BottlerTile extends TileEntity implements ITickableTileEntity{
+public class BottlerTile extends BlockEntity{
 
 	public final ItemStackHandler itemHandler = createHandler();
 	private final LazyOptional<IItemHandler> handler = LazyOptional.of(()->itemHandler);
 	
-	public BottlerTile(TileEntityType<?> In) {
-		super(In);
-	}
-	public BottlerTile() {
-		this(PepsiMcTileEntity.BOTTLER_TILE.get());
-	}
-	@Override
-	public void load(BlockState state, CompoundNBT nbt) {
-		itemHandler.deserializeNBT(nbt.getCompound("inv"));
-		super.load(state, nbt);
+	public BottlerTile(BlockEntityType<?> In, BlockPos pos, BlockState state) {
+		super(PepsiMcBlockEntity.BOTTLER_TILE.get(), pos, state);
 	}
 	
 	@Override
-	public CompoundNBT save(CompoundNBT nbt) {
+	public void load(CompoundTag nbt) {
+		itemHandler.deserializeNBT(nbt.getCompound("inv"));
+		super.load(nbt);
+	}
+	
+	
+	@Override
+	public CompoundTag save(CompoundTag nbt) {
 		nbt.put("inv", itemHandler.serializeNBT());
 		return super.save(nbt);
 	}
@@ -61,8 +62,8 @@ public class BottlerTile extends TileEntity implements ITickableTileEntity{
 		return toReturn; 
 	}
 	
-	public void bottle(World world) {
-		Inventory inv = new Inventory(itemHandler.getSlots());
+	public void bottle(Level world) {
+		SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
 		
 		for(int i=0;i<itemHandler.getSlots();i++) {
 			inv.setItem(i, itemHandler.getStackInSlot(i));
@@ -98,10 +99,10 @@ public class BottlerTile extends TileEntity implements ITickableTileEntity{
 			@Override
 			public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
 				switch (slot) {
-					case 0: return stack.getItem().is(PepsiMcTags.Items.BOTTLING_CONTAINER);
-					case 1: return stack.getItem().is(PepsiMcTags.Items.BOTTLING_LABEL);
-					case 2: return stack.getItem().is(PepsiMcTags.Items.BOTTLING_LIQUID);
-					case 3: return stack.getItem().is(PepsiMcTags.Items.BOTTLED_LIQUID);
+					case 0: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "bottling_container"));
+					case 1: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "bottling_label"));
+					case 2: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "bottling_liquid"));
+					case 3: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "bottlied_liquid"));
 					case 4: return stack.getItem() == Items.BUCKET;
 
 					default:
@@ -130,10 +131,12 @@ public class BottlerTile extends TileEntity implements ITickableTileEntity{
 		
 		return super.getCapability(cap, side);
 	}
+
+
 	@Override
-	public void tick() {
+	public BlockEntityType<?> getType() {
 		// TODO Auto-generated method stub
-		
+		return PepsiMcBlockEntity.BOTTLER_TILE.get();
 	}
 
 	

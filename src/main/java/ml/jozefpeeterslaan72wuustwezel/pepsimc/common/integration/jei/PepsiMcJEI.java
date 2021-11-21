@@ -13,8 +13,8 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
 
 @JeiPlugin
 public class PepsiMcJEI implements IModPlugin{
@@ -34,7 +34,7 @@ public class PepsiMcJEI implements IModPlugin{
 	    @Override
 	    public void registerRecipes(IRecipeRegistration registration) {
 	        @SuppressWarnings("resource")
-			net.minecraft.item.crafting.RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
+			net.minecraft.world.item.crafting.RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
 	        registration.addRecipes(rm.getAllRecipesFor(PepsiMcRecipeType.BOTTLER_RECIPE).stream()
 	                        .filter(r -> r instanceof BottlerRecipe).collect(Collectors.toList()),
 	                BottlerRecipeCategory.UID);

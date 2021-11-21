@@ -5,40 +5,40 @@ import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.BottlerContainer;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.tileentity.BottlerTile;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.tileentity.PepsiMcTileEntity;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraftforge.common.ToolType;
-import net.minecraftforge.fml.network.NetworkHooks;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.BottlerTile;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Containers;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 
-public class BottlerBlock extends FacedBlock {
+public class BottlerBlock extends FacedBlock implements EntityBlock {
 	
-	private static final DirectionProperty FACING = HorizontalBlock.FACING;
+	private static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	
 	private static final VoxelShape ShW = Stream.of(
 			Block.box(5, 7, 10, 6, 9, 11),
@@ -58,7 +58,7 @@ public class BottlerBlock extends FacedBlock {
 			Block.box(13, 7, 0, 14, 9, 6),
 			Block.box(2, 7, 0, 3, 9, 6),
 			Block.box(0, 0, 0, 16, 7, 16)
-			).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+			).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 	
 	private static final VoxelShape ShL = Stream.of(
 			Block.box(10, 7, 10, 11, 9, 11),
@@ -78,36 +78,25 @@ public class BottlerBlock extends FacedBlock {
 			Block.box(0, 7, 2, 6, 9, 3),
 			Block.box(0, 7, 13, 6, 9, 14),
 			Block.box(0, 0, 0, 16, 7, 16)
-			).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+			).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 			
 	public BottlerBlock() {
-		super(AbstractBlock.Properties
+		super(BlockBehaviour.Properties
 				.of(Material.PISTON)
-				.harvestLevel(2)
 				.strength(4.5f,15)
 				.sound(SoundType.METAL)
-				.requiresCorrectToolForDrops()
-				.harvestTool(ToolType.PICKAXE));
+				.requiresCorrectToolForDrops());
 	}
 	
-	@Nullable
-	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return PepsiMcTileEntity.BOTTLER_TILE.get().create();
-	}
-	  
-	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
+	
 	
 	@SuppressWarnings("deprecation")
-	public void onRemove(BlockState state, World level, BlockPos pos, BlockState secondState, boolean p_196243_5_) {
+	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState secondState, boolean p_196243_5_) {
 	      if (!state.is(secondState.getBlock())) {
-	         TileEntity tileentity = level.getBlockEntity(pos);
+	         BlockEntity tileentity = level.getBlockEntity(pos);
 	         if (tileentity instanceof BottlerTile) {
 		         BottlerTile bottlerTile = (BottlerTile)tileentity;
-	            InventoryHelper.dropContents(level, pos, bottlerTile.getNNLInv());
+	            Containers.dropContents(level, pos, bottlerTile.getNNLInv());
 	            level.updateNeighbourForOutputSignal(pos, this);
 	         }
 
@@ -116,37 +105,37 @@ public class BottlerBlock extends FacedBlock {
 	   }
 	
 	@Override
-	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity plr, Hand hand, BlockRayTraceResult RT) {
+	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player plr, InteractionHand hand, BlockHitResult RT) {
 		if(!world.isClientSide) {
-			TileEntity TE = world.getBlockEntity(pos);
+			BlockEntity TE = world.getBlockEntity(pos);
 				if(!plr.isCrouching()) {
 					if(TE instanceof BottlerTile) {
-						INamedContainerProvider containerProvider = createContainerProvider(world, pos);
-						NetworkHooks.openGui(((ServerPlayerEntity)plr), containerProvider, pos );
+						MenuProvider containerProvider = createContainerProvider(world, pos);
+						NetworkHooks.openGui(((ServerPlayer)plr), containerProvider, pos );
 					} else {
 						throw new IllegalStateException("Container provider is missing.");
 					}
 				}
 		}
-		return ActionResultType.SUCCESS;
+		return InteractionResult.SUCCESS;
 	}
 	
-	private INamedContainerProvider createContainerProvider(World world, BlockPos pos) {
-		return new INamedContainerProvider() {
+	private MenuProvider createContainerProvider(Level world, BlockPos pos) {
+		return new MenuProvider() {
 			@Override
-			public ITextComponent getDisplayName() {
-				return new TranslationTextComponent("screen.pepsimc.bottler");
+			public Component getDisplayName() {
+				return new TranslatableComponent("screen.pepsimc.bottler");
 			}
 
 			@Override
-			public Container createMenu(int i, PlayerInventory inv, PlayerEntity plr) {
+			public AbstractContainerMenu createMenu(int i, Inventory inv, Player plr) {
 				return new BottlerContainer(i, world, pos, inv, plr);
 			}
 		};  
 	}
 	
 	@Override 
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos p, ISelectionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos p, CollisionContext context) {
 		 switch (state.getValue(FACING)) {
 		 	case NORTH:
 		 		return ShW;
@@ -159,6 +148,11 @@ public class BottlerBlock extends FacedBlock {
 		 	default:
 		 		return ShW;
 		 }
+	}
+
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return PepsiMcBlockEntity.BOTTLER_TILE.get().create(pos, state);
 	}
 	
 	
