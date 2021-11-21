@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -63,11 +64,7 @@ public class BottlerContainer extends AbstractContainerMenu{
 					return LabelSlotItemHandler.hasItem();
 					
 				case 2:
-					if(FluidSlotItemHandler.hasItem()&&FluidSlotItemHandler.getItem().getItem().is(PepsiMcTags.Items.BOTTLING_LIQUID)) {
-						return true;
-					}else {
-						return false;
-					}
+					return FluidSlotItemHandler.hasItem();
 				case 3:
 					return OutSlotItemHandler.hasItem();
 				case 4:

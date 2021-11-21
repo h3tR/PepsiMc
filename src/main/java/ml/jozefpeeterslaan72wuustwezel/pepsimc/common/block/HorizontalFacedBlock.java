@@ -11,11 +11,11 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 
-public class FacedBlock extends Block{
+public class HorizontalFacedBlock extends Block{
 	
 	private static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	
-	public FacedBlock(Properties prop) {
+	public HorizontalFacedBlock(Properties prop) {
 		super(prop);
 	}
 

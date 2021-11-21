@@ -78,7 +78,7 @@ public class BottlerRecipe implements IBottlerRecipe{
 
 		@Override
 		public BottlerRecipe fromJson(ResourceLocation Id, JsonObject json) {
-			ItemStack Out = ShapedRecipe.itemFromJson(GsonHelper.getAsJsonObject(json, "result"));
+			ItemStack Out = ShapedRecipe.itemFromJson(GsonHelper.getAsJsonObject(json, "result")).getDefaultInstance();
 			JsonObject Label = GsonHelper.getAsJsonObject(json, "label");
 			JsonObject Container = GsonHelper.getAsJsonObject(json, "container");
 			JsonObject Fluid = GsonHelper.getAsJsonObject(json, "fluid");

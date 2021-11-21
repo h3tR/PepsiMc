@@ -2,8 +2,6 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block;
 
 import java.util.stream.Stream;
 
-import javax.annotation.Nullable;
-
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.BottlerContainer;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.BottlerTile;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
@@ -36,7 +34,7 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 
-public class BottlerBlock extends FacedBlock implements EntityBlock {
+public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 	
 	private static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	

@@ -10,8 +10,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.BlockGetter;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 public class SteviaCrop extends CropBlock{
 
 	 private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{

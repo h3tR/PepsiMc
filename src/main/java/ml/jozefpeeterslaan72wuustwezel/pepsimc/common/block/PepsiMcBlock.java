@@ -21,8 +21,8 @@ public class PepsiMcBlock {
 
 	
 			// regular blocks
-	public static final RegistryObject<FacedBlock> PEPSITEBLOCK = BLOCKS.register("pepsite_block",
-			()->new FacedBlock(
+	public static final RegistryObject<HorizontalFacedBlock> PEPSITEBLOCK = BLOCKS.register("pepsite_block",
+			()->new HorizontalFacedBlock(
 					BlockBehaviour.Properties.of(Material.HEAVY_METAL)
 					.requiresCorrectToolForDrops()
 					.strength(5, 1200)

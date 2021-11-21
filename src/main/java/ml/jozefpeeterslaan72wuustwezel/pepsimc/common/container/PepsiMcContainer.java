@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 public class PepsiMcContainer {
@@ -13,7 +13,7 @@ public class PepsiMcContainer {
 	
 	public static RegistryObject<MenuType<BottlerContainer>> BOTTLER_CONTAINER = CONTAINERS.register("bottlercontainer", ()-> IForgeContainerType.create((ID, inv, dat)->{
 		BlockPos pos = dat.readBlockPos();
-		Level world = inv.player.getEntity().level;
+		Level world = inv.player.getCommandSenderWorld();
 		return new BottlerContainer(ID, world, pos, inv, inv.player);
 	}));
 	

@@ -16,6 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.components.AbstractButton;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
@@ -59,7 +60,7 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 		
 	        RenderSystem.depthFunc(515);
 
-			this.addButton(new BottlerScreen.ConfirmButton(this.getGuiLeft()+95,this.getGuiTop()+30,176,3,23,9));
+			this.addWidget(new BottlerScreen.ConfirmButton(this.getGuiLeft()+95,this.getGuiTop()+30,176,3,23,9));
 			if(this.isHovering(95,30, 23, 9, mouseX, mouseY)) {
 
 				if(this.createTooltip()!=null) {
@@ -121,11 +122,10 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 		
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void renderBg(PoseStack stack, float Ptick, int X, int Y) {
-		RenderSystem.color4f(1f, 1f, 1f, 1f);
-		this.minecraft.getTextureManager().bind(GUI);
+		RenderSystem.clearColor(1f, 1f, 1f, 1f);
+		this.minecraft.getTextureManager().bindForSetup(GUI);
 		int i = this.getGuiLeft();
 		int j = this.getGuiTop();
 		this.blit(stack, i, j, 0, 0, this.getXSize(), this.getYSize()+2);
@@ -149,10 +149,9 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 	         super(X, Y, SizeX, SizeY, TextComponent.EMPTY);
 	      }
 
-	      @SuppressWarnings("deprecation")
 		public void renderButton(PoseStack stack, int X, int Y, float Ptick) {
-	         Minecraft.getInstance().getTextureManager().bind(BottlerScreen.GUI);
-	         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+	         Minecraft.getInstance().getTextureManager().bindForSetup(BottlerScreen.GUI);
+	         RenderSystem.clearColor(1.0F, 1.0F, 1.0F, 1.0F);
 	         int i = 219;
 	         int j = 0;
 	         if (!this.active) {
@@ -204,6 +203,13 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 	      protected void renderIcon(PoseStack stack) {
 		         this.blit(stack, this.x + 2, this.y + 2, this.iconX, this.iconY, this.SizeX, this.SizeY);
 		      }
+
+
+		@Override
+		public void updateNarration(NarrationElementOutput p_169152_) {
+			// TODO Auto-generated method stub
+			
+		}
 	   }
 	 
 	

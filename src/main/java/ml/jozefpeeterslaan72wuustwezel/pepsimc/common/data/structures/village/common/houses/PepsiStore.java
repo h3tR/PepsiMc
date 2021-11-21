@@ -16,7 +16,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.world.level.levelgen.feature.structures.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.feature.structures.StructurePoolElement;
-import net.minecraft.world.gen.feature.structure.*;
 import net.minecraft.data.worldgen.ProcessorLists;
 
 

@@ -38,7 +38,7 @@ import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.village.VillagerTradesEvent;
-import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
+import net.minecraftforge.fmlserverevents.FMLServerAboutToStartEvent;
 
 public class PepsiMcTrades {
 	  private static final Map<VillagerProfession, Int2ObjectMap<ItemListing[]>> PEPSIMC_TRADES = new HashMap<>();
