@@ -63,11 +63,7 @@ public class BottlerContainer extends Container{
 					return LabelSlotItemHandler.hasItem();
 					
 				case 2:
-					if(FluidSlotItemHandler.hasItem()&&FluidSlotItemHandler.getItem().getItem().is(PepsiMcTags.Items.BOTTLING_LIQUID)) {
-						return true;
-					}else {
-						return false;
-					}
+					return FluidSlotItemHandler.hasItem();
 				case 3:
 					return OutSlotItemHandler.hasItem();
 				case 4:
