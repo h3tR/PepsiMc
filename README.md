@@ -1,5 +1,4 @@
-# PepsiMc [![Downloads](https://cf.way2muchnoise.eu/short_3532305.svg)] [![Versions](https://cf.way2muchnoise.eu/versions/3532305.svg)]
-
+# PepsiMc [Downloads](https://cf.way2muchnoise.eu/short_3532305.svg) [Versions](https://cf.way2muchnoise.eu/versions/3532305.svg)
 This mod is a standalone mod centered around the pepsi beverage.  
 It adds powerful consumables along with various other features.
 For example:
