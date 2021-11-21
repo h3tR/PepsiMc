@@ -3,8 +3,6 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import org.apache.logging.log4j.LogManager;
-
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -103,8 +101,6 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 		}
 		
 		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.BOTTLER_RECIPE, inv, world);
-		LogManager.getLogger().debug(recipe.toString());
-
 		return recipe.isPresent();
 		
 	}
@@ -118,8 +114,6 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 		}
 		
 		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.BOTTLER_RECIPE, inv, world);
-		LogManager.getLogger().debug(recipe.toString());
-
 		recipe.ifPresent(i->{
 			result.add(i.getResultItem());
 		});
