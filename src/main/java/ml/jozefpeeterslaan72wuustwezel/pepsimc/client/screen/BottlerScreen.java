@@ -28,11 +28,11 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
 public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 
 	public BottlerScreen(BottlerContainer BC, Inventory plrInv, Component Text) {
 		super(BC, plrInv, Text);
-		// TODO Auto-generated constructor stub
 	}
 
 	private static final ResourceLocation GUI = new ResourceLocation("pepsimc","textures/gui/bottler_gui.png");

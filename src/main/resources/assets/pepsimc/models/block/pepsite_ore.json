@@ -1,7 +1,7 @@
 {
 "parent": "block/cube",
     "textures": {
-        "particle": "pepsimc:particles/pepsiparticle",
+        "particle": "pepsimc:particles/temp_pepsiparticle",
         "all":"pepsimc:blocks/pepsite_ore"
     },
   "elements": [
