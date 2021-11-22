@@ -34,7 +34,11 @@ public class PepsiStore {
 		TaigaVillagePools.bootstrap();
 		for(String biome : new String[]{"plains", "snowy", "savanna", "desert", "taiga"}) {
 			addToPool(new ResourceLocation("village/"+biome+"/houses"),
-					new ResourceLocation("pepsimc:village/"+biome+"/houses/"+biome+"_pepsi_store_1"), 400);
+					new ResourceLocation("pepsimc:village/"+biome+"/houses/"+biome+"_pepsi_store_1"), 150);
+		}
+		for(String biome : new String[]{"plains", "snowy", "savanna", "desert", "taiga"}) {
+			addToPool(new ResourceLocation("village/"+biome+"/houses"),
+					new ResourceLocation("pepsimc:village/"+biome+"/houses/"+biome+"_pepsi_store_1"), 150);
 		}
 	}
 	private static void addToPool(ResourceLocation pool, ResourceLocation toAdd, int weight)
@@ -47,7 +51,7 @@ public class PepsiStore {
 			shuffled = old.getShuffledTemplates(new Random(0));
 		else
 			shuffled = ImmutableList.of();
-
+		
 		Object2IntMap<StructurePoolElement> newPieces = new Object2IntLinkedOpenHashMap<>();
 		for(StructurePoolElement p : shuffled)
 			newPieces.computeInt(p, (StructurePoolElement pTemp, Integer i) -> (i==null?0: i)+1);

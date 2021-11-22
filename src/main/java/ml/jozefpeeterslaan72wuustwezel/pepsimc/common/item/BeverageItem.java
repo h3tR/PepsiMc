@@ -4,8 +4,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 
-import net.minecraft.world.item.Item.Properties;
-
 public class BeverageItem extends Item{
 
 	public BeverageItem(Properties p_i48487_1_) {
