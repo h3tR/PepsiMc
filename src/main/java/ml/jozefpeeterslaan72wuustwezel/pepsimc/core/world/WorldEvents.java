@@ -1,6 +1,7 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,15 +14,15 @@ import com.mojang.serialization.Codec;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world.structure.PepsiMcStructure;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.Registry;
+import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.FlatLevelSource;
-import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
@@ -29,9 +30,8 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
-import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
-import net.minecraft.world.level.levelgen.feature.configurations.RangeDecoratorConfiguration;
 import net.minecraft.world.level.levelgen.StructureSettings;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.common.BiomeDictionary;
@@ -46,30 +46,37 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 @Mod.EventBusSubscriber(modid = "pepsimc")
 public class WorldEvents {
 	
+    public static final List<ConfiguredFeature<?, ?>> OVERWORLD_ORES = new ArrayList<>();
+
+	
 	@SubscribeEvent
 	public static void Generate(final BiomeLoadingEvent event)
 	{
 		if(!(event.getCategory().equals(Biome.BiomeCategory.NETHER)||event.getCategory().equals(Biome.BiomeCategory.THEEND)))
 		{
-			genOre(event, OreConfiguration.Predicates.NATURAL_STONE, PepsiMcBlock.PEPSITEORE.get().defaultBlockState(), 5, 5, 50, 20);
+			genOre(event, OreConfiguration.Predicates.STONE_ORE_REPLACEABLES, PepsiMcBlock.PEPSITEORE.get(), 5, 50, 20, "stone_pepsite_ore");
 		}
 		genStruct(event, BiomeDictionary.Type.PLAINS, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get().configured(FeatureConfiguration.NONE));
 		genStruct(event, BiomeDictionary.Type.SANDY, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get().configured(FeatureConfiguration.NONE));
 	//	genStruct(event, BiomeDictionary.Type.PLAINS, PepsiMcStructure.EXCAVATION_SITE.get().configured(IFeatureConfig.NONE));
 	//	genStruct(event, BiomeDictionary.Type.SANDY, PepsiMcStructure.EXCAVATION_SITE.get().configured(IFeatureConfig.NONE));
-		genFlowers(event);
+		genFlowers(event,PepsiMcConfiguredFeature.STEVIA_PLANT_CONFIG);
 	}
 	
-	private static void genOre(final BiomeLoadingEvent event, RuleTest fillerType, BlockState state, int vein, int min, int max, int count)
+	private static void genOre(final BiomeLoadingEvent event, RuleTest fillerType, Block block, int vein, int min, int count, String name)
 	{
-		event.getGeneration().addFeature(Decoration.UNDERGROUND_ORES, 
-				Feature.ORE.configured(new OreConfiguration(fillerType, state, vein))
-						.decorated(FeatureDecorator.RANGE.configured(new RangeDecoratorConfiguration(min,0,max)))
-						.squared()
-						.count(count));
+		
+		ConfiguredFeature<?, ?> STONE_ORE = Feature.ORE.configured(
+				 new OreConfiguration(
+						 List.of(OreConfiguration.target(fillerType, block.defaultBlockState())),
+						 vein)).rangeUniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(min)).squared().count(count);
+		
+		OVERWORLD_ORES.add(register(name,STONE_ORE));
 	}
 	
-	private static void genFlowers(final BiomeLoadingEvent event)
+			 
+	 
+	private static void genFlowers(final BiomeLoadingEvent event, ConfiguredFeature<?, ?> feature)
 	{
 		ResourceKey<Biome> key = ResourceKey.create(Registry.BIOME_REGISTRY, event.getName());
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
@@ -78,7 +85,7 @@ public class WorldEvents {
             List<Supplier<ConfiguredFeature<?, ?>>> base =
                     event.getGeneration().getFeatures(GenerationStep.Decoration.VEGETAL_DECORATION);
 
-            base.add(() -> PepsiMcConfiguredFeature.STEVIA_PLANT_CONFIG);
+            base.add(() -> feature);
         }
 	}
 	
@@ -134,6 +141,10 @@ public class WorldEvents {
         server.getChunkSource().generator.getSettings().structureConfig().putAll(tempMap);
 	}
 
-	
+	  private static <Config extends FeatureConfiguration> ConfiguredFeature<Config, ?> register(String name,
+	            ConfiguredFeature<Config, ?> configuredFeature) {
+	        return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation("pepsimc", name),
+	                configuredFeature);
+	    }
 }
 

@@ -1,6 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.structures;
 
-import net.minecraft.world.level.block.state.BlockState;
+/*import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.core.BlockPos;
@@ -112,3 +112,4 @@ public class ExcavationSite extends StructureFeature<NoneFeatureConfiguration>{
 
 
 }
+*/

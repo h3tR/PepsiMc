@@ -8,11 +8,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NoiseColumn;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.Registry;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.chunk.ChunkGenerator;
@@ -27,8 +25,6 @@ import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 
-import net.minecraft.world.level.levelgen.feature.StructureFeature.StructureStartFactory;
-
 public class abandonedBottlingPlantStructure extends StructureFeature<NoneFeatureConfiguration>{
 
 	public abandonedBottlingPlantStructure() {
@@ -40,8 +36,12 @@ public class abandonedBottlingPlantStructure extends StructureFeature<NoneFeatur
 	      return GenerationStep.Decoration.TOP_LAYER_MODIFICATION;
 	   }
 	
-	@Override
-	protected boolean isFeatureChunk(ChunkGenerator chunkGenerator, BiomeSource source, long p_160457_, WorldgenRandom random, ChunkPos pos, Biome p_160460_, ChunkPos p_160461_, C p_160462_, LevelHeightAccessor heightAccessor) {
+	
+	
+	
+	//@Override
+	protected boolean isFeatureChunk(ChunkGenerator chunkGenerator, BiomeSource source, long seed, WorldgenRandom random, ChunkPos pos,
+			Biome biome, ChunkPos potpos, JigsawConfiguration config, LevelHeightAccessor heightAccessor) {
 		
 		BlockPos centerOfChunk = new BlockPos((pos.x << 4) + 7, 0, (pos.z << 4) + 7);
 		
@@ -74,16 +74,17 @@ public class abandonedBottlingPlantStructure extends StructureFeature<NoneFeatur
 
 	        	BlockPos centerOfChunk = new BlockPos((pos.x << 4) + 7, 0, (pos.z << 4) + 7);
 	      
-	            
+	        	
+	        	
 	            JigsawPlacement.addPieces(dynamicRegistryManager, 
 	            		new JigsawConfiguration(() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY)
 	            				.get(new ResourceLocation("pepsimc", "abandoned_bottling_plant/start_pool")),
 	            				10), 
-	            		JigsawPlacement.PieceFactory,
+	            		PoolElementStructurePiece::new,
 	            		chunkGenerator,
 	            		templateManagerIn,
 	            		centerOfChunk,
-	            		this.pieces,
+	            		this,
 	            		this.random,
 	            		false,
 	            		true,

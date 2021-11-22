@@ -14,6 +14,8 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 public class BottlerRecipeCategory implements IRecipeCategory<BottlerRecipe>{
@@ -36,12 +38,6 @@ public class BottlerRecipeCategory implements IRecipeCategory<BottlerRecipe>{
 	public Class<? extends BottlerRecipe> getRecipeClass() {
 		// TODO Auto-generated method stub
 		return BottlerRecipe.class;
-	}
-
-	@Override
-	public String getTitle() {
-		// TODO Auto-generated method stub
-		return PepsiMcBlock.BOTTLER.get().getName().getString();
 	}
 
 	@Override
@@ -76,6 +72,12 @@ public class BottlerRecipeCategory implements IRecipeCategory<BottlerRecipe>{
 
 		recipeLayout.getItemStacks().set(ingredients);
 		
+	}
+
+	@Override
+	public Component getTitle() {
+		// TODO Auto-generated method stub
+		return new TranslatableComponent("block.pepsimc.bottler");
 	}
 	
 	

@@ -10,7 +10,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class PepsiMcBlockEntity {
 	public static DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, "pepsimc");
 	
-	public static RegistryObject<BlockEntityType<BottlerTile>> BOTTLER_TILE = BLOCK_ENTITIES.register("bottlertile", ()-> BlockEntityType.Builder.of(BottlerTile::new, PepsiMcBlock.BOTTLER.get()).build(null));
+	public static RegistryObject<BlockEntityType<BottlerTile>> BOTTLER_TILE = BLOCK_ENTITIES.register("bottlertile", 
+			()-> BlockEntityType.Builder.of(BottlerTile::new, PepsiMcBlock.BOTTLER.get()).build(null));
 	
 	public static void register(IEventBus bus) {
 		BLOCK_ENTITIES.register(bus);

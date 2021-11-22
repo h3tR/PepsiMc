@@ -64,7 +64,7 @@ public abstract class PepsiMaxFluid extends FlowingFluid {
 	   }
 
 	   protected void beforeDestroyingBlock(LevelAccessor p_205580_1_, BlockPos p_205580_2_, BlockState p_205580_3_) {
-	      BlockEntity tileentity = p_205580_3_.hasTileEntity() ? p_205580_1_.getBlockEntity(p_205580_2_) : null;
+	      BlockEntity tileentity = p_205580_3_.hasBlockEntity() ? p_205580_1_.getBlockEntity(p_205580_2_) : null;
 	      Block.dropResources(p_205580_3_, p_205580_1_, p_205580_2_, tileentity);
 	   }
 

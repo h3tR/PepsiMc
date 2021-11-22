@@ -31,7 +31,7 @@ public class BottlerTile extends BlockEntity{
 	public final ItemStackHandler itemHandler = createHandler();
 	private final LazyOptional<IItemHandler> handler = LazyOptional.of(()->itemHandler);
 	
-	public BottlerTile(BlockEntityType<?> In, BlockPos pos, BlockState state) {
+	public BottlerTile(BlockPos pos, BlockState state) {
 		super(PepsiMcBlockEntity.BOTTLER_TILE.get(), pos, state);
 	}
 	
