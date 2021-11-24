@@ -2,6 +2,8 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc;
 
 
 
+import org.spongepowered.asm.mixin.Final;
+
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.BottlerScreen;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.fluid.PepsiMcFluid;
@@ -26,6 +28,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod("pepsimc")
@@ -53,8 +56,7 @@ public class PepsiMC {
 	}
 	
 	 private void setup(final FMLCommonSetupEvent event) {
-		 PepsimcNetwork.init();
-	        event.enqueueWork(() -> {
+		 	event.enqueueWork(() -> {
 	            PepsiMcStructure.setup();
 	            PepsiStore.init();
 	        });
