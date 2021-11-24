@@ -27,16 +27,15 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
 public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 
 	public BottlerScreen(BottlerContainer BC, PlayerInventory plrInv, ITextComponent Text) {
 		super(BC, plrInv, Text);
-		// TODO Auto-generated constructor stub
 	}
 
 	private static final ResourceLocation GUI = new ResourceLocation("pepsimc","textures/gui/bottler_gui.png");
 	
-
 	@Override
 	public void render(MatrixStack stack, int mouseX, int mouseY, float Ptick) {
 		this.renderBackground(stack);
@@ -91,6 +90,7 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 		}
 		return null;
     }
+	
 	private boolean hasRecipe() {
 		BottlerTile TE = (BottlerTile) BottlerScreen.this.menu.TE;
         World world = TE.getLevel();
@@ -104,6 +104,7 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 		return recipe.isPresent();
 		
 	}
+	
 	private ItemStack RecipeResult() {
 		BottlerTile TE = (BottlerTile) BottlerScreen.this.menu.TE;
         World world = TE.getLevel();
@@ -196,8 +197,7 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 		        		      
 	      public void onPress() {
 	    	  BlockPos pos = BottlerScreen.this.menu.TE.getBlockPos();
-	    	  int posar[] = {pos.getX(),pos.getY(),pos.getZ()};
-	    	  PepsimcNetwork.CHANNEL.sendToServer(new BottlerCraftPacket(posar));
+	    	  PepsimcNetwork.CHANNEL.sendToServer(new BottlerCraftPacket(pos));
 	      }
 
 	     
