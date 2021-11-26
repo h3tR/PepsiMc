@@ -2,8 +2,6 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc;
 
 
 
-import org.spongepowered.asm.mixin.Final;
-
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.BottlerScreen;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.fluid.PepsiMcFluid;
@@ -16,7 +14,7 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcPro
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.trades.PepsiMcTrades;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.villagerPOI.PepsiMcVillagerPOI;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.PepsimcNetwork;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.network.PacketHandler;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.soundevent.PepsiMcSoundEvent;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world.structure.PepsiMcStructure;
 import net.minecraft.client.gui.ScreenManager;
@@ -28,7 +26,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod("pepsimc")
@@ -57,6 +54,7 @@ public class PepsiMC {
 	
 	 private void setup(final FMLCommonSetupEvent event) {
 		 	event.enqueueWork(() -> {
+				PacketHandler.init();
 	            PepsiMcStructure.setup();
 	            PepsiStore.init();
 	        });

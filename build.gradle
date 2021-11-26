@@ -102,7 +102,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
 
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.0'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.19'
 
   compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // JEI API
   runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // JEI

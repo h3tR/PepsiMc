@@ -3,6 +3,8 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -10,8 +12,8 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.BottlerContainer
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.tileentity.BottlerTile;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.PepsimcNetwork;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.packet.BottlerCraftPacket;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.network.PacketHandler;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.network.packets.ProcessingCraftPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -27,6 +29,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 
@@ -35,7 +38,7 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 	}
 
 	private static final ResourceLocation GUI = new ResourceLocation("pepsimc","textures/gui/bottler_gui.png");
-	
+
 	@Override
 	public void render(MatrixStack stack, int mouseX, int mouseY, float Ptick) {
 		this.renderBackground(stack);
@@ -150,7 +153,7 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 	         super(X, Y, SizeX, SizeY, StringTextComponent.EMPTY);
 	      }
 
-	      @SuppressWarnings("deprecation")
+		@SuppressWarnings("deprecation")
 		public void renderButton(MatrixStack stack, int X, int Y, float Ptick) {
 	         Minecraft.getInstance().getTextureManager().bind(BottlerScreen.GUI);
 	         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -197,7 +200,9 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 		        		      
 	      public void onPress() {
 	    	  BlockPos pos = BottlerScreen.this.menu.TE.getBlockPos();
-	    	  PepsimcNetwork.CHANNEL.sendToServer(new BottlerCraftPacket(pos));
+	    	  LogManager.getLogger().debug(pos);
+	    	  PacketHandler.CHANNEL.sendToServer(new ProcessingCraftPacket(pos));
+	    	  
 	      }
 
 	     
