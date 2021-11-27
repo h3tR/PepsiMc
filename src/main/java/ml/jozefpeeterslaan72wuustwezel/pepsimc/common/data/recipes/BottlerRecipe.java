@@ -25,10 +25,10 @@ public class BottlerRecipe implements IBottlerRecipe{
 	private final ItemStack out;
 	private final NonNullList<Ingredient> in;
 	
-	public BottlerRecipe(ResourceLocation Id, ItemStack Out, NonNullList<Ingredient> In) {
-		this.id = Id;
-		this.out = Out;
-		this.in = In;
+	public BottlerRecipe(ResourceLocation id, ItemStack out, NonNullList<Ingredient> in) {
+		this.id = id;
+		this.out = out;
+		this.in = in;
 	}
 	
 	@Override
@@ -77,39 +77,39 @@ public class BottlerRecipe implements IBottlerRecipe{
 
 
 		@Override
-		public BottlerRecipe fromJson(ResourceLocation Id, JsonObject json) {
-			ItemStack Out = ShapedRecipe.itemFromJson(JSONUtils.getAsJsonObject(json, "result"));
-			JsonObject Label = JSONUtils.getAsJsonObject(json, "label");
-			JsonObject Container = JSONUtils.getAsJsonObject(json, "container");
-			JsonObject Fluid = JSONUtils.getAsJsonObject(json, "fluid");
-			NonNullList<Ingredient> In = NonNullList.withSize(3, Ingredient.EMPTY);
-			In.set(1, Ingredient.fromJson(Label));
-			In.set(0, Ingredient.fromJson(Container));
-			In.set(2, Ingredient.fromJson(Fluid));
-			return new BottlerRecipe(Id, Out, In);
+		public BottlerRecipe fromJson(ResourceLocation id, JsonObject json) {
+			ItemStack out = ShapedRecipe.itemFromJson(JSONUtils.getAsJsonObject(json, "result"));
+			JsonObject label = JSONUtils.getAsJsonObject(json, "label");
+			JsonObject container = JSONUtils.getAsJsonObject(json, "container");
+			JsonObject fluid = JSONUtils.getAsJsonObject(json, "fluid");
+			NonNullList<Ingredient> in = NonNullList.withSize(3, Ingredient.EMPTY);
+			in.set(1, Ingredient.fromJson(label));
+			in.set(0, Ingredient.fromJson(container));
+			in.set(2, Ingredient.fromJson(fluid));
+			return new BottlerRecipe(id, out, in);
 		}
 
 		@Nullable
 		@Override
-		public BottlerRecipe fromNetwork(ResourceLocation Id, PacketBuffer buffer) {
-			NonNullList<Ingredient> In = NonNullList.withSize(3, Ingredient.EMPTY);
+		public BottlerRecipe fromNetwork(ResourceLocation id, PacketBuffer buffer) {
+			NonNullList<Ingredient> in = NonNullList.withSize(buffer.readInt(), Ingredient.EMPTY);
 			
-			for(int i = 0;i<In.size(); i++) {
-				In.set(i, Ingredient.fromNetwork(buffer));
+			for(int i = 0;i<in.size(); i++) {
+				in.set(i, Ingredient.fromNetwork(buffer));
 			}
 			
-			ItemStack Out = buffer.readItem();
+			ItemStack out = buffer.readItem();
 
-			return new BottlerRecipe(Id, Out, In);
+			return new BottlerRecipe(id, out, in);
 		}
 
 		@Override
-		public void toNetwork(PacketBuffer buffer, BottlerRecipe Recipe) {
-			buffer.writeInt(Recipe.getIngredients().size());
-			for(Ingredient ing : Recipe.getIngredients()) {
+		public void toNetwork(PacketBuffer buffer, BottlerRecipe recipe) {
+			buffer.writeInt(recipe.getIngredients().size());
+			for(Ingredient ing : recipe.getIngredients()) {
 				ing.toNetwork(buffer);
 			}
-			buffer.writeItemStack(Recipe.getResultItem(), false);
+			buffer.writeItemStack(recipe.getResultItem(), false);
 
 		}
 		

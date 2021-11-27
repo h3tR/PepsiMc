@@ -1,4 +1,5 @@
 # eclipse
+server_run
 bin
 *.launch
 .settings
@@ -16,6 +17,7 @@ out
 # gradle
 build
 .gradle
+server_run
 
 # other
 eclipse
