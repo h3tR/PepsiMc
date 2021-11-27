@@ -1,5 +1,4 @@
 # eclipse
-server_run
 bin
 *.launch
 .settings
@@ -17,12 +16,12 @@ out
 # gradle
 build
 .gradle
-server_run
 
 # other
 eclipse
 run
 server_run
+data_run
 
 # Files from Forge MDK
 forge*changelog.txt
