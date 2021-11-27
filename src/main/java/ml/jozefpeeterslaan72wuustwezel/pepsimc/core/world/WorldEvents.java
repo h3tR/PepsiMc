@@ -54,7 +54,9 @@ public class WorldEvents {
 	{
 		if(!(event.getCategory().equals(Biome.BiomeCategory.NETHER)||event.getCategory().equals(Biome.BiomeCategory.THEEND)))
 		{
-			genOre(event, OreConfiguration.Predicates.STONE_ORE_REPLACEABLES, PepsiMcBlock.PEPSITEORE.get(), 5, 50, 20, "stone_pepsite_ore");
+			genOre(event, OreConfiguration.Predicates.STONE_ORE_REPLACEABLES, PepsiMcBlock.PEPSITE_ORE.get(), 5, 50, 0, 20, "pepsite_ore");
+			genOre(event, OreConfiguration.Predicates.STONE_ORE_REPLACEABLES, PepsiMcBlock.DEEPSLATE_PEPSITE_ORE.get(), 5, 50, -64, 20, "deepslate_pepsite_ore");
+
 		}
 		genStruct(event, BiomeDictionary.Type.PLAINS, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get().configured(FeatureConfiguration.NONE));
 		genStruct(event, BiomeDictionary.Type.SANDY, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get().configured(FeatureConfiguration.NONE));
@@ -63,15 +65,15 @@ public class WorldEvents {
 		genFlowers(event,PepsiMcConfiguredFeature.STEVIA_PLANT_CONFIG);
 	}
 	
-	private static void genOre(final BiomeLoadingEvent event, RuleTest fillerType, Block block, int vein, int min, int count, String name)
+	private static void genOre(final BiomeLoadingEvent event, RuleTest fillerType, Block block, int vein, int min, int max, int count, String name)
 	{
 		
-		ConfiguredFeature<?, ?> STONE_ORE = Feature.ORE.configured(
+		ConfiguredFeature<?, ?> ORE = Feature.ORE.configured(
 				 new OreConfiguration(
 						 List.of(OreConfiguration.target(fillerType, block.defaultBlockState())),
-						 vein)).rangeUniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(min)).squared().count(count);
+						 vein)).rangeUniform(VerticalAnchor.aboveBottom(max), VerticalAnchor.aboveBottom(min)).squared().count(count);
 		
-		OVERWORLD_ORES.add(register(name,STONE_ORE));
+		OVERWORLD_ORES.add(register(name,ORE));
 	}
 	
 			 

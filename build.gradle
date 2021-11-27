@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-version = '1.3'
+version = '1.3.2'
 group = 'ml.jozefpeeterslaan72wuustwezel.pepsimc' 
 archivesBaseName = 'pepsimc'
 
@@ -65,7 +65,7 @@ minecraft {
         }
 
         server {
-            workingDirectory project.file('run')
+            workingDirectory project.file('server_run')
 
             property 'forge.logging.markers', 'REGISTRIES'
 
@@ -80,7 +80,7 @@ minecraft {
         }
 
         data {
-            workingDirectory project.file('run')
+            workingDirectory project.file('data_run')
 
             property 'forge.logging.markers', 'REGISTRIES'
 

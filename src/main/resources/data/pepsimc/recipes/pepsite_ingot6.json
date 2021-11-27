@@ -1,7 +1,7 @@
 {
     "type": "minecraft:smelting",
     "ingredient": {
-        "item": "pepsimc:raw_pepsite"
+        "item": "pepsimc:pepsite_ore"
     },
     "result": "pepsimc:pepsite_ingot",
     "experience": 0.1,

@@ -21,7 +21,7 @@ public class PepsiMcProfession {
 			new VillagerProfession("bottling_plant_operator",
 					PepsiMcVillagerPOI.BOTTLING_OPERATOR.get(),
 					ImmutableSet.of(PepsiMcItem.CAFFEINE.get(),PepsiMcItem.STEVIA.get()),
-					ImmutableSet.of(PepsiMcBlock.PEPSITEBLOCK.get()),
+					ImmutableSet.of(PepsiMcBlock.PEPSITE_BLOCK.get()),
 					(SoundEvent)null));
 	
 	public static void register(IEventBus bus) {

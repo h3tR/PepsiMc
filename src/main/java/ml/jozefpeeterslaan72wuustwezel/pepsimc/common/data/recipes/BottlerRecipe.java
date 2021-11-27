@@ -92,7 +92,7 @@ public class BottlerRecipe implements IBottlerRecipe{
 		@Nullable
 		@Override
 		public BottlerRecipe fromNetwork(ResourceLocation Id, FriendlyByteBuf buffer) {
-			NonNullList<Ingredient> In = NonNullList.withSize(3, Ingredient.EMPTY);
+			NonNullList<Ingredient> In = NonNullList.withSize(buffer.readInt(), Ingredient.EMPTY);
 			
 			for(int i = 0;i<In.size(); i++) {
 				In.set(i, Ingredient.fromNetwork(buffer));

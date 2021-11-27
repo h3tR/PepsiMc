@@ -9,6 +9,7 @@
 	"item.pepsimc.stevia":"Stevia Sweetener",
 	"item.pepsimc.caffeine":"Caffeine",
 	"item.pepsimc.pepsite_ingot":"Pepsite Ingot",
+	"item.pepsimc.raw_pepsite":"Raw Pepsite",
 	"item.pepsimc.pepsi_bucket":"Bucket of Pepsi",
 	"item.pepsimc.pepsi_max_bucket":"Bucket of Pepsi Max",
 	"item.pepsimc.pepsi_label":"Pepsi Label",
@@ -21,6 +22,7 @@
 	
 		//blocks
 	"block.pepsimc.pepsite_block":"Pepsite Block",
+	"block.pepsimc.deepslate_pepsite_ore":"Deepslate Pepsite Ore",
 	"block.pepsimc.pepsite_ore":"Pepsite Ore",
 	"block.pepsimc.bottler":"Bottler",
 	"block.pepsimc.stevia_plant":"Stevia Rebaudiana",

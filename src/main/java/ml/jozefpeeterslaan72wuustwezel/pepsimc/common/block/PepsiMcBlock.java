@@ -21,7 +21,7 @@ public class PepsiMcBlock {
 
 	
 			// regular blocks
-	public static final RegistryObject<HorizontalFacedBlock> PEPSITEBLOCK = BLOCKS.register("pepsite_block",
+	public static final RegistryObject<HorizontalFacedBlock> PEPSITE_BLOCK = BLOCKS.register("pepsite_block",
 			()->new HorizontalFacedBlock(
 					BlockBehaviour.Properties.of(Material.HEAVY_METAL)
 					.requiresCorrectToolForDrops()
@@ -29,7 +29,14 @@ public class PepsiMcBlock {
 					.sound(SoundType.METAL)
 					.requiresCorrectToolForDrops()));
 	
-	public static final RegistryObject<Block> PEPSITEORE = BLOCKS.register("pepsite_ore", 
+	public static final RegistryObject<Block> PEPSITE_ORE = BLOCKS.register("pepsite_ore", 
+			()-> new Block(
+					BlockBehaviour.Properties.of(Material.STONE)
+						.strength(4.5f, 15)
+						.sound(SoundType.STONE)
+						.requiresCorrectToolForDrops()));
+	
+	public static final RegistryObject<Block> DEEPSLATE_PEPSITE_ORE = BLOCKS.register("deepslate_pepsite_ore", 
 			()-> new Block(
 					BlockBehaviour.Properties.of(Material.STONE)
 						.strength(4.5f, 15)
