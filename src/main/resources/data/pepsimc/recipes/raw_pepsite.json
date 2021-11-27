@@ -5,11 +5,11 @@
     ],
     "key": {
         "#": {
-            "item": "pepsimc:pepsite_block"
+            "item": "pepsimc:raw_pepsite_block"
         }
     },
     "result": {
-        "item": "pepsimc:pepsite_ingot",
+        "item": "pepsimc:raw_pepsite",
         "count": 9
     }
 }
