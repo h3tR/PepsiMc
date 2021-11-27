@@ -21,7 +21,8 @@
 	"item.pepsimc.stevia_seeds":"Stevia Rebaudiana Seeds",
 	
 		//blocks
-	"block.pepsimc.pepsite_block":"Pepsite Block",
+	"block.pepsimc.pepsite_block":"Block of Pepsite",
+	"block.pepsimc.raw_pepsite_block":"Block of Raw Pepsite",
 	"block.pepsimc.deepslate_pepsite_ore":"Deepslate Pepsite Ore",
 	"block.pepsimc.pepsite_ore":"Pepsite Ore",
 	"block.pepsimc.bottler":"Bottler",

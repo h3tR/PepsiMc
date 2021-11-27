@@ -153,6 +153,9 @@ public class PepsiMcItem {
 	public static final RegistryObject<BlockItem> PEPSITE_BLOCK = ITEMS.register("pepsite_block", ()-> new BlockItem(PepsiMcBlock.PEPSITE_BLOCK.get(), new Item.Properties()
 			.tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	
+	public static final RegistryObject<BlockItem> RAW_PEPSITE_BLOCK = ITEMS.register("raw_pepsite_block", ()-> new BlockItem(PepsiMcBlock.RAW_PEPSITE_BLOCK.get(), new Item.Properties()
+			.tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	
 	public static final RegistryObject<BlockItem> STEVIA_PLANT = ITEMS.register("stevia_plant", ()-> new BlockItem(PepsiMcBlock.STEVIA_PLANT.get(), new Item.Properties()
 			.tab(CreativeModeTab.TAB_DECORATIONS)));
 	

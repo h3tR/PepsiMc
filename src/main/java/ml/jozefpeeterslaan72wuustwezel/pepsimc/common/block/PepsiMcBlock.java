@@ -29,6 +29,13 @@ public class PepsiMcBlock {
 					.sound(SoundType.METAL)
 					.requiresCorrectToolForDrops()));
 	
+	public static final RegistryObject<Block> RAW_PEPSITE_BLOCK = BLOCKS.register("raw_pepsite_block", 
+			()-> new Block(
+					BlockBehaviour.Properties.of(Material.METAL)
+						.strength(4.5f, 15)
+						.sound(SoundType.METAL)
+						.requiresCorrectToolForDrops()));
+	
 	public static final RegistryObject<Block> PEPSITE_ORE = BLOCKS.register("pepsite_ore", 
 			()-> new Block(
 					BlockBehaviour.Properties.of(Material.STONE)

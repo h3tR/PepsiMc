@@ -3,6 +3,7 @@
   "values": [
     "pepsimc:bottler",
     "pepsimc:pepsite_block",
+    "pepsimc:raw_pepsite_block",
     "pepsimc:pepsite_ore",
     "pepsimc:deepslate_pepsite_ore"
   ]

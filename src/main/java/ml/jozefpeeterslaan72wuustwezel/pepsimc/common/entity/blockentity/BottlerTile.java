@@ -6,6 +6,8 @@ import java.util.Optional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.apache.logging.log4j.LogManager;
+
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import net.minecraft.core.BlockPos;
@@ -61,6 +63,7 @@ public class BottlerTile extends BlockEntity{
 	}
 	
 	public void bottle(Level world) {
+		
 		SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
 		
 		for(int i=0;i<itemHandler.getSlots();i++) {
@@ -75,6 +78,7 @@ public class BottlerTile extends BlockEntity{
 			itemHandler.extractItem(2, 1, false);
 			itemHandler.insertItem(4, new ItemStack(Items.BUCKET), false);
 			itemHandler.insertItem(3, iRecipe.getResultItem(), false);
+			LogManager.getLogger().debug(iRecipe.getResultItem());
 			setChanged();
 		});	
 	}

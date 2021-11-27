@@ -40,7 +40,9 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 @Mod.EventBusSubscriber(modid = "pepsimc")
@@ -54,8 +56,8 @@ public class WorldEvents {
 	{
 		if(!(event.getCategory().equals(Biome.BiomeCategory.NETHER)||event.getCategory().equals(Biome.BiomeCategory.THEEND)))
 		{
-			genOre(event, OreConfiguration.Predicates.STONE_ORE_REPLACEABLES, PepsiMcBlock.PEPSITE_ORE.get(), 5, 50, 0, 20, "pepsite_ore");
-			genOre(event, OreConfiguration.Predicates.STONE_ORE_REPLACEABLES, PepsiMcBlock.DEEPSLATE_PEPSITE_ORE.get(), 5, 50, -64, 20, "deepslate_pepsite_ore");
+			genOre(event, OreConfiguration.Predicates.STONE_ORE_REPLACEABLES, PepsiMcBlock.PEPSITE_ORE.get(), 5, 50, 5, "pepsite_ore");
+			genOre(event, OreConfiguration.Predicates.DEEPSLATE_ORE_REPLACEABLES, PepsiMcBlock.DEEPSLATE_PEPSITE_ORE.get(), 5, 20, 5, "deepslate_pepsite_ore");
 
 		}
 		genStruct(event, BiomeDictionary.Type.PLAINS, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get().configured(FeatureConfiguration.NONE));
@@ -65,13 +67,13 @@ public class WorldEvents {
 		genFlowers(event,PepsiMcConfiguredFeature.STEVIA_PLANT_CONFIG);
 	}
 	
-	private static void genOre(final BiomeLoadingEvent event, RuleTest fillerType, Block block, int vein, int min, int max, int count, String name)
+	private static void genOre(final BiomeLoadingEvent event, RuleTest fillerType, Block block, int vein, int max, int count, String name)
 	{
 		
 		ConfiguredFeature<?, ?> ORE = Feature.ORE.configured(
 				 new OreConfiguration(
 						 List.of(OreConfiguration.target(fillerType, block.defaultBlockState())),
-						 vein)).rangeUniform(VerticalAnchor.aboveBottom(max), VerticalAnchor.aboveBottom(min)).squared().count(count);
+						 vein)).rangeUniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(max)).squared().count(count);
 		
 		OVERWORLD_ORES.add(register(name,ORE));
 	}
@@ -143,10 +145,23 @@ public class WorldEvents {
         server.getChunkSource().generator.getSettings().structureConfig().putAll(tempMap);
 	}
 
-	  private static <Config extends FeatureConfiguration> ConfiguredFeature<Config, ?> register(String name,
-	            ConfiguredFeature<Config, ?> configuredFeature) {
-	        return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation("pepsimc", name),
+	 private static <Config extends FeatureConfiguration> ConfiguredFeature<Config, ?> register(String name,
+			 ConfiguredFeature<Config, ?> configuredFeature) {
+	     return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation("pepsimc", name),
 	                configuredFeature);
+	 }
+	 
+	 @Mod.EventBusSubscriber(modid = "pepsimc", bus = Bus.FORGE)
+	    public static class ForgeBusSubscriber {
+	        @SubscribeEvent
+	        public static void biomeLoading(BiomeLoadingEvent event) {
+	            List<Supplier<ConfiguredFeature<?, ?>>> features = event.getGeneration()
+	                    .getFeatures(Decoration.UNDERGROUND_ORES);
+
+	            switch(event.getCategory()) {
+	                default -> WorldEvents.OVERWORLD_ORES.forEach(ore -> features.add(() -> ore));
+	            }
+	        }
 	    }
 }
 

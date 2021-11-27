@@ -1,7 +1,7 @@
 {
 	"parent": "item/generated",
     "textures": {
-    	"layer0": "pepsimc:items/pepsite_ingot"   
+    	"layer0": "pepsimc:items/raw_pepsite"   
     }
 
 }
