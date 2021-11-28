@@ -3,6 +3,8 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -11,10 +13,11 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.BottlerTile;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.PepsimcNetwork;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.packet.BottlerCraftPacket;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.packet.ProcessingCraftPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.world.entity.player.Inventory;
@@ -49,16 +52,16 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 			Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(RecipeResult(), this.getGuiLeft()+143, this.getGuiTop()+30);
 			if(!this.menu.slotHasItem(4))
 			Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(new ItemStack(Items.BUCKET), this.getGuiLeft()+143, this.getGuiTop()+51);
-			for (int i = 0; i < 5; i++) {
-	    	   RenderSystem.depthFunc(516+i);
+			for (int i = 0; i < 3; i++) {
+		        RenderSystem.depthFunc(516+i);
 				if(!this.menu.slotHasItem(3))
-	    	   GuiComponent.fill(stack, this.getGuiLeft()+143, this.getGuiTop()+30, this.getGuiLeft()+159, this.getGuiTop()+46,822083583);
+					GuiComponent.fill(stack, this.getGuiLeft()+143, this.getGuiTop()+30, this.getGuiLeft()+159, this.getGuiTop()+46,822083583);
 				if(!this.menu.slotHasItem(4))
-				GuiComponent.fill(stack, this.getGuiLeft()+143, this.getGuiTop()+51, this.getGuiLeft()+159, this.getGuiTop()+67,822083583);
+					GuiComponent.fill(stack, this.getGuiLeft()+143, this.getGuiTop()+51, this.getGuiLeft()+159, this.getGuiTop()+67,822083583);
 			}
-			
-		
 	        RenderSystem.depthFunc(515);
+
+		
 
 			this.addWidget(new BottlerScreen.ConfirmButton(this.getGuiLeft()+95,this.getGuiTop()+30,176,3,23,9));
 			if(this.isHovering(95,30, 23, 9, mouseX, mouseY)) {
@@ -118,25 +121,27 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 		recipe.ifPresent(i->{
 			result.add(i.getResultItem());
 		});
+		LogManager.getLogger().debug(result.get(0));
 		return result.get(0);
 		
 	}
 	
 	@Override
 	protected void renderBg(PoseStack stack, float Ptick, int X, int Y) {
-		RenderSystem.clearColor(1f, 1f, 1f, 1f);
-		this.minecraft.getTextureManager().bindForSetup(GUI);
-		int i = this.getGuiLeft();
-		int j = this.getGuiTop();
-		this.blit(stack, i, j, 0, 0, this.getXSize(), this.getYSize()+2);
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+		RenderSystem.setShaderTexture(0, GUI);
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
+        this.blit(stack, x, y, 0, 0, imageWidth, imageHeight);
 		if(this.menu.slotHasItem(0)) {
-			this.blit(stack, i+61, j+35, 176, 0, 3, 3);
+			this.blit(stack, x+61, y+35, 176, 0, 3, 3);
 		}
 		if (this.menu.slotHasItem(1)) {
-			this.blit(stack, i+69, j+35, 176, 0, 3, 3);
+			this.blit(stack, x+69, y+35, 176, 0, 3, 3);
 		}
 		if (this.menu.slotHasItem(2)) {
-			this.blit(stack, i+77, j+35, 176, 0, 3, 3);
+			this.blit(stack, x+77, y+35, 176, 0, 3, 3);
 		}
 	}
 	
@@ -195,8 +200,7 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 		        		      
 	      public void onPress() {
 	    	  BlockPos pos = BottlerScreen.this.menu.TE.getBlockPos();
-	    	  int posar[] = {pos.getX(),pos.getY(),pos.getZ()};
-	    	  PepsimcNetwork.CHANNEL.sendToServer(new BottlerCraftPacket(posar));
+	    	  PepsimcNetwork.CHANNEL.sendToServer(new ProcessingCraftPacket(pos));
 	      }
 
 	     

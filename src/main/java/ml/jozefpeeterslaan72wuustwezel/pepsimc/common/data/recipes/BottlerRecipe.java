@@ -3,6 +3,8 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes;
 
 import javax.annotation.Nullable;
 
+import org.apache.logging.log4j.LogManager;
+
 import com.google.gson.JsonObject;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
@@ -78,7 +80,7 @@ public class BottlerRecipe implements IBottlerRecipe{
 
 		@Override
 		public BottlerRecipe fromJson(ResourceLocation Id, JsonObject json) {
-			ItemStack Out = ShapedRecipe.itemFromJson(GsonHelper.getAsJsonObject(json, "result")).getDefaultInstance();
+			ItemStack Out = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
 			JsonObject Label = GsonHelper.getAsJsonObject(json, "label");
 			JsonObject Container = GsonHelper.getAsJsonObject(json, "container");
 			JsonObject Fluid = GsonHelper.getAsJsonObject(json, "fluid");
