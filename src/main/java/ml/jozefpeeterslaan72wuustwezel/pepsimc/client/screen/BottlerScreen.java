@@ -199,7 +199,6 @@ public class BottlerScreen extends ContainerScreen<BottlerContainer>{
 		        		      
 	      public void onPress() {
 	    	  BlockPos pos = BottlerScreen.this.menu.TE.getBlockPos();
-	    	  LogManager.getLogger().debug(pos);
 	    	  PacketHandler.CHANNEL.sendToServer(new ProcessingCraftPacket(pos));
 	    	  
 	      }

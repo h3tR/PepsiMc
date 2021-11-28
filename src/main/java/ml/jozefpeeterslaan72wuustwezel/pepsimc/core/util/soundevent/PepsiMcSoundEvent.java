@@ -10,7 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class PepsiMcSoundEvent {
 	public static DeferredRegister<SoundEvent> SOUND_EVENTS = 
 			DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, "pepsimc");
-	
+
 	public static final RegistryObject<SoundEvent> PEPSI_MAN_TUNE = 
 			SOUND_EVENTS.register("pepsi_man_tune", ()-> new SoundEvent(new ResourceLocation("pepsimc","pepsi_man_tune")));
 	
