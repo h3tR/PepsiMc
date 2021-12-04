@@ -3,8 +3,6 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import org.apache.logging.log4j.LogManager;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -16,6 +14,7 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.PepsimcNetwork;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.packet.ProcessingCraftPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.gui.components.AbstractButton;
@@ -25,7 +24,6 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.level.Level;
@@ -47,7 +45,14 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 		super.render(stack, mouseX, mouseY, Ptick);
 		this.renderTooltip(stack, mouseX, mouseY);
 		if (hasRecipe()) {
-			
+			this.addRenderableWidget(new BottlerScreen.ConfirmButton(this.getGuiLeft()+95,this.getGuiTop()+30,176,3,23,9));
+			if(this.isHovering(95,30, 23, 9, mouseX, mouseY)) {
+
+				if(this.createTooltip()!=null) {
+
+					this.renderTooltip(stack, this.createTooltip(), mouseX,mouseY);
+				}
+			}			
 			if(!this.menu.slotHasItem(3))
 			Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(RecipeResult(), this.getGuiLeft()+143, this.getGuiTop()+30);
 			if(!this.menu.slotHasItem(4))
@@ -63,14 +68,7 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 
 		
 
-			this.addWidget(new BottlerScreen.ConfirmButton(this.getGuiLeft()+95,this.getGuiTop()+30,176,3,23,9));
-			if(this.isHovering(95,30, 23, 9, mouseX, mouseY)) {
-
-				if(this.createTooltip()!=null) {
-
-				this.renderTooltip(stack, this.createTooltip(), mouseX,mouseY);
-				}
-			}
+			
 		}
 		
 	}
@@ -105,6 +103,7 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 		}
 		
 		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.BOTTLER_RECIPE, inv, world);
+
 		return recipe.isPresent();
 		
 	}
@@ -121,7 +120,6 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 		recipe.ifPresent(i->{
 			result.add(i.getResultItem());
 		});
-		LogManager.getLogger().debug(result.get(0));
 		return result.get(0);
 		
 	}
@@ -199,8 +197,7 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 		
 		        		      
 	      public void onPress() {
-	    	  BlockPos pos = BottlerScreen.this.menu.TE.getBlockPos();
-	    	  PepsimcNetwork.CHANNEL.sendToServer(new ProcessingCraftPacket(pos));
+	    	  PepsimcNetwork.CHANNEL.sendToServer(new ProcessingCraftPacket(BottlerScreen.this.menu.TE.getBlockPos(),Screen.hasShiftDown()));
 	      }
 
 	     

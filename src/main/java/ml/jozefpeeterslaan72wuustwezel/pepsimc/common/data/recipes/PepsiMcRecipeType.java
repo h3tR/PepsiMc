@@ -13,7 +13,21 @@ public class PepsiMcRecipeType {
 	
 	public static final RegistryObject<BottlerRecipe.Serializer> BOTTLER_SERIALIZER = RECIPE_SERIALIZER.register("bottler", BottlerRecipe.Serializer::new);
 	
+	public static final RegistryObject<ExtractorRecipe.Serializer> EXTRACTOR_SERIALIZER = RECIPE_SERIALIZER.register("extractor", ExtractorRecipe.Serializer::new);
+
+	public static final RegistryObject<FlavoringRecipe.Serializer> FLAVORING_SERIALIZER = RECIPE_SERIALIZER.register("flavor", FlavoringRecipe.Serializer::new);
+
+	public static final RegistryObject<RecyclerRecipe.Serializer> RECYCLER_SERIALIZER = RECIPE_SERIALIZER.register("recycler", RecyclerRecipe.Serializer::new);
+
+	
 	public static RecipeType<BottlerRecipe> BOTTLER_RECIPE = new BottlerRecipe.BottlerRecipeType();
+	
+	public static RecipeType<ExtractorRecipe> EXTRACTOR_RECIPE = new ExtractorRecipe.ExtractorRecipeType();
+
+	public static RecipeType<FlavoringRecipe> FLAVORING_RECIPE = new FlavoringRecipe.FlavoringRecipeType();
+
+	public static RecipeType<RecyclerRecipe> RECYCLER_RECIPE = new RecyclerRecipe.RecyclerRecipeType();
+
 	
 	public static void register(IEventBus bus) {
 		RECIPE_SERIALIZER.register(bus);

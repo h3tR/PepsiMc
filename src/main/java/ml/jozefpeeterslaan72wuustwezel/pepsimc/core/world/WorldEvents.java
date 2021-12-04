@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.Registry;
-import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.ChunkGenerator;
@@ -69,13 +68,10 @@ public class WorldEvents {
 	
 	private static void genOre(final BiomeLoadingEvent event, RuleTest fillerType, Block block, int vein, int max, int count, String name)
 	{
-		
-		ConfiguredFeature<?, ?> ORE = Feature.ORE.configured(
+		event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,Feature.ORE.configured(
 				 new OreConfiguration(
 						 List.of(OreConfiguration.target(fillerType, block.defaultBlockState())),
-						 vein)).rangeUniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(max)).squared().count(count);
-		
-		OVERWORLD_ORES.add(register(name,ORE));
+						 vein)).rangeUniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(max)).squared().count(count));
 	}
 	
 			 
@@ -145,11 +141,6 @@ public class WorldEvents {
         server.getChunkSource().generator.getSettings().structureConfig().putAll(tempMap);
 	}
 
-	 private static <Config extends FeatureConfiguration> ConfiguredFeature<Config, ?> register(String name,
-			 ConfiguredFeature<Config, ?> configuredFeature) {
-	     return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation("pepsimc", name),
-	                configuredFeature);
-	 }
 	 
 	 @Mod.EventBusSubscriber(modid = "pepsimc", bus = Bus.FORGE)
 	    public static class ForgeBusSubscriber {

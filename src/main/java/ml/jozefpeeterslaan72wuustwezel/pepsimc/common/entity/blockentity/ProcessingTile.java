@@ -62,6 +62,10 @@ public class ProcessingTile extends BlockEntity{
 		LogManager.getLogger().warn("Process method called outside super class!");
 	}
 	
+	public void processAll(Level world) {
+		LogManager.getLogger().warn("Process method called outside super class!");
+	}
+	
 	protected SimpleContainer getSimpleInv() {
 		LogManager.getLogger().debug("simpleinv");
 
@@ -85,7 +89,6 @@ public class ProcessingTile extends BlockEntity{
 		return super.getCapability(cap, side);
 	}
 	
-
 	@Override
 	public BlockEntityType<?> getType() {
 		// TODO Auto-generated method stub

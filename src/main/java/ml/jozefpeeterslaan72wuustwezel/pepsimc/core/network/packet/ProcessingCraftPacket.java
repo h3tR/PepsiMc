@@ -12,16 +12,18 @@ import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 public class ProcessingCraftPacket {
 	public BlockPos pos;
-	
-	public ProcessingCraftPacket(BlockPos pos) {
+	public boolean shift;
+	public ProcessingCraftPacket(BlockPos pos,boolean shift) {
 		this.pos = pos;
+		this.shift = shift;
 	}
 	public static void encode(ProcessingCraftPacket message, FriendlyByteBuf buffer) {
 		buffer.writeBlockPos(message.pos);
+		buffer.writeBoolean(message.shift);
 	}
 	
 	public static ProcessingCraftPacket decode(FriendlyByteBuf buffer) {
-		return new ProcessingCraftPacket(buffer.readBlockPos());
+		return new ProcessingCraftPacket(buffer.readBlockPos(),buffer.readBoolean());
 	}
 	
 	public static void handle(ProcessingCraftPacket message,Supplier<NetworkEvent.Context> context) {
@@ -29,18 +31,17 @@ public class ProcessingCraftPacket {
 		ctx.enqueueWork(()->{
 			ServerPlayer plrEntity = ctx.getSender();
 			Level world = plrEntity.level;
-			
-			try {
-				BlockEntity TE = world.getBlockEntity(message.pos);
-				if(TE instanceof ProcessingTile) {
-					ProcessingTile PT = (ProcessingTile) TE;
+			BlockEntity TE = world.getBlockEntity(message.pos);
+			if(TE instanceof ProcessingTile) {
+				ProcessingTile PT = (ProcessingTile) TE;
+				if(message.shift) {
+					PT.processAll(world);
+				} else {
 					PT.process(world);
 				}
-			}catch (Exception e) {
-				throw e;
 			}
-			
 		});
+		ctx.setPacketHandled(true);
 	}
 	
 }

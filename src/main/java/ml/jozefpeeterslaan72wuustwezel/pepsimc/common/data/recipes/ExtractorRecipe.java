@@ -22,14 +22,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class BottlerRecipe implements Recipe<Container>{
-	static ResourceLocation TYPE_ID = new ResourceLocation("pepsimc", "bottler");
+public class ExtractorRecipe implements Recipe<Container>{
+	static ResourceLocation TYPE_ID = new ResourceLocation("pepsimc", "extractor");
 
 	private final ResourceLocation id;
 	private final ItemStack out;
 	private final NonNullList<Ingredient> in;
 	
-	public BottlerRecipe(ResourceLocation Id, ItemStack Out, NonNullList<Ingredient> In) {
+	public ExtractorRecipe(ResourceLocation Id, ItemStack Out, NonNullList<Ingredient> In) {
 		this.id = Id;
 		this.out = Out;
 		this.in = In;
@@ -53,7 +53,7 @@ public class BottlerRecipe implements Recipe<Container>{
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return PepsiMcRecipeType.BOTTLER_SERIALIZER.get();
+		return PepsiMcRecipeType.EXTRACTOR_SERIALIZER.get();
 	}
 	
 	@Override
@@ -68,35 +68,31 @@ public class BottlerRecipe implements Recipe<Container>{
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(PepsiMcBlock.BOTTLER.get());
+		return new ItemStack(PepsiMcBlock.EXTRACTOR.get());
 	}
 	
-	public static class BottlerRecipeType implements RecipeType<BottlerRecipe>{
+	public static class ExtractorRecipeType implements RecipeType<ExtractorRecipe>{
 		@Override
 		public String toString() {
-			return BottlerRecipe.TYPE_ID.toString();
+			return ExtractorRecipe.TYPE_ID.toString();
 		}
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<BottlerRecipe>{
+	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ExtractorRecipe>{
 
 
 		@Override
-		public BottlerRecipe fromJson(ResourceLocation Id, JsonObject json) {
+		public ExtractorRecipe fromJson(ResourceLocation Id, JsonObject json) {
 			ItemStack Out = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
-			JsonObject Label = GsonHelper.getAsJsonObject(json, "label");
-			JsonObject Container = GsonHelper.getAsJsonObject(json, "container");
-			JsonObject Fluid = GsonHelper.getAsJsonObject(json, "fluid");
-			NonNullList<Ingredient> In = NonNullList.withSize(3, Ingredient.EMPTY);
-			In.set(1, Ingredient.fromJson(Label));
-			In.set(0, Ingredient.fromJson(Container));
-			In.set(2, Ingredient.fromJson(Fluid));
-			return new BottlerRecipe(Id, Out, In);
+			JsonObject Extract = GsonHelper.getAsJsonObject(json, "extract");
+			NonNullList<Ingredient> In = NonNullList.withSize(1, Ingredient.EMPTY);
+			In.set(0, Ingredient.fromJson(Extract));
+			return new ExtractorRecipe(Id, Out, In);
 		}
 
 		@Nullable
 		@Override
-		public BottlerRecipe fromNetwork(ResourceLocation Id, FriendlyByteBuf buffer) {
+		public ExtractorRecipe fromNetwork(ResourceLocation Id, FriendlyByteBuf buffer) {
 			NonNullList<Ingredient> In = NonNullList.withSize(buffer.readInt(), Ingredient.EMPTY);
 			
 			for(int i = 0;i<In.size(); i++) {
@@ -105,11 +101,11 @@ public class BottlerRecipe implements Recipe<Container>{
 			
 			ItemStack Out = buffer.readItem();
 
-			return new BottlerRecipe(Id, Out, In);
+			return new ExtractorRecipe(Id, Out, In);
 		}
 
 		@Override
-		public void toNetwork(FriendlyByteBuf buffer, BottlerRecipe Recipe) {
+		public void toNetwork(FriendlyByteBuf buffer, ExtractorRecipe Recipe) {
 			buffer.writeInt(Recipe.getIngredients().size());
 			for(Ingredient ing : Recipe.getIngredients()) {
 				ing.toNetwork(buffer);

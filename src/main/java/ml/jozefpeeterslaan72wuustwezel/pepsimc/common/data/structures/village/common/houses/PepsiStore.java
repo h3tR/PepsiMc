@@ -17,34 +17,21 @@ import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.world.level.levelgen.feature.structures.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.feature.structures.StructurePoolElement;
 import net.minecraft.data.worldgen.ProcessorLists;
-
-
-import net.minecraft.data.worldgen.DesertVillagePools;
-import net.minecraft.data.worldgen.PlainVillagePools;
-import net.minecraft.data.worldgen.SavannaVillagePools;
-import net.minecraft.data.worldgen.SnowyVillagePools;
-import net.minecraft.data.worldgen.TaigaVillagePools;
+import net.minecraft.data.worldgen.VillagePools;
 
 public class PepsiStore {
 	public static void init() {
-		PlainVillagePools.bootstrap();
-		SnowyVillagePools.bootstrap();
-		SavannaVillagePools.bootstrap();
-		DesertVillagePools.bootstrap();
-		TaigaVillagePools.bootstrap();
+		VillagePools.bootstrap();
 		for(String biome : new String[]{"plains", "snowy", "savanna", "desert", "taiga"}) {
 			addToPool(new ResourceLocation("village/"+biome+"/houses"),
 					new ResourceLocation("pepsimc:village/"+biome+"/houses/"+biome+"_pepsi_store_1"), 150);
 		}
-		for(String biome : new String[]{"plains", "snowy", "savanna", "desert", "taiga"}) {
-			addToPool(new ResourceLocation("village/"+biome+"/houses"),
-					new ResourceLocation("pepsimc:village/"+biome+"/houses/"+biome+"_pepsi_store_1"), 150);
-		}
+
 	}
 	private static void addToPool(ResourceLocation pool, ResourceLocation toAdd, int weight)
 	{
+		
 		StructureTemplatePool old = BuiltinRegistries.TEMPLATE_POOL.get(pool);
-
 		// Fixed seed to prevent inconsistencies between different worlds
 		List<StructurePoolElement> shuffled;
 		if(old!=null)
@@ -63,6 +50,7 @@ public class PepsiStore {
 		List<Pair<StructurePoolElement, Integer>> newPieceList = newPieces.object2IntEntrySet().stream()
 				.map(e -> Pair.of(e.getKey(), e.getIntValue()))
 				.collect(Collectors.toList());
+		
 
 		ResourceLocation name = old.getName();
 

@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-version = '1.3.3'
+version = '1.3.4'
 group = 'ml.jozefpeeterslaan72wuustwezel.pepsimc' 
 archivesBaseName = 'pepsimc'
 
@@ -101,7 +101,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
 
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.111'
+    minecraft 'net.minecraftforge:forge:1.17.1-37.1.0'
 
   compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // JEI API
   runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // JEI

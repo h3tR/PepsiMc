@@ -23,7 +23,6 @@ public class PepsiMcItem {
 	
 	public static final RegistryObject<BeverageItem> PEPSI_CAN = ITEMS.register("pepsi_can", ()-> new BeverageItem(new Item.Properties()
 			.tab(CreativeModeTab.TAB_FOOD)
-			.craftRemainder(net.minecraft.world.item.Items.BUCKET)
 			.food(new FoodProperties.Builder()
 					.nutrition(2)
 					.saturationMod(.2f)
@@ -41,7 +40,6 @@ public class PepsiMcItem {
 	
 	public static final RegistryObject<BeverageItem> PEPSI_BOTTLE = ITEMS.register("pepsi_bottle", ()-> new BeverageItem(new Item.Properties()
 			.tab(CreativeModeTab.TAB_FOOD)
-			.craftRemainder(net.minecraft.world.item.Items.BUCKET)
 			.food(new FoodProperties.Builder()
 					.nutrition(2)
 					.saturationMod(.2f)
@@ -85,7 +83,6 @@ public class PepsiMcItem {
 	
 	public static final RegistryObject<BeverageItem> PEPSI_MAX_BOTTLE = ITEMS.register("pepsi_max_bottle", ()-> new BeverageItem(new Item.Properties()
 			.tab(CreativeModeTab.TAB_FOOD)
-			.craftRemainder(net.minecraft.world.item.Items.BUCKET)
 			.food(new FoodProperties.Builder()
 					.nutrition(2)
 					.saturationMod(.2f)
@@ -103,7 +100,6 @@ public class PepsiMcItem {
 	
 	public static final RegistryObject<BeverageItem> PEPSI_MAX_CAN = ITEMS.register("pepsi_max_can", ()-> new BeverageItem(new Item.Properties()
 			.tab(CreativeModeTab.TAB_FOOD)
-			.craftRemainder(net.minecraft.world.item.Items.BUCKET)
 			.food(new FoodProperties.Builder()
 					.nutrition(2)
 					.saturationMod(.2f)
@@ -135,7 +131,13 @@ public class PepsiMcItem {
 	public static final RegistryObject<Item> EMPTY_BOTTLE = ITEMS.register("empty_bottle", ()-> new Item(new Item.Properties()
 			.tab(CreativeModeTab.TAB_MISC))); 
 	
+	public static final RegistryObject<Item> USED_BOTTLE = ITEMS.register("used_bottle", ()-> new Item(new Item.Properties()
+			.tab(CreativeModeTab.TAB_MISC))); 
+	
 	public static final RegistryObject<Item> EMPTY_CAN = ITEMS.register("empty_can", ()-> new Item(new Item.Properties()
+			.tab(CreativeModeTab.TAB_MISC))); 
+	
+	public static final RegistryObject<Item> USED_CAN = ITEMS.register("used_can", ()-> new Item(new Item.Properties()
 			.tab(CreativeModeTab.TAB_MISC))); 
 	
 	public static final RegistryObject<Item> PEPSI_FLUID_BUCKET = ITEMS.register("pepsi_bucket", ()-> new BucketItem(()->PepsiMcFluid.PEPSI_FLUID.get(),new Item.Properties()
@@ -166,6 +168,15 @@ public class PepsiMcItem {
 			.tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	
 	public static final RegistryObject<BlockItem> BOTTLER = ITEMS.register("bottler", ()-> new BlockItem(PepsiMcBlock.BOTTLER.get(), new Item.Properties()
+			.tab(CreativeModeTab.TAB_DECORATIONS)));
+	
+	public static final RegistryObject<BlockItem> FLAVOR_MACHINE = ITEMS.register("flavor_machine", ()-> new BlockItem(PepsiMcBlock.FLAVOR_MACHINE.get(), new Item.Properties()
+			.tab(CreativeModeTab.TAB_DECORATIONS)));
+	
+	public static final RegistryObject<BlockItem> RECYCLER = ITEMS.register("recycler", ()-> new BlockItem(PepsiMcBlock.RECYCLER.get(), new Item.Properties()
+			.tab(CreativeModeTab.TAB_DECORATIONS)));
+	
+	public static final RegistryObject<BlockItem> EXTRACTOR = ITEMS.register("extractor", ()-> new BlockItem(PepsiMcBlock.EXTRACTOR.get(), new Item.Properties()
 			.tab(CreativeModeTab.TAB_DECORATIONS)));
 	
 	

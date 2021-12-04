@@ -5,10 +5,9 @@ import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
-import org.apache.logging.log4j.LogManager;
-
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.RecyclerRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,22 +16,20 @@ import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class BottlerTile extends ProcessingTile{
+public class RecyclerTile extends ProcessingTile{
 	
-	public BottlerTile(BlockPos pos, BlockState state) {
-		super(PepsiMcBlockEntity.BOTTLER_TILE.get(), pos, state);
+	public RecyclerTile(BlockPos pos, BlockState state) {
+		super(PepsiMcBlockEntity.RECYCLER_TILE.get(), pos, state);
 	}
 
 	@Override
 	public void process(Level world) {
-		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.BOTTLER_RECIPE, getSimpleInv(), world);
+		Optional<RecyclerRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.RECYCLER_RECIPE, getSimpleInv(), world);
 
 		recipe.ifPresent(iRecipe->{
 			itemHandler.extractItem(0, 1, false);
 			itemHandler.extractItem(1, 1, false);
-			itemHandler.extractItem(2, 1, false);
-			itemHandler.insertItem(3, iRecipe.getResultItem(), false);
-			itemHandler.insertItem(4, new ItemStack(Items.BUCKET), false);
+			itemHandler.insertItem(2, iRecipe.getResultItem(), false);
 			setChanged();
 		});	
 
@@ -40,17 +37,15 @@ public class BottlerTile extends ProcessingTile{
 	
 	@Override
 	public void processAll(Level world) {
-		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.BOTTLER_RECIPE, getSimpleInv(), world);
+		Optional<RecyclerRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.RECYCLER_RECIPE, getSimpleInv(), world);
 		while (recipe.isPresent()) {
 			recipe.ifPresent(iRecipe->{
 				itemHandler.extractItem(0, 1, false);
 				itemHandler.extractItem(1, 1, false);
-				itemHandler.extractItem(2, 1, false);
-				itemHandler.insertItem(3, iRecipe.getResultItem(), false);
-				itemHandler.insertItem(4, new ItemStack(Items.BUCKET), false);
+				itemHandler.insertItem(2, iRecipe.getResultItem(), false);
 				setChanged();
 			});	
-			recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.BOTTLER_RECIPE, getSimpleInv(), world);
+			recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.RECYCLER_RECIPE, getSimpleInv(), world);
 		}
 		
 
@@ -59,7 +54,7 @@ public class BottlerTile extends ProcessingTile{
 	@Override
 	protected ItemStackHandler createHandler() {
 
-		return new ItemStackHandler(5) {
+		return new ItemStackHandler(3) {
 			
 			@Override
 			protected void onContentsChanged(int slot) {
@@ -74,12 +69,9 @@ public class BottlerTile extends ProcessingTile{
 			@Override
 			public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
 				switch (slot) {
-					case 0: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "bottling_container"));
-					case 1: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "bottling_label"));
-					case 2: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "bottling_liquid"));
-					case 3: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "bottled_liquid"));
-					case 4: return stack.getItem() == Items.BUCKET;
-
+					case 0: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "recycing_catalyst"));
+					case 1: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "recyclable"));
+					case 2: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "recycled"));
 					default:
 						return false;
 				

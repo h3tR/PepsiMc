@@ -1,6 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.packet.BottlerCraftPacket;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.packet.ProcessingCraftPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fmllegacy.network.NetworkRegistry;
 import net.minecraftforge.fmllegacy.network.simple.SimpleChannel;
@@ -12,6 +12,6 @@ public class PepsimcNetwork {
 	
 	
 	public static void init() {
-		CHANNEL.registerMessage(0, BottlerCraftPacket.class, BottlerCraftPacket::encode, BottlerCraftPacket::decode, BottlerCraftPacket::handle);
+		CHANNEL.registerMessage(0, ProcessingCraftPacket.class, ProcessingCraftPacket::encode, ProcessingCraftPacket::decode, ProcessingCraftPacket::handle);
 	}
 }
