@@ -17,12 +17,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
-public class ReyclerRecipeCategory implements IRecipeCategory<RecyclerRecipe>{
+public class RecyclerRecipeCategory implements IRecipeCategory<RecyclerRecipe>{
 	public static final ResourceLocation UID = new ResourceLocation("pepsimc","recycler");
 	private final IDrawable bg;
 	private final IDrawable icon;
 
-	public ReyclerRecipeCategory(IGuiHelper helper) {
+	public RecyclerRecipeCategory(IGuiHelper helper) {
 		this.bg = helper.createDrawable(new ResourceLocation("pepsimc","textures/gui/jei/recycler_gui.png"), 0,0, 176, 85);
 		this.icon = helper.createDrawableIngredient(new ItemStack(PepsiMcBlock.RECYCLER.get()));
 	}
@@ -65,6 +65,7 @@ public class ReyclerRecipeCategory implements IRecipeCategory<RecyclerRecipe>{
 		//TODO
 		recipeLayout.getItemStacks().init(0, true, 79, 8);
 		recipeLayout.getItemStacks().init(1, true, 41, 30);
+		recipeLayout.getItemStacks().init(2, false, 79, 52);
 
 		recipeLayout.getItemStacks().set(ingredients);
 		
@@ -72,7 +73,6 @@ public class ReyclerRecipeCategory implements IRecipeCategory<RecyclerRecipe>{
 
 	@Override
 	public Component getTitle() {
-		// TODO Auto-generated method stub
 		return new TranslatableComponent("block.pepsimc.recycler");
 	}
 	

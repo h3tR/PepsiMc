@@ -9,7 +9,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.BottlerContainer;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.BottlerTile;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.BottlerEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -79,7 +79,7 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 		return null;
     }
 	private boolean hasRecipe() {
-		BottlerTile TE = (BottlerTile) BottlerScreen.this.menu.TE;
+		BottlerEntity TE = (BottlerEntity) BottlerScreen.this.menu.TE;
         Level world = TE.getLevel();
         SimpleContainer inv = new SimpleContainer(TE.itemHandler.getSlots());
         
@@ -93,7 +93,7 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 		
 	}
 	private ItemStack RecipeResult() {
-		BottlerTile TE = (BottlerTile) BottlerScreen.this.menu.TE;
+		BottlerEntity TE = (BottlerEntity) BottlerScreen.this.menu.TE;
         Level world = TE.getLevel();
         SimpleContainer inv = new SimpleContainer(TE.itemHandler.getSlots());
         ArrayList<ItemStack> result = new ArrayList<ItemStack>();

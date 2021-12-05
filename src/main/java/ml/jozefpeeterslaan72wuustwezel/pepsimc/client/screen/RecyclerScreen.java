@@ -9,7 +9,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.RecyclerContainer;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.RecyclerRecipe;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.RecyclerTile;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.RecyclerEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -33,6 +33,7 @@ public class RecyclerScreen extends AbstractContainerScreen<RecyclerContainer>{
 	public void containerTick() {
 	      super.containerTick();
 	      if (hasRecipe()) {
+				this.addRenderableWidget(new ConfirmButton(this.getGuiLeft()+77,this.getGuiTop()+28,176,0,18,15,this.menu.TE.getBlockPos(),GUI));
 	      } else {
 	  		this.clearWidgets();
 	      }
@@ -56,7 +57,7 @@ public class RecyclerScreen extends AbstractContainerScreen<RecyclerContainer>{
 			for (int i = 0; i < 3; i++) {
 		        RenderSystem.depthFunc(516+i);
 				if(!this.menu.slotHasItem(2))
-					GuiComponent.fill(stack, this.getGuiLeft()+80, this.getGuiTop()+53, this.getGuiLeft()+95, this.getGuiTop()+68,822083583);
+					GuiComponent.fill(stack, this.getGuiLeft()+80, this.getGuiTop()+53, this.getGuiLeft()+96, this.getGuiTop()+69,822083583);
 				
 			}
 	        RenderSystem.depthFunc(515);
@@ -72,7 +73,7 @@ public class RecyclerScreen extends AbstractContainerScreen<RecyclerContainer>{
 		return null;
     }
 	private boolean hasRecipe() {
-		RecyclerTile TE = (RecyclerTile) RecyclerScreen.this.menu.TE;
+		RecyclerEntity TE = (RecyclerEntity) RecyclerScreen.this.menu.TE;
         Level world = TE.getLevel();
         SimpleContainer inv = new SimpleContainer(TE.itemHandler.getSlots());
         
@@ -86,7 +87,7 @@ public class RecyclerScreen extends AbstractContainerScreen<RecyclerContainer>{
 		
 	}
 	private ItemStack RecipeResult() {
-		RecyclerTile TE = (RecyclerTile) RecyclerScreen.this.menu.TE;
+		RecyclerEntity TE = (RecyclerEntity) RecyclerScreen.this.menu.TE;
         Level world = TE.getLevel();
         SimpleContainer inv = new SimpleContainer(TE.itemHandler.getSlots());
         ArrayList<ItemStack> result = new ArrayList<ItemStack>();

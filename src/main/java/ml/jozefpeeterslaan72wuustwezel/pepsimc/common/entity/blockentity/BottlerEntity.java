@@ -15,9 +15,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class BottlerTile extends ProcessingTile{
+public class BottlerEntity extends ProcessingBlockEntity{
 	
-	public BottlerTile(BlockPos pos, BlockState state) {
+	public BottlerEntity(BlockPos pos, BlockState state) {
 		super(PepsiMcBlockEntity.BOTTLER_TILE.get(), pos, state);
 	}
 

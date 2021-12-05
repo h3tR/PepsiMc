@@ -21,12 +21,12 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class ProcessingTile extends BlockEntity{
+public class ProcessingBlockEntity extends BlockEntity{
 
 	public final ItemStackHandler itemHandler;
 	private LazyOptional<IItemHandler> handler;
 	private BlockEntityType<?> type;
-	public ProcessingTile(BlockEntityType<?> in, BlockPos pos, BlockState state) {
+	public ProcessingBlockEntity(BlockEntityType<?> in, BlockPos pos, BlockState state) {
 		super(in, pos, state);
 		this.itemHandler = createHandler();
 		this.handler = LazyOptional.of(()->itemHandler);

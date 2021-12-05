@@ -37,12 +37,6 @@
 						}
 					}
 				}
-			},
-			"particle_effects": {
-				"0.0": {
-					"effect": "recycler_spark",
-					"locator": "recycler_spark"
-				}
 			}
 		}
 	},

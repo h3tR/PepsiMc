@@ -10,17 +10,17 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class PepsiMcBlockEntity {
 	public static DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, "pepsimc");
 	
-	public static RegistryObject<BlockEntityType<BottlerTile>> BOTTLER_TILE = BLOCK_ENTITIES.register("bottlertile", 
-			()-> BlockEntityType.Builder.of(BottlerTile::new, PepsiMcBlock.BOTTLER.get()).build(null));
+	public static RegistryObject<BlockEntityType<BottlerEntity>> BOTTLER_TILE = BLOCK_ENTITIES.register("bottlertile", 
+			()-> BlockEntityType.Builder.of(BottlerEntity::new, PepsiMcBlock.BOTTLER.get()).build(null));
 	
-	public static RegistryObject<BlockEntityType<ExtractorTile>> EXTRACTOR_TILE = BLOCK_ENTITIES.register("extractortile", 
-			()-> BlockEntityType.Builder.of(ExtractorTile::new, PepsiMcBlock.EXTRACTOR.get()).build(null));
+	public static RegistryObject<BlockEntityType<ExtractorEntity>> EXTRACTOR_TILE = BLOCK_ENTITIES.register("extractortile", 
+			()-> BlockEntityType.Builder.of(ExtractorEntity::new, PepsiMcBlock.EXTRACTOR.get()).build(null));
 	
-	public static RegistryObject<BlockEntityType<FlavorMachineTile>> FLAVOR_MACHINE_TILE = BLOCK_ENTITIES.register("flavor_machinetile", 
-			()-> BlockEntityType.Builder.of(FlavorMachineTile::new, PepsiMcBlock.FLAVOR_MACHINE.get()).build(null));
+	public static RegistryObject<BlockEntityType<FlavorMachineBlock>> FLAVOR_MACHINE_TILE = BLOCK_ENTITIES.register("flavor_machinetile", 
+			()-> BlockEntityType.Builder.of(FlavorMachineBlock::new, PepsiMcBlock.FLAVOR_MACHINE.get()).build(null));
 	
-	public static RegistryObject<BlockEntityType<RecyclerTile>> RECYCLER_TILE = BLOCK_ENTITIES.register("recyclertile", 
-			()-> BlockEntityType.Builder.of(RecyclerTile::new, PepsiMcBlock.RECYCLER.get()).build(null));
+	public static RegistryObject<BlockEntityType<RecyclerEntity>> RECYCLER_TILE = BLOCK_ENTITIES.register("recyclertile", 
+			()-> BlockEntityType.Builder.of(RecyclerEntity::new, PepsiMcBlock.RECYCLER.get()).build(null));
 	
 	public static void register(IEventBus bus) {
 		BLOCK_ENTITIES.register(bus);

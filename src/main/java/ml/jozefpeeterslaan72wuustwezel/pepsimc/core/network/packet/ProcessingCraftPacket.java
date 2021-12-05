@@ -2,7 +2,7 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.packet;
 
 import java.util.function.Supplier;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.ProcessingTile;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.ProcessingBlockEntity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -32,8 +32,8 @@ public class ProcessingCraftPacket {
 			ServerPlayer plrEntity = ctx.getSender();
 			Level world = plrEntity.level;
 			BlockEntity TE = world.getBlockEntity(message.pos);
-			if(TE instanceof ProcessingTile) {
-				ProcessingTile PT = (ProcessingTile) TE;
+			if(TE instanceof ProcessingBlockEntity) {
+				ProcessingBlockEntity PT = (ProcessingBlockEntity) TE;
 				if(message.shift) {
 					PT.processAll(world);
 				} else {

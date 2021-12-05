@@ -3,7 +3,7 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block;
 import java.util.stream.Stream;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.BottlerContainer;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.BottlerTile;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.BottlerEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
@@ -57,7 +57,6 @@ public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 			Block.box(2, 7, 0, 3, 9, 6),
 			Block.box(0, 0, 0, 16, 7, 16)
 			).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-	
 	private static final VoxelShape ShL = Stream.of(
 			Block.box(10, 7, 10, 11, 9, 11),
 			Block.box(10, 7, 5, 11, 9, 6),
@@ -92,8 +91,8 @@ public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState secondState, boolean p_196243_5_) {
 	      if (!state.is(secondState.getBlock())) {
 	         BlockEntity tileentity = level.getBlockEntity(pos);
-	         if (tileentity instanceof BottlerTile) {
-		         BottlerTile bottlerTile = (BottlerTile)tileentity;
+	         if (tileentity instanceof BottlerEntity) {
+		         BottlerEntity bottlerTile = (BottlerEntity)tileentity;
 	            Containers.dropContents(level, pos, bottlerTile.getNNLInv());
 	            level.updateNeighbourForOutputSignal(pos, this);
 	         }
@@ -107,7 +106,7 @@ public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 		if(!world.isClientSide) {
 			BlockEntity TE = world.getBlockEntity(pos);
 				if(!plr.isCrouching()) {
-					if(TE instanceof BottlerTile) {
+					if(TE instanceof BottlerEntity) {
 						MenuProvider containerProvider = createContainerProvider(world, pos);
 						NetworkHooks.openGui(((ServerPlayer)plr), containerProvider, pos );
 					} else {

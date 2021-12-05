@@ -21,13 +21,13 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class RecyclerTile extends ProcessingTile implements IAnimatable {
-	
-	public RecyclerTile(BlockPos pos, BlockState state) {
+public class RecyclerEntity extends ProcessingBlockEntity implements IAnimatable {
+    private AnimationFactory factory = new AnimationFactory(this);
+
+	public RecyclerEntity(BlockPos pos, BlockState state) {
 		super(PepsiMcBlockEntity.RECYCLER_TILE.get(), pos, state);
 	}
 
-    private AnimationFactory factory = new AnimationFactory(this);
 
 	@Override
 	public void process(Level world) {
@@ -98,14 +98,14 @@ public class RecyclerTile extends ProcessingTile implements IAnimatable {
 
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
-    {
+    {		
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pepsimc.recycler", true));
         return PlayState.CONTINUE;
     }
 
 	@Override
 	public void registerControllers(AnimationData data) {
-		 data.addAnimationController(new AnimationController<RecyclerTile>(this, "controller", 0, this::predicate));
+		 data.addAnimationController(new AnimationController<RecyclerEntity>(this, "controller", 0, this::predicate));
 		
 	}
 

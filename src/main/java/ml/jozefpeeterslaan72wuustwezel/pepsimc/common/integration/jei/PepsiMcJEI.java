@@ -11,6 +11,7 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.RecyclerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
@@ -25,11 +26,13 @@ public class PepsiMcJEI implements IModPlugin{
 		return new ResourceLocation("pepsimc","jei_plugin");
 	}
 	
-	 @Override
-	    public void registerCategories(IRecipeCategoryRegistration registration) {
-	        registration.addRecipeCategories(
+	@Override
+	public void registerCategories(IRecipeCategoryRegistration registration) {
+	     registration.addRecipeCategories(
 	                new BottlerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-	    }
+	     registration.addRecipeCategories(
+	                new RecyclerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+	}
 
 	    @Override
 	    public void registerRecipes(IRecipeRegistration registration) {
@@ -38,12 +41,16 @@ public class PepsiMcJEI implements IModPlugin{
 	        registration.addRecipes(rm.getAllRecipesFor(PepsiMcRecipeType.BOTTLER_RECIPE).stream()
 	                        .filter(r -> r instanceof BottlerRecipe).collect(Collectors.toList()),
 	                BottlerRecipeCategory.UID);
+	        registration.addRecipes(rm.getAllRecipesFor(PepsiMcRecipeType.RECYCLER_RECIPE).stream()
+                    .filter(r -> r instanceof RecyclerRecipe).collect(Collectors.toList()),
+            RecyclerRecipeCategory.UID);
 	    }
 	    
 	    @Override
 	    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
 
 	    	registration.addRecipeCatalyst(new ItemStack(PepsiMcItem.BOTTLER.get()),BottlerRecipeCategory.UID);
+	    	registration.addRecipeCatalyst(new ItemStack(PepsiMcItem.RECYCLER.get()),RecyclerRecipeCategory.UID);
 	    	IModPlugin.super.registerRecipeCatalysts(registration);
 	    }
 }
