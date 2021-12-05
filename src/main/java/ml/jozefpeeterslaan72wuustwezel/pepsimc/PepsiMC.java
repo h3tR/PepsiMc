@@ -2,7 +2,9 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc;
 
 
 
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.animation.render.RecyclerRenderer;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.BottlerScreen;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.RecyclerScreen;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.fluid.PepsiMcFluid;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.PepsiMcContainer;
@@ -20,6 +22,7 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world.structure.PepsiMcStruc
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -27,6 +30,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fmlclient.registry.ClientRegistry;
+import software.bernie.geckolib3.GeckoLib;
 
 @Mod("pepsimc")
 public class PepsiMC {
@@ -46,7 +51,7 @@ public class PepsiMC {
     	PepsiMcEffect.register(bus);
     	bus.addListener(this::setup);
 		bus.addListener(this::doClientStuff);
-
+		GeckoLib.initialize();
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, PepsiMcTrades::loadTrades);
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -59,6 +64,11 @@ public class PepsiMC {
 	            PepsiStore.init();
 	        });
 	    }
+	 
+	 
+	public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
+		event.registerBlockEntityRenderer(PepsiMcBlockEntity.RECYCLER_TILE.get(), RecyclerRenderer::new);
+	 }
 	 
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		event.enqueueWork(()->{
@@ -74,6 +84,7 @@ public class PepsiMC {
 
 		});
 		MenuScreens.register(PepsiMcContainer.BOTTLER_CONTAINER.get(), BottlerScreen::new);
+		MenuScreens.register(PepsiMcContainer.RECYCLER_CONTAINER.get(), RecyclerScreen::new);
 
 	}
 

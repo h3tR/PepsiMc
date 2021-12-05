@@ -15,7 +15,10 @@
 	"item.pepsimc.pepsi_label":"Pepsi Label",
 	"item.pepsimc.pepsi_max_label":"Pepsi Max Label",
 	"item.pepsimc.empty_bottle":"Empty Bottle",
+	"item.pepsimc.used_bottle":"Used Bottle",
+	"item.pepsimc.bottlecap":"Bottlecap",
 	"item.pepsimc.empty_can":"Empty Can",
+	"item.pepsimc.used_can":"Used Can",
 	"item.pepsimc.pepsi_man_tune_disc":"Music Disc",
 	"item.pepsimc.pepsi_man_tune_disc.desc":"James Shimoji - Pepsi Man Theme Song",
 	"item.pepsimc.stevia_seeds":"Stevia Rebaudiana Seeds",
@@ -26,6 +29,9 @@
 	"block.pepsimc.deepslate_pepsite_ore":"Deepslate Pepsite Ore",
 	"block.pepsimc.pepsite_ore":"Pepsite Ore",
 	"block.pepsimc.bottler":"Bottler",
+	"block.pepsimc.extractor":"Extractor",
+	"block.pepsimc.flavor_machine":"Flavoring Machine",
+	"block.pepsimc.recycler":"Recycler",
 	"block.pepsimc.stevia_plant":"Stevia Rebaudiana",
 	"block.pepsimc.stevia_crop":"Stevia Rebaudiana Seeds",
 	
@@ -34,6 +40,9 @@
 	"fluid.pepsimc.pepsi_fluid":"Pepsi",
 	"fluid.pepsimc.pepsi_max_fluid":"Pepsi Max",
 	"screen.pepsimc.bottler":"Bottler",
+	"screen.pepsimc.extractor":"Extractor",
+	"screen.pepsimc.flavor_machine":"Flavoring Machine",
+	"screen.pepsimc.recycler":"Recycler",
 	"filled_map.pepsimc:abandoned_bottling_plant":"Abandoned pepsi plant location",
 	"effect.pepsimc.insomnia":"Insomnia"
 }

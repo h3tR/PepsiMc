@@ -32,6 +32,9 @@ public class PepsiMcRecipeType {
 	public static void register(IEventBus bus) {
 		RECIPE_SERIALIZER.register(bus);
     	Registry.register(Registry.RECIPE_TYPE, BottlerRecipe.TYPE_ID, BOTTLER_RECIPE);
+    	Registry.register(Registry.RECIPE_TYPE, RecyclerRecipe.TYPE_ID, RECYCLER_RECIPE);
+    	//Registry.register(Registry.RECIPE_TYPE, ExtractorRecipe.TYPE_ID, EXTRACTOR_RECIPE);
+    //	Registry.register(Registry.RECIPE_TYPE, FlavoringRecipe.TYPE_ID, FLAVORING_RECIPE);
 
 	}
 	

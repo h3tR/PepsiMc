@@ -37,8 +37,7 @@ public class RecyclerRecipe implements Recipe<Container>{
 	
 	@Override
 	public boolean matches(Container inv, Level Win) {
-		//TODO
-		return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1))&&in.get(2).test(inv.getItem(2));
+		return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1));
 	}
 	
 	@Override
@@ -88,8 +87,8 @@ public class RecyclerRecipe implements Recipe<Container>{
 			JsonObject Catalyst = GsonHelper.getAsJsonObject(json, "catalyst");
 			JsonObject Recycle = GsonHelper.getAsJsonObject(json, "recycle");
 			NonNullList<Ingredient> In = NonNullList.withSize(2, Ingredient.EMPTY);
-			In.set(0, Ingredient.fromJson(Catalyst));
-			In.set(1, Ingredient.fromJson(Recycle));
+			In.set(0, Ingredient.fromJson(Recycle));
+			In.set(1, Ingredient.fromJson(Catalyst));
 			return new RecyclerRecipe(Id, Out, In);
 		}
 

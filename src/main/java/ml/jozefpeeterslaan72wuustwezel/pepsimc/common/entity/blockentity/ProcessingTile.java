@@ -51,8 +51,8 @@ public class ProcessingTile extends BlockEntity{
 	}
 	
 	public NonNullList<ItemStack> getNNLInv(){
-		NonNullList<ItemStack> toReturn = NonNullList.withSize(5, ItemStack.EMPTY);
-		for(int i=0;i<5;i++) {
+		NonNullList<ItemStack> toReturn = NonNullList.withSize(itemHandler.getSlots(), ItemStack.EMPTY);
+		for(int i=0;i<itemHandler.getSlots();i++) {
 			toReturn.set(i, itemHandler.getStackInSlot(i));
 		}
 		return toReturn; 
@@ -63,7 +63,7 @@ public class ProcessingTile extends BlockEntity{
 	}
 	
 	public void processAll(Level world) {
-		LogManager.getLogger().warn("Process method called outside super class!");
+		LogManager.getLogger().warn("Processall method called outside super class!");
 	}
 	
 	protected SimpleContainer getSimpleInv() {

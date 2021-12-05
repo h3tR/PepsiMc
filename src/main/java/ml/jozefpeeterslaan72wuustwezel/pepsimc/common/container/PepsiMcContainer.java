@@ -17,6 +17,12 @@ public class PepsiMcContainer {
 		return new BottlerContainer(ID, world, pos, inv, inv.player);
 	}));
 	
+	public static RegistryObject<MenuType<RecyclerContainer>> RECYCLER_CONTAINER = CONTAINERS.register("recycler_container", ()-> IForgeContainerType.create((ID, inv, dat)->{
+		BlockPos pos = dat.readBlockPos();
+		Level world = inv.player.getCommandSenderWorld();
+		return new RecyclerContainer(ID, world, pos, inv, inv.player);
+	}));
+	
 	public static void register(IEventBus bus) {
 		CONTAINERS.register(bus);
 	}

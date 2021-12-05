@@ -20,7 +20,7 @@ public class PepsiMcTags {
 
 		public static final Tags.IOptionalNamedTag<Item> RECYCLED = createTag("recycled");
 		
-		public static final Tags.IOptionalNamedTag<Item> RECYCLING_CATALYST = createTag("recycing_catalyst");
+		public static final Tags.IOptionalNamedTag<Item> RECYCLING_CATALYST = createTag("recycling_catalyst");
 
 		public static final Tags.IOptionalNamedTag<Item> FLAVOR = createTag("flavor");
 

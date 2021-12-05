@@ -5,22 +5,29 @@ import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.RecyclerRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.items.ItemStackHandler;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class RecyclerTile extends ProcessingTile{
+public class RecyclerTile extends ProcessingTile implements IAnimatable {
 	
 	public RecyclerTile(BlockPos pos, BlockState state) {
 		super(PepsiMcBlockEntity.RECYCLER_TILE.get(), pos, state);
 	}
+
+    private AnimationFactory factory = new AnimationFactory(this);
 
 	@Override
 	public void process(Level world) {
@@ -69,8 +76,8 @@ public class RecyclerTile extends ProcessingTile{
 			@Override
 			public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
 				switch (slot) {
-					case 0: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "recycing_catalyst"));
-					case 1: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "recyclable"));
+					case 0: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "recyclable"));
+					case 1: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "recycling_catalyst"));
 					case 2: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "recycled"));
 					default:
 						return false;
@@ -87,5 +94,26 @@ public class RecyclerTile extends ProcessingTile{
 				return super.insertItem(slot, stack, simulate);
 			}
 		};
+	}
+
+
+	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
+    {
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pepsimc.recycler", true));
+        return PlayState.CONTINUE;
+    }
+
+	@Override
+	public void registerControllers(AnimationData data) {
+		 data.addAnimationController(new AnimationController<RecyclerTile>(this, "controller", 0, this::predicate));
+		
+	}
+
+
+
+	@Override
+	public AnimationFactory getFactory() {
+		// TODO Auto-generated method stub
+		 return this.factory;
 	}
 }

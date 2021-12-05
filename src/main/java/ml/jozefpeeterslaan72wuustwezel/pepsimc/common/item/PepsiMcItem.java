@@ -67,6 +67,9 @@ public class PepsiMcItem {
 	public static final RegistryObject<Item> PHOSPHORIC_ACID = ITEMS.register("phosphoric_acid", ()-> new Item(new Item.Properties()
 			.tab(CreativeModeTab.TAB_MISC)));
 	
+	public static final RegistryObject<Item> BOTTLECAP = ITEMS.register("bottlecap", ()-> new Item(new Item.Properties()
+			.tab(CreativeModeTab.TAB_MISC)));
+	
 	public static final RegistryObject<Item> CAFFEINE = ITEMS.register("caffeine", ()-> new Item(new Item.Properties()
 			.tab(CreativeModeTab.TAB_MISC).food(new FoodProperties.Builder()
 					.nutrition(0)

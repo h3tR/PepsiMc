@@ -1,0 +1,8 @@
+{
+    "type": "pepsimc:recycler",
+    "recycle": { "item": "pepsimc:used_can" },
+    "catalyst": { "item": "minecraft:iron_ingot" }, 
+    "result": {
+        "item": "pepsimc:empty_can"
+    }
+}

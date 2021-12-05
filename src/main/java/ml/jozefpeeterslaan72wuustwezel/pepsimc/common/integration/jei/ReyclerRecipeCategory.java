@@ -63,8 +63,8 @@ public class ReyclerRecipeCategory implements IRecipeCategory<RecyclerRecipe>{
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, RecyclerRecipe recipe, IIngredients ingredients) {
 		//TODO
-		recipeLayout.getItemStacks().init(0, true, 11, 14);
-		recipeLayout.getItemStacks().init(1, true, 29, 14);
+		recipeLayout.getItemStacks().init(0, true, 79, 8);
+		recipeLayout.getItemStacks().init(1, true, 41, 30);
 
 		recipeLayout.getItemStacks().set(ingredients);
 		

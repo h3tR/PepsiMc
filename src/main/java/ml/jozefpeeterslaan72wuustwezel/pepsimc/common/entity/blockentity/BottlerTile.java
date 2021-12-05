@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
-import org.apache.logging.log4j.LogManager;
-
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import net.minecraft.core.BlockPos;
