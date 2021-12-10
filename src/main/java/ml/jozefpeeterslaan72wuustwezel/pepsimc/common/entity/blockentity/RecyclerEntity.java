@@ -9,6 +9,7 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipe
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.RecyclerRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
@@ -97,23 +98,21 @@ public class RecyclerEntity extends ProcessingBlockEntity implements IAnimatable
 	}
 
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
+	private <E extends BlockEntity & IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {		
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pepsimc.recycler", true));
         return PlayState.CONTINUE;
     }
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void registerControllers(AnimationData data) {
-		 data.addAnimationController(new AnimationController<RecyclerEntity>(this, "controller", 0, this::predicate));
+		 data.addAnimationController(new AnimationController(this, "controller", 0, this::predicate));
 		
 	}
 
-
-
 	@Override
 	public AnimationFactory getFactory() {
-		// TODO Auto-generated method stub
 		 return this.factory;
 	}
 }

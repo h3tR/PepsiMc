@@ -13,6 +13,7 @@ import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
 
 public class RecyclerRenderer extends GeoBlockRenderer<RecyclerEntity> {
 
+	@SuppressWarnings("unchecked")
 	public RecyclerRenderer(Context rendererDispatcherIn) {
 		super(rendererDispatcherIn, new RecyclerModel());
 	}

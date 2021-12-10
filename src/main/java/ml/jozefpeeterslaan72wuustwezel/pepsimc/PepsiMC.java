@@ -2,7 +2,6 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc;
 
 
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.animation.render.RecyclerRenderer;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.BottlerScreen;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.RecyclerScreen;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
@@ -22,7 +21,6 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world.structure.PepsiMcStruc
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -65,10 +63,6 @@ public class PepsiMC {
 	    }
 	 
 	 
-	public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-		event.registerBlockEntityRenderer(PepsiMcBlockEntity.RECYCLER_TILE.get(), RecyclerRenderer::new);
-	 }
-	 
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		event.enqueueWork(()->{
 			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.PEPSI_FLUID_BLOCK.get(), RenderType.translucent());
@@ -79,8 +73,6 @@ public class PepsiMC {
 			ItemBlockRenderTypes.setRenderLayer(PepsiMcFluid.PEPSI_MAX_FLOW.get(), RenderType.translucent());
 			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.STEVIA_PLANT.get(), RenderType.cutout());
 			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.STEVIA_CROP.get(), RenderType.cutout());
-
-
 		});
 		MenuScreens.register(PepsiMcContainer.BOTTLER_CONTAINER.get(), BottlerScreen::new);
 		MenuScreens.register(PepsiMcContainer.RECYCLER_CONTAINER.get(), RecyclerScreen::new);
