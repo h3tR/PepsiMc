@@ -8,6 +8,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.RecordItem;
 import net.minecraft.world.item.Rarity;
@@ -20,6 +21,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class PepsiMcItem {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "pepsimc");
+	
+	public static final RegistryObject<Item> USED_CAN = ITEMS.register("used_can", ()-> new Item(new Item.Properties()
+			.tab(CreativeModeTab.TAB_MISC))); 
+	
+	public static final RegistryObject<Item> USED_BOTTLE = ITEMS.register("used_bottle", ()-> new Item(new Item.Properties()
+			.tab(CreativeModeTab.TAB_MISC))); 
 	
 	public static final RegistryObject<BeverageItem> PEPSI_CAN = ITEMS.register("pepsi_can", ()-> new BeverageItem(new Item.Properties()
 			.tab(CreativeModeTab.TAB_FOOD)
@@ -36,7 +43,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1600, 2),1)
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 1600), .3f)
 					.build()
-					)));
+					),new ItemStack(()->PepsiMcItem.USED_CAN.get())));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_BOTTLE = ITEMS.register("pepsi_bottle", ()-> new BeverageItem(new Item.Properties()
 			.tab(CreativeModeTab.TAB_FOOD)
@@ -53,7 +60,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1600, 2),1)
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 1600), .3f)
 					.build()
-					)));
+					),new ItemStack(()->PepsiMcItem.USED_BOTTLE.get())));
 	
 	public static final RegistryObject<Item> CARAMEL = ITEMS.register("caramel", ()-> new Item(new Item.Properties()
 			.tab(CreativeModeTab.TAB_FOOD)
@@ -81,7 +88,7 @@ public class PepsiMcItem {
 	public static final RegistryObject<Item> STEVIA = ITEMS.register("stevia", ()-> new Item(new Item.Properties()
 			.tab(CreativeModeTab.TAB_MISC)));
 	
-	public static final RegistryObject<Item> PEPSI_MAN_TUNE_DISC = ITEMS.register("pepsi_man_tune_disc", ()-> new RecordItem(1,()->PepsiMcSoundEvent.PEPSI_MAN_TUNE.get(),new Item.Properties()
+	public static final RegistryObject<Item> PEPSI_MAN_TUNE_DISC = ITEMS.register("pepsi_man_tune_disc", ()-> new RecordItem(13,()->PepsiMcSoundEvent.PEPSI_MAN_TUNE.get(),new Item.Properties()
 			.tab(CreativeModeTab.TAB_MISC).rarity(Rarity.RARE).stacksTo(1)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_MAX_BOTTLE = ITEMS.register("pepsi_max_bottle", ()-> new BeverageItem(new Item.Properties()
@@ -99,7 +106,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 800, 2),1)
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 1600), .3f)
 					.build()
-			)));
+			),new ItemStack(()->PepsiMcItem.USED_CAN.get())));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_MAX_CAN = ITEMS.register("pepsi_max_can", ()-> new BeverageItem(new Item.Properties()
 			.tab(CreativeModeTab.TAB_FOOD)
@@ -115,7 +122,8 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 800, 2),1)
 					.effect(()->new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 800, 2),1)
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 1600), .3f)
-					.build())));
+					.build()
+			),new ItemStack(()->PepsiMcItem.USED_BOTTLE.get())));
 
 	
 
@@ -134,13 +142,7 @@ public class PepsiMcItem {
 	public static final RegistryObject<Item> EMPTY_BOTTLE = ITEMS.register("empty_bottle", ()-> new Item(new Item.Properties()
 			.tab(CreativeModeTab.TAB_MISC))); 
 	
-	public static final RegistryObject<Item> USED_BOTTLE = ITEMS.register("used_bottle", ()-> new Item(new Item.Properties()
-			.tab(CreativeModeTab.TAB_MISC))); 
-	
 	public static final RegistryObject<Item> EMPTY_CAN = ITEMS.register("empty_can", ()-> new Item(new Item.Properties()
-			.tab(CreativeModeTab.TAB_MISC))); 
-	
-	public static final RegistryObject<Item> USED_CAN = ITEMS.register("used_can", ()-> new Item(new Item.Properties()
 			.tab(CreativeModeTab.TAB_MISC))); 
 	
 	public static final RegistryObject<Item> PEPSI_FLUID_BUCKET = ITEMS.register("pepsi_bucket", ()-> new BucketItem(()->PepsiMcFluid.PEPSI_FLUID.get(),new Item.Properties()

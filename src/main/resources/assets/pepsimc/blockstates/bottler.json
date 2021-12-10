@@ -4,6 +4,5 @@
         "facing=south": { "model": "pepsimc:block/bottler" },
         "facing=west": { "model": "pepsimc:block/bottler", "y":90 },
         "facing=east": { "model": "pepsimc:block/bottler", "y":90 }
-        
     }
 }

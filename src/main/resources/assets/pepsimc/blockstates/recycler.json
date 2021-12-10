@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "pepsimc:block/recycler" },
+        "facing=south": { "model": "pepsimc:block/recycler" },
+        "facing=west": { "model": "pepsimc:block/recycler", "y":90 },
+        "facing=east": { "model": "pepsimc:block/recycler", "y":90 }
+    }
+}
