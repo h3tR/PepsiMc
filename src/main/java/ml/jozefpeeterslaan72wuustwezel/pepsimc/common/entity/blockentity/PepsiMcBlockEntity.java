@@ -16,8 +16,8 @@ public class PepsiMcBlockEntity {
 	public static RegistryObject<BlockEntityType<ExtractorEntity>> EXTRACTOR_TILE = BLOCK_ENTITIES.register("extractortile", 
 			()-> BlockEntityType.Builder.of(ExtractorEntity::new, PepsiMcBlock.EXTRACTOR.get()).build(null));
 	
-	public static RegistryObject<BlockEntityType<FlavorMachineBlock>> FLAVOR_MACHINE_TILE = BLOCK_ENTITIES.register("flavor_machinetile", 
-			()-> BlockEntityType.Builder.of(FlavorMachineBlock::new, PepsiMcBlock.FLAVOR_MACHINE.get()).build(null));
+	public static RegistryObject<BlockEntityType<FlavorMachineEntity>> FLAVOR_MACHINE_TILE = BLOCK_ENTITIES.register("flavor_machinetile", 
+			()-> BlockEntityType.Builder.of(FlavorMachineEntity::new, PepsiMcBlock.FLAVOR_MACHINE.get()).build(null));
 	
 	public static RegistryObject<BlockEntityType<RecyclerEntity>> RECYCLER_TILE = BLOCK_ENTITIES.register("recyclertile", 
 			()-> BlockEntityType.Builder.of(RecyclerEntity::new, PepsiMcBlock.RECYCLER.get()).build(null));

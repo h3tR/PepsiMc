@@ -23,6 +23,12 @@ public class PepsiMcContainer {
 		return new RecyclerContainer(ID, world, pos, inv, inv.player);
 	}));
 	
+	public static RegistryObject<MenuType<FlavorMachineContainer>> FLAVOR_MACHINE_CONTAINER = CONTAINERS.register("flavor_machine_container", ()-> IForgeContainerType.create((ID, inv, dat)->{
+		BlockPos pos = dat.readBlockPos();
+		Level world = inv.player.getCommandSenderWorld();
+		return new FlavorMachineContainer(ID, world, pos, inv, inv.player);
+	}));
+	
 	public static void register(IEventBus bus) {
 		CONTAINERS.register(bus);
 	}

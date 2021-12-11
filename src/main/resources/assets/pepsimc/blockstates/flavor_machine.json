@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "pepsimc:block/flavor_machine" },
+        "facing=south": { "model": "pepsimc:block/flavor_machine", "y":180 },
+        "facing=west": { "model": "pepsimc:block/flavor_machine", "y":270 },
+        "facing=east": { "model": "pepsimc:block/flavor_machine", "y":90 }
+    }
+}

@@ -38,7 +38,7 @@ public class FlavoringRecipe implements Recipe<Container>{
 	@Override
 	public boolean matches(Container inv, Level Win) {
 		//TODO
-		return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1))&&in.get(2).test(inv.getItem(2));
+		return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1));
 	}
 	
 	@Override
@@ -87,8 +87,8 @@ public class FlavoringRecipe implements Recipe<Container>{
 			JsonObject Product = GsonHelper.getAsJsonObject(json, "product");
 
 			NonNullList<Ingredient> In = NonNullList.withSize(2, Ingredient.EMPTY);
-			In.set(0, Ingredient.fromJson(Product));
-			In.set(1, Ingredient.fromJson(Flavor));
+			In.set(1, Ingredient.fromJson(Product));
+			In.set(0, Ingredient.fromJson(Flavor));
 			return new FlavoringRecipe(Id, Out, In);
 		}
 
@@ -120,19 +120,16 @@ public class FlavoringRecipe implements Recipe<Container>{
 
 	@Override
 	public boolean canCraftInDimensions(int p_43999_, int p_44000_) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		// TODO Auto-generated method stub
 		return Registry.RECIPE_TYPE.getOptional(TYPE_ID).get();
 	}
 	
 	@Override
 	public boolean isSpecial() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	

@@ -61,7 +61,7 @@ public class PepsiMcBlock {
 	
 	public static final RegistryObject<Block> BOTTLER = BLOCKS.register("bottler",BottlerBlock::new);
 	
-	public static final RegistryObject<Block> FLAVOR_MACHINE = BLOCKS.register("flavor_machine",BottlerBlock::new);
+	public static final RegistryObject<Block> FLAVOR_MACHINE = BLOCKS.register("flavor_machine",FlavorMachineBlock::new);
 
 	public static final RegistryObject<Block> RECYCLER = BLOCKS.register("recycler",RecyclerBlock::new);
 

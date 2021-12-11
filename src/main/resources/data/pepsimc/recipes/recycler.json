@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "o o",
+        "php",
+        "pcp"
+    ],
+    "key": {
+        "o": {
+            "item": "minecraft:obsidian"
+        },
+        "h": {
+            "item": "minecraft:hopper"
+        }, 
+        "c": {
+            "item": "minecraft:oxidized_copper"
+        },
+        "p": {
+            "item": "pepsimc:pepsite_ingot"
+        }
+    },
+    "result": {
+        "item": "pepsimc:recycler",
+        "count": 1
+    }
+}

@@ -14,9 +14,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class FlavorMachineBlock extends ProcessingBlockEntity{
+public class FlavorMachineEntity extends ProcessingBlockEntity{
 	
-	public FlavorMachineBlock(BlockPos pos, BlockState state) {
+	public FlavorMachineEntity(BlockPos pos, BlockState state) {
 		super(PepsiMcBlockEntity.FLAVOR_MACHINE_TILE.get(), pos, state);
 	}
 

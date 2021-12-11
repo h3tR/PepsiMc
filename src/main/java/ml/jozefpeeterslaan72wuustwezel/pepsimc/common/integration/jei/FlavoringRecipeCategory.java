@@ -29,25 +29,21 @@ public class FlavoringRecipeCategory implements IRecipeCategory<FlavoringRecipe>
 	
 	@Override
 	public ResourceLocation getUid() {
-		// TODO Auto-generated method stub
 		return UID;
 	}
 
 	@Override
 	public Class<? extends FlavoringRecipe> getRecipeClass() {
-		// TODO Auto-generated method stub
 		return FlavoringRecipe.class;
 	}
 
 	@Override
 	public IDrawable getBackground() {
-		// TODO Auto-generated method stub
 		return this.bg;
 	}
 
 	@Override
 	public IDrawable getIcon() {
-		// TODO Auto-generated method stub
 		return this.icon;
 	}
 
@@ -62,16 +58,15 @@ public class FlavoringRecipeCategory implements IRecipeCategory<FlavoringRecipe>
 
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, FlavoringRecipe recipe, IIngredients ingredients) {
-		//TODO
-		recipeLayout.getItemStacks().init(0, true, 11, 14);
-		recipeLayout.getItemStacks().init(1, true, 29, 14);
+		recipeLayout.getItemStacks().init(0, true, 79, 19);
+		recipeLayout.getItemStacks().init(1, true, 41, 41);
+		recipeLayout.getItemStacks().init(2, false, 79, 63);
 		recipeLayout.getItemStacks().set(ingredients);
 		
 	}
 
 	@Override
 	public Component getTitle() {
-		// TODO Auto-generated method stub
 		return new TranslatableComponent("block.pepsimc.flavor_machine");
 	}
 	

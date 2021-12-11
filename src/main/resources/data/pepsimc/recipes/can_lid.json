@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " nn",
+        "n n",
+        "nn "
+    ],
+    "key": {
+        "n": {
+            "item": "minecraft:iron_nugget"
+        }
+    },
+    "result": {
+        "item": "pepsimc:can_lid",
+        "count": 4
+    }
+}

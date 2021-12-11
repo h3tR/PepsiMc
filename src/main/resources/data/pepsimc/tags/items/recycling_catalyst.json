@@ -1,7 +1,7 @@
 {
 	"replace": false,
 	"values": [
-	"minecraft:iron_ingot",
+	"pepsimc:can_lid",
 	"pepsimc:bottlecap"
 	]
 }

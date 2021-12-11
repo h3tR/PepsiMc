@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 
 public class BeverageItem extends Item{
 
-	private ItemStack item;
+	protected ItemStack item;
 	public BeverageItem(Properties properties,ItemStack item) {
 		super(properties);
 		this.item = item;
