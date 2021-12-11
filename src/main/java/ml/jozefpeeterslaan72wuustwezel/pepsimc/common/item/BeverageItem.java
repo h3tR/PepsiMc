@@ -21,8 +21,7 @@ public class BeverageItem extends Item{
 	 public UseAnim getUseAnimation(ItemStack p_77661_1_) {
 	      return UseAnim.DRINK;
 	   }
-	//player.addItem(this.item);
-
+	
 	@Override
 	public ItemStack finishUsingItem(ItemStack itemStack, Level world, LivingEntity plr) {
 		Player player = plr instanceof Player ? (Player)plr : null;
@@ -36,6 +35,9 @@ public class BeverageItem extends Item{
 	        }else if(inv.getFreeSlot()!=-1) {
 	        	inv.setItem(inv.getFreeSlot(),this.item);
 	        	 inv.setChanged();
+	        } else {
+	        	inv.add(this.item);
+	        	inv.setChanged();
 	        }
 	       
 	      }

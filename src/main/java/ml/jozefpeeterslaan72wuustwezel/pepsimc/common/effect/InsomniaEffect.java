@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 @EventBusSubscriber(modid="pepsimc",bus = Bus.FORGE)
 public class InsomniaEffect extends MobEffect {
-	       
+
 	protected InsomniaEffect() {
 		super(MobEffectCategory.HARMFUL, 22222222);
 		// TODO Auto-generated constructor stub
