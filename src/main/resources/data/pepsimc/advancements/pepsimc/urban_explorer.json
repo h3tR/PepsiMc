@@ -1,0 +1,33 @@
+{
+    "parent": "pepsimc:sacred_drink",
+    "display": {
+      "icon": {
+        "item": "minecraft:compass"
+      },
+      "title": {
+        "translate": "advancements.pepsimc.urban_explorer.title"
+      },
+      "description": {
+        "translate": "advancements.pepsimc.urban_explorer.description"
+      },
+      "frame": "challenge",
+      "show_toast": true,
+      "announce_to_chat": true,
+      "hidden": true
+    },
+    "criteria": {
+        "in_bottling_plant": {
+          "trigger": "minecraft:location",
+          "conditions": {
+            "location": {
+              "feature": "pepsimc:abandoned_bottling_plant"
+            }
+          }
+        }
+    },
+    "requirements": [
+      [
+        "in_bottling_plant"
+      ]
+    ]
+  }

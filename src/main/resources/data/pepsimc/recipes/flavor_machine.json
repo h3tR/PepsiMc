@@ -1,0 +1,29 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "pph",
+        "tc ",
+        "ppb"
+    ],
+    "key": {
+        "p": {
+            "item": "pepsimc:pepsite_ingot"
+        },
+        "h": {
+            "item": "minecraft:hopper"
+        }, 
+        "b": {
+            "item": "minecraft:bucket"
+        },
+        "c": {
+            "item": "minecraft:cauldron"
+        },
+        "t": {
+            "item": "minecraft:tinted_glass"
+        }
+    },
+    "result": {
+        "item": "pepsimc:flavor_machine",
+        "count": 1
+    }
+}

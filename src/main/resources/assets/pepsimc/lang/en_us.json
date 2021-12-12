@@ -70,5 +70,21 @@
 	"screen.pepsimc.flavor_machine":"Flavoring Machine",
 	"screen.pepsimc.recycler":"Recycler",
 	"filled_map.pepsimc:abandoned_bottling_plant":"Abandoned pepsi plant location",
-	"effect.pepsimc.insomnia":"Insomnia"
+	"effect.pepsimc.insomnia":"Insomnia",
+	"advancements.pepsimc.root.title":"PepsiMc",
+	"advancements.pepsimc.root.description":"This mod is all about pepsi, go ahead and make some!",
+	"advancements.pepsimc.bottler.title":"Bottler acquired!",
+	"advancements.pepsimc.bottler.description":"Craft a bottler, you can use it to craft pepsi",
+	"advancements.pepsimc.ecologist.title":"Ecologist",
+	"advancements.pepsimc.ecologist.description":"Use the recycler to make new cans and bottles for much cheaper and enviromentally friendly! ;D",
+	"advancements.pepsimc.sacred_drink.title":"The Sacred Drink",
+	"advancements.pepsimc.sacred_drink.description":"Experience the godlike taste of pepsi",
+	"advancements.pepsimc.immortality.title":"Immortality!",
+	"advancements.pepsimc.immortality.description":"Join the gods by drinking every flavor of pepsi",
+	"advancements.pepsimc.urban_explorer.title":"Urban Explorer",
+	"advancements.pepsimc.urban_explorer.description":"Explore an abandoned pepsi bottling plant",
+	"advancements.pepsimc.sinner.title":"Sinner",
+	"advancements.pepsimc.sinner.description":"You have commited blasphemy... and you had to pay for it!",
+	"advancements.pepsimc.flavor_machine.title":"Add some flavor...",
+	"advancements.pepsimc.flavor_machine.description":"Craft the flavoring machine, this machine will aid you in creating different pepsi flavors"
 }

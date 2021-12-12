@@ -1,0 +1,37 @@
+{
+    "parent": "pepsimc:pepsimc/sacred_drink",
+    "display": {
+      "icon": {
+        "item": "pepsimc:recycler"
+      },
+      "title": {
+        "translate": "advancements.pepsimc.ecologist.title"
+      },
+      "description": {
+        "translate": "advancements.pepsimc.ecologist.description"
+      },
+      "frame": "goal",
+      "show_toast": true,
+      "announce_to_chat": false,
+      "hidden": false
+    },
+    "criteria": {
+      "recycler": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "pepsimc:recycler"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "requirements": [
+      [
+        "recycler"
+      ]
+    ]
+}

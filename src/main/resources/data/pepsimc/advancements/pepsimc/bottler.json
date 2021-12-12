@@ -1,0 +1,37 @@
+{
+    "parent": "pepsimc:pepsimc/root",
+    "display": {
+      "icon": {
+        "item": "pepsimc:bottler"
+      },
+      "title": {
+        "translate": "advancements.pepsimc.bottler.title"
+      },
+      "description": {
+        "translate": "advancements.pepsimc.bottler.description"
+      },
+      "frame": "task",
+      "show_toast": true,
+      "announce_to_chat": false,
+      "hidden": false
+    },
+    "criteria": {
+      "bottler": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "pepsimc:bottler"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "requirements": [
+      [
+        "bottler"
+      ]
+    ]
+  }

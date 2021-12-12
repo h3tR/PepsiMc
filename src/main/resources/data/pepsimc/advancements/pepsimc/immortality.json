@@ -1,0 +1,162 @@
+{
+    "parent": "pepsimc:pepsimc/flavor_machine",
+    "display": {
+      "icon": {
+        "item": "pepsimc:token"
+      },
+      "title": {
+        "translate": "advancements.pepsimc.immortality.title"
+      },
+      "description": {
+        "translate": "advancements.pepsimc.immortality.description"
+      },
+      "frame": "challenge",
+      "show_toast": true,
+      "announce_to_chat": true,
+      "hidden": false
+    },
+    "criteria": {
+      "consumed_pepsi": {
+        "trigger": "minecraft:consume_item",
+        "conditions": { 
+            "item": 
+            {
+              "items": [
+                "pepsimc:pepsi_can",
+                "pepsimc:pepsi_max_can",
+                "pepsimc:pepsi_bottle",
+                "pepsimc:pepsi_max_bottle"
+              ]
+            }
+          }
+      },
+      "consumed_pepsi_lemon": {
+        "trigger": "minecraft:consume_item",
+        "conditions": { 
+            "item": 
+            {
+              "items": [
+                "pepsimc:pepsi_lemon_can",
+                "pepsimc:pepsi_lemon_bottle"
+              ]
+            }
+          }
+      },
+      "consumed_pepsi_max_lemon": {
+        "trigger": "minecraft:consume_item",
+        "conditions": { 
+            "item": 
+            {
+              "items": [
+                "pepsimc:pepsi_max_lemon_can",
+                "pepsimc:pepsi_max_lemon_bottle"
+              ]
+            }
+          }
+      },
+      "consumed_pepsi_mango": {
+        "trigger": "minecraft:consume_item",
+        "conditions": { 
+            "item": 
+            {
+              "items": [
+                "pepsimc:pepsi_mango_can",
+                "pepsimc:pepsi_max_mango_can",
+                "pepsimc:pepsi_mango_bottle",
+                "pepsimc:pepsi_max_mango_bottle"
+              ]
+            }
+          }
+      },
+      "consumed_pepsi_berry": {
+        "trigger": "minecraft:consume_item",
+        "conditions": { 
+            "item": 
+            {
+              "items":[ 
+                "pepsimc:pepsi_berry_can",
+                "pepsimc:pepsi_berry_bottle"
+              ]
+            }
+          }
+      },
+      "consumed_pepsi_crystal": {
+        "trigger": "minecraft:consume_item",
+        "conditions": { 
+            "item": 
+            {
+              "items": [
+                "pepsimc:pepsi_crystal_bottle"
+              ]
+            }
+          }
+      },
+      "consumed_pepsi_cherry": {
+        "trigger": "minecraft:consume_item",
+        "conditions": { 
+            "item": 
+            {
+              "items": [
+                "pepsimc:pepsi_cherry_can",
+                "pepsimc:pepsi_max_cherry_can",
+                "pepsimc:pepsi_cherry_bottle",
+                "pepsimc:pepsi_max_cherry_bottle"
+              ]
+            }
+          }
+      },
+      "consumed_pepsi_boom": {
+        "trigger": "minecraft:consume_item",
+        "conditions": { 
+            "item": 
+            {
+              "items": [
+                "pepsimc:pepsi_boom_can",
+                "pepsimc:pepsi_boom_bottle"
+              ]
+            }
+          }
+      },
+      "consumed_pepsi_fire": {
+        "trigger": "minecraft:consume_item",
+        "conditions": { 
+            "item": 
+            {
+              "items": [
+                "pepsimc:pepsi_fire_can",
+                "pepsimc:pepsi_fire_bottle"
+              ]
+            }
+          }
+      }
+    },
+    "requirements": [
+      [
+        "consumed_pepsi"
+      ],
+      [
+        "consumed_pepsi_lemon"
+      ],
+      [
+        "consumed_pepsi_max_lemon"
+      ],
+      [
+        "consumed_pepsi_mango"
+      ],
+      [
+        "consumed_pepsi_berry"
+      ],
+      [
+        "consumed_pepsi_crystal"
+      ],
+      [
+        "consumed_pepsi_cherry"
+      ],
+      [
+        "consumed_pepsi_boom"
+      ],
+      [
+        "consumed_pepsi_fire"
+      ]
+    ]
+  }

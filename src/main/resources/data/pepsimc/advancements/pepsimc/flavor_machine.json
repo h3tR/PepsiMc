@@ -1,0 +1,37 @@
+{
+    "parent": "pepsimc:pepsimc/sacred_drink",
+    "display": {
+      "icon": {
+        "item": "pepsimc:flavor_machine"
+      },
+      "title": {
+        "translate": "advancements.pepsimc.flavor_machine.title"
+      },
+      "description": {
+        "translate": "advancements.pepsimc.flavor_machine.description"
+      },
+      "frame": "task",
+      "show_toast": true,
+      "announce_to_chat": true,
+      "hidden": false
+    },
+    "criteria": {
+      "flavor_machine": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "pepsimc:flavor_machine"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "requirements": [
+      [
+        "flavor_machine"
+      ]
+    ]
+  }

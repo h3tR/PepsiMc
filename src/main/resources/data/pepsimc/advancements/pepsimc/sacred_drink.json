@@ -1,0 +1,39 @@
+{
+    "parent": "pepsimc:pepsimc/bottler",
+    "display": {
+      "icon": {
+        "item": "pepsimc:pepsi_can"
+      },
+      "title": {
+        "translate": "advancements.pepsimc.sacred_drink.title"
+      },
+      "description": {
+        "translate": "advancements.pepsimc.sacred_drink.description"
+      },
+      "frame": "task",
+      "show_toast": true,
+      "announce_to_chat": false,
+      "hidden": false
+    },
+    "criteria": {
+      "consumed_pepsi": {
+        "trigger": "minecraft:consume_item",
+        "conditions": { 
+            "item": 
+            {
+              "items": [
+                "pepsimc:pepsi_can",
+                "pepsimc:pepsi_max_can",
+                "pepsimc:pepsi_bottle",
+                "pepsimc:pepsi_max_bottle"
+              ]
+            }
+          }
+      }
+    },
+    "requirements": [
+      [
+        "consumed_pepsi"
+      ]
+    ]
+  }

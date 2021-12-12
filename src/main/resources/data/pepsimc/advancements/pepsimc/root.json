@@ -1,0 +1,29 @@
+{
+    "display": {
+      "icon": {
+        "item": "pepsimc:token"
+      },
+      "title": {
+        "translate": "advancements.pepsimc.root.title"
+      },
+      "description": {
+        "translate": "advancements.pepsimc.root.description"
+      },
+      "frame": "task",
+      "show_toast": false,
+      "announce_to_chat": false,
+      "hidden": false,
+      "background": "pepsimc:textures/blocks/pepsite_block_side.png"
+    },
+    "criteria": {
+      "consumed_item": {
+        "trigger": "minecraft:consume_item",
+        "conditions": {}
+      }
+    },
+    "requirements": [
+      [
+        "consumed_item"
+      ]
+    ]
+  }
