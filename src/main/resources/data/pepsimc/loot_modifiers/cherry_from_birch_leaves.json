@@ -1,0 +1,24 @@
+{
+	"conditions": [
+		{
+			"condition": "minecraft:survives_explosion"
+		},
+		{
+			"condition": "block_state_property",
+			"block":"minecraft:birch_leaves"
+		},
+		{
+			"condition": "minecraft:table_bonus",
+			"enchantment": "minecraft:fortune",
+			"chances": [
+				0.05,
+				0.055555557,
+				0.0625,
+				0.08333334,
+				0.25
+			]
+		}
+	],
+	"addition": "pepsimc:cherry",
+    "count":2
+}

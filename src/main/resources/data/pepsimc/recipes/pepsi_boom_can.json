@@ -1,0 +1,8 @@
+{
+    "type": "pepsimc:flavor",
+    "product": { "item": "pepsimc:pepsi_can" },
+    "flavor": { "item": "minecraft:tnt" }, 
+    "result": {
+        "item": "pepsimc:pepsi_boom_can"
+    }
+}

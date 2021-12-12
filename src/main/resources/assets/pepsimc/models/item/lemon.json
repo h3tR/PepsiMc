@@ -1,7 +1,7 @@
 {
 	"parent": "item/generated",
     "textures": {
-    	"layer0": "pepsimc:items/pepsi_max_cherry_can"   
+    	"layer0": "pepsimc:items/lemon"   
     }
 
 }

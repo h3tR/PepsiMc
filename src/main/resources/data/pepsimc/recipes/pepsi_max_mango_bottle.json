@@ -1,0 +1,8 @@
+{
+    "type": "pepsimc:flavor",
+    "product": { "item": "pepsimc:pepsi_max_bottle" },
+    "flavor": { "item": "pepsimc:mango" }, 
+    "result": {
+        "item": "pepsimc:pepsi_max_mango_bottle"
+    }
+}

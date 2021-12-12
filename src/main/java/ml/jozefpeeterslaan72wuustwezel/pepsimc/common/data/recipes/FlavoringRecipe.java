@@ -87,8 +87,8 @@ public class FlavoringRecipe implements Recipe<Container>{
 			JsonObject Product = GsonHelper.getAsJsonObject(json, "product");
 
 			NonNullList<Ingredient> In = NonNullList.withSize(2, Ingredient.EMPTY);
-			In.set(1, Ingredient.fromJson(Product));
-			In.set(0, Ingredient.fromJson(Flavor));
+			In.set(0, Ingredient.fromJson(Product));
+			In.set(1, Ingredient.fromJson(Flavor));
 			return new FlavoringRecipe(Id, Out, In);
 		}
 

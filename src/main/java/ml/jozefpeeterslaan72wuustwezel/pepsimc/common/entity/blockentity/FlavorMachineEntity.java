@@ -68,8 +68,8 @@ public class FlavorMachineEntity extends ProcessingBlockEntity{
 			@Override
 			public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
 				switch (slot) {
-					case 0: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "flavor"));
-					case 1: return true;
+					case 0: return true;
+					case 1: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "flavor"));
 					case 2: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "flavored"));
 					default:
 						return false;

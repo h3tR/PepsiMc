@@ -1,4 +1,4 @@
-{
+ {
 	//Items
 	"item.pepsimc.pepsi_can":"Can of Pepsi ",
 	"item.pepsimc.pepsi_bottle":"Bottle of Pepsi",
@@ -23,7 +23,10 @@
 	"item.pepsimc.pepsi_max_mango_bottle":"Bottle of Pepsi Max Mango",
 	"item.pepsimc.pepsi_max_cherry_can":"Can of Pepsi Max Cherry",
 	"item.pepsimc.pepsi_max_cherry_bottle":"Bottle of Pepsi Max Cherry",
-	"item.pepsimc.coke_can":"Can of Coca Cola",
+	"item.pepsimc.mango":"Mango",
+	"item.pepsimc.lemon":"Lemon",
+	"item.pepsimc.cherry":"Cherry",
+	"item.pepsimc.coke_can":"Can of Coca Cola",	
 	"item.pepsimc.coke_bottle":"Bottle of Coca Cola",
 	"item.pepsimc.caramel":"Caramel",
 	"item.pepsimc.phosphoric_acid":"Phosphoric Acid",

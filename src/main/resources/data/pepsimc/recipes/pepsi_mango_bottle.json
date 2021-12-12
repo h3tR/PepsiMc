@@ -1,8 +1,8 @@
 {
     "type": "pepsimc:flavor",
     "product": { "item": "pepsimc:pepsi_bottle" },
-    "flavor": { "item": "minecraft:quartz" }, 
+    "flavor": { "item": "pepsimc:mango" }, 
     "result": {
-        "item": "pepsimc:pepsi_crystal_bottle"
+        "item": "pepsimc:pepsi_mango_bottle"
     }
 }

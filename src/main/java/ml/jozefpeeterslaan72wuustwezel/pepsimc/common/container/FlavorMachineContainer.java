@@ -24,8 +24,8 @@ public class FlavorMachineContainer extends ProcessingTileContainer{
 	
 	@Override
 	protected void addSlots(IItemHandler h) {
-		FlavorSlotItemHandler=new SlotItemHandler(h,1,80,20);
-		BaseBeverageSlotItemHandler=new SlotItemHandler(h,0,42,42);
+		FlavorSlotItemHandler=new SlotItemHandler(h,0,80,20);
+		BaseBeverageSlotItemHandler=new SlotItemHandler(h,1,42,42);
 		OutSlotItemHandler=new SlotItemHandler(h,2,80,64);
 		addSlot(FlavorSlotItemHandler);
 		addSlot(BaseBeverageSlotItemHandler);
@@ -35,10 +35,10 @@ public class FlavorMachineContainer extends ProcessingTileContainer{
 	@Override
 	public boolean slotHasItem(int slotIndex) {
 		switch (slotIndex) {
-			case 0:
+			case 1:
 				return FlavorSlotItemHandler.hasItem();
 		
-			case 1:
+			case 0:
 				return BaseBeverageSlotItemHandler.hasItem();
 					
 			case 2:

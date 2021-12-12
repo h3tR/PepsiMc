@@ -1,0 +1,8 @@
+{
+    "type": "pepsimc:flavor",
+    "product": { "item": "pepsimc:pepsi_max_can" },
+    "flavor": { "item": "pepsimc:lemon" }, 
+    "result": {
+        "item": "pepsimc:pepsi_max_lemon_can"
+    }
+}

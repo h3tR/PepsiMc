@@ -4,6 +4,12 @@
 	"minecraft:rotten_flesh",
 	"minecraft:spider_eye",
 	"minecraft:sand",
-	"minecraft:dead_bush"
+	"minecraft:dead_bush",
+	"minecraft:quartz",
+	"minecraft:fire_charge",
+	"minecraft:sweet_berries",
+	"pepsimc:cherry",
+	"pepsimc:mango",
+	"pepsimc:lemon"
 	]
 }
