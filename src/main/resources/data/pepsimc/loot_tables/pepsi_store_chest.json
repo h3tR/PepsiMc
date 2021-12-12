@@ -3,7 +3,7 @@
         {
             "rolls": {
                 "min": 1,
-                "max": 12
+                "max": 4
             },
             "bonus_rolls": {
                 "min": 0,
@@ -86,12 +86,6 @@
                     "weight": 1,
                     "name": "pepsimc:pepsi_max_bottle",
                     "quality": 20
-                },
-                {
-                    "type": "item",
-                    "weight": 1,
-                    "name": "pepsimc:pepsi_man_tune_disc",
-                    "quality": 50
                 },
                 {
                     "type": "item",

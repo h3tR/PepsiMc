@@ -3,7 +3,7 @@
         {
             "rolls": {
                 "min": 1,
-                "max": 20
+                "max": 5
             },
             "bonus_rolls": {
                 "min": 0,
@@ -12,7 +12,7 @@
             "entries": [
                 {
                     "type": "item",
-                    "weight": 18,
+                    "weight": 108,
                     "name": "pepsimc:caffeine",
                     "functions": [
                         {
@@ -26,7 +26,7 @@
                 },
                 {
                     "type": "item",
-                    "weight": 8,
+                    "weight": 64,
                     "name": "pepsimc:caramel",
                     "quality": 2,
                     "functions": [
@@ -41,7 +41,7 @@
                 },
                 {
                     "type": "item",
-                    "weight": 6,
+                    "weight": 40,
                     "name": "pepsimc:empty_can",
                     "quality": 3,
                     "functions": [
@@ -56,7 +56,7 @@
                 },
                 {
                     "type": "item",
-                    "weight": 6,
+                    "weight": 40,
                     "name": "pepsimc:empty_bottle",
                     "quality": 3,
                     "functions": [
@@ -71,43 +71,49 @@
                 },
                 {
                     "type": "item",
-                    "weight": 4,
+                    "weight": 24,
                     "name": "pepsimc:pepsi_max_bucket",
                     "quality": 7
                 },
                 {
                     "type": "item",
-                    "weight": 4,
+                    "weight": 24,
                     "name": "pepsimc:pepsi_bucket",
                     "quality": 7
                 },
                 {
                     "type": "item",
-                    "weight":1,
+                    "weight":6,
                     "name": "pepsimc:pepsi_max_bottle",
                     "quality": 20
                 },
                 {
                     "type": "item",
-                    "weight": 1,
+                    "weight": 6,
                     "name": "pepsimc:pepsi_max_can",
                     "quality": 20
                 },
                 {
                     "type": "item",
-                    "weight": 1,
+                    "weight": 6,
                     "name": "pepsimc:pepsi_bottle",
                     "quality": 20
                 },
                 {
                     "type": "item",
-                    "weight": 1,
+                    "weight": 6,
                     "name": "pepsimc:pepsi_can",
                     "quality": 20
                 },
+                                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "pepsimc:pepsi_man_tune_disc",
+                    "quality": 150
+                },
                 {
                     "type": "item",
-                    "weight": 4,
+                    "weight": 24,
                     "name": "pepsimc:pepsite_ingot",
                     "quality": 4,
                     "functions": [
@@ -122,7 +128,7 @@
                 },
                 {
                     "type": "item",
-                    "weight": 18,
+                    "weight": 108,
                     "name": "pepsimc:stevia",
                     "functions": [
                         {
@@ -136,7 +142,7 @@
                 },
                 {
                     "type": "item",
-                    "weight": 4,
+                    "weight": 40,
                     "name": "pepsimc:phosphoric_acid",
                     "quality": 4,
                     "functions": [
@@ -151,7 +157,7 @@
                 },
                 {
                     "type": "item",
-                    "weight": 6,
+                    "weight": 36,
                     "name": "pepsimc:pepsi_label",
                     "quality": 3,
                     "functions": [
@@ -166,7 +172,7 @@
                 },
                 {
                     "type": "item",
-                    "weight": 6,
+                    "weight": 36,
                     "name": "pepsimc:pepsi_max_label",
                     "quality": 3,
                     "functions": [
@@ -181,7 +187,7 @@
                 },
                 {
                     "type": "item",
-                    "weight": 2,
+                    "weight": 8,
                     "name": "pepsimc:pepsite_block",
                     "quality": 15
                 }

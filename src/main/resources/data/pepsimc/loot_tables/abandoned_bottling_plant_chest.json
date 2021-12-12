@@ -3,11 +3,11 @@
         {
             "rolls": {
                 "min": 1,
-                "max": 25
+                "max": 10
             },
             "bonus_rolls": {
                 "min": 0,
-                "max": 10
+                "max": 5
             },
             "entries": [
                 {
