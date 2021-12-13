@@ -1,5 +1,5 @@
 {
-    "parent": "pepsimc:sacred_drink",
+    "parent": "pepsimc:pepsimc/sacred_drink",
     "display": {
       "icon": {
         "item": "minecraft:compass"
@@ -19,9 +19,9 @@
         "in_bottling_plant": {
           "trigger": "minecraft:location",
           "conditions": {
-            "location": {
+          	"location": {
               "feature": "pepsimc:abandoned_bottling_plant"
-            }
+			}
           }
         }
     },

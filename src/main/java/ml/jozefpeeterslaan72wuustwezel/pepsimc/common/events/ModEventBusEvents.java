@@ -18,7 +18,7 @@ public class ModEventBusEvents {
                 new FruitAdditionModifier.Serializer().setRegistryName(
                 		new ResourceLocation("pepsimc","lemon_from_acacia_leaves")),
                 new FruitAdditionModifier.Serializer().setRegistryName(
-                		new ResourceLocation("pepsimc","mango_from_jungme_leaves")),
+                		new ResourceLocation("pepsimc","mango_from_jungle_leaves")),
                 new FruitAdditionModifier.Serializer().setRegistryName(
                 		new ResourceLocation("pepsimc","cherry_from_birch_leaves")));
     }

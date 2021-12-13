@@ -65,7 +65,6 @@ public class WorldEvents {
 	//	genStruct(event, BiomeDictionary.Type.SANDY, PepsiMcStructure.EXCAVATION_SITE.get().configured(IFeatureConfig.NONE));
 		genFlowers(event,PepsiMcConfiguredFeature.STEVIA_PLANT_CONFIG);
 	}
-	
 	private static void genOre(final BiomeLoadingEvent event, RuleTest fillerType, Block block, int vein, int max, int count, String name)
 	{
 		event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,Feature.ORE.configured(
@@ -99,6 +98,7 @@ public class WorldEvents {
 
             structures.add(() -> Configured);
         }
+       
 	}
 	
 	@SubscribeEvent

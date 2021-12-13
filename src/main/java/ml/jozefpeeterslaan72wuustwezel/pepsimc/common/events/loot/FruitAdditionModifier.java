@@ -2,7 +2,6 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.events.loot;
 
 import java.util.List;
 
-
 import com.google.gson.JsonObject;
 
 import net.minecraft.resources.ResourceLocation;
@@ -35,9 +34,9 @@ public class FruitAdditionModifier extends LootModifier {
 
         @Override
         public FruitAdditionModifier read(ResourceLocation name, JsonObject object, LootItemCondition[] conditionsIn) {
-            Item addition = ForgeRegistries.ITEMS.getValue(new ResourceLocation((GsonHelper.getAsString(object,"addition"))));
+        	Item addition = ForgeRegistries.ITEMS.getValue(new ResourceLocation((GsonHelper.getAsString(object,"addition"))));
             int count = GsonHelper.getAsInt(object,"count");
-            return new FruitAdditionModifier(conditionsIn, addition,count);
+            return new FruitAdditionModifier(conditionsIn,addition,count);// addition,count);
         }
 
         @Override

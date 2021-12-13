@@ -309,13 +309,6 @@ public class PepsiMcItem {
 	public static final RegistryObject<Item> STEVIA = ITEMS.register("stevia", ()-> new Item(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
 	
-	public static final RegistryObject<Item> MANGO = ITEMS.register("mango", ()-> new Item(new Item.Properties()
-			.tab(PepsiMcItemGroup.PEPSIMC_TAB).food(new FoodProperties.Builder()
-					.nutrition(4)
-					.saturationMod(4)
-					.build()
-					)));
-	
 	public static final RegistryObject<Item> LEMON = ITEMS.register("lemon", ()-> new Item(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB).food(new FoodProperties.Builder()
 					.nutrition(2)
@@ -327,6 +320,13 @@ public class PepsiMcItem {
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB).food(new FoodProperties.Builder()
 					.nutrition(3)
 					.saturationMod(2)
+					.build()
+					)));
+
+	public static final RegistryObject<Item> MANGO = ITEMS.register("mango", ()-> new Item(new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB).food(new FoodProperties.Builder()
+					.nutrition(4)
+					.saturationMod(4)
 					.build()
 					)));
 	
