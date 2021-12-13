@@ -11,10 +11,10 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Con
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
 
-public class RecyclerRenderer extends GeoBlockRenderer<RecyclerEntity> {
+public class RecyclerRender extends GeoBlockRenderer<RecyclerEntity> {
 
 	@SuppressWarnings("unchecked")
-	public RecyclerRenderer(Context rendererDispatcherIn) {
+	public RecyclerRender(Context rendererDispatcherIn) {
 		super(rendererDispatcherIn, new RecyclerModel());
 	}
 	

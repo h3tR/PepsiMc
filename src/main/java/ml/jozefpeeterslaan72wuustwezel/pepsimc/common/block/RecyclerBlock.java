@@ -102,6 +102,8 @@ public class RecyclerBlock extends HorizontalFacedBlock implements EntityBlock{
 		return InteractionResult.SUCCESS;
 	}
 
+
+	
 	private MenuProvider createContainerProvider(Level world, BlockPos pos) {
 		return new MenuProvider() {
 			@Override
@@ -118,7 +120,6 @@ public class RecyclerBlock extends HorizontalFacedBlock implements EntityBlock{
 
 	@Override
 	public RenderShape getRenderShape(BlockState p_60550_) {
-		// TODO Auto-generated method stub
 		return RenderShape.ENTITYBLOCK_ANIMATED;
 	}
 	

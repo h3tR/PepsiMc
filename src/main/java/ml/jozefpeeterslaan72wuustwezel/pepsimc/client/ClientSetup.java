@@ -1,6 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.client;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.animation.render.RecyclerRenderer;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.animation.render.RecyclerRender;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -17,7 +17,7 @@ public class ClientSetup {
 
 	@SubscribeEvent
 	public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-			event.registerBlockEntityRenderer(PepsiMcBlockEntity.RECYCLER_TILE.get(), RecyclerRenderer::new);
+			event.registerBlockEntityRenderer(PepsiMcBlockEntity.RECYCLER_TILE.get(), RecyclerRender::new);
 	}
 	
 	@SubscribeEvent
