@@ -1,0 +1,24 @@
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item;
+
+import java.util.function.Consumer;
+
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.animation.render.CentrifugeItemRender;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.client.IItemRenderProperties;
+
+public class CentrifugeBlockItem extends AnimatedBlockItem {
+	public CentrifugeBlockItem(Block p_40565_, Properties p_40566_) {
+		super(p_40565_,  p_40566_);
+	}
+
+	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+		super.initializeClient(consumer);
+		consumer.accept(new IItemRenderProperties() {
+			@Override
+			public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+				return new CentrifugeItemRender();
+			}
+		});
+	}
+}

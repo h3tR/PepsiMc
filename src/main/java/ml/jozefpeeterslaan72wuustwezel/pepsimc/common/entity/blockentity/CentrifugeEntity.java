@@ -31,7 +31,7 @@ public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatab
 
 	@Override
 	public void process(Level world) {
-		Optional<CentrifugeRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.EXTRACTOR_RECIPE, getSimpleInv(), world);
+		Optional<CentrifugeRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.CENTRIFUGE_RECIPE, getSimpleInv(), world);
 
 		recipe.ifPresent(iRecipe->{
 			itemHandler.extractItem(0, 1, false);
@@ -43,14 +43,14 @@ public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatab
 	
 	@Override
 	public void processAll(Level world) {
-		Optional<CentrifugeRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.EXTRACTOR_RECIPE, getSimpleInv(), world);
+		Optional<CentrifugeRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.CENTRIFUGE_RECIPE, getSimpleInv(), world);
 		while (recipe.isPresent()) {
 			recipe.ifPresent(iRecipe->{
 				itemHandler.extractItem(0, 1, false);
 				itemHandler.insertItem(1, iRecipe.getResultItem(), false);
 				setChanged();
 			});	
-			recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.EXTRACTOR_RECIPE, getSimpleInv(), world);
+			recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.CENTRIFUGE_RECIPE, getSimpleInv(), world);
 		}
 		
 

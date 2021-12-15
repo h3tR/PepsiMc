@@ -1,6 +1,8 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item;
 
 
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.animation.render.CentrifugeItemRender;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.animation.render.RecyclerItemRender;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.fluid.PepsiMcFluid;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.effect.PepsiMcEffect;
@@ -544,10 +546,10 @@ public class PepsiMcItem {
 	public static final RegistryObject<BlockItem> FLAVOR_MACHINE = ITEMS.register("flavor_machine", ()-> new BlockItem(PepsiMcBlock.FLAVOR_MACHINE.get(), new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
 	
-	public static final RegistryObject<BlockItem> RECYCLER = ITEMS.register("recycler", ()-> new AnimatedBlockItem(PepsiMcBlock.RECYCLER.get(), new Item.Properties()
+	public static final RegistryObject<BlockItem> RECYCLER = ITEMS.register("recycler", ()-> new RecyclerBlockItem(PepsiMcBlock.RECYCLER.get(), new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
 	
-	public static final RegistryObject<BlockItem> EXTRACTOR = ITEMS.register("extractor", ()-> new BlockItem(PepsiMcBlock.EXTRACTOR.get(), new Item.Properties()
+	public static final RegistryObject<BlockItem> CENTRIFUGE = ITEMS.register("centrifuge", ()-> new CentrifugeBlockItem(PepsiMcBlock.CENTRIFUGE.get(), new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
 	
 	

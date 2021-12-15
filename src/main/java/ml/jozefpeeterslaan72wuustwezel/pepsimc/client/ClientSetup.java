@@ -1,5 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.client;
 
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.animation.render.CentrifugeRender;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.animation.render.RecyclerRender;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
@@ -18,11 +19,16 @@ public class ClientSetup {
 	@SubscribeEvent
 	public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
 			event.registerBlockEntityRenderer(PepsiMcBlockEntity.RECYCLER_TILE.get(), RecyclerRender::new);
+			event.registerBlockEntityRenderer(PepsiMcBlockEntity.CENTRIFUGE_TILE.get(), CentrifugeRender::new);
+
 	}
 	
 	@SubscribeEvent
 	public static void registerRenderers(final FMLClientSetupEvent event) {
 			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.RECYCLER.get(), RenderType.cutout());
-		
+			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.CENTRIFUGE.get(), RenderType.cutout());
+
 	}
+	
+
 }

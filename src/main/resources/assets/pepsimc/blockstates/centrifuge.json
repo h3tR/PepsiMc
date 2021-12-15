@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "pepsimc:block/centrifuge" },
+        "facing=south": { "model": "pepsimc:block/centrifuge", "y":180 },
+        "facing=west": { "model": "pepsimc:block/centrifuge", "y":270 },
+        "facing=east": { "model": "pepsimc:block/centrifuge", "y":90 }
+    }
+}

@@ -47,6 +47,18 @@
 	"item.pepsimc.pepsi_man_tune_disc":"Music Disc",
 	"item.pepsimc.pepsi_man_tune_disc.desc":"James Shimoji - Pepsi Man Theme Song",
 	"item.pepsimc.stevia_seeds":"Stevia Rebaudiana Seeds",
+	
+		//blocks
+	"block.pepsimc.pepsite_block":"Block of Pepsite",
+	"block.pepsimc.raw_pepsite_block":"Block of Raw Pepsite",
+	"block.pepsimc.deepslate_pepsite_ore":"Deepslate Pepsite Ore",
+	"block.pepsimc.pepsite_ore":"Pepsite Ore",
+	"block.pepsimc.bottler":"Bottler",
+	"block.pepsimc.centrifuge":"Centrifuge",
+	"block.pepsimc.flavor_machine":"Flavoring Machine",
+	"block.pepsimc.recycler":"Recycler",
+	"block.pepsimc.stevia_plant":"Stevia Rebaudiana",
+	"block.pepsimc.stevia_crop":"Stevia Rebaudiana Seeds",
 	"item.pepsimc.pepsite_shard":"Hardened Pepsite Shard",
 	"item.pepsimc.shard_helmet":"Pepsite Shard Helmet Pattern",
 	"item.pepsimc.shard_chestplate":"Pepsite Shard Chestplate Pattern",
@@ -58,20 +70,6 @@
 	"item.pepsimc.pepsite_leggings":"Pepsite Leggings",
 	"item.pepsimc.pepsite_boots":"Pepsite Boots",
 	"item.pepsimc.pepsite_core":"Pepsite Core",
-
-	
-	
-		//blocks
-	"block.pepsimc.pepsite_block":"Block of Pepsite",
-	"block.pepsimc.raw_pepsite_block":"Block of Raw Pepsite",
-	"block.pepsimc.deepslate_pepsite_ore":"Deepslate Pepsite Ore",
-	"block.pepsimc.pepsite_ore":"Pepsite Ore",
-	"block.pepsimc.bottler":"Bottler",
-	"block.pepsimc.extractor":"Extractor",
-	"block.pepsimc.flavor_machine":"Flavoring Machine",
-	"block.pepsimc.recycler":"Recycler",
-	"block.pepsimc.stevia_plant":"Stevia Rebaudiana",
-	"block.pepsimc.stevia_crop":"Stevia Rebaudiana Seeds",
 	
 		//Misc
 	"entity.minecraft.villager.pepsimc.bottling_plant_operator":"Bottling Plant Operator",
@@ -91,7 +89,7 @@
 	"advancements.pepsimc.ecologist.title":"Ecologist",
 	"advancements.pepsimc.ecologist.description":"Use the recycler to make new cans and bottles for much cheaper and enviromentally friendly! ;D",
 	"advancements.pepsimc.sacred_drink.title":"The Sacred Drink",
-	"advancements.pepsimc.sacred_drink.description":"Experience the godlike taste of pepsi",
+	"advancements.pepsimc.sacred_drink.description":"Experienced the godlike taste of pepsi",
 	"advancements.pepsimc.immortality.title":"Immortality!",
 	"advancements.pepsimc.immortality.description":"Join the gods by drinking every flavor of pepsi",
 	"advancements.pepsimc.urban_explorer.title":"Urban Explorer",

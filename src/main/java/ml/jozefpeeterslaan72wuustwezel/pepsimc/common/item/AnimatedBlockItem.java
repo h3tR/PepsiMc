@@ -1,12 +1,8 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item;
 
-import java.util.function.Consumer;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.animation.render.RecyclerItemRender;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.IItemRenderProperties;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -21,18 +17,6 @@ public class AnimatedBlockItem extends BlockItem implements IAnimatable {
 		super(p_40565_, p_40566_);
 	}
 
-	@Override
-	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-		super.initializeClient(consumer);
-		consumer.accept(new IItemRenderProperties() {
-			private final BlockEntityWithoutLevelRenderer renderer = new RecyclerItemRender();
-
-			@Override
-			public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-				return renderer;
-			}
-		});
-	}
 	
 	public <P extends BlockItem & IAnimatable> PlayState predicate(AnimationEvent<P> event) {
 		return PlayState.CONTINUE;
