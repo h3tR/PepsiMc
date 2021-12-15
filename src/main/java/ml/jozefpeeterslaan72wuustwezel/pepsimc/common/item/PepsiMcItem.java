@@ -489,18 +489,6 @@ public class PepsiMcItem {
 	public static final RegistryObject<Item> PEPSITE_SHARD = ITEMS.register("pepsite_shard", ()-> new Item(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
 	
-	public static final RegistryObject<Item> SHARD_HELMET = ITEMS.register("shard_helmet", ()-> new Item(new Item.Properties()
-			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
-	
-	public static final RegistryObject<Item> SHARD_CHESTPLATE = ITEMS.register("shard_chestplate", ()-> new Item(new Item.Properties()
-			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
-	
-	public static final RegistryObject<Item> SHARD_LEGGINGS = ITEMS.register("shard_leggings", ()-> new Item(new Item.Properties()
-			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
-	
-	public static final RegistryObject<Item> SHARD_BOOTS = ITEMS.register("shard_boots", ()-> new  Item(new Item.Properties()
-			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
-	
 	public static final RegistryObject<Item> PEPSITE_HELMET = ITEMS.register("pepsite_helmet", ()-> new PepsiteArmorItem(PepsiMcArmorMaterial.PEPSITE, EquipmentSlot.HEAD,new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB),MobEffects.NIGHT_VISION)); 
 	
@@ -519,6 +507,17 @@ public class PepsiMcItem {
 	public static final RegistryObject<Item> PEPSITE_CORE = ITEMS.register("pepsite_core", ()-> new Item(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
 	
+	public static final RegistryObject<Item> SHARD_HELMET = ITEMS.register("shard_helmet", ()-> new PepsiteShardArmorItem(new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB),PepsiMcItem.PEPSITE_HELMET.get())); 
+	
+	public static final RegistryObject<Item> SHARD_CHESTPLATE = ITEMS.register("shard_chestplate", ()-> new PepsiteShardArmorItem(new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB),PepsiMcItem.PEPSITE_CHESTPLATE.get())); 
+	
+	public static final RegistryObject<Item> SHARD_LEGGINGS = ITEMS.register("shard_leggings", ()-> new PepsiteShardArmorItem(new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB),PepsiMcItem.PEPSITE_LEGGINGS.get())); 
+	
+	public static final RegistryObject<Item> SHARD_BOOTS = ITEMS.register("shard_boots", ()-> new  PepsiteShardArmorItem(new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB),PepsiMcItem.PEPSITE_BOOTS.get())); 
 	
 	//blockItems
 	public static final RegistryObject<Item> STEVIA_SEEDS = ITEMS.register("stevia_seeds", ()-> new BlockItem(PepsiMcBlock.STEVIA_CROP.get(),new Item.Properties()

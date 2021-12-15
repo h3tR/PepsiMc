@@ -1,7 +1,5 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item;
 
-import org.apache.logging.log4j.LogManager;
-
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.effect.PepsiMcEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;

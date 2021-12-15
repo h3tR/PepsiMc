@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "pepsimc:pepsite_chestplate"
+        },
+        {
+            "item": "pepsimc:pepsite_core"
+        }
+    ],
+    "result": {
+        "item": "pepsimc:powered_pepsite_chestplate",
+        "count": 1
+    }
+}
