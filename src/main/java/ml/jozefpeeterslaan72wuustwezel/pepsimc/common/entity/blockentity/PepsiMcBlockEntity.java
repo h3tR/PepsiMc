@@ -13,8 +13,8 @@ public class PepsiMcBlockEntity {
 	public static RegistryObject<BlockEntityType<BottlerEntity>> BOTTLER_TILE = BLOCK_ENTITIES.register("bottlertile", 
 			()-> BlockEntityType.Builder.of(BottlerEntity::new, PepsiMcBlock.BOTTLER.get()).build(null));
 	
-	public static RegistryObject<BlockEntityType<ExtractorEntity>> EXTRACTOR_TILE = BLOCK_ENTITIES.register("extractortile", 
-			()-> BlockEntityType.Builder.of(ExtractorEntity::new, PepsiMcBlock.EXTRACTOR.get()).build(null));
+	public static RegistryObject<BlockEntityType<CentrifugeEntity>> CENTRIFUGE_TILE = BLOCK_ENTITIES.register("centrifugetile", 
+			()-> BlockEntityType.Builder.of(CentrifugeEntity::new, PepsiMcBlock.CENTRIFUGE.get()).build(null));
 	
 	public static RegistryObject<BlockEntityType<FlavorMachineEntity>> FLAVOR_MACHINE_TILE = BLOCK_ENTITIES.register("flavor_machinetile", 
 			()-> BlockEntityType.Builder.of(FlavorMachineEntity::new, PepsiMcBlock.FLAVOR_MACHINE.get()).build(null));

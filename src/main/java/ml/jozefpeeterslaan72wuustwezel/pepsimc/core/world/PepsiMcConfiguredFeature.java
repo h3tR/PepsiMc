@@ -11,5 +11,5 @@ import net.minecraft.data.worldgen.Features;
 public class PepsiMcConfiguredFeature {
 	public static final ConfiguredFeature<?, ?> STEVIA_PLANT_CONFIG = Feature.FLOWER.configured((
             new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(PepsiMcBlock.STEVIA_PLANT.get().defaultBlockState()),
-          SimpleBlockPlacer.INSTANCE)).tries(12).build()).decorated(Features.Decorators.HEIGHTMAP).count(1);
+          SimpleBlockPlacer.INSTANCE)).tries(6).build()).decorated(Features.Decorators.HEIGHTMAP).count(1);
 }

@@ -13,7 +13,7 @@ public class PepsiMcRecipeType {
 	
 	public static final RegistryObject<BottlerRecipe.Serializer> BOTTLER_SERIALIZER = RECIPE_SERIALIZER.register("bottler", BottlerRecipe.Serializer::new);
 	
-	public static final RegistryObject<ExtractorRecipe.Serializer> EXTRACTOR_SERIALIZER = RECIPE_SERIALIZER.register("extractor", ExtractorRecipe.Serializer::new);
+	public static final RegistryObject<CentrifugeRecipe.Serializer> CENTRIFUGE_SERIALIZER = RECIPE_SERIALIZER.register("centrifuge", CentrifugeRecipe.Serializer::new);
 
 	public static final RegistryObject<FlavoringRecipe.Serializer> FLAVORING_SERIALIZER = RECIPE_SERIALIZER.register("flavor", FlavoringRecipe.Serializer::new);
 
@@ -22,7 +22,7 @@ public class PepsiMcRecipeType {
 	
 	public static RecipeType<BottlerRecipe> BOTTLER_RECIPE = new BottlerRecipe.BottlerRecipeType();
 	
-	public static RecipeType<ExtractorRecipe> EXTRACTOR_RECIPE = new ExtractorRecipe.ExtractorRecipeType();
+	public static RecipeType<CentrifugeRecipe> CENTRIFUGE_RECIPE = new CentrifugeRecipe.CentrifugeRecipeType();
 
 	public static RecipeType<FlavoringRecipe> FLAVORING_RECIPE = new FlavoringRecipe.FlavoringRecipeType();
 

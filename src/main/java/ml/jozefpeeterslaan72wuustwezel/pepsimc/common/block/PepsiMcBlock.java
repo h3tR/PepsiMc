@@ -65,7 +65,7 @@ public class PepsiMcBlock {
 
 	public static final RegistryObject<Block> RECYCLER = BLOCKS.register("recycler",RecyclerBlock::new);
 
-	public static final RegistryObject<Block> EXTRACTOR = BLOCKS.register("extractor",BottlerBlock::new);
+	public static final RegistryObject<Block> CENTRIFUGE = BLOCKS.register("centrifuge",CentrifugeBlock::new);
 	
 	public static final RegistryObject<Block> STEVIA_PLANT = BLOCKS.register("stevia_plant", 
 			()-> new FlowerBlock(MobEffects.MOVEMENT_SPEED,2,BlockBehaviour.Properties.copy(Blocks.POPPY)));

@@ -10,6 +10,7 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.CentrifugeRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.FlavoringRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.RecyclerRecipe;
@@ -34,7 +35,8 @@ public class PepsiMcJEI implements IModPlugin{
 	                new RecyclerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
 	     registration.addRecipeCategories(
 	                new FlavoringRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-
+	     registration.addRecipeCategories(
+	                new CentrifugeRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
 	}
 
 	    @Override
@@ -50,6 +52,9 @@ public class PepsiMcJEI implements IModPlugin{
 	        registration.addRecipes(rm.getAllRecipesFor(PepsiMcRecipeType.FLAVORING_RECIPE).stream()
                     .filter(r -> r instanceof FlavoringRecipe).collect(Collectors.toList()),
             FlavoringRecipeCategory.UID);
+	        registration.addRecipes(rm.getAllRecipesFor(PepsiMcRecipeType.CENTRIFUGE_RECIPE).stream()
+                    .filter(r -> r instanceof CentrifugeRecipe).collect(Collectors.toList()),
+            CentrifugeRecipeCategory.UID);
 
 	    }
 	    
@@ -58,6 +63,8 @@ public class PepsiMcJEI implements IModPlugin{
 	    	registration.addRecipeCatalyst(new ItemStack(PepsiMcItem.BOTTLER.get()),BottlerRecipeCategory.UID);
 	    	registration.addRecipeCatalyst(new ItemStack(PepsiMcItem.RECYCLER.get()),RecyclerRecipeCategory.UID);
 	    	registration.addRecipeCatalyst(new ItemStack(PepsiMcItem.FLAVOR_MACHINE.get()),FlavoringRecipeCategory.UID);
+	    	registration.addRecipeCatalyst(new ItemStack(PepsiMcItem.CENTRIFUGE.get()),CentrifugeRecipeCategory.UID);
+
 	    	IModPlugin.super.registerRecipeCatalysts(registration);
 	    }
 }
