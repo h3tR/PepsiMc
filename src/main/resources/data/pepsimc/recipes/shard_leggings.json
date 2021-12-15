@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "sss",
+        "scs",
+        "s s"
+    ],
+    "key": {
+        "s": {
+            "item": "pepsimc:pepsite_shard"
+        },
+        "c": {
+            "item": "minecraft:clay"
+        }
+    },
+    "result": {
+        "item": "pepsimc:shard_leggings",
+        "count": 1
+    }
+}

@@ -28,6 +28,7 @@ public class PepsiMcRecipeType {
 
 	public static RecipeType<RecyclerRecipe> RECYCLER_RECIPE = new RecyclerRecipe.RecyclerRecipeType();
 
+
 	
 	public static void register(IEventBus bus) {
 		RECIPE_SERIALIZER.register(bus);

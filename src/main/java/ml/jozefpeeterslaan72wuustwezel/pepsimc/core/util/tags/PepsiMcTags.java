@@ -1,6 +1,10 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.Tags;
@@ -28,8 +32,20 @@ public class PepsiMcTags {
 		
 		public static final Tags.IOptionalNamedTag<Item> EXTRACTED = createTag("extracted");
 		
+		public static final Tags.IOptionalNamedTag<Fluid> SHARD_MENDABLE = createFluidTag("shard_mendable");
+
+		
 		private static Tags.IOptionalNamedTag<Item> createTag(String name){
 			return ItemTags.createOptional(new ResourceLocation("pepsimc", name));
+		}
+		
+		@SuppressWarnings("unused")
+		private static Tags.IOptionalNamedTag<Block> createBlockTag(String name){
+			return BlockTags.createOptional(new ResourceLocation("pepsimc", name));
+		}
+		
+		private static Tags.IOptionalNamedTag<Fluid> createFluidTag(String name){
+			return FluidTags.createOptional(new ResourceLocation("pepsimc", name));
 		}
 
 	}

@@ -89,7 +89,7 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'pepsimc', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
                 pepsimc {
@@ -108,7 +108,7 @@ dependencies {
 
   compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // JEI API
   runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // JEI
-  implementation fg.deobf('software.bernie.geckolib:geckolib-1.17.1:3.0.14')// Geckolib
+  implementation fg.deobf("software.bernie.geckolib:geckolib-${mc_version}-forge:${geckolib_version}")// Geckolib
 }
 
 jar {

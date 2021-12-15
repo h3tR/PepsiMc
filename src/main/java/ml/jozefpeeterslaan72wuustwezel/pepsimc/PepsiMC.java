@@ -1,7 +1,5 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc;
 
-
-
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.BottlerScreen;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.FlavorMachineScreen;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.RecyclerScreen;

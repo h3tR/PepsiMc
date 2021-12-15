@@ -67,8 +67,6 @@ public class ProcessingBlockEntity extends BlockEntity{
 	}
 	
 	protected SimpleContainer getSimpleInv() {
-		LogManager.getLogger().debug("simpleinv");
-
 		SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
 		
 		for(int i=0;i<itemHandler.getSlots();i++) {

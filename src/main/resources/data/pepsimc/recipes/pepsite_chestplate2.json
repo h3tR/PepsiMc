@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "pepsimc:shard_chestplate"
+        },
+        {
+            "item": "pepsimc:pepsi_max_bucket"
+        }
+    ],
+    "result": {
+        "item": "pepsimc:pepsite_chestplate",
+        "count": 1
+    }
+}

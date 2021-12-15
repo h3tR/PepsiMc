@@ -47,6 +47,19 @@
 	"item.pepsimc.pepsi_man_tune_disc":"Music Disc",
 	"item.pepsimc.pepsi_man_tune_disc.desc":"James Shimoji - Pepsi Man Theme Song",
 	"item.pepsimc.stevia_seeds":"Stevia Rebaudiana Seeds",
+	"item.pepsimc.pepsite_shard":"Hardened Pepsite Shard",
+	"item.pepsimc.shard_helmet":"Pepsite Shard Helmet Pattern",
+	"item.pepsimc.shard_chestplate":"Pepsite Shard Chestplate Pattern",
+	"item.pepsimc.shard_leggings":"Pepsite Shard Leggings Pattern",
+	"item.pepsimc.shard_boots":"Pepsite Shard Boots Pattern",
+	"item.pepsimc.pepsite_helmet":"Pepsite Helmet",
+	"item.pepsimc.pepsite_chestplate":"Pepsite Chestplate",
+	"item.pepsimc.powered_pepsite_chestplate":"Powered Pepsite Chestplate",
+	"item.pepsimc.pepsite_leggings":"Pepsite Leggings",
+	"item.pepsimc.pepsite_boots":"Pepsite Boots",
+	"item.pepsimc.pepsite_core":"Pepsite Core",
+
+	
 	
 		//blocks
 	"block.pepsimc.pepsite_block":"Block of Pepsite",

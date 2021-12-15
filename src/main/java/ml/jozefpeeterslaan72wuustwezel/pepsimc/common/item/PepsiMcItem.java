@@ -1,5 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item;
 
+
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.fluid.PepsiMcFluid;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.effect.PepsiMcEffect;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.RecordItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -484,6 +486,40 @@ public class PepsiMcItem {
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
 			.stacksTo(16))); 
 	
+	public static final RegistryObject<Item> PEPSITE_SHARD = ITEMS.register("pepsite_shard", ()-> new Item(new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
+	
+	public static final RegistryObject<Item> SHARD_HELMET = ITEMS.register("shard_helmet", ()-> new Item(new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
+	
+	public static final RegistryObject<Item> SHARD_CHESTPLATE = ITEMS.register("shard_chestplate", ()-> new Item(new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
+	
+	public static final RegistryObject<Item> SHARD_LEGGINGS = ITEMS.register("shard_leggings", ()-> new Item(new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
+	
+	public static final RegistryObject<Item> SHARD_BOOTS = ITEMS.register("shard_boots", ()-> new  Item(new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
+	
+	public static final RegistryObject<Item> PEPSITE_HELMET = ITEMS.register("pepsite_helmet", ()-> new PepsiteArmorItem(PepsiMcArmorMaterial.PEPSITE, EquipmentSlot.HEAD,new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB),MobEffects.NIGHT_VISION)); 
+	
+	public static final RegistryObject<Item> PEPSITE_CHESTPLATE = ITEMS.register("pepsite_chestplate", ()-> new PepsiteArmorItem(PepsiMcArmorMaterial.PEPSITE, EquipmentSlot.CHEST,new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB),MobEffects.DIG_SPEED)); 
+	
+	public static final RegistryObject<Item> PEPSITE_LEGGINGS = ITEMS.register("pepsite_leggings", ()-> new PepsiteArmorItem(PepsiMcArmorMaterial.PEPSITE, EquipmentSlot.LEGS,new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB),MobEffects.FIRE_RESISTANCE)); 
+	
+	public static final RegistryObject<Item> PEPSITE_BOOTS = ITEMS.register("pepsite_boots", ()-> new  PepsiteArmorItem(PepsiMcArmorMaterial.PEPSITE, EquipmentSlot.FEET,new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB),MobEffects.JUMP)); 
+	
+	public static final RegistryObject<Item> POWERED_PEPSITE_CHESTPLATE = ITEMS.register("powered_pepsite_chestplate", ()-> new CoreChestPlateItem(PepsiMcArmorMaterial.COREPEPSITE, EquipmentSlot.CHEST,new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB),MobEffects.DIG_SPEED)); 
+	
+	public static final RegistryObject<Item> PEPSITE_CORE = ITEMS.register("pepsite_core", ()-> new Item(new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
+	
+	
 	//blockItems
 	public static final RegistryObject<Item> STEVIA_SEEDS = ITEMS.register("stevia_seeds", ()-> new BlockItem(PepsiMcBlock.STEVIA_CROP.get(),new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
@@ -518,7 +554,6 @@ public class PepsiMcItem {
 	
 	public static void register(IEventBus bus) {
 		ITEMS.register(bus);
-	
 	}
 
 	

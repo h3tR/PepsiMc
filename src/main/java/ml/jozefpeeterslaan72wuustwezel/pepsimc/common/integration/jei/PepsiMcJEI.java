@@ -34,6 +34,7 @@ public class PepsiMcJEI implements IModPlugin{
 	                new RecyclerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
 	     registration.addRecipeCategories(
 	                new FlavoringRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+
 	}
 
 	    @Override
@@ -49,6 +50,7 @@ public class PepsiMcJEI implements IModPlugin{
 	        registration.addRecipes(rm.getAllRecipesFor(PepsiMcRecipeType.FLAVORING_RECIPE).stream()
                     .filter(r -> r instanceof FlavoringRecipe).collect(Collectors.toList()),
             FlavoringRecipeCategory.UID);
+
 	    }
 	    
 	    @Override

@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "ddd",
+        "dpd",
+        "ddd"
+    ],
+    "key": {
+        "p": {
+            "item": "pepsimc:pepsite_block"
+        },
+        "d": {
+            "item": "minecraft:diamond"
+        }
+    },
+    "result": {
+        "item": "pepsimc:pepsite_core",
+        "count": 1
+    }
+}

@@ -98,7 +98,7 @@ public class WorldEvents {
 
             structures.add(() -> Configured);
         }
-       
+
 	}
 	
 	@SubscribeEvent

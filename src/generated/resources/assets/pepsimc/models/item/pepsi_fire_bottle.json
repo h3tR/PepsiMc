@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pepsimc:items/pepsi_fire_bottle"
+  }
+}
