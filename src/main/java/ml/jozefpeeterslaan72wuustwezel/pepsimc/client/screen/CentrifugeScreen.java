@@ -38,6 +38,7 @@ public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeContaine
 	  		this.clearWidgets();
 	      }
 	   }
+	
 	@Override
 	public void render(PoseStack stack, int mouseX, int mouseY, float Ptick) {
 		this.renderBackground(stack);
