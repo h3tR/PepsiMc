@@ -71,9 +71,15 @@
    	},
     "requirements": [
       [
-        "powered_pepsite_chestplate",
-        "pepsite_helmet",
-        "pepsite_boots",
+      	"powered_pepsite_chestplate"
+      ],
+      [
+      	"pepsite_helmet"
+      ],
+      [
+        "pepsite_boots"
+      ],
+      [
         "pepsite_leggings"
       ]
     ]
