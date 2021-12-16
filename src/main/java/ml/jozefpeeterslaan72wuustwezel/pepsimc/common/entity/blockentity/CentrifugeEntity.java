@@ -36,6 +36,7 @@ public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatab
 		recipe.ifPresent(iRecipe->{
 			itemHandler.extractItem(0, 1, false);
 			itemHandler.insertItem(1, iRecipe.getResultItem(), false);
+			itemHandler.insertItem(2, iRecipe.getByproductItem(), false);
 			setChanged();
 		});	
 
@@ -48,6 +49,8 @@ public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatab
 			recipe.ifPresent(iRecipe->{
 				itemHandler.extractItem(0, 1, false);
 				itemHandler.insertItem(1, iRecipe.getResultItem(), false);
+				itemHandler.insertItem(2, iRecipe.getByproductItem(), false);
+
 				setChanged();
 			});	
 			recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.CENTRIFUGE_RECIPE, getSimpleInv(), world);
@@ -59,7 +62,7 @@ public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatab
 	@Override
 	protected ItemStackHandler createHandler() {
 
-		return new ItemStackHandler(2) {
+		return new ItemStackHandler(3) {
 			
 			@Override
 			protected void onContentsChanged(int slot) {
@@ -77,6 +80,7 @@ public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatab
 				switch (slot) {
 					case 0: return true;
 					case 1: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "extracted"));
+					case 2: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "extraction_byproduct"));
 					default:
 						return false;
 				

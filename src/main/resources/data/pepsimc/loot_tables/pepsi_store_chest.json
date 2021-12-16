@@ -41,6 +41,12 @@
                 },
                 {
                     "type": "item",
+                    "weight": 1,
+                    "name": "pepsimc:pepsite_shard",
+                    "quality": 75
+                },
+                {
+                    "type": "item",
                     "weight": 7,
                     "name": "pepsimc:empty_can",
                     "quality": 3,

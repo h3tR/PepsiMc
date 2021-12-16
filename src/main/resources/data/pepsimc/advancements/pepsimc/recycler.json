@@ -1,14 +1,14 @@
 {
-    "parent": "pepsimc:pepsimc/sacred_drink",
+    "parent": "pepsimc:pepsimc/pepsi",
     "display": {
       "icon": {
         "item": "pepsimc:recycler"
       },
       "title": {
-        "translate": "advancements.pepsimc.ecologist.title"
+        "translate": "advancements.pepsimc.recycler.title"
       },
       "description": {
-        "translate": "advancements.pepsimc.ecologist.description"
+        "translate": "advancements.pepsimc.recycler.description"
       },
       "frame": "goal",
       "show_toast": true,

@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "pip",
+        "scs",
+        "pip"
+    ],
+    "key": {
+        "p": {
+            "item": "pepsimc:pepsite_ingot"
+        },
+        "s": {
+            "item": "minecraft:piston"
+        }, 
+        "c": {
+            "item": "minecraft:chest"
+        },
+        "i": {
+            "item": "minecraft:iron_block"
+        }
+    },
+    "result": {
+        "item": "pepsimc:centrifuge",
+        "count": 1
+    }
+}

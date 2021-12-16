@@ -105,7 +105,13 @@
                     "name": "pepsimc:pepsi_can",
                     "quality": 20
                 },
-                                {
+                {
+                    "type": "item",
+                    "weight": 3,
+                    "name": "pepsimc:pepsite_shard",
+                    "quality": 75
+                },
+                {
                     "type": "item",
                     "weight": 1,
                     "name": "pepsimc:pepsi_man_tune_disc",

@@ -103,7 +103,7 @@ public class CentrifugeBlock extends HorizontalFacedBlock implements EntityBlock
 	
 	
 	@SuppressWarnings("deprecation")
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState secondState, boolean p_196243_5_) {
+	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState secondState, boolean what) {
 	      if (!state.is(secondState.getBlock())) {
 	         BlockEntity TE = level.getBlockEntity(pos);
 	         if (TE instanceof CentrifugeEntity) {
@@ -112,7 +112,7 @@ public class CentrifugeBlock extends HorizontalFacedBlock implements EntityBlock
 	            level.updateNeighbourForOutputSignal(pos, this);
 	         }
 
-	         super.onRemove(state, level, pos, secondState, p_196243_5_);
+	         super.onRemove(state, level, pos, secondState, what);
 	      }
 	   }
 	

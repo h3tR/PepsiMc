@@ -13,24 +13,20 @@ public class PepsiMcTags {
 	public static class Items{
 		
 		public static final Tags.IOptionalNamedTag<Item> BOTTLING_LIQUID = createTag("bottling_liquid");
-		
 		public static final Tags.IOptionalNamedTag<Item> BOTTLING_CONTAINER = createTag("bottling_container");
-		
 		public static final Tags.IOptionalNamedTag<Item> BOTTLING_LABEL = createTag("bottling_label");
-		
 		public static final Tags.IOptionalNamedTag<Item> BOTTLED_LIQUID = createTag("bottled_liquid");
 
 		public static final Tags.IOptionalNamedTag<Item> RECYCLABLE = createTag("recyclable");
-
 		public static final Tags.IOptionalNamedTag<Item> RECYCLED = createTag("recycled");
-		
 		public static final Tags.IOptionalNamedTag<Item> RECYCLING_CATALYST = createTag("recycling_catalyst");
 
 		public static final Tags.IOptionalNamedTag<Item> FLAVOR = createTag("flavor");
-
 		public static final Tags.IOptionalNamedTag<Item> FLAVORED = createTag("flavored");
 		
 		public static final Tags.IOptionalNamedTag<Item> EXTRACTED = createTag("extracted");
+		public static final Tags.IOptionalNamedTag<Item> EXTRACTION_BYPRODUCT = createTag("extraction_byproduct");
+
 		
 		public static final Tags.IOptionalNamedTag<Fluid> SHARD_MENDABLE = createFluidTag("shard_mendable");
 

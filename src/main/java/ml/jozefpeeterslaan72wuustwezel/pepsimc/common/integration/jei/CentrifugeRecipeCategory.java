@@ -30,25 +30,21 @@ public class CentrifugeRecipeCategory implements IRecipeCategory<CentrifugeRecip
 	
 	@Override
 	public ResourceLocation getUid() {
-		// TODO Auto-generated method stub
 		return UID;
 	}
 
 	@Override
 	public Class<? extends CentrifugeRecipe> getRecipeClass() {
-		// TODO Auto-generated method stub
 		return CentrifugeRecipe.class;
 	}
 
 	@Override
 	public IDrawable getBackground() {
-		// TODO Auto-generated method stub
 		return this.bg;
 	}
 
 	@Override
 	public IDrawable getIcon() {
-		// TODO Auto-generated method stub
 		return this.icon;
 	}
 
@@ -56,16 +52,20 @@ public class CentrifugeRecipeCategory implements IRecipeCategory<CentrifugeRecip
 	public void setIngredients(CentrifugeRecipe recipe, IIngredients ingredients) {
 		ArrayList<ItemStack> result = new ArrayList<ItemStack>();
 		result.add(recipe.getResultItem());
+		result.add(recipe.getByproductItem());
+
 		ingredients.setInputIngredients(recipe.getIngredients());
 		ingredients.setOutputs(VanillaTypes.ITEM, result);
+
 		
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, CentrifugeRecipe recipe, IIngredients ingredients) {
-		//TODO
-		
-		recipeLayout.getItemStacks().init(0, true, 11, 14);
+	public void setRecipe(IRecipeLayout recipeLayout, CentrifugeRecipe recipe, IIngredients ingredients) {		
+		recipeLayout.getItemStacks().init(0, true, 79, 8);
+		recipeLayout.getItemStacks().init(1, false, 65, 52);
+		recipeLayout.getItemStacks().init(2, false, 93, 52);
+
 		recipeLayout.getItemStacks().set(ingredients);
 		
 	}

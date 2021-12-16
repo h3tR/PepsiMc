@@ -1,14 +1,14 @@
 {
-    "parent": "pepsimc:pepsimc/centrifuge",
+    "parent": "pepsimc:pepsimc/root",
     "display": {
       "icon": {
-        "item": "pepsimc:bottler"
+        "item": "pepsimc:centrifuge"
       },
       "title": {
-        "translate": "advancements.pepsimc.bottler.title"
+        "translate": "advancements.pepsimc.centrifuge.title"
       },
       "description": {
-        "translate": "advancements.pepsimc.bottler.description"
+        "translate": "advancements.pepsimc.centrifuge.description"
       },
       "frame": "task",
       "show_toast": true,
@@ -16,13 +16,13 @@
       "hidden": false
     },
     "criteria": {
-      "bottler": {
+      "centrifuge": {
         "trigger": "minecraft:inventory_changed",
         "conditions": {
           "items": [
             {
               "items": [
-                "pepsimc:bottler"
+                "pepsimc:centrifuge"
               ]
             }
           ]
@@ -31,7 +31,7 @@
     },
     "requirements": [
       [
-        "bottler"
+        "centrifuge"
       ]
     ]
   }

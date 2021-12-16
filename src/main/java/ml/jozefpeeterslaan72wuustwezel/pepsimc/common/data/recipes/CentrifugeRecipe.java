@@ -27,22 +27,29 @@ public class CentrifugeRecipe implements Recipe<Container>{
 
 	private final ResourceLocation id;
 	private final ItemStack out;
+	private final ItemStack extra;
+
 	private final NonNullList<Ingredient> in;
 	
-	public CentrifugeRecipe(ResourceLocation Id, ItemStack Out, NonNullList<Ingredient> In) {
+	public CentrifugeRecipe(ResourceLocation Id, ItemStack Out, ItemStack Byproduct,NonNullList<Ingredient> In) {
 		this.id = Id;
 		this.out = Out;
 		this.in = In;
+		this.extra = Byproduct;
 	}
 	
 	@Override
 	public boolean matches(Container inv, Level Win) {
-		return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1))&&in.get(2).test(inv.getItem(2));
+		return in.get(0).test(inv.getItem(0));
 	}
 	
 	@Override
 	public ItemStack getResultItem() {
 		return out.copy();
+	}
+	
+	public ItemStack getByproductItem() {
+		return extra.copy();
 	}
 	
 	
@@ -84,10 +91,11 @@ public class CentrifugeRecipe implements Recipe<Container>{
 		@Override
 		public CentrifugeRecipe fromJson(ResourceLocation Id, JsonObject json) {
 			ItemStack Out = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
+			ItemStack Extra = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "byproduct"));
 			JsonObject Extract = GsonHelper.getAsJsonObject(json, "extract");
 			NonNullList<Ingredient> In = NonNullList.withSize(1, Ingredient.EMPTY);
 			In.set(0, Ingredient.fromJson(Extract));
-			return new CentrifugeRecipe(Id, Out, In);
+			return new CentrifugeRecipe(Id, Out,Extra, In);
 		}
 
 		@Nullable
@@ -99,9 +107,10 @@ public class CentrifugeRecipe implements Recipe<Container>{
 				In.set(i, Ingredient.fromNetwork(buffer));
 			}
 			
+			ItemStack Extra = buffer.readItem();
 			ItemStack Out = buffer.readItem();
 
-			return new CentrifugeRecipe(Id, Out, In);
+			return new CentrifugeRecipe(Id, Out, Extra, In);
 		}
 
 		@Override
@@ -110,6 +119,7 @@ public class CentrifugeRecipe implements Recipe<Container>{
 			for(Ingredient ing : Recipe.getIngredients()) {
 				ing.toNetwork(buffer);
 			}
+			buffer.writeItemStack(Recipe.getByproductItem(), false);
 			buffer.writeItemStack(Recipe.getResultItem(), false);
 
 		}

@@ -2,7 +2,7 @@
 	"texture_size": [24, 24],
 	"textures": {
 		"0": "pepsimc:blocks/recycler",
-		"particle": "pepsimc:particle/temp_recyclerparticle"
+		"particle": "pepsimc:particles/temp_recyclerparticle"
 	},
 	"elements": [
 		{

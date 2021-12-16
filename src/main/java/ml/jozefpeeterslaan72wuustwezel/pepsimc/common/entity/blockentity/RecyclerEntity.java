@@ -55,8 +55,6 @@ public class RecyclerEntity extends ProcessingBlockEntity implements IAnimatable
 			});	
 			recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.RECYCLER_RECIPE, getSimpleInv(), world);
 		}
-		
-
 	}
 	
 	@Override
@@ -108,7 +106,6 @@ public class RecyclerEntity extends ProcessingBlockEntity implements IAnimatable
 	@Override
 	public void registerControllers(AnimationData data) {
 		 data.addAnimationController(new AnimationController(this, "controller", 0, this::predicate));
-		
 	}
 
 	@Override

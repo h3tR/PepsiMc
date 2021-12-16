@@ -1,0 +1,80 @@
+{
+    "parent": "pepsimc:pepsimc/pepsite_armor",
+    "display": {
+      "icon": {
+        "item": "pepsimc:powered_pepsite_chestplate"
+      },
+      "title": {
+        "translate": "advancements.pepsimc.powered_pepsite_armor.title"
+      },
+      "description": {
+        "translate": "advancements.pepsimc.powered_pepsite_armor.description"
+      },
+      "frame": "challenge",
+      "show_toast": true,
+      "announce_to_chat": true,
+      "hidden": false
+    },
+    "criteria": {
+      "powered_pepsite_chestplate": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "pepsimc:powered_pepsite_chestplate"
+              ]
+            }
+            
+          ]
+        }
+      },  
+      "pepsite_helmet": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "pepsimc:pepsite_helmet"
+              ]
+            }
+            
+          ]
+        }
+      },
+      "pepsite_boots": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "pepsimc:pepsite_boots"
+              ]
+            }
+            
+          ]
+        }
+      },
+      "pepsite_leggings": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "pepsimc:pepsite_leggings"
+              ]
+            }
+            
+          ]
+        }
+     }
+   	},
+    "requirements": [
+      [
+        "powered_pepsite_chestplate",
+        "pepsite_helmet",
+        "pepsite_boots",
+        "pepsite_leggings"
+      ]
+    ]
+  }

@@ -1,14 +1,14 @@
 {
-    "parent": "pepsimc:pepsimc/centrifuge",
+    "parent": "pepsimc:pepsimc/pepsite_shard",
     "display": {
       "icon": {
-        "item": "pepsimc:bottler"
+        "item": "pepsimc:shard_chestplate"
       },
       "title": {
-        "translate": "advancements.pepsimc.bottler.title"
+        "translate": "advancements.pepsimc.shard_armor.title"
       },
       "description": {
-        "translate": "advancements.pepsimc.bottler.description"
+        "translate": "advancements.pepsimc.shard_armor.description"
       },
       "frame": "task",
       "show_toast": true,
@@ -16,22 +16,26 @@
       "hidden": false
     },
     "criteria": {
-      "bottler": {
+      "shard_armor": {
         "trigger": "minecraft:inventory_changed",
         "conditions": {
           "items": [
             {
               "items": [
-                "pepsimc:bottler"
+                "pepsimc:shard_chestplate",
+                "pepsimc:shard_helmet",
+                "pepsimc:shard_boots",
+                "pepsimc:shard_leggings"
               ]
             }
+            
           ]
         }
       }
     },
     "requirements": [
       [
-        "bottler"
+        "shard_armor"
       ]
     ]
   }

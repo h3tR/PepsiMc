@@ -1,14 +1,14 @@
 {
-    "parent": "pepsimc:pepsimc/centrifuge",
+    "parent": "pepsimc:pepsimc/pepsi",
     "display": {
       "icon": {
-        "item": "pepsimc:bottler"
+        "item": "pepsimc:pepsite_shard"
       },
       "title": {
-        "translate": "advancements.pepsimc.bottler.title"
+        "translate": "advancements.pepsimc.pepsite_shard.title"
       },
       "description": {
-        "translate": "advancements.pepsimc.bottler.description"
+        "translate": "advancements.pepsimc.pepsite_shard.description"
       },
       "frame": "task",
       "show_toast": true,
@@ -16,13 +16,13 @@
       "hidden": false
     },
     "criteria": {
-      "bottler": {
+      "pepsite_shard": {
         "trigger": "minecraft:inventory_changed",
         "conditions": {
           "items": [
             {
               "items": [
-                "pepsimc:bottler"
+                "pepsimc:pepsite_shard"
               ]
             }
           ]
@@ -31,7 +31,7 @@
     },
     "requirements": [
       [
-        "bottler"
+        "pepsite_shard"
       ]
     ]
   }

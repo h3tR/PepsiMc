@@ -5,10 +5,10 @@
         "item": "pepsimc:coke_can"
       },
       "title": {
-        "translate": "advancements.pepsimc.sinner.title"
+        "translate": "advancements.pepsimc.coke.title"
       },
       "description": {
-        "translate": "advancements.pepsimc.sinner.description"
+        "translate": "advancements.pepsimc.coke.description"
       },
       "frame": "goal",
       "show_toast": true,
@@ -16,7 +16,7 @@
       "hidden": true
     },
     "criteria": {
-      "consumed_coke": {
+      "coke": {
         "trigger": "minecraft:consume_item",
         "conditions": { 
             "item": 
@@ -31,7 +31,7 @@
     },
     "requirements": [
       [
-        "consumed_coke"
+        "coke"
       ]
     ]
   }

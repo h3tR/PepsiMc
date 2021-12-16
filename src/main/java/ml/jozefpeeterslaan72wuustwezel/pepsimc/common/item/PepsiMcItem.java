@@ -1,8 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item;
 
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.animation.render.CentrifugeItemRender;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.animation.render.RecyclerItemRender;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.fluid.PepsiMcFluid;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.effect.PepsiMcEffect;

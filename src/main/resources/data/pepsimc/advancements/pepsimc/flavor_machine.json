@@ -1,5 +1,5 @@
 {
-    "parent": "pepsimc:pepsimc/sacred_drink",
+    "parent": "pepsimc:pepsimc/pepsi",
     "display": {
       "icon": {
         "item": "pepsimc:flavor_machine"

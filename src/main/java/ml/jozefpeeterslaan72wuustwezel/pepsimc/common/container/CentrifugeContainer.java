@@ -10,11 +10,11 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 
-public class CentrifugeContainer extends ProcessingTileContainer{
+public class CentrifugeContainer extends ProcessingTileContainer {
 	
 
-	private SlotItemHandler CatalystSlotItemHandler;
-	private SlotItemHandler UsedSlotItemHandler;
+	private SlotItemHandler InSlotItemHandler;
+	private SlotItemHandler ByProductSlotItemHandler;
 	private SlotItemHandler OutSlotItemHandler;
 
 
@@ -24,11 +24,12 @@ public class CentrifugeContainer extends ProcessingTileContainer{
 	
 	@Override
 	protected void addSlots(IItemHandler h) {
-		CatalystSlotItemHandler=new SlotItemHandler(h,0,80,9);
-		UsedSlotItemHandler=new SlotItemHandler(h,1,42,31);
-		OutSlotItemHandler=new SlotItemHandler(h,2,80,53);
-		addSlot(CatalystSlotItemHandler);
-		addSlot(UsedSlotItemHandler);
+		InSlotItemHandler=new SlotItemHandler(h,0,80,9);
+		OutSlotItemHandler=new SlotItemHandler(h,1,66,53);
+		ByProductSlotItemHandler=new SlotItemHandler(h,2,94,53);
+
+		addSlot(InSlotItemHandler);
+		addSlot(ByProductSlotItemHandler);
 		addSlot(OutSlotItemHandler);
 	}
 	
@@ -36,13 +37,13 @@ public class CentrifugeContainer extends ProcessingTileContainer{
 	public boolean slotHasItem(int slotIndex) {
 		switch (slotIndex) {
 			case 0:
-				return CatalystSlotItemHandler.hasItem();
+				return InSlotItemHandler.hasItem();
 		
 			case 1:
-				return UsedSlotItemHandler.hasItem();
+				return OutSlotItemHandler.hasItem();
 					
 			case 2:
-				return OutSlotItemHandler.hasItem();
+				return ByProductSlotItemHandler.hasItem();
 				
 			default:
 				return false;

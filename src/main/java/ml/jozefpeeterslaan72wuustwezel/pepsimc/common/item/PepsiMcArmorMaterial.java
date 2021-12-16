@@ -11,11 +11,11 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 @SuppressWarnings("deprecation")
 public enum PepsiMcArmorMaterial implements ArmorMaterial{
-	PEPSITE("pepsite", 50, new int[]{16, 16, 16, 16}, 5, SoundEvents.ARMOR_EQUIP_NETHERITE,
+	PEPSITE("pepsite", 150, new int[]{16, 16, 16, 16}, 5, SoundEvents.ARMOR_EQUIP_NETHERITE,
             4.0F, 0.2F, () -> {
         return Ingredient.of(PepsiMcItem.PEPSITE_SHARD.get());
     }),
-	COREPEPSITE("corepepsite", 50, new int[]{16, 16, 16, 16}, 5, SoundEvents.ARMOR_EQUIP_NETHERITE,
+	COREPEPSITE("corepepsite", 300, new int[]{16, 16, 16, 16}, 5, SoundEvents.ARMOR_EQUIP_NETHERITE,
             4.0F, 0.2F, () -> {
         return Ingredient.of(PepsiMcItem.PEPSITE_CORE.get());
     });

@@ -5,10 +5,10 @@
         "item": "pepsimc:token"
       },
       "title": {
-        "translate": "advancements.pepsimc.immortality.title"
+        "translate": "advancements.pepsimc.flavors.title"
       },
       "description": {
-        "translate": "advancements.pepsimc.immortality.description"
+        "translate": "advancements.pepsimc.flavors.description"
       },
       "frame": "challenge",
       "show_toast": true,

@@ -1,0 +1,41 @@
+{
+    "parent": "pepsimc:pepsimc/shard_armor",
+    "display": {
+      "icon": {
+        "item": "pepsimc:pepsite_chestplate"
+      },
+      "title": {
+        "translate": "advancements.pepsimc.pepsite_armor.title"
+      },
+      "description": {
+        "translate": "advancements.pepsimc.pepsite_armor.description"
+      },
+      "frame": "goal",
+      "show_toast": true,
+      "announce_to_chat": true,
+      "hidden": false
+    },
+    "criteria": {
+      "pepsite_armor": {
+        "trigger": "minecraft:inventory_changed",
+        "conditions": {
+          "items": [
+            {
+              "items": [
+                "pepsimc:pepsite_chestplate",
+                "pepsimc:pepsite_helmet",
+                "pepsimc:pepsite_boots",
+                "pepsimc:pepsite_leggings"
+              ]
+            }
+            
+          ]
+        }
+      }
+    },
+    "requirements": [
+      [
+        "pepsite_armor"
+      ]
+    ]
+  }
