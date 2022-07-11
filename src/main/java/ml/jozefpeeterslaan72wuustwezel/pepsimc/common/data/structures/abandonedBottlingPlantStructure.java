@@ -1,31 +1,33 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.structures;
 
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NoiseColumn;
-import net.minecraft.core.Vec3i;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.Registry;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.structures.JigsawPlacement;
+import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.structure.PoolElementStructurePiece;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
-import net.minecraft.world.level.levelgen.structure.StructurePiece;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
-import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
+import net.minecraft.world.level.levelgen.structure.StructureType;
+import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
+import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
-public class abandonedBottlingPlantStructure extends StructureFeature<NoneFeatureConfiguration>{
+import java.util.Optional;
+
+public class abandonedBottlingPlantStructure {/*extends Structure{
 
 	public abandonedBottlingPlantStructure() {
 		super(NoneFeatureConfiguration.CODEC);
@@ -111,6 +113,6 @@ public class abandonedBottlingPlantStructure extends StructureFeature<NoneFeatur
 	 
 	 
      
-
+*/
 
 }

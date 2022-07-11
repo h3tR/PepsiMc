@@ -5,7 +5,9 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -18,8 +20,8 @@ public class CentrifugeContainer extends ProcessingTileContainer {
 	private SlotItemHandler OutSlotItemHandler;
 
 
-	public CentrifugeContainer(int ID, Level world, BlockPos pos, Inventory inventory, Player player) {
-		super(ID, world, pos, inventory, player, PepsiMcContainer.CENTRIFUGE_CONTAINER.get(), ID, PepsiMcBlock.CENTRIFUGE.get());
+	public CentrifugeContainer(int ID, Inventory inv, BlockEntity Entity)  {
+		super(ID, inv, Entity, new SimpleContainerData(3), PepsiMcContainer.CENTRIFUGE_CONTAINER.get(), PepsiMcBlock.CENTRIFUGE.get());
 	}
 	
 	@Override

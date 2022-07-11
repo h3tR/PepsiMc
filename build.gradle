@@ -14,7 +14,7 @@ version = '2.0.0'
 group = 'ml.jozefpeeterslaan72wuustwezel.pepsimc'
 archivesBaseName = 'pepsimc'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(16) // Mojang ships Java 8 to end users, so your mod should target Java 8.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Mojang ships Java 8 to end users, so your mod should target Java 8.
 
 repositories {
     maven {
@@ -106,15 +106,17 @@ dependencies {
 
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // JEI API
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // JEI
-    implementation fg.deobf("software.bernie.geckolib:geckolib-${mc_version}-forge:${geckolib_version}")// Geckolib
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${mc_version}:${geckolib_version}")
+
 }
 
 jar {
     manifest {
         attributes([
-                "Specification-Title": "tutorialmod",
+                "Specification-Title": "pepsimc",
                 "Specification-Vendor": "RMI",
                 "Specification-Version": "1", // We are version 1 of ourselves
                 "Implementation-Title": project.name,

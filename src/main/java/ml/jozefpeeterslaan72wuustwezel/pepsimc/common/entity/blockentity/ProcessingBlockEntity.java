@@ -3,6 +3,11 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import org.apache.logging.log4j.LogManager;
 
 import net.minecraft.core.BlockPos;
@@ -41,9 +46,9 @@ public class ProcessingBlockEntity extends BlockEntity{
 	
 	
 	@Override
-	public CompoundTag save(CompoundTag nbt) {
+	public void saveAdditional(CompoundTag nbt) {
 		nbt.put("inv", itemHandler.serializeNBT());
-		return super.save(nbt);
+		super.saveAdditional(nbt);
 	}
 	
 	public boolean slotHasItem(int index) {
@@ -89,7 +94,6 @@ public class ProcessingBlockEntity extends BlockEntity{
 	
 	@Override
 	public BlockEntityType<?> getType() {
-		// TODO Auto-generated method stub
 		return type;
 	}
 }

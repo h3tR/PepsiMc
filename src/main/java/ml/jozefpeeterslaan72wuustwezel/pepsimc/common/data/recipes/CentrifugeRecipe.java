@@ -1,30 +1,20 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes;
 
 
+import com.google.gson.JsonObject;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-import com.google.gson.JsonObject;
-
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
-import net.minecraft.world.Container;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.ShapedRecipe;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistryEntry;
-
-public class CentrifugeRecipe implements Recipe<Container>{
-	static ResourceLocation TYPE_ID = new ResourceLocation("pepsimc", "centrifuge");
-
+public class CentrifugeRecipe implements Recipe<SimpleContainer>{
 	private final ResourceLocation id;
 	private final ItemStack out;
 	private final ItemStack extra;
@@ -39,7 +29,7 @@ public class CentrifugeRecipe implements Recipe<Container>{
 	}
 	
 	@Override
-	public boolean matches(Container inv, Level Win) {
+	public boolean matches(SimpleContainer inv, Level Win) {
 		return in.get(0).test(inv.getItem(0));
 	}
 	
@@ -54,7 +44,7 @@ public class CentrifugeRecipe implements Recipe<Container>{
 	
 	
 	@Override
-	public ItemStack assemble(Container inv) {
+	public ItemStack assemble(SimpleContainer inv) {
 		return out;
 	}
 	
@@ -77,16 +67,15 @@ public class CentrifugeRecipe implements Recipe<Container>{
 	public ItemStack getToastSymbol() {
 		return new ItemStack(PepsiMcBlock.CENTRIFUGE.get());
 	}
-	
+
 	public static class CentrifugeRecipeType implements RecipeType<CentrifugeRecipe>{
-		@Override
-		public String toString() {
-			return CentrifugeRecipe.TYPE_ID.toString();
-		}
+		private CentrifugeRecipeType() { }
+		public static final String ID = "centrifuge";
+		public static final CentrifugeRecipe.CentrifugeRecipeType INSTANCE = new CentrifugeRecipe.CentrifugeRecipeType();
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CentrifugeRecipe>{
-
+	public static class Serializer implements RecipeSerializer<CentrifugeRecipe>{
+		public static final CentrifugeRecipe.Serializer INSTANCE = new CentrifugeRecipe.Serializer();
 
 		@Override
 		public CentrifugeRecipe fromJson(ResourceLocation Id, JsonObject json) {
@@ -102,10 +91,8 @@ public class CentrifugeRecipe implements Recipe<Container>{
 		@Override
 		public CentrifugeRecipe fromNetwork(ResourceLocation Id, FriendlyByteBuf buffer) {
 			NonNullList<Ingredient> In = NonNullList.withSize(buffer.readInt(), Ingredient.EMPTY);
-			
-			for(int i = 0;i<In.size(); i++) {
-				In.set(i, Ingredient.fromNetwork(buffer));
-			}
+
+			In.replaceAll(ignored -> Ingredient.fromNetwork(buffer));
 			
 			ItemStack Extra = buffer.readItem();
 			ItemStack Out = buffer.readItem();
@@ -128,19 +115,16 @@ public class CentrifugeRecipe implements Recipe<Container>{
 
 	@Override
 	public boolean canCraftInDimensions(int p_43999_, int p_44000_) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		// TODO Auto-generated method stub
-		return Registry.RECIPE_TYPE.getOptional(TYPE_ID).get();
+		return CentrifugeRecipeType.INSTANCE;
 	}
 	
 	@Override
 	public boolean isSpecial() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	

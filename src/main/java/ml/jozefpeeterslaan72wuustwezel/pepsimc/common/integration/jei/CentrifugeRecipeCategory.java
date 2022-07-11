@@ -5,19 +5,16 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.integration.jei;
 import java.util.ArrayList;
 
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.CentrifugeRecipe;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
-public class CentrifugeRecipeCategory implements IRecipeCategory<CentrifugeRecipe>{
+public class CentrifugeRecipeCategory {/*implements IRecipeCategory<CentrifugeRecipe>{/*
 	public static final ResourceLocation UID = new ResourceLocation("pepsimc","centrifuge");
 	private final IDrawable bg;
 	private final IDrawable icon;
@@ -75,6 +72,6 @@ public class CentrifugeRecipeCategory implements IRecipeCategory<CentrifugeRecip
 		// TODO Auto-generated method stub
 		return new TranslatableComponent("block.pepsimc.centrifuge");
 	}
-	
+	*/
 	
 }

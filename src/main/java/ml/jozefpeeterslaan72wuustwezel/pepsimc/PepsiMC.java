@@ -17,6 +17,9 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.villagerPO
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.PepsimcNetwork;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.soundevent.PepsiMcSoundEvent;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world.PepsiMcConfiguredFeature;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world.PepsiMcPlacedFeature;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world.biomemodifiers.PepsiMcBiomeModifiers;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world.structure.PepsiMcStructure;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
@@ -37,19 +40,21 @@ public class PepsiMC {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
     	PepsiMcItem.register(bus);
     	PepsiMcBlock.register(bus);
-    	PepsiMcFluid.register(bus);
+    	//PepsiMcFluid.register(bus);
     	PepsiMcBlockEntity.register(bus);
     	PepsiMcContainer.register(bus);
     	PepsiMcRecipeType.register(bus);
-    	PepsiMcStructure.register(bus);
-    	PepsiMcProfession.register(bus);
+		PepsiMcPlacedFeature.register(bus);
+		PepsiMcBiomeModifiers.register(bus);
+    	//PepsiMcStructure.register(bus);
+    	//PepsiMcProfession.register(bus);
     	PepsiMcSoundEvent.register(bus);
-    	PepsiMcVillagerPOI.register(bus);
+    	//PepsiMcVillagerPOI.register(bus);
     	PepsiMcEffect.register(bus);
     	bus.addListener(this::setup);
 		bus.addListener(this::doClientStuff);
 		GeckoLib.initialize();
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, PepsiMcTrades::loadTrades);
+        //MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, PepsiMcTrades::loadTrades);
         MinecraftForge.EVENT_BUS.register(this);
 
 	}
@@ -57,20 +62,20 @@ public class PepsiMC {
 	 private void setup(final FMLCommonSetupEvent event) {
 		 PepsimcNetwork.init();
 	        event.enqueueWork(() -> {
-	            PepsiMcStructure.setup();
-	            PepsiStore.init();
+	            //PepsiMcStructure.setup();
+	            //PepsiStore.init();
 	        });
 	    }
 	 
 	 
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		event.enqueueWork(()->{
-			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.PEPSI_FLUID_BLOCK.get(), RenderType.translucent());
+			/*ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.PEPSI_FLUID_BLOCK.get(), RenderType.translucent());
 			ItemBlockRenderTypes.setRenderLayer(PepsiMcFluid.PEPSI_FLUID.get(), RenderType.translucent());
 			ItemBlockRenderTypes.setRenderLayer(PepsiMcFluid.PEPSI_FLOW.get(), RenderType.translucent());
 			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.PEPSI_MAX_FLUID_BLOCK.get(), RenderType.translucent());
 			ItemBlockRenderTypes.setRenderLayer(PepsiMcFluid.PEPSI_MAX_FLUID.get(), RenderType.translucent());
-			ItemBlockRenderTypes.setRenderLayer(PepsiMcFluid.PEPSI_MAX_FLOW.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(PepsiMcFluid.PEPSI_MAX_FLOW.get(), RenderType.translucent());*/
 			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.STEVIA_PLANT.get(), RenderType.cutout());
 			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.STEVIA_CROP.get(), RenderType.cutout());
 		});

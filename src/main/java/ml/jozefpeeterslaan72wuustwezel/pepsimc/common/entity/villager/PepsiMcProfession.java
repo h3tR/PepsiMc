@@ -9,11 +9,11 @@ import com.google.common.collect.ImmutableSet;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class PepsiMcProfession {
+public class PepsiMcProfession {/*
 	public static final DeferredRegister<VillagerProfession> VILLAGER_PROFESSION = DeferredRegister.create(ForgeRegistries.PROFESSIONS, "pepsimc");
 
 	public static final RegistryObject<VillagerProfession> BOTTLING_OPERATOR = 
@@ -26,6 +26,6 @@ public class PepsiMcProfession {
 	
 	public static void register(IEventBus bus) {
 		VILLAGER_PROFESSION.register(bus);
-	}
+	}*/
 
 }

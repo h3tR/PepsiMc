@@ -19,8 +19,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
 
-@JeiPlugin
-public class PepsiMcJEI implements IModPlugin{
+//@JeiPlugin
+public class PepsiMcJEI{/* implements IModPlugin{
 
 	@Override
 	public ResourceLocation getPluginUid() {
@@ -66,5 +66,5 @@ public class PepsiMcJEI implements IModPlugin{
 	    	registration.addRecipeCatalyst(new ItemStack(PepsiMcItem.CENTRIFUGE.get()),CentrifugeRecipeCategory.UID);
 
 	    	IModPlugin.super.registerRecipeCatalysts(registration);
-	    }
+	    }*/
 }

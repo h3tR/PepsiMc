@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.gson.JsonObject;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
@@ -25,7 +26,7 @@ public class FruitAdditionModifier extends LootModifier {
 	}
 
 	@Override
-	protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
+	protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
 		generatedLoot.add(new ItemStack(this.addition,this.count));
 		return generatedLoot;
 	}
@@ -34,9 +35,9 @@ public class FruitAdditionModifier extends LootModifier {
 
         @Override
         public FruitAdditionModifier read(ResourceLocation name, JsonObject object, LootItemCondition[] conditionsIn) {
-        	Item addition = ForgeRegistries.ITEMS.getValue(new ResourceLocation((GsonHelper.getAsString(object,"addition"))));
+        	Item addition = (GsonHelper.convertToItem(object,"addition"));
             int count = GsonHelper.getAsInt(object,"count");
-            return new FruitAdditionModifier(conditionsIn,addition,count);// addition,count);
+            return new FruitAdditionModifier(conditionsIn,addition,count);
         }
 
         @Override

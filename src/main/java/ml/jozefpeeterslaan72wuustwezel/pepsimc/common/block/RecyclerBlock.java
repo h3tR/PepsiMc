@@ -29,13 +29,12 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.network.NetworkHooks;
 
-public class RecyclerBlock extends HorizontalFacedBlock implements EntityBlock{
+public class RecyclerBlock extends HorizontalFacedBaseEntityBlock{
 			
 	private static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	
@@ -89,11 +88,10 @@ public class RecyclerBlock extends HorizontalFacedBlock implements EntityBlock{
 	@Override
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player plr, InteractionHand hand, BlockHitResult RT) {
 		if(!world.isClientSide) {
-			BlockEntity TE = world.getBlockEntity(pos);
+			BlockEntity Entity = world.getBlockEntity(pos);
 				if(!plr.isCrouching()) {
-					if(TE instanceof RecyclerEntity) {
-						MenuProvider containerProvider = createContainerProvider(world, pos);
-						NetworkHooks.openGui(((ServerPlayer)plr), containerProvider, pos);
+					if(Entity instanceof RecyclerEntity) {
+						NetworkHooks.openGui(((ServerPlayer)plr), (RecyclerEntity)Entity, pos);
 					} else {
 						throw new IllegalStateException("Container provider is missing.");
 					}
@@ -103,32 +101,17 @@ public class RecyclerBlock extends HorizontalFacedBlock implements EntityBlock{
 	}
 
 
-	
-	private MenuProvider createContainerProvider(Level world, BlockPos pos) {
-		return new MenuProvider() {
-			@Override
-			public Component getDisplayName() {
-				return new TranslatableComponent("screen.pepsimc.recycler");
-			}
-
-			@Override
-			public AbstractContainerMenu createMenu(int i, Inventory inv, Player plr) {
-				return new RecyclerContainer(i, world, pos, inv, plr);
-			}
-		};  
-	}
-
 	@Override
 	public RenderShape getRenderShape(BlockState p_60550_) {
 		return RenderShape.ENTITYBLOCK_ANIMATED;
 	}
-	
+
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return PepsiMcBlockEntity.RECYCLER_TILE.get().create(pos, state);
+		return new RecyclerEntity(pos, state);
 	}
 
-	@Override 
+	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos p, CollisionContext context) {
 		 switch (state.getValue(FACING)) {
 		 	case NORTH:

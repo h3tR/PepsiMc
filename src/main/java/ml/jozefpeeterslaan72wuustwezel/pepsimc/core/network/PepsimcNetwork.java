@@ -2,8 +2,8 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.packet.ProcessingCraftPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fmllegacy.network.NetworkRegistry;
-import net.minecraftforge.fmllegacy.network.simple.SimpleChannel;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
 
 public class PepsimcNetwork {
 	public static final String VERSION = "1.3";

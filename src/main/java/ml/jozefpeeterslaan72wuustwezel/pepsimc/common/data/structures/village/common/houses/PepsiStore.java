@@ -14,12 +14,10 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.dirty_workaround.LegacySJP
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.world.level.levelgen.feature.structures.StructureTemplatePool;
-import net.minecraft.world.level.levelgen.feature.structures.StructurePoolElement;
 import net.minecraft.data.worldgen.ProcessorLists;
 import net.minecraft.data.worldgen.VillagePools;
 
-public class PepsiStore {
+public class PepsiStore {/*
 	public static void init() {
 		VillagePools.bootstrap();
 		for(String biome : new String[]{"plains", "snowy", "savanna", "desert", "taiga"}) {
@@ -55,5 +53,5 @@ public class PepsiStore {
 		ResourceLocation name = old.getName();
 
 		Registry.register(BuiltinRegistries.TEMPLATE_POOL, pool, new StructureTemplatePool(pool, name, newPieceList));
-	}
+	}*/
 }

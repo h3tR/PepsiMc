@@ -17,6 +17,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcProfession;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world.structure.PepsiMcStructure;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -31,16 +32,13 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.core.NonNullList;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.village.VillagerTradesEvent;
-import net.minecraftforge.fmlserverevents.FMLServerAboutToStartEvent;
 
-public class PepsiMcTrades {
+public class PepsiMcTrades {/*
 	  private static final Map<VillagerProfession, Int2ObjectMap<ItemListing[]>> PEPSIMC_TRADES = new HashMap<>();
 	    
 	    public static final Map<VillagerProfession, Int2ObjectMap<VillagerTrades.ItemListing[]>> TRADES = 
@@ -192,7 +190,7 @@ public class PepsiMcTrades {
 	                 ItemStack itemstack = MapItem.create(serverworld, blockpos.getX(), blockpos.getZ(), (byte)2, true, true);
 	                 MapItem.renderBiomePreviewMap(serverworld, itemstack);
 	                 MapItemSavedData.addTargetDecoration(itemstack, blockpos, "+", this.destinationType);
-	                 itemstack.setHoverName(new TranslatableComponent("filled_map." + this.destination.getFeatureName().toLowerCase(Locale.ROOT)));
+	                 itemstack.setHoverName(Component.translatable("filled_map." + this.destination.getFeatureName().toLowerCase(Locale.ROOT)));
 	                 return new MerchantOffer(new ItemStack(Items.EMERALD, this.emeraldCost), new ItemStack(Items.COMPASS), itemstack, this.maxUses, this.villagerXp, 0.2F);
 	              } else {
 	                 return null;
@@ -203,5 +201,5 @@ public class PepsiMcTrades {
 	    
 	    private static Int2ObjectMap<VillagerTrades.ItemListing[]> toIntMap(ImmutableMap<Integer, VillagerTrades.ItemListing[]> p_221238_0_) {
 	        return new Int2ObjectOpenHashMap<>(p_221238_0_);
-	     }
+	     }*/
 }

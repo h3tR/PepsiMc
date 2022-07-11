@@ -5,20 +5,20 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.integration.jei;
 import java.util.ArrayList;
 
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
-public class BottlerRecipeCategory implements IRecipeCategory<BottlerRecipe>{
+public class BottlerRecipeCategory {/*implements IRecipeCategory<BottlerRecipe>{/*
 	public static final ResourceLocation UID = new ResourceLocation("pepsimc","bottler");
 	private final IDrawable bg;
 	private final IDrawable icon;
@@ -53,6 +53,11 @@ public class BottlerRecipeCategory implements IRecipeCategory<BottlerRecipe>{
 	}
 
 	@Override
+	public void setRecipe(IRecipeLayoutBuilder builder, BottlerRecipe recipe, IFocusGroup focuses) {
+
+	}
+
+	@Override
 	public void setIngredients(BottlerRecipe recipe, IIngredients ingredients) {
 		ArrayList<ItemStack> result = new ArrayList<ItemStack>();
 		result.add(recipe.getResultItem());
@@ -75,10 +80,15 @@ public class BottlerRecipeCategory implements IRecipeCategory<BottlerRecipe>{
 	}
 
 	@Override
+	public RecipeType<BottlerRecipe> getRecipeType() {
+		return null;
+	}
+
+	@Override
 	public Component getTitle() {
 		// TODO Auto-generated method stub
 		return new TranslatableComponent("block.pepsimc.bottler");
 	}
 	
-	
+	*/
 }

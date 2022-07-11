@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import com.google.gson.JsonObject;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
-import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -17,14 +17,11 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistryEntry;
+import org.jetbrains.annotations.NotNull;
 
-public class FlavoringRecipe implements Recipe<Container>{
-	static ResourceLocation TYPE_ID = new ResourceLocation("pepsimc", "flavor");
-
+public class FlavoringRecipe implements Recipe<SimpleContainer>{
 	private final ResourceLocation id;
 	private final ItemStack out;
 	private final NonNullList<Ingredient> in;
@@ -34,52 +31,42 @@ public class FlavoringRecipe implements Recipe<Container>{
 		this.out = Out;
 		this.in = In;
 	}
-	
+
 	@Override
-	public boolean matches(Container inv, Level Win) {
-		//TODO
-		return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1));
-	}
-	
-	@Override
-	public ItemStack getResultItem() {
+	public @NotNull ItemStack getResultItem() {
 		return out.copy();
 	}
-	
-	
-	@Override
-	public ItemStack assemble(Container inv) {
-		return out;
-	}
+
 	
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public @NotNull RecipeSerializer<?> getSerializer() {
 		return PepsiMcRecipeType.FLAVORING_SERIALIZER.get();
 	}
 	
 	@Override
-	public NonNullList<Ingredient> getIngredients() {
+	public @NotNull NonNullList<Ingredient> getIngredients() {
 		return in;
 	}
 	
 	@Override
-	public ResourceLocation getId() {
+	public @NotNull ResourceLocation getId() {
 		return id;
 	}
 	
 	@Override
-	public ItemStack getToastSymbol() {
+	public @NotNull ItemStack getToastSymbol() {
 		return new ItemStack(PepsiMcBlock.FLAVOR_MACHINE.get());
 	}
 	
 	public static class FlavoringRecipeType implements RecipeType<FlavoringRecipe>{
-		@Override
-		public String toString() {
-			return FlavoringRecipe.TYPE_ID.toString();
-		}
+		private FlavoringRecipeType() { }
+		public static final String ID = "flavor";
+		public static final FlavoringRecipeType INSTANCE = new FlavoringRecipeType();
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<FlavoringRecipe>{
+	public static class Serializer implements RecipeSerializer<FlavoringRecipe>{
+		public static final Serializer INSTANCE = new Serializer();
+
 		@Override
 		public FlavoringRecipe fromJson(ResourceLocation Id, JsonObject json) {
 			ItemStack Out = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
@@ -96,10 +83,8 @@ public class FlavoringRecipe implements Recipe<Container>{
 		@Override
 		public FlavoringRecipe fromNetwork(ResourceLocation Id, FriendlyByteBuf buffer) {
 			NonNullList<Ingredient> In = NonNullList.withSize(buffer.readInt(), Ingredient.EMPTY);
-			
-			for(int i = 0;i<In.size(); i++) {
-				In.set(i, Ingredient.fromNetwork(buffer));
-			}
+
+			In.replaceAll(ignored -> Ingredient.fromNetwork(buffer));
 			
 			ItemStack Out = buffer.readItem();
 
@@ -119,13 +104,23 @@ public class FlavoringRecipe implements Recipe<Container>{
 	}
 
 	@Override
+	public boolean matches(SimpleContainer inv, Level __) {
+		return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1));
+	}
+
+	@Override
+	public ItemStack assemble(SimpleContainer __) {
+		return out;
+	}
+
+	@Override
 	public boolean canCraftInDimensions(int p_43999_, int p_44000_) {
 		return true;
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		return Registry.RECIPE_TYPE.getOptional(TYPE_ID).get();
+		return FlavoringRecipeType.INSTANCE;
 	}
 	
 	@Override

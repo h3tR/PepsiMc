@@ -28,7 +28,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public abstract class PepsiFluid extends FlowingFluid {
+public abstract class PepsiFluid /*extends FlowingFluid */{/*
 	   public Fluid getFlowing() {
 	      return PepsiMcFluid.PEPSI_FLOW.get();
 	   }
@@ -119,5 +119,5 @@ public abstract class PepsiFluid extends FlowingFluid {
 	      public boolean isSource(FluidState p_207193_1_) {
 	         return true;
 	      }
-	   }
+	   }*/
 	}

@@ -1,5 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container;
 
+import net.minecraft.world.inventory.ContainerData;
 import org.apache.logging.log4j.LogManager;
 
 import net.minecraft.world.entity.player.Player;
@@ -18,37 +19,36 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class ProcessingTileContainer extends AbstractContainerMenu{
-	
-	public final BlockEntity TE;
-	private final IItemHandler inv;
-	public Block block;
-	public int Size;
-	
-	public ProcessingTileContainer(int ID, Level world, BlockPos pos, Inventory inventory, Player player,MenuType<?> container, int Size, Block block) {
-		super(container, ID);
-		this.TE = world.getBlockEntity(pos);
-		this.inv = new InvWrapper(inventory);
-		this.block = block;
-		this.Size = Size;
-		layoutPlayerInventorySlots(8, 86);
-		
-		if(TE !=null) {
-			TE.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h->{
-				addSlots(h);
-			});
-		}
-		
-	}
-	
+
+    public final BlockEntity Entity;
+    private final Block block;
+    private final IItemHandler inv;
+	private final ContainerData dat;
+    public ProcessingTileContainer(int ID, Inventory inv, BlockEntity Entity, ContainerData dat,MenuType<?> container,Block block) {
+        super(container, ID);
+        this.Entity = Entity;
+        this.inv = new InvWrapper(inv);
+        this.dat = dat;
+        this.block = block;
+        layoutPlayerInventorySlots(8, 86);
+
+        if(Entity !=null) {
+            Entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h->{
+                addSlots(h);
+            });
+        }
+
+    }
+
 	public boolean slotHasItem(int slotIndex) {
 		return inv.getStackInSlot(slotIndex) != null;
 	}
-	
+
 	protected void addSlots(IItemHandler h) {
 		LogManager.getLogger().warn("addSlots method called outside super class");
 	}
-	
-	
+
+
     private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {
         for (int i = 0; i < amount; i++) {
             addSlot(new SlotItemHandler(handler, index, x, y));
@@ -74,7 +74,7 @@ public class ProcessingTileContainer extends AbstractContainerMenu{
         topRow += 58;
         addSlotRange(inv, 0, leftCol, topRow, 9, 18);
     }
-   
+
   /*  private static final int HOTBAR_SLOT_COUNT = 9;
     private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
     private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
@@ -84,13 +84,13 @@ public class ProcessingTileContainer extends AbstractContainerMenu{
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;*/
 
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {     
-    	return ItemStack.EMPTY;        
+    public ItemStack quickMoveStack(Player playerIn, int index) {
+    	return ItemStack.EMPTY;
     }
 
     @Override
     public boolean stillValid(Player playerIn) {
-        return super.stillValid(ContainerLevelAccess.create(TE.getLevel(), TE.getBlockPos()), playerIn,block);
+        return super.stillValid(ContainerLevelAccess.create(Entity.getLevel(), Entity.getBlockPos()), playerIn,block);
     }
 
     

@@ -5,19 +5,16 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.integration.jei;
 import java.util.ArrayList;
 
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.RecyclerRecipe;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
-public class RecyclerRecipeCategory implements IRecipeCategory<RecyclerRecipe>{
+public class RecyclerRecipeCategory {/*implements IRecipeCategory<RecyclerRecipe>{
 	public static final ResourceLocation UID = new ResourceLocation("pepsimc","recycler");
 	private final IDrawable bg;
 	private final IDrawable icon;
@@ -75,6 +72,6 @@ public class RecyclerRecipeCategory implements IRecipeCategory<RecyclerRecipe>{
 	public Component getTitle() {
 		return new TranslatableComponent("block.pepsimc.recycler");
 	}
-	
+	*/
 	
 }

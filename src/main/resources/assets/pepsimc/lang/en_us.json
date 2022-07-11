@@ -48,7 +48,6 @@
 	"item.pepsimc.pepsi_man_tune_disc.desc":"James Shimoji - Pepsi Man Theme Song",
 	"item.pepsimc.stevia_seeds":"Stevia Rebaudiana Seeds",
 	
-		//blocks
 	"block.pepsimc.pepsite_block":"Block of Pepsite",
 	"block.pepsimc.raw_pepsite_block":"Block of Raw Pepsite",
 	"block.pepsimc.deepslate_pepsite_ore":"Deepslate Pepsite Ore",
@@ -71,7 +70,6 @@
 	"item.pepsimc.pepsite_boots":"Pepsite Boots",
 	"item.pepsimc.pepsite_core":"Pepsite Core",
 	
-		//Misc
 	"entity.minecraft.villager.pepsimc.bottling_plant_operator":"Bottling Plant Operator",
 	"fluid.pepsimc.pepsi_fluid":"Pepsi",
 	"fluid.pepsimc.pepsi_max_fluid":"Pepsi Max",

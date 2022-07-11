@@ -2,12 +2,11 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block;
 
 import java.util.stream.Stream;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.CentrifugeContainer;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.CentrifugeEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.RecyclerEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,11 +14,8 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
@@ -29,13 +25,11 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.network.NetworkHooks;
 
-public class CentrifugeBlock extends HorizontalFacedBlock implements EntityBlock{
+public class CentrifugeBlock extends HorizontalFacedBaseEntityBlock{
 			
 	private static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
@@ -115,38 +109,22 @@ public class CentrifugeBlock extends HorizontalFacedBlock implements EntityBlock
 	         super.onRemove(state, level, pos, secondState, what);
 	      }
 	   }
-	
+
 	@Override
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player plr, InteractionHand hand, BlockHitResult RT) {
 		if(!world.isClientSide) {
-			BlockEntity TE = world.getBlockEntity(pos);
-				if(!plr.isCrouching()) {
-					if(TE instanceof CentrifugeEntity) {
-						MenuProvider containerProvider = createContainerProvider(world, pos);
-						NetworkHooks.openGui(((ServerPlayer)plr), containerProvider, pos);
-					} else {
-						throw new IllegalStateException("Container provider is missing.");
-					}
+			BlockEntity Entity = world.getBlockEntity(pos);
+			if(!plr.isCrouching()) {
+				if(Entity instanceof CentrifugeEntity) {
+					NetworkHooks.openGui(((ServerPlayer)plr), (CentrifugeEntity)Entity, pos);
+				} else {
+					throw new IllegalStateException("Container provider is missing.");
 				}
+			}
 		}
 		return InteractionResult.SUCCESS;
 	}
 
-
-	
-	private MenuProvider createContainerProvider(Level world, BlockPos pos) {
-		return new MenuProvider() {
-			@Override
-			public Component getDisplayName() {
-				return new TranslatableComponent("screen.pepsimc.centrifuge");
-			}
-
-			@Override
-			public AbstractContainerMenu createMenu(int i, Inventory inv, Player plr) {
-				return new CentrifugeContainer(i, world, pos, inv, plr);
-			}
-		};  
-	}
 
 	@Override
 	public RenderShape getRenderShape(BlockState p_60550_) {
@@ -155,7 +133,7 @@ public class CentrifugeBlock extends HorizontalFacedBlock implements EntityBlock
 	
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return PepsiMcBlockEntity.CENTRIFUGE_TILE.get().create(pos, state);
+		return new CentrifugeEntity(pos, state);
 	}
 
 	@Override 

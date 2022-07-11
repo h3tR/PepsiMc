@@ -8,8 +8,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.CentrifugeContainer;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.CentrifugeRecipe;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.CentrifugeEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.ProcessingBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -23,9 +23,12 @@ import net.minecraft.network.chat.Component;
 
 
 public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeContainer>{
-
+	private final ProcessingBlockEntity Entity;
+	private final Level world;
 	public CentrifugeScreen(CentrifugeContainer CC, Inventory plrInv, Component Text) {
 		super(CC, plrInv, Text);
+		Entity = (CentrifugeEntity)this.getMenu().Entity;
+		world = Entity.getLevel();
 	}
 
 	private static final ResourceLocation GUI = new ResourceLocation("pepsimc","textures/gui/centrifuge_gui.png");
@@ -33,7 +36,7 @@ public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeContaine
 	public void containerTick() {
 	      super.containerTick();
 	      if (hasRecipe()) {
-				this.addRenderableWidget(new ConfirmButton(this.getGuiLeft()+77,this.getGuiTop()+28,176,0,18,15,this.menu.TE.getBlockPos(),GUI));
+				this.addRenderableWidget(new ConfirmButton(this.getGuiLeft()+77,this.getGuiTop()+28,176,0,18,15,Entity.getBlockPos(),GUI));
 	      } else {
 	  		this.clearWidgets();
 	      }
@@ -82,29 +85,25 @@ public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeContaine
 		return null;
     }
 	private boolean hasRecipe() {
-		CentrifugeEntity TE = (CentrifugeEntity) CentrifugeScreen.this.menu.TE;
-        Level world = TE.getLevel();
-        SimpleContainer inv = new SimpleContainer(TE.itemHandler.getSlots());
+        SimpleContainer inv = new SimpleContainer(Entity.itemHandler.getSlots());
         
-		for(int i=0;i<TE.itemHandler.getSlots();i++) {
-			inv.setItem(i, TE.itemHandler.getStackInSlot(i));
+		for(int i=0;i<Entity.itemHandler.getSlots();i++) {
+			inv.setItem(i, Entity.itemHandler.getStackInSlot(i));
 		}
 		
-		Optional<CentrifugeRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.CENTRIFUGE_RECIPE, inv, world);
+		Optional<CentrifugeRecipe> recipe = world.getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, inv, world);
 
 		return recipe.isPresent();
 		
 	}
 	private ItemStack RecipeResult() {
-		CentrifugeEntity TE = (CentrifugeEntity) CentrifugeScreen.this.menu.TE;
-        Level world = TE.getLevel();
-        SimpleContainer inv = new SimpleContainer(TE.itemHandler.getSlots());
+        SimpleContainer inv = new SimpleContainer(Entity.itemHandler.getSlots());
         ArrayList<ItemStack> result = new ArrayList<ItemStack>();
-		for(int i=0;i<TE.itemHandler.getSlots();i++) {
-			inv.setItem(i, TE.itemHandler.getStackInSlot(i));
+		for(int i=0;i<Entity.itemHandler.getSlots();i++) {
+			inv.setItem(i, Entity.itemHandler.getStackInSlot(i));
 		}
 		
-		Optional<CentrifugeRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.CENTRIFUGE_RECIPE, inv, world);
+		Optional<CentrifugeRecipe> recipe = world.getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, inv, world);
 		recipe.ifPresent(i->{
 			result.add(i.getResultItem());
 		});
@@ -112,15 +111,13 @@ public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeContaine
 		
 	}
 	private ItemStack RecipeByproduct() {
-		CentrifugeEntity TE = (CentrifugeEntity) CentrifugeScreen.this.menu.TE;
-        Level world = TE.getLevel();
-        SimpleContainer inv = new SimpleContainer(TE.itemHandler.getSlots());
+        SimpleContainer inv = new SimpleContainer(Entity.itemHandler.getSlots());
         ArrayList<ItemStack> result = new ArrayList<ItemStack>();
-		for(int i=0;i<TE.itemHandler.getSlots();i++) {
-			inv.setItem(i, TE.itemHandler.getStackInSlot(i));
+		for(int i=0;i<Entity.itemHandler.getSlots();i++) {
+			inv.setItem(i, Entity.itemHandler.getStackInSlot(i));
 		}
 		
-		Optional<CentrifugeRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.CENTRIFUGE_RECIPE, inv, world);
+		Optional<CentrifugeRecipe> recipe = world.getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, inv, world);
 		recipe.ifPresent(i->{
 			result.add(i.getByproductItem());
 		});

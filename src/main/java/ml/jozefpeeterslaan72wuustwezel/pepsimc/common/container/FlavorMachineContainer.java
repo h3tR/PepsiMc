@@ -2,10 +2,13 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container;
 
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -18,8 +21,8 @@ public class FlavorMachineContainer extends ProcessingTileContainer{
 	private SlotItemHandler OutSlotItemHandler;
 
 
-	public FlavorMachineContainer(int ID, Level world, BlockPos pos, Inventory inventory, Player player) {
-		super(ID, world, pos, inventory, player, PepsiMcContainer.FLAVOR_MACHINE_CONTAINER.get(), ID, PepsiMcBlock.FLAVOR_MACHINE.get());
+	public FlavorMachineContainer(int ID, Inventory inv, BlockEntity Entity) {
+		super(ID, inv, Entity, new SimpleContainerData(3), PepsiMcContainer.FLAVOR_MACHINE_CONTAINER.get(), PepsiMcBlock.FLAVOR_MACHINE.get());
 	}
 	
 	@Override
