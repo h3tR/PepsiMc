@@ -479,12 +479,12 @@ public class PepsiMcItem {
 	public static final RegistryObject<Item> EMPTY_CAN = ITEMS.register("empty_can", ()-> new Item(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
 	
-	public static final RegistryObject<Item> PEPSI_FLUID_BUCKET = ITEMS.register("pepsi_bucket", ()-> new BucketItem(()->PepsiMcFluid.PEPSI_FLUID.get(),new Item.Properties()
+	public static final RegistryObject<Item> PEPSI_FLUID_BUCKET = ITEMS.register("pepsi_bucket", ()-> new /*Bucket*/Item(/*()->PepsiMcFluid.PEPSI_FLUID.get(),*/new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
-			.stacksTo(16))); 
-	public static final RegistryObject<Item> PEPSI_MAX_FLUID_BUCKET = ITEMS.register("pepsi_max_bucket", ()-> new BucketItem(()->PepsiMcFluid.PEPSI_MAX_FLUID.get(),new Item.Properties()
+			/*.stacksTo(16)*/));
+	public static final RegistryObject<Item> PEPSI_MAX_FLUID_BUCKET = ITEMS.register("pepsi_max_bucket", ()-> new /*Bucket*/Item(/*()->PepsiMcFluid.PEPSI_MAX_FLUID.get(),*/new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
-			.stacksTo(16))); 
+			/*.stacksTo(16)*/));
 	
 	public static final RegistryObject<Item> PEPSITE_SHARD = ITEMS.register("pepsite_shard", ()-> new Item(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
