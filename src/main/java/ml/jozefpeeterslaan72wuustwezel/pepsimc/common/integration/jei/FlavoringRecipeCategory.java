@@ -17,7 +17,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
-public class FlavoringRecipeCategory implements IRecipeCategory<FlavoringRecipe>{
+public class FlavoringRecipeCategory {/*implements IRecipeCategory<FlavoringRecipe>{
+//TODO
 	public static final ResourceLocation UID = new ResourceLocation("pepsimc","flavor");
 	private final IDrawable bg;
 	private final IDrawable icon;
@@ -67,8 +68,8 @@ public class FlavoringRecipeCategory implements IRecipeCategory<FlavoringRecipe>
 
 	@Override
 	public Component getTitle() {
-		return new TranslatableComponent("block.pepsimc.flavor_machine");
+		return Component.translatable("block.pepsimc.flavor_machine");
 	}
-	
+	*/
 	
 }

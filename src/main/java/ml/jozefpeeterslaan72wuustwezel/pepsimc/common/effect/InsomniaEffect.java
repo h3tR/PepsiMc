@@ -13,7 +13,6 @@ public class InsomniaEffect extends MobEffect {
 
 	protected InsomniaEffect() {
 		super(MobEffectCategory.HARMFUL, 22222222);
-		// TODO Auto-generated constructor stub
 	}
 	@SubscribeEvent
 	public static void SleepEvent(PlayerSleepInBedEvent event) {

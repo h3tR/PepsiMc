@@ -47,7 +47,7 @@ public class PepsiteShardArmorItem extends Item {
 	         BlockPos blockpos1 = blockpos.relative(direction);
 	         if (lvl.mayInteract(plr, blockpos) && plr.mayUseItemAt(blockpos1, direction, itemstack)) {
 	        	BlockState blockstate1 = lvl.getBlockState(blockpos);
-	               if (blockstate1.getBlock().getTags().contains(new ResourceLocation("pepsimc", "shard_mendable"))) {
+	               if (blockstate1.getBlock().defaultBlockState().getTags().toList().contains(new ResourceLocation("pepsimc", "shard_mendable"))) {
 	                	  plr.awardStat(Stats.ITEM_USED.get(this));
 	                	  if(!lvl.isClientSide) {
 	                		  EntityType.LIGHTNING_BOLT.spawn((ServerLevel)lvl, null, null, plr, blockpos, MobSpawnType.TRIGGERED, true, true);

@@ -5,17 +5,25 @@ import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.BottlerMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.Nullable;
 
-public class BottlerEntity extends ProcessingBlockEntity{
+public class BottlerEntity extends ProcessingBlockEntity implements MenuProvider {
 	
 	public BottlerEntity(BlockPos pos, BlockState state) {
 		super(PepsiMcBlockEntity.BOTTLER_TILE.get(), pos, state);
@@ -23,7 +31,7 @@ public class BottlerEntity extends ProcessingBlockEntity{
 
 	@Override
 	public void process(Level world) {
-		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.BOTTLER_RECIPE, getSimpleInv(), world);
+		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, getSimpleInv(), world);
 
 		recipe.ifPresent(iRecipe->{
 			itemHandler.extractItem(0, 1, false);
@@ -38,7 +46,7 @@ public class BottlerEntity extends ProcessingBlockEntity{
 	
 	@Override
 	public void processAll(Level world) {
-		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.BOTTLER_RECIPE, getSimpleInv(), world);
+		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, getSimpleInv(), world);
 		while (recipe.isPresent()) {
 			recipe.ifPresent(iRecipe->{
 				itemHandler.extractItem(0, 1, false);
@@ -48,7 +56,7 @@ public class BottlerEntity extends ProcessingBlockEntity{
 				itemHandler.insertItem(4, new ItemStack(Items.BUCKET), false);
 				setChanged();
 			});	
-			recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.BOTTLER_RECIPE, getSimpleInv(), world);
+			recipe = world.getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, getSimpleInv(), world);
 		}
 		
 
@@ -72,10 +80,10 @@ public class BottlerEntity extends ProcessingBlockEntity{
 			@Override
 			public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
 				switch (slot) {
-					case 0: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "bottling_container"));
-					case 1: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "bottling_label"));
-					case 2: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "bottling_liquid"));
-					case 3: return stack.getItem().getTags().contains(new ResourceLocation("pepsimc", "bottled_liquid"));
+					case 0: return stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_CONTAINER);
+					case 1: return stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_LABEL);
+					case 2: return stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_LIQUID);
+					case 3: return stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLED_LIQUID);
 					case 4: return stack.getItem() == Items.BUCKET;
 
 					default:
@@ -93,5 +101,16 @@ public class BottlerEntity extends ProcessingBlockEntity{
 				return super.insertItem(slot, stack, simulate);
 			}
 		};
+	}
+	@Override
+	public Component getDisplayName() {
+		//TODO
+		return new TranslatableComponent("block.pepsimc.recycler");
+	}
+
+	@Nullable
+	@Override
+	public AbstractContainerMenu createMenu(int id, Inventory inv, Player plr) {
+		return new BottlerMenu(id,inv,this);
 	}
 }

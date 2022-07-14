@@ -72,13 +72,15 @@ public class BottlerRecipe implements Recipe<Container>{
 	}
 	
 	public static class BottlerRecipeType implements RecipeType<BottlerRecipe>{
+		private BottlerRecipeType() { }
+		public static final BottlerRecipeType INSTANCE = new BottlerRecipeType();
 		@Override
 		public String toString() {
 			return BottlerRecipe.TYPE_ID.toString();
 		}
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<BottlerRecipe>{
+	public static class Serializer  extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<BottlerRecipe>{
 
 
 		@Override
@@ -122,19 +124,16 @@ public class BottlerRecipe implements Recipe<Container>{
 
 	@Override
 	public boolean canCraftInDimensions(int p_43999_, int p_44000_) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		// TODO Auto-generated method stub
-		return Registry.RECIPE_TYPE.getOptional(TYPE_ID).get();
+		return BottlerRecipeType.INSTANCE;
 	}
 	
 	@Override
 	public boolean isSpecial() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	

@@ -2,8 +2,9 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block;
 
 import java.util.stream.Stream;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.CentrifugeContainer;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.CentrifugeMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.CentrifugeEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.FlavorMachineEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
@@ -29,9 +30,8 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 
@@ -115,38 +115,22 @@ public class CentrifugeBlock extends HorizontalFacedBlock implements EntityBlock
 	         super.onRemove(state, level, pos, secondState, what);
 	      }
 	   }
-	
+
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player plr, InteractionHand hand, BlockHitResult RT) {
-		if(!world.isClientSide) {
-			BlockEntity TE = world.getBlockEntity(pos);
-				if(!plr.isCrouching()) {
-					if(TE instanceof CentrifugeEntity) {
-						MenuProvider containerProvider = createContainerProvider(world, pos);
-						NetworkHooks.openGui(((ServerPlayer)plr), containerProvider, pos);
-					} else {
-						throw new IllegalStateException("Container provider is missing.");
-					}
-				}
+	public InteractionResult use(BlockState state, Level world, BlockPos pos,
+								 Player plr, InteractionHand hand, BlockHitResult hit) {
+		if (!world.isClientSide()) {
+			BlockEntity entity = world.getBlockEntity(pos);
+			if(entity instanceof CentrifugeEntity) {
+				NetworkHooks.openGui(((ServerPlayer)plr), (CentrifugeEntity)entity, pos);
+			} else {
+				throw new IllegalStateException("Container provider is missing!");
+			}
 		}
-		return InteractionResult.SUCCESS;
+
+		return InteractionResult.sidedSuccess(world.isClientSide());
 	}
 
-
-	
-	private MenuProvider createContainerProvider(Level world, BlockPos pos) {
-		return new MenuProvider() {
-			@Override
-			public Component getDisplayName() {
-				return new TranslatableComponent("screen.pepsimc.centrifuge");
-			}
-
-			@Override
-			public AbstractContainerMenu createMenu(int i, Inventory inv, Player plr) {
-				return new CentrifugeContainer(i, world, pos, inv, plr);
-			}
-		};  
-	}
 
 	@Override
 	public RenderShape getRenderShape(BlockState p_60550_) {

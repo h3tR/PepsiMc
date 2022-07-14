@@ -38,12 +38,11 @@ public class ProcessingBlockEntity extends BlockEntity{
 		itemHandler.deserializeNBT(nbt.getCompound("inv"));
 		super.load(nbt);
 	}
-	
-	
+
 	@Override
-	public CompoundTag save(CompoundTag nbt) {
+	protected void saveAdditional(CompoundTag nbt) {
 		nbt.put("inv", itemHandler.serializeNBT());
-		return super.save(nbt);
+		super.saveAdditional(nbt);
 	}
 	
 	public boolean slotHasItem(int index) {

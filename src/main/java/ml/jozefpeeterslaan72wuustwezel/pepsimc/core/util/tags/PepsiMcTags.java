@@ -1,5 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags;
 
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
@@ -7,41 +8,40 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.Tags;
 
 public class PepsiMcTags {
 	public static class Items{
 		
-		public static final Tags.IOptionalNamedTag<Item> BOTTLING_LIQUID = createTag("bottling_liquid");
-		public static final Tags.IOptionalNamedTag<Item> BOTTLING_CONTAINER = createTag("bottling_container");
-		public static final Tags.IOptionalNamedTag<Item> BOTTLING_LABEL = createTag("bottling_label");
-		public static final Tags.IOptionalNamedTag<Item> BOTTLED_LIQUID = createTag("bottled_liquid");
+		public static final TagKey<Item> BOTTLING_LIQUID = createTag("bottling_liquid");
+		public static final TagKey<Item> BOTTLING_CONTAINER = createTag("bottling_container");
+		public static final TagKey<Item> BOTTLING_LABEL = createTag("bottling_label");
+		public static final TagKey<Item> BOTTLED_LIQUID = createTag("bottled_liquid");
 
-		public static final Tags.IOptionalNamedTag<Item> RECYCLABLE = createTag("recyclable");
-		public static final Tags.IOptionalNamedTag<Item> RECYCLED = createTag("recycled");
-		public static final Tags.IOptionalNamedTag<Item> RECYCLING_CATALYST = createTag("recycling_catalyst");
+		public static final TagKey<Item> RECYCLABLE = createTag("recyclable");
+		public static final TagKey<Item> RECYCLED = createTag("recycled");
+		public static final TagKey<Item> RECYCLING_CATALYST = createTag("recycling_catalyst");
 
-		public static final Tags.IOptionalNamedTag<Item> FLAVOR = createTag("flavor");
-		public static final Tags.IOptionalNamedTag<Item> FLAVORED = createTag("flavored");
+		public static final TagKey<Item> FLAVOR = createTag("flavor");
+		public static final TagKey<Item> FLAVORED = createTag("flavored");
 		
-		public static final Tags.IOptionalNamedTag<Item> EXTRACTED = createTag("extracted");
-		public static final Tags.IOptionalNamedTag<Item> EXTRACTION_BYPRODUCT = createTag("extraction_byproduct");
-
-		
-		public static final Tags.IOptionalNamedTag<Fluid> SHARD_MENDABLE = createFluidTag("shard_mendable");
+		public static final TagKey<Item> EXTRACTED = createTag("extracted");
+		public static final TagKey<Item> EXTRACTION_BYPRODUCT = createTag("extraction_byproduct");
 
 		
-		private static Tags.IOptionalNamedTag<Item> createTag(String name){
-			return ItemTags.createOptional(new ResourceLocation("pepsimc", name));
+		public static final TagKey<Fluid> SHARD_MENDABLE = createFluidTag("shard_mendable");
+
+		
+		private static TagKey<Item> createTag(String name){
+			return ItemTags.create(new ResourceLocation("pepsimc", name));
 		}
 		
 		@SuppressWarnings("unused")
-		private static Tags.IOptionalNamedTag<Block> createBlockTag(String name){
-			return BlockTags.createOptional(new ResourceLocation("pepsimc", name));
+		private static TagKey<Block> createBlockTag(String name){
+			return BlockTags.create(new ResourceLocation("pepsimc", name));
 		}
 		
-		private static Tags.IOptionalNamedTag<Fluid> createFluidTag(String name){
-			return FluidTags.createOptional(new ResourceLocation("pepsimc", name));
+		private static TagKey<Fluid> createFluidTag(String name){
+			return FluidTags.create(new ResourceLocation("pepsimc", name));
 		}
 
 	}

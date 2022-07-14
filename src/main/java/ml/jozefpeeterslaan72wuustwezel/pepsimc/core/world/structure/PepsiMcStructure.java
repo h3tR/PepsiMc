@@ -6,18 +6,16 @@ import java.util.Map;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.structures.abandonedBottlingPlantStructure;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
-import net.minecraft.world.level.levelgen.StructureSettings;
-import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class PepsiMcStructure {
+public class PepsiMcStructure {/*
+//TODO
 	public static final DeferredRegister<StructureFeature<?>> STRUCTURES = 
 			DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES,"pepsimc");
 
@@ -44,7 +42,7 @@ public class PepsiMcStructure {
 	* Basically, it adds land at the base of the structure like it does for Villages and Outposts.
 	* Doesn't work well on structure that have pieces stacked vertically or change in heights.
 	*
-	*/
+	*//*
 		if (transformSurroundingLand) {
 
 			StructureFeature.NOISE_AFFECTING_FEATURES =
@@ -66,7 +64,7 @@ public class PepsiMcStructure {
 	* We also use our entry in DimensionStructuresSettings.DEFAULTS in WorldEvent.Load as well.
 	*
 	* DEFAULTS requires AccessTransformer  (See resources/META-INF/accesstransformer.cfg)
-	*/
+	*//*
 		StructureSettings.DEFAULTS =
 				ImmutableMap.<StructureFeature<?>, StructureFeatureConfiguration>builder()
 				.putAll(StructureSettings.DEFAULTS)
@@ -82,7 +80,7 @@ public class PepsiMcStructure {
 	* won't add to other worldtypes or dimensions (like amplified or Nether).
 	* So yeah, don't do DimensionSettings.BUILTIN_OVERWORLD. Use the NOISE_GENERATOR_SETTINGS loop
 	* below instead if you must.
-	*/
+	*//*
 		BuiltinRegistries.NOISE_GENERATOR_SETTINGS.entrySet().forEach(settings -> {
 
 			Map<StructureFeature<?>, StructureFeatureConfiguration> structureMap = 
@@ -92,7 +90,7 @@ public class PepsiMcStructure {
 		* I take no chances myself. You never know what another mods does...
 		*
 		* structureConfig requires AccessTransformer  (See resources/META-INF/accesstransformer.cfg)
-		*/
+		*//*
 			if (structureMap instanceof ImmutableMap) {
 				Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap = new HashMap<>(structureMap);
 				tempMap.put(structure, structureSeparationSettings);
@@ -107,5 +105,5 @@ public class PepsiMcStructure {
 	public static void register(IEventBus bus) {
 
 		STRUCTURES.register(bus);
-	}
+	}*/
 }

@@ -2,8 +2,9 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block;
 
 import java.util.stream.Stream;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.BottlerContainer;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.BottlerMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.BottlerEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.FlavorMachineEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.Block;
@@ -27,12 +28,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.network.NetworkHooks;
 
 public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 	
@@ -100,36 +100,22 @@ public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 	         super.onRemove(state, level, pos, secondState, p_196243_5_);
 	      }
 	   }
-	
-	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player plr, InteractionHand hand, BlockHitResult RT) {
-		if(!world.isClientSide) {
-			BlockEntity TE = world.getBlockEntity(pos);
-				if(!plr.isCrouching()) {
-					if(TE instanceof BottlerEntity) {
-						MenuProvider containerProvider = createContainerProvider(world, pos);
-						NetworkHooks.openGui(((ServerPlayer)plr), containerProvider, pos );
-					} else {
-						throw new IllegalStateException("Container provider is missing.");
-					}
-				}
-		}
-		return InteractionResult.SUCCESS;
-	}
-	
-	private MenuProvider createContainerProvider(Level world, BlockPos pos) {
-		return new MenuProvider() {
-			@Override
-			public Component getDisplayName() {
-				return new TranslatableComponent("screen.pepsimc.bottler");
-			}
 
-			@Override
-			public AbstractContainerMenu createMenu(int i, Inventory inv, Player plr) {
-				return new BottlerContainer(i, world, pos, inv, plr);
+	@Override
+	public InteractionResult use(BlockState state, Level world, BlockPos pos,
+								 Player plr, InteractionHand hand, BlockHitResult hit) {
+		if (!world.isClientSide()) {
+			BlockEntity entity = world.getBlockEntity(pos);
+			if(entity instanceof BottlerEntity) {
+				NetworkHooks.openGui(((ServerPlayer)plr), (BottlerEntity)entity, pos);
+			} else {
+				throw new IllegalStateException("Container provider is missing!");
 			}
-		};  
+		}
+
+		return InteractionResult.sidedSuccess(world.isClientSide());
 	}
+
 	
 	@Override 
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos p, CollisionContext context) {

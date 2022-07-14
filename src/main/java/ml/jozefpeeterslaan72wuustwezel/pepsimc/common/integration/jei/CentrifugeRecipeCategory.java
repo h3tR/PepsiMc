@@ -17,13 +17,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
-public class CentrifugeRecipeCategory implements IRecipeCategory<CentrifugeRecipe>{
+public class CentrifugeRecipeCategory {/*implements IRecipeCategory<CentrifugeRecipe>{
+	//TODO
 	public static final ResourceLocation UID = new ResourceLocation("pepsimc","centrifuge");
 	private final IDrawable bg;
 	private final IDrawable icon;
 
 	public CentrifugeRecipeCategory(IGuiHelper helper) {
-		//TODO
 		this.bg = helper.createDrawable(new ResourceLocation("pepsimc","textures/gui/jei/centrifuge_gui.png"), 0,0, 176, 85);
 		this.icon = helper.createDrawableIngredient(new ItemStack(PepsiMcBlock.CENTRIFUGE.get()));
 	}
@@ -72,9 +72,8 @@ public class CentrifugeRecipeCategory implements IRecipeCategory<CentrifugeRecip
 
 	@Override
 	public Component getTitle() {
-		// TODO Auto-generated method stub
-		return new TranslatableComponent("block.pepsimc.centrifuge");
+		return Component.translatable("block.pepsimc.centrifuge");
 	}
 	
-	
+	*/
 }

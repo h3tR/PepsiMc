@@ -17,7 +17,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
-public class RecyclerRecipeCategory implements IRecipeCategory<RecyclerRecipe>{
+public class RecyclerRecipeCategory {/*implements IRecipeCategory<RecyclerRecipe>{
+	//TODO
 	public static final ResourceLocation UID = new ResourceLocation("pepsimc","recycler");
 	private final IDrawable bg;
 	private final IDrawable icon;
@@ -29,25 +30,21 @@ public class RecyclerRecipeCategory implements IRecipeCategory<RecyclerRecipe>{
 	
 	@Override
 	public ResourceLocation getUid() {
-		// TODO Auto-generated method stub
 		return UID;
 	}
 
 	@Override
 	public Class<? extends RecyclerRecipe> getRecipeClass() {
-		// TODO Auto-generated method stub
 		return RecyclerRecipe.class;
 	}
 
 	@Override
 	public IDrawable getBackground() {
-		// TODO Auto-generated method stub
 		return this.bg;
 	}
 
 	@Override
 	public IDrawable getIcon() {
-		// TODO Auto-generated method stub
 		return this.icon;
 	}
 
@@ -62,7 +59,6 @@ public class RecyclerRecipeCategory implements IRecipeCategory<RecyclerRecipe>{
 
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, RecyclerRecipe recipe, IIngredients ingredients) {
-		//TODO
 		recipeLayout.getItemStacks().init(0, true, 79, 8);
 		recipeLayout.getItemStacks().init(1, true, 41, 30);
 		recipeLayout.getItemStacks().init(2, false, 79, 52);
@@ -73,8 +69,8 @@ public class RecyclerRecipeCategory implements IRecipeCategory<RecyclerRecipe>{
 
 	@Override
 	public Component getTitle() {
-		return new TranslatableComponent("block.pepsimc.recycler");
+		return Component.translatable("block.pepsimc.recycler");
 	}
 	
-	
+*/
 }

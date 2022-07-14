@@ -6,23 +6,19 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.FlavorMachineScreen
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.RecyclerScreen;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.fluid.PepsiMcFluid;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.PepsiMcContainer;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.PepsiMcMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.structures.village.common.houses.PepsiStore;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.effect.PepsiMcEffect;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcProfession;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.trades.PepsiMcTrades;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.villagerPOI.PepsiMcVillagerPOI;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.PepsimcNetwork;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.soundevent.PepsiMcSoundEvent;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world.structure.PepsiMcStructure;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -39,9 +35,9 @@ public class PepsiMC {
     	PepsiMcBlock.register(bus);
     	PepsiMcFluid.register(bus);
     	PepsiMcBlockEntity.register(bus);
-    	PepsiMcContainer.register(bus);
+    	PepsiMcMenu.register(bus);
     	PepsiMcRecipeType.register(bus);
-    	PepsiMcStructure.register(bus);
+    	//PepsiMcStructure.register(bus);
     	PepsiMcProfession.register(bus);
     	PepsiMcSoundEvent.register(bus);
     	PepsiMcVillagerPOI.register(bus);
@@ -49,7 +45,7 @@ public class PepsiMC {
     	bus.addListener(this::setup);
 		bus.addListener(this::doClientStuff);
 		GeckoLib.initialize();
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, PepsiMcTrades::loadTrades);
+        //MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, PepsiMcTrades::loadTrades);
         MinecraftForge.EVENT_BUS.register(this);
 
 	}
@@ -57,8 +53,8 @@ public class PepsiMC {
 	 private void setup(final FMLCommonSetupEvent event) {
 		 PepsimcNetwork.init();
 	        event.enqueueWork(() -> {
-	            PepsiMcStructure.setup();
-	            PepsiStore.init();
+	           // PepsiMcStructure.setup();
+	            //PepsiStore.init();
 	        });
 	    }
 	 
@@ -74,10 +70,10 @@ public class PepsiMC {
 			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.STEVIA_PLANT.get(), RenderType.cutout());
 			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.STEVIA_CROP.get(), RenderType.cutout());
 		});
-		MenuScreens.register(PepsiMcContainer.BOTTLER_CONTAINER.get(), BottlerScreen::new);
-		MenuScreens.register(PepsiMcContainer.RECYCLER_CONTAINER.get(), RecyclerScreen::new);
-		MenuScreens.register(PepsiMcContainer.FLAVOR_MACHINE_CONTAINER.get(), FlavorMachineScreen::new);
-		MenuScreens.register(PepsiMcContainer.CENTRIFUGE_CONTAINER.get(), CentrifugeScreen::new);
+		MenuScreens.register(PepsiMcMenu.BOTTLER_MENU.get(), BottlerScreen::new);
+		MenuScreens.register(PepsiMcMenu.RECYCLER_MENU.get(), RecyclerScreen::new);
+		MenuScreens.register(PepsiMcMenu.FLAVOR_MACHINE_MENU.get(), FlavorMachineScreen::new);
+		MenuScreens.register(PepsiMcMenu.CENTRIFUGE_MENU.get(), CentrifugeScreen::new);
 
 	}
 

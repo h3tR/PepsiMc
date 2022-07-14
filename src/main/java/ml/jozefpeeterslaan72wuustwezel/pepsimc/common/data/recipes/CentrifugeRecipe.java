@@ -79,12 +79,14 @@ public class CentrifugeRecipe implements Recipe<Container>{
 	}
 	
 	public static class CentrifugeRecipeType implements RecipeType<CentrifugeRecipe>{
+		private CentrifugeRecipeType() { }
+		public static final CentrifugeRecipe.CentrifugeRecipeType INSTANCE = new CentrifugeRecipe.CentrifugeRecipeType();
 		@Override
 		public String toString() {
 			return CentrifugeRecipe.TYPE_ID.toString();
 		}
 	}
-	
+
 	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CentrifugeRecipe>{
 
 
@@ -128,19 +130,16 @@ public class CentrifugeRecipe implements Recipe<Container>{
 
 	@Override
 	public boolean canCraftInDimensions(int p_43999_, int p_44000_) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		// TODO Auto-generated method stub
-		return Registry.RECIPE_TYPE.getOptional(TYPE_ID).get();
+		return CentrifugeRecipeType.INSTANCE;
 	}
 	
 	@Override
 	public boolean isSpecial() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	

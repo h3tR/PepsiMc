@@ -72,6 +72,8 @@ public class RecyclerRecipe implements Recipe<Container>{
 	}
 	
 	public static class RecyclerRecipeType implements RecipeType<RecyclerRecipe>{
+		private RecyclerRecipeType() { }
+		public static final RecyclerRecipe.RecyclerRecipeType INSTANCE = new RecyclerRecipe.RecyclerRecipeType();
 		@Override
 		public String toString() {
 			return RecyclerRecipe.TYPE_ID.toString();
@@ -120,19 +122,16 @@ public class RecyclerRecipe implements Recipe<Container>{
 
 	@Override
 	public boolean canCraftInDimensions(int p_43999_, int p_44000_) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		// TODO Auto-generated method stub
-		return Registry.RECIPE_TYPE.getOptional(TYPE_ID).get();
+		return RecyclerRecipeType.INSTANCE;
 	}
 	
 	@Override
 	public boolean isSpecial() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	

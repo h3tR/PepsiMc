@@ -38,7 +38,6 @@ import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.village.VillagerTradesEvent;
-import net.minecraftforge.fmlserverevents.FMLServerAboutToStartEvent;
 
 public class PepsiMcTrades {
 	  private static final Map<VillagerProfession, Int2ObjectMap<ItemListing[]>> PEPSIMC_TRADES = new HashMap<>();
@@ -58,8 +57,8 @@ public class PepsiMcTrades {
 	        	}, 3, new VillagerTrades.ItemListing[]{
 	            		new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_LABEL.get(), 10, 2, 15),
 	            		new ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_LABEL.get(), 10, 2, 15),
-	            		new EmeraldForItemsTrade(PepsiMcItem.STEVIA.get(), 10, 2, 15),
-	            		new EmeraldForMapTrade(32, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get(), MapDecoration.Type.TARGET_POINT, 1, 15)
+	            		new EmeraldForItemsTrade(PepsiMcItem.STEVIA.get(), 10, 2, 15)//,
+	            		//TODO new EmeraldForMapTrade(32, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get(), MapDecoration.Type.TARGET_POINT, 1, 15)
 
 	        	}, 4, new VillagerTrades.ItemListing[]{
 	            		new ItemsForEmeraldsTrade(PepsiMcItem.CARAMEL.get(), 1, 8, 12),
@@ -102,10 +101,10 @@ public class PepsiMcTrades {
 	            VillagerTrades.TRADES.put(prof, newTrades); 
 	    }
 		
-	    public static void loadTrades(FMLServerAboutToStartEvent e)
+	    /*public static void loadTrades(FMLServerAboutToStartEvent e)
 	    {
 	        postVillagerEvent(PepsiMcProfession.BOTTLING_OPERATOR.get());
-	    }
+	    }*/
 	    
 	    static class EmeraldForItemsTrade implements VillagerTrades.ItemListing {
 	        private final Item item;
@@ -181,8 +180,9 @@ public class PepsiMcTrades {
 	           this.villagerXp = Xp;
 	        }
 
+			//TODO
 	        @Nullable
-	        public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
+	        public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {/*
 	           if (!(p_221182_1_.level instanceof ServerLevel)) {
 	              return null;
 	           } else {
@@ -192,13 +192,14 @@ public class PepsiMcTrades {
 	                 ItemStack itemstack = MapItem.create(serverworld, blockpos.getX(), blockpos.getZ(), (byte)2, true, true);
 	                 MapItem.renderBiomePreviewMap(serverworld, itemstack);
 	                 MapItemSavedData.addTargetDecoration(itemstack, blockpos, "+", this.destinationType);
-	                 itemstack.setHoverName(new TranslatableComponent("filled_map." + this.destination.getFeatureName().toLowerCase(Locale.ROOT)));
+	                 itemstack.setHoverName(Component.translatable("filled_map." + this.destination.getFeatureName().toLowerCase(Locale.ROOT)));
 	                 return new MerchantOffer(new ItemStack(Items.EMERALD, this.emeraldCost), new ItemStack(Items.COMPASS), itemstack, this.maxUses, this.villagerXp, 0.2F);
 	              } else {
 	                 return null;
 	              }
-	           }
-	        }
+	           }*/
+				return null;
+			}
 	     }
 	    
 	    private static Int2ObjectMap<VillagerTrades.ItemListing[]> toIntMap(ImmutableMap<Integer, VillagerTrades.ItemListing[]> p_221238_0_) {

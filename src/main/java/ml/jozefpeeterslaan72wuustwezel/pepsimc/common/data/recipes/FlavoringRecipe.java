@@ -73,13 +73,15 @@ public class FlavoringRecipe implements Recipe<Container>{
 	}
 	
 	public static class FlavoringRecipeType implements RecipeType<FlavoringRecipe>{
+		private FlavoringRecipeType() { }
+		public static final FlavoringRecipe.FlavoringRecipeType INSTANCE = new FlavoringRecipe.FlavoringRecipeType();
 		@Override
 		public String toString() {
 			return FlavoringRecipe.TYPE_ID.toString();
 		}
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<FlavoringRecipe>{
+	public static class Serializer  extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<FlavoringRecipe>{
 		@Override
 		public FlavoringRecipe fromJson(ResourceLocation Id, JsonObject json) {
 			ItemStack Out = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
@@ -125,7 +127,7 @@ public class FlavoringRecipe implements Recipe<Container>{
 
 	@Override
 	public RecipeType<?> getType() {
-		return Registry.RECIPE_TYPE.getOptional(TYPE_ID).get();
+		return FlavoringRecipeType.INSTANCE;
 	}
 	
 	@Override

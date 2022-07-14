@@ -42,7 +42,7 @@ public class ConfirmButton extends AbstractButton{
 	            j += this.width * 2;
 	         } else if (this.selected) {
 	            j += this.width * 1;
-	         } else if (this.isHovered()) {
+	         } else if (this.isHoveredOrFocused()) {
 	            j += this.width * 3;
 	         }
 	         this.blit(stack, this.x, this.y, j, i, this.width, this.height);

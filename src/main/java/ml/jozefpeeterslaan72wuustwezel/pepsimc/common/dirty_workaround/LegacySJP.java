@@ -9,15 +9,14 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.levelgen.feature.structures.StructurePoolElementType;
-import net.minecraft.world.level.levelgen.feature.structures.StructureTemplatePool;
-import net.minecraft.world.level.levelgen.feature.structures.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnoreProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
-public class LegacySJP extends SinglePoolElement {
+public class LegacySJP {
+	//TODO
+	/*extends SinglePoolElement {
 	   public static final Codec<LegacySJP> CODEC = RecordCodecBuilder.create((p_236833_0_) -> {
 	      return p_236833_0_.group(templateCodec(), processorsCodec(), projectionCodec()).apply(p_236833_0_, LegacySJP::new);
 	   });
@@ -40,4 +39,5 @@ public class LegacySJP extends SinglePoolElement {
 	   public String toString() {
 	      return "LegacySingle[" + this.template + "]";
 	   }
+	}*/
 	}

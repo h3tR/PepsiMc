@@ -6,7 +6,7 @@ import java.util.Optional;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.BottlerContainer;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.BottlerMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.BottlerEntity;
@@ -22,10 +22,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 
-public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
-
-	public BottlerScreen(BottlerContainer BC, Inventory plrInv, Component Text) {
-		super(BC, plrInv, Text);
+public class BottlerScreen extends AbstractContainerScreen<BottlerMenu>{
+	private final BottlerEntity entity;
+	private final Level world;
+	public BottlerScreen(BottlerMenu Menu, Inventory plrInv, Component Text) {
+		super(Menu, plrInv, Text);
+		this.entity = (BottlerEntity) Menu.entity;
+		this.world = this.entity.getLevel();
 	}
 
 	private static final ResourceLocation GUI = new ResourceLocation("pepsimc","textures/gui/bottler_gui.png");
@@ -34,7 +37,7 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 	protected void containerTick() {
 		super.containerTick();
 		if(hasRecipe()) {
-			this.addRenderableWidget(new ConfirmButton(this.getGuiLeft()+95,this.getGuiTop()+30,176,3,23,9,this.menu.TE.getBlockPos(),GUI));
+			this.addRenderableWidget(new ConfirmButton(this.getGuiLeft()+95,this.getGuiTop()+30,176,3,23,9,entity.getBlockPos(),GUI));
 		} else {
 			this.clearWidgets();
 		}
@@ -79,29 +82,25 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerContainer>{
 		return null;
     }
 	private boolean hasRecipe() {
-		BottlerEntity TE = (BottlerEntity) BottlerScreen.this.menu.TE;
-        Level world = TE.getLevel();
-        SimpleContainer inv = new SimpleContainer(TE.itemHandler.getSlots());
+        Level world = entity.getLevel();
+        SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());
         
-		for(int i=0;i<TE.itemHandler.getSlots();i++) {
-			inv.setItem(i, TE.itemHandler.getStackInSlot(i));
+		for(int i=0;i<entity.itemHandler.getSlots();i++) {
+			inv.setItem(i, entity.itemHandler.getStackInSlot(i));
 		}
-		
-		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.BOTTLER_RECIPE, inv, world);
+		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, inv, world);
 
 		return recipe.isPresent();
 		
 	}
 	private ItemStack RecipeResult() {
-		BottlerEntity TE = (BottlerEntity) BottlerScreen.this.menu.TE;
-        Level world = TE.getLevel();
-        SimpleContainer inv = new SimpleContainer(TE.itemHandler.getSlots());
+        SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());
         ArrayList<ItemStack> result = new ArrayList<ItemStack>();
-		for(int i=0;i<TE.itemHandler.getSlots();i++) {
-			inv.setItem(i, TE.itemHandler.getStackInSlot(i));
+		for(int i=0;i<entity.itemHandler.getSlots();i++) {
+			inv.setItem(i, entity.itemHandler.getStackInSlot(i));
 		}
 		
-		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.BOTTLER_RECIPE, inv, world);
+		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, inv, world);
 		recipe.ifPresent(i->{
 			result.add(i.getResultItem());
 		});

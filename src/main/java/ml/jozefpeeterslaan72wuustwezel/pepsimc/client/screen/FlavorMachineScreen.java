@@ -6,9 +6,11 @@ import java.util.Optional;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.FlavorMachineContainer;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.CentrifugeMenu;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.FlavorMachineMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.FlavoringRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.CentrifugeEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.FlavorMachineEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
@@ -22,10 +24,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
 
-public class FlavorMachineScreen extends AbstractContainerScreen<FlavorMachineContainer>{
+public class FlavorMachineScreen extends AbstractContainerScreen<FlavorMachineMenu>{
 
-	public FlavorMachineScreen(FlavorMachineContainer BC, Inventory plrInv, Component Text) {
-		super(BC, plrInv, Text);
+	private final FlavorMachineEntity entity;
+	private final Level world;
+	public FlavorMachineScreen(FlavorMachineMenu Menu, Inventory plrInv, Component Text) {
+		super(Menu, plrInv, Text);
+		this.entity = (FlavorMachineEntity) Menu.entity;
+		this.world = this.entity.getLevel();
 	}
 
 	private static final ResourceLocation GUI = new ResourceLocation("pepsimc","textures/gui/flavor_machine_gui.png");
@@ -33,7 +39,7 @@ public class FlavorMachineScreen extends AbstractContainerScreen<FlavorMachineCo
 	public void containerTick() {
 	      super.containerTick();
 	      if (hasRecipe()) {
-				this.addRenderableWidget(new ConfirmButton(this.getGuiLeft()+82,this.getGuiTop()+37,176,0,8,22,this.menu.TE.getBlockPos(),GUI));
+				this.addRenderableWidget(new ConfirmButton(this.getGuiLeft()+82,this.getGuiTop()+37,176,0,8,22,entity.getBlockPos(),GUI));
 	      } else {
 	  		this.clearWidgets();
 	      }
@@ -73,29 +79,24 @@ public class FlavorMachineScreen extends AbstractContainerScreen<FlavorMachineCo
 		return null;
     }
 	private boolean hasRecipe() {
-		FlavorMachineEntity TE = (FlavorMachineEntity) FlavorMachineScreen.this.menu.TE;
-        Level world = TE.getLevel();
-        SimpleContainer inv = new SimpleContainer(TE.itemHandler.getSlots());
-        
-		for(int i=0;i<TE.itemHandler.getSlots();i++) {
-			inv.setItem(i, TE.itemHandler.getStackInSlot(i));
+		SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());
+		ArrayList<ItemStack> result = new ArrayList<ItemStack>();
+		for(int i=0;i<entity.itemHandler.getSlots();i++) {
+			inv.setItem(i, entity.itemHandler.getStackInSlot(i));
 		}
 		
-		Optional<FlavoringRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.FLAVORING_RECIPE, inv, world);
+		Optional<FlavoringRecipe> recipe = world.getRecipeManager().getRecipeFor(FlavoringRecipe.FlavoringRecipeType.INSTANCE, inv, world);
 
 		return recipe.isPresent();
 		
 	}
 	private ItemStack RecipeResult() {
-		FlavorMachineEntity TE = (FlavorMachineEntity) FlavorMachineScreen.this.menu.TE;
-        Level world = TE.getLevel();
-        SimpleContainer inv = new SimpleContainer(TE.itemHandler.getSlots());
-        ArrayList<ItemStack> result = new ArrayList<ItemStack>();
-		for(int i=0;i<TE.itemHandler.getSlots();i++) {
-			inv.setItem(i, TE.itemHandler.getStackInSlot(i));
+		SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());
+		ArrayList<ItemStack> result = new ArrayList<ItemStack>();
+		for(int i=0;i<entity.itemHandler.getSlots();i++) {
+			inv.setItem(i, entity.itemHandler.getStackInSlot(i));
 		}
-		
-		Optional<FlavoringRecipe> recipe = world.getRecipeManager().getRecipeFor(PepsiMcRecipeType.FLAVORING_RECIPE, inv, world);
+		Optional<FlavoringRecipe> recipe = world.getRecipeManager().getRecipeFor(FlavoringRecipe.FlavoringRecipeType.INSTANCE, inv, world);
 		recipe.ifPresent(i->{
 			result.add(i.getResultItem());
 		});

@@ -2,7 +2,6 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block;
 
 import java.util.stream.Stream;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.RecyclerContainer;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.RecyclerEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -15,11 +14,8 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
@@ -29,9 +25,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraftforge.network.NetworkHooks;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 
@@ -85,37 +79,20 @@ public class RecyclerBlock extends HorizontalFacedBlock implements EntityBlock{
 	         super.onRemove(state, level, pos, secondState, p_196243_5_);
 	      }
 	   }
-	
+
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player plr, InteractionHand hand, BlockHitResult RT) {
-		if(!world.isClientSide) {
-			BlockEntity TE = world.getBlockEntity(pos);
-				if(!plr.isCrouching()) {
-					if(TE instanceof RecyclerEntity) {
-						MenuProvider containerProvider = createContainerProvider(world, pos);
-						NetworkHooks.openGui(((ServerPlayer)plr), containerProvider, pos);
-					} else {
-						throw new IllegalStateException("Container provider is missing.");
-					}
-				}
+	public InteractionResult use(BlockState state, Level world, BlockPos pos,
+								 Player plr, InteractionHand hand, BlockHitResult hit) {
+		if (!world.isClientSide()) {
+			BlockEntity entity = world.getBlockEntity(pos);
+			if(entity instanceof RecyclerEntity) {
+				NetworkHooks.openGui(((ServerPlayer)plr), (RecyclerEntity)entity, pos);
+			} else {
+				throw new IllegalStateException("Container provider is missing!");
+			}
 		}
-		return InteractionResult.SUCCESS;
-	}
 
-
-	
-	private MenuProvider createContainerProvider(Level world, BlockPos pos) {
-		return new MenuProvider() {
-			@Override
-			public Component getDisplayName() {
-				return new TranslatableComponent("screen.pepsimc.recycler");
-			}
-
-			@Override
-			public AbstractContainerMenu createMenu(int i, Inventory inv, Player plr) {
-				return new RecyclerContainer(i, world, pos, inv, plr);
-			}
-		};  
+		return InteractionResult.sidedSuccess(world.isClientSide());
 	}
 
 	@Override

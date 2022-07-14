@@ -10,36 +10,39 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class ProcessingTileContainer extends AbstractContainerMenu{
+import java.util.ArrayList;
+
+public class ProcessingTileMenu extends AbstractContainerMenu{
 	
-	public final BlockEntity TE;
+	public final BlockEntity entity;
 	private final IItemHandler inv;
 	public Block block;
 	public int Size;
-	
-	public ProcessingTileContainer(int ID, Level world, BlockPos pos, Inventory inventory, Player player,MenuType<?> container, int Size, Block block) {
+    protected final ArrayList<SlotItemHandler> SlotHandlers;
+
+
+    public ProcessingTileMenu(int ID, Inventory inv, BlockEntity entity, MenuType<?> container, int Size, Block block) {
 		super(container, ID);
-		this.TE = world.getBlockEntity(pos);
-		this.inv = new InvWrapper(inventory);
+        this.entity = entity;
+		this.inv = new InvWrapper(inv);
 		this.block = block;
 		this.Size = Size;
-		layoutPlayerInventorySlots(8, 86);
+        this.SlotHandlers = new ArrayList<SlotItemHandler>();
+        layoutPlayerInventorySlots(8, 86);
 		
-		if(TE !=null) {
-			TE.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h->{
+		if(entity !=null) {
+            entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h->{
 				addSlots(h);
 			});
 		}
 		
 	}
-	
+
 	public boolean slotHasItem(int slotIndex) {
 		return inv.getStackInSlot(slotIndex) != null;
 	}
@@ -90,7 +93,7 @@ public class ProcessingTileContainer extends AbstractContainerMenu{
 
     @Override
     public boolean stillValid(Player playerIn) {
-        return super.stillValid(ContainerLevelAccess.create(TE.getLevel(), TE.getBlockPos()), playerIn,block);
+        return super.stillValid(ContainerLevelAccess.create(entity.getLevel(), entity.getBlockPos()), playerIn,block);
     }
 
     
