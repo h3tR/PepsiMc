@@ -17,7 +17,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 public class FruitAdditionModifier extends LootModifier {
-	//TODO
 	private final Item addition;
 	private final int count;
 	protected FruitAdditionModifier(LootItemCondition[] conditionsIn,Item addition,int count) {

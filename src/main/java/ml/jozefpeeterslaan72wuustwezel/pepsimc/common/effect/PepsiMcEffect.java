@@ -21,7 +21,7 @@ public class PepsiMcEffect {
 
 	public static final DeferredRegister<MobEffect> EFFECTS = 
 			DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, "pepsimc");
-	public static final DeferredRegister<Potion> POTIONS = //TODO
+	public static final DeferredRegister<Potion> POTIONS =
 			DeferredRegister.create(ForgeRegistries.POTIONS, "pepsimc");
 	
 	public static RegistryObject<MobEffect> INSOMNIA = EFFECTS.register("insomnia",InsomniaEffect::new);
