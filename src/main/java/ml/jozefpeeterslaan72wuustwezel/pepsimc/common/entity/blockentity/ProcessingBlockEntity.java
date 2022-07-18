@@ -79,16 +79,14 @@ public class ProcessingBlockEntity extends BlockEntity{
 	@Nonnull
 	@Override
 	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side){
-		if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+		if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY  && side == null) {
 			return handler.cast();
 		}
-		
 		return super.getCapability(cap, side);
 	}
 	
 	@Override
 	public BlockEntityType<?> getType() {
-		// TODO Auto-generated method stub
 		return type;
 	}
 }

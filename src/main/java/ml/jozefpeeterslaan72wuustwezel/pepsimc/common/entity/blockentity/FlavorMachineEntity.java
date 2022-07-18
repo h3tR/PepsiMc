@@ -5,9 +5,8 @@ import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.FlavorMachineMenu;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.FlavorMachineMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.FlavoringRecipe;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -97,7 +96,6 @@ public class FlavorMachineEntity extends ProcessingBlockEntity implements MenuPr
 
 	@Override
 	public Component getDisplayName() {
-		//TODO
 		return new TranslatableComponent("block.pepsimc.flavor_machine");
 	}
 

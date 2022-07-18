@@ -2,81 +2,66 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.integration.jei;
 
 
 
-import java.util.ArrayList;
 
 import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-public class BottlerRecipeCategory {/*implements IRecipeCategory<BottlerRecipe>{
-	//TODO
-	public static final ResourceLocation UID = new ResourceLocation("pepsimc","bottler");
-	private final IDrawable bg;
-	private final IDrawable icon;
+public class BottlerRecipeCategory implements IRecipeCategory<BottlerRecipe>{
 
-	public BottlerRecipeCategory(IGuiHelper helper) {
-		this.bg = helper.createDrawable(new ResourceLocation("pepsimc","textures/gui/jei/bottler_gui.png"), 0,0, 176, 85);
-		this.icon = helper.createDrawableIngredient(new ItemStack(PepsiMcBlock.BOTTLER.get()));
-	}
-	
-	@Override
-	public ResourceLocation getUid() {
-		// TODO Auto-generated method stub
-		return UID;
-	}
+    private final IDrawable Background;
+    private final IDrawable Icon;
 
-	@Override
-	public Class<? extends BottlerRecipe> getRecipeClass() {
-		// TODO Auto-generated method stub
-		return BottlerRecipe.class;
-	}
+    public BottlerRecipeCategory(IGuiHelper helper) {
+        this.Background = helper.createDrawable(new ResourceLocation("pepsimc","textures/gui/jei/bottler_gui.png"), 0,0, 176, 85);
+        this.Icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK,new ItemStack(PepsiMcBlock.BOTTLER.get()));
+    }
+    public static final ResourceLocation UID = new ResourceLocation("pepsimc","bottler");
+    @Override
+    public Component getTitle() {
+        return new TranslatableComponent("block.pepsimc.bottler");
+    }
 
-	@Override
-	public IDrawable getBackground() {
-		// TODO Auto-generated method stub
-		return this.bg;
-	}
+    @Override
+    public IDrawable getBackground() {
+        return Background;
+    }
 
-	@Override
-	public IDrawable getIcon() {
-		// TODO Auto-generated method stub
-		return this.icon;
-	}
+    @Override
+    public IDrawable getIcon() {
+        return Icon;
+    }
 
-	@Override
-	public void setIngredients(BottlerRecipe recipe, IIngredients ingredients) {
-		ArrayList<ItemStack> result = new ArrayList<ItemStack>();
-		result.add(recipe.getResultItem());
-		result.add(new ItemStack(Items.BUCKET));
-		ingredients.setInputIngredients(recipe.getIngredients());
-		ingredients.setOutputs(VanillaTypes.ITEM, result);
-		
-	}
+    @Override
+    public ResourceLocation getUid() {
+        return UID;
+    }
 
-	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, BottlerRecipe recipe, IIngredients ingredients) {
-		recipeLayout.getItemStacks().init(0, true, 11, 14);
-		recipeLayout.getItemStacks().init(1, true, 29, 14);
-		recipeLayout.getItemStacks().init(2, true, 11, 42);
-		recipeLayout.getItemStacks().init(3, false, 142, 29);
-		recipeLayout.getItemStacks().init(4, false, 142, 50);
+    @Override
+    public Class<? extends BottlerRecipe> getRecipeClass() {
+        return BottlerRecipe.class;
+    }
 
-		recipeLayout.getItemStacks().set(ingredients);
-		
-	}
 
-	@Override
-	public Component getTitle() {
-		// TODO Auto-generated method stub
-		return Component.translatable("block.pepsimc.bottler");
-	}
-	
-	*/
+
+    @Override
+    public void setRecipe(IRecipeLayoutBuilder LayoutBuilder, BottlerRecipe recipe, IFocusGroup focusGroup) {
+        LayoutBuilder.addSlot(RecipeIngredientRole.INPUT,12,15).addIngredients(recipe.getIngredients().get(0));
+        LayoutBuilder.addSlot(RecipeIngredientRole.INPUT,30,15).addIngredients(recipe.getIngredients().get(1));
+        LayoutBuilder.addSlot(RecipeIngredientRole.INPUT,12,43).addIngredients(recipe.getIngredients().get(2));
+        LayoutBuilder.addSlot(RecipeIngredientRole.OUTPUT,143,30).addItemStack(recipe.getResultItem());
+
+        LayoutBuilder.addSlot(RecipeIngredientRole.OUTPUT,143,51).addItemStack(new ItemStack(Items.BUCKET,1));
+    }
 }

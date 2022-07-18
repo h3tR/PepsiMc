@@ -1,7 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.villagerPOI.PepsiMcVillagerPOI;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 
 import com.google.common.collect.ImmutableSet;
@@ -13,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class PepsiMcProfession {/*
+public class PepsiMcProfession {
 	public static final DeferredRegister<VillagerProfession> VILLAGER_PROFESSION = DeferredRegister.create(ForgeRegistries.PROFESSIONS, "pepsimc");
 
 	public static final RegistryObject<VillagerProfession> BOTTLING_OPERATOR = 
@@ -26,6 +25,6 @@ public class PepsiMcProfession {/*
 	
 	public static void register(IEventBus bus) {
 		VILLAGER_PROFESSION.register(bus);
-	}*/
+	}
 
 }

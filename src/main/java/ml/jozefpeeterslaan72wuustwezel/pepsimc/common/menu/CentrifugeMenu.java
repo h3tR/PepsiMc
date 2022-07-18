@@ -1,4 +1,4 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu;
 
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
@@ -6,8 +6,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-
-import java.util.ArrayList;
 
 
 public class CentrifugeMenu extends ProcessingTileMenu {

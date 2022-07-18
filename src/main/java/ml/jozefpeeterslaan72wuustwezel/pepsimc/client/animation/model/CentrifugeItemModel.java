@@ -7,23 +7,19 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 @SuppressWarnings("rawtypes")
 public class CentrifugeItemModel extends AnimatedGeoModel {
 
-	@Override
-	public void setLivingAnimations(Object entity, Integer uniqueID, AnimationEvent customPredicate) {
 
+	@Override
+	public ResourceLocation getAnimationFileLocation(Object animatable) {
+		return new ResourceLocation("pepsimc", "animations/centrifuge.animation.json");
 	}
 
 	@Override
-	public ResourceLocation getModelResource(Object object) {
+	public ResourceLocation getModelLocation(Object object) {
 		return new ResourceLocation("pepsimc", "geo/centrifuge.geo.json");
 	}
 
 	@Override
-	public ResourceLocation getTextureResource(Object object) {
+	public ResourceLocation getTextureLocation(Object object) {
 		return new ResourceLocation("pepsimc", "textures/blocks/centrifuge.png");
-	}
-
-	@Override
-	public ResourceLocation getAnimationResource(Object animatable) {
-		return new ResourceLocation("pepsimc", "animations/centrifuge.animation.json");
 	}
 }

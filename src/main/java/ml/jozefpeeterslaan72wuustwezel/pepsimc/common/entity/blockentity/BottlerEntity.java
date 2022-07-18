@@ -5,9 +5,8 @@ import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.BottlerMenu;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.BottlerMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -104,7 +103,6 @@ public class BottlerEntity extends ProcessingBlockEntity implements MenuProvider
 	}
 	@Override
 	public Component getDisplayName() {
-		//TODO
 		return new TranslatableComponent("block.pepsimc.recycler");
 	}
 

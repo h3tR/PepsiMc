@@ -19,6 +19,7 @@
 			]
 		}
 	],
+	"type": "pepsimc:lemon_from_acacia_leaves",
 	"addition": "pepsimc:lemon",
     "count":1
 }

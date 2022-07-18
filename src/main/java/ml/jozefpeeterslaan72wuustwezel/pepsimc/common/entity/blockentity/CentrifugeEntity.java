@@ -5,9 +5,8 @@ import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.CentrifugeMenu;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.CentrifugeMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.CentrifugeRecipe;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -125,7 +124,6 @@ public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatab
 
 	@Override
 	public Component getDisplayName() {
-		//TODO
 		return new TranslatableComponent("block.pepsimc.centrifuge");
 	}
 

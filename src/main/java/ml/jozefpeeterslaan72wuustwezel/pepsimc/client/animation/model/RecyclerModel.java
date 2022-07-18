@@ -9,22 +9,19 @@ public class RecyclerModel extends AnimatedGeoModel {
 
 
 	@Override
-	public void setLivingAnimations(Object entity, Integer uniqueID, AnimationEvent customPredicate) {
-
-	}
-
-	@Override
-	public ResourceLocation getModelResource(Object object) {
+	public ResourceLocation getModelLocation(Object object) {
 		return new ResourceLocation("pepsimc", "geo/recycler.geo.json");
+
 	}
 
 	@Override
-	public ResourceLocation getTextureResource(Object object) {
+	public ResourceLocation getTextureLocation(Object object) {
 		return new ResourceLocation("pepsimc", "textures/blocks/recycler.png");
 	}
 
 	@Override
-	public ResourceLocation getAnimationResource(Object animatable) {
+	public ResourceLocation getAnimationFileLocation(Object animatable) {
 		return new ResourceLocation("pepsimc", "animations/recycler.animation.json");
+
 	}
 }

@@ -6,11 +6,8 @@ import java.util.Optional;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.BottlerMenu;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.CentrifugeMenu;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.CentrifugeMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.CentrifugeRecipe;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.BottlerEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.CentrifugeEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;

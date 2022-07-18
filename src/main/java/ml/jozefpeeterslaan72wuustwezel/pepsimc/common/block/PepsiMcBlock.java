@@ -53,11 +53,11 @@ public class PepsiMcBlock {
 	
 			// special blocks
 
-	//public static final RegistryObject<LiquidBlock> PEPSI_FLUID_BLOCK = BLOCKS.register("pepsi",
-		//	()-> new LiquidBlock(()->PepsiMcFluid.PEPSI_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER).noLootTable().strength(100f).noCollission()));
+	public static final RegistryObject<LiquidBlock> PEPSI_FLUID_BLOCK = BLOCKS.register("pepsi",
+			()-> new LiquidBlock(()->PepsiMcFluid.PEPSI_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER).noDrops().strength(100f).noCollission()));
 	
-	//public static final RegistryObject<LiquidBlock> PEPSI_MAX_FLUID_BLOCK = BLOCKS.register("pepsi_max",
-			//()-> new LiquidBlock(()->PepsiMcFluid.PEPSI_MAX_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER).strength(100f).noLootTable().noCollission()));
+	public static final RegistryObject<LiquidBlock> PEPSI_MAX_FLUID_BLOCK = BLOCKS.register("pepsi_max",
+			()-> new LiquidBlock(()->PepsiMcFluid.PEPSI_MAX_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER).strength(100f).noDrops().noCollission()));
 	
 	public static final RegistryObject<Block> BOTTLER = BLOCKS.register("bottler",BottlerBlock::new);
 	

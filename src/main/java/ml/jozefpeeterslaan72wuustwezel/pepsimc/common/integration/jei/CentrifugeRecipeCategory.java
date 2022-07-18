@@ -2,13 +2,13 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.integration.jei;
 
 
 
-import java.util.ArrayList;
 
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.CentrifugeRecipe;
@@ -17,15 +17,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
-public class CentrifugeRecipeCategory {/*implements IRecipeCategory<CentrifugeRecipe>{
-	//TODO
+public class CentrifugeRecipeCategory implements IRecipeCategory<CentrifugeRecipe>{
 	public static final ResourceLocation UID = new ResourceLocation("pepsimc","centrifuge");
-	private final IDrawable bg;
-	private final IDrawable icon;
+    private final IDrawable Background;
+    private final IDrawable Icon;
 
 	public CentrifugeRecipeCategory(IGuiHelper helper) {
-		this.bg = helper.createDrawable(new ResourceLocation("pepsimc","textures/gui/jei/centrifuge_gui.png"), 0,0, 176, 85);
-		this.icon = helper.createDrawableIngredient(new ItemStack(PepsiMcBlock.CENTRIFUGE.get()));
+		this.Background = helper.createDrawable(new ResourceLocation("pepsimc","textures/gui/jei/centrifuge_gui.png"), 0,0, 176, 85);
+		this.Icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK,new ItemStack(PepsiMcBlock.CENTRIFUGE.get()));
 	}
 	
 	@Override
@@ -40,40 +39,25 @@ public class CentrifugeRecipeCategory {/*implements IRecipeCategory<CentrifugeRe
 
 	@Override
 	public IDrawable getBackground() {
-		return this.bg;
+		return this.Background;
 	}
 
 	@Override
 	public IDrawable getIcon() {
-		return this.icon;
+		return this.Icon;
 	}
 
-	@Override
-	public void setIngredients(CentrifugeRecipe recipe, IIngredients ingredients) {
-		ArrayList<ItemStack> result = new ArrayList<ItemStack>();
-		result.add(recipe.getResultItem());
-		result.add(recipe.getByproductItem());
-
-		ingredients.setInputIngredients(recipe.getIngredients());
-		ingredients.setOutputs(VanillaTypes.ITEM, result);
-
-		
-	}
-
-	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, CentrifugeRecipe recipe, IIngredients ingredients) {		
-		recipeLayout.getItemStacks().init(0, true, 79, 8);
-		recipeLayout.getItemStacks().init(1, false, 65, 52);
-		recipeLayout.getItemStacks().init(2, false, 93, 52);
-
-		recipeLayout.getItemStacks().set(ingredients);
-		
-	}
+    @Override
+    public void setRecipe(IRecipeLayoutBuilder LayoutBuilder, CentrifugeRecipe recipe, IFocusGroup focusGroup) {
+        LayoutBuilder.addSlot(RecipeIngredientRole.INPUT,80,9).addIngredients(recipe.getIngredients().get(0));
+        LayoutBuilder.addSlot(RecipeIngredientRole.OUTPUT,66,53).addItemStack(recipe.getResultItem());
+        LayoutBuilder.addSlot(RecipeIngredientRole.OUTPUT,94,53).addItemStack(recipe.getByproductItem());
+    }
 
 	@Override
 	public Component getTitle() {
-		return Component.translatable("block.pepsimc.centrifuge");
+		return new TranslatableComponent("block.pepsimc.centrifuge");
 	}
 	
-	*/
+
 }

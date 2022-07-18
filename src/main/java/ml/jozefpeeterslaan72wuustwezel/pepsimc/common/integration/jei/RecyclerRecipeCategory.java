@@ -2,13 +2,13 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.integration.jei;
 
 
 
-import java.util.ArrayList;
 
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.RecyclerRecipe;
@@ -17,15 +17,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
-public class RecyclerRecipeCategory {/*implements IRecipeCategory<RecyclerRecipe>{
-	//TODO
+public class RecyclerRecipeCategory implements IRecipeCategory<RecyclerRecipe>{
 	public static final ResourceLocation UID = new ResourceLocation("pepsimc","recycler");
-	private final IDrawable bg;
-	private final IDrawable icon;
+    private final IDrawable Background;
+    private final IDrawable Icon;
 
 	public RecyclerRecipeCategory(IGuiHelper helper) {
-		this.bg = helper.createDrawable(new ResourceLocation("pepsimc","textures/gui/jei/recycler_gui.png"), 0,0, 176, 85);
-		this.icon = helper.createDrawableIngredient(new ItemStack(PepsiMcBlock.RECYCLER.get()));
+		this.Background = helper.createDrawable(new ResourceLocation("pepsimc","textures/gui/jei/recycler_gui.png"), 0,0, 176, 85);
+		this.Icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK,new ItemStack(PepsiMcBlock.RECYCLER.get()));
 	}
 	
 	@Override
@@ -40,37 +39,25 @@ public class RecyclerRecipeCategory {/*implements IRecipeCategory<RecyclerRecipe
 
 	@Override
 	public IDrawable getBackground() {
-		return this.bg;
+		return this.Background;
 	}
 
 	@Override
 	public IDrawable getIcon() {
-		return this.icon;
+		return this.Icon;
 	}
 
-	@Override
-	public void setIngredients(RecyclerRecipe recipe, IIngredients ingredients) {
-		ArrayList<ItemStack> result = new ArrayList<ItemStack>();
-		result.add(recipe.getResultItem());
-		ingredients.setInputIngredients(recipe.getIngredients());
-		ingredients.setOutputs(VanillaTypes.ITEM, result);
-		
-	}
+    @Override
+    public void setRecipe(IRecipeLayoutBuilder LayoutBuilder, RecyclerRecipe recipe, IFocusGroup focusGroup) {
+        LayoutBuilder.addSlot(RecipeIngredientRole.INPUT,80,9).addIngredients(recipe.getIngredients().get(0));
+        LayoutBuilder.addSlot(RecipeIngredientRole.INPUT,42,31).addIngredients(recipe.getIngredients().get(1));
+        LayoutBuilder.addSlot(RecipeIngredientRole.OUTPUT,80,53).addItemStack(recipe.getResultItem());
 
-	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, RecyclerRecipe recipe, IIngredients ingredients) {
-		recipeLayout.getItemStacks().init(0, true, 79, 8);
-		recipeLayout.getItemStacks().init(1, true, 41, 30);
-		recipeLayout.getItemStacks().init(2, false, 79, 52);
-
-		recipeLayout.getItemStacks().set(ingredients);
-		
-	}
-
+    }
 	@Override
 	public Component getTitle() {
-		return Component.translatable("block.pepsimc.recycler");
+		return new TranslatableComponent("block.pepsimc.recycler");
 	}
 	
-*/
+
 }

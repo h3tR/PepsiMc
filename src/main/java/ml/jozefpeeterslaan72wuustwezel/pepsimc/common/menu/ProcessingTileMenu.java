@@ -1,4 +1,4 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu;
 
 import org.apache.logging.log4j.LogManager;
 

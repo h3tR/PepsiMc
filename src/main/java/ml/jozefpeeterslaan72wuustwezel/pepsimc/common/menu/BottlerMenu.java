@@ -1,12 +1,10 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-
-import java.util.ArrayList;
 
 public class BottlerMenu extends ProcessingTileMenu {
 
@@ -22,7 +20,7 @@ public class BottlerMenu extends ProcessingTileMenu {
 		SlotHandlers.add(new SlotItemHandler(h,1,30,15));
 		SlotHandlers.add(new SlotItemHandler(h,2,12,43));
 		SlotHandlers.add(new SlotItemHandler(h,3,143,30));
-		SlotHandlers.add(new SlotItemHandler(h,3,143,30));
+		SlotHandlers.add(new SlotItemHandler(h,4,143,51));
 
 		SlotHandlers.forEach((i) -> addSlot(i));
 	}
@@ -37,7 +35,7 @@ public class BottlerMenu extends ProcessingTileMenu {
 					return SlotHandlers.get(1).hasItem();
 					
 				case 2:
-					return SlotHandlers.get(0).hasItem();
+					return SlotHandlers.get(2).hasItem();
 				case 3:
 					return SlotHandlers.get(3).hasItem();
 				case 4:

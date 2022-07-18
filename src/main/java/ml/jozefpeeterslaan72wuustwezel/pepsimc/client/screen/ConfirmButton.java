@@ -11,6 +11,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -24,7 +25,7 @@ public class ConfirmButton extends AbstractButton{
 	      int SizeY;
 	      ResourceLocation GUI;
 	      protected ConfirmButton(int X, int Y, int IconX, int IconY, int SizeX, int SizeY, BlockPos Pos, ResourceLocation GUI) {
-	         super(X, Y, SizeX, SizeY, Component.empty());
+	         super(X, Y, SizeX, SizeY, TextComponent.EMPTY);
 	         this.IconX = IconX;
 	         this.IconY= IconY; 
 	         this.Pos = Pos;

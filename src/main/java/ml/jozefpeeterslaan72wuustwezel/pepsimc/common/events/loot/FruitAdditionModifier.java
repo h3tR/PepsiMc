@@ -17,7 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 public class FruitAdditionModifier extends LootModifier {
-
+	//TODO
 	private final Item addition;
 	private final int count;
 	protected FruitAdditionModifier(LootItemCondition[] conditionsIn,Item addition,int count) {
@@ -28,7 +28,7 @@ public class FruitAdditionModifier extends LootModifier {
 
 	@NotNull
 	@Override
-	protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
+	protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
 		generatedLoot.add(new ItemStack(this.addition,this.count));
 		return generatedLoot;
 	}
@@ -37,7 +37,8 @@ public class FruitAdditionModifier extends LootModifier {
 
         @Override
         public FruitAdditionModifier read(ResourceLocation name, JsonObject object, LootItemCondition[] conditionsIn) {
-        	Item addition = (GsonHelper.convertToItem(object,"addition"));
+        	Item addition = ForgeRegistries.ITEMS.getValue(
+					new ResourceLocation(GsonHelper.getAsString(object, "addition")));
             int count = GsonHelper.getAsInt(object,"count");
             return new FruitAdditionModifier(conditionsIn,addition,count);
         }

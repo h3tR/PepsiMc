@@ -5,8 +5,7 @@ import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.RecyclerMenu;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.RecyclerMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.RecyclerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
 import net.minecraft.core.BlockPos;
@@ -123,7 +122,6 @@ public class RecyclerEntity extends ProcessingBlockEntity implements IAnimatable
 
 	@Override
 	public Component getDisplayName() {
-		//TODO
 		return new TranslatableComponent("block.pepsimc.recycler");
 	}
 

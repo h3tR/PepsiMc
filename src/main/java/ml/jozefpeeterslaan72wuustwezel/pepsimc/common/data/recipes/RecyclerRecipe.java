@@ -81,7 +81,6 @@ public class RecyclerRecipe implements Recipe<Container>{
 	}
 	
 	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<RecyclerRecipe>{
-		//TODO
 
 		@Override
 		public RecyclerRecipe fromJson(ResourceLocation Id, JsonObject json) {

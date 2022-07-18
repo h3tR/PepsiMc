@@ -1,5 +1,0 @@
-{
-  "type": "pepsimc:ores",
-  "biomes": "#minecraft:is_overworld",
-  "feature":"pepsimc:pepsite_ore_placed"
-}

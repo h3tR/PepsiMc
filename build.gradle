@@ -1,18 +1,20 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = "https://repo.spongepowered.org/maven" }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
+apply plugin: "org.spongepowered.mixin"
 apply plugin: 'maven-publish'
 version = '2.0.0'
-group = 'ml.jozefpeeterslaan72wuustwezel.pepsimc'
-archivesBaseName = 'pepsimc'
+group = "ml.jozefpeeterslaan72wuustwezel.${mod_id}"
+archivesBaseName = mod_id
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(javaVersion)
 
@@ -58,6 +60,18 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
 
+            ideaModule "${rootProject.name}.${project.name}.main"
+
+            arg "-mixin.config=${mod_id}.mixins.json"
+
+            property "mixin.env.disableRefMap", "true"
+            property "mixin.debug.export", "true"
+            property "mixin.debug.export.decompile", "false"
+            property "mixin.debug.verbose", "true"
+            property "mixin.debug.dumpTargetOnFailure", "true"
+            property "mixin.checks", "true"
+            property "mixin.hotSwap", "true"
+
             property 'forge.logging.console.level', 'debug'
 
             mods {
@@ -72,6 +86,17 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
 
+            ideaModule "${rootProject.name}.${project.name}.main"
+
+            arg "-mixin.config=${mod_id}.mixins.json"
+
+            property "mixin.env.disableRefMap", "true"
+            property "mixin.debug.export", "true"
+            property "mixin.debug.export.decompile", "false"
+            property "mixin.debug.verbose", "true"
+            property "mixin.debug.dumpTargetOnFailure", "true"
+            property "mixin.checks", "true"
+            property "mixin.hotSwap", "true"
 
             property 'forge.logging.console.level', 'debug'
 
@@ -89,7 +114,21 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'pepsimc', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            ideaModule "${rootProject.name}.${project.name}.main"
+
+            property 'forge.logging.console.level', 'debug'
+
+            arg "-mixin.config=${mod_id}.mixins.json"
+
+            property "mixin.env.disableRefMap", "true"
+            property "mixin.debug.export", "true"
+            property "mixin.debug.export.decompile", "false"
+            property "mixin.debug.verbose", "true"
+            property "mixin.debug.dumpTargetOnFailure", "true"
+            property "mixin.checks", "true"
+            property "mixin.hotSwap", "true"
+
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
                 pepsimc {
@@ -114,13 +153,14 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Specification-Title": "tutorialmod",
+                "Specification-Title": mod_id,
                 "Specification-Vendor": "RMI",
                 "Specification-Version": "1", // We are version 1 of ourselves
                 "Implementation-Title": project.name,
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"RMI",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs": mod_id + ".mixins.json"
         ])
     }
 }

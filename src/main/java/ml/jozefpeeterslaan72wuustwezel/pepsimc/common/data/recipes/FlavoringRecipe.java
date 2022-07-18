@@ -37,7 +37,6 @@ public class FlavoringRecipe implements Recipe<Container>{
 	
 	@Override
 	public boolean matches(Container inv, Level Win) {
-		//TODO
 		return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1));
 	}
 	

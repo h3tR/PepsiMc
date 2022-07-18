@@ -1,27 +1,24 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.integration.jei;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.CentrifugeRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.FlavoringRecipe;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.RecyclerRecipe;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeManager;
 
-//@JeiPlugin
-public class PepsiMcJEI {/*implements IModPlugin{
-	//TODO
+@JeiPlugin
+public class PepsiMcJEI implements IModPlugin{
 	@Override
 	public ResourceLocation getPluginUid() {
 		return new ResourceLocation("pepsimc","jei_plugin");
@@ -39,32 +36,20 @@ public class PepsiMcJEI {/*implements IModPlugin{
 	                new CentrifugeRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
 	}
 
-	    @Override
-	    public void registerRecipes(IRecipeRegistration registration) {
-	        @SuppressWarnings("resource")
-			net.minecraft.world.item.crafting.RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
-	        registration.addRecipes(rm.getAllRecipesFor(PepsiMcRecipeType.BOTTLER_RECIPE).stream()
-	                        .filter(r -> r instanceof BottlerRecipe).collect(Collectors.toList()),
-	                BottlerRecipeCategory.UID);
-	        registration.addRecipes(rm.getAllRecipesFor(PepsiMcRecipeType.RECYCLER_RECIPE).stream()
-                    .filter(r -> r instanceof RecyclerRecipe).collect(Collectors.toList()),
-            RecyclerRecipeCategory.UID);
-	        registration.addRecipes(rm.getAllRecipesFor(PepsiMcRecipeType.FLAVORING_RECIPE).stream()
-                    .filter(r -> r instanceof FlavoringRecipe).collect(Collectors.toList()),
-            FlavoringRecipeCategory.UID);
-	        registration.addRecipes(rm.getAllRecipesFor(PepsiMcRecipeType.CENTRIFUGE_RECIPE).stream()
-                    .filter(r -> r instanceof CentrifugeRecipe).collect(Collectors.toList()),
-            CentrifugeRecipeCategory.UID);
 
-	    }
-	    
-	    @Override
-	    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-	    	registration.addRecipeCatalyst(new ItemStack(PepsiMcItem.BOTTLER.get()),BottlerRecipeCategory.UID);
-	    	registration.addRecipeCatalyst(new ItemStack(PepsiMcItem.RECYCLER.get()),RecyclerRecipeCategory.UID);
-	    	registration.addRecipeCatalyst(new ItemStack(PepsiMcItem.FLAVOR_MACHINE.get()),FlavoringRecipeCategory.UID);
-	    	registration.addRecipeCatalyst(new ItemStack(PepsiMcItem.CENTRIFUGE.get()),CentrifugeRecipeCategory.UID);
+    @Override
+    public void registerRecipes(IRecipeRegistration registration) {
+        RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
 
-	    	IModPlugin.super.registerRecipeCatalysts(registration);
-	    }*/
+        List<BottlerRecipe> BottlerRecipes = rm.getAllRecipesFor(BottlerRecipe.BottlerRecipeType.INSTANCE);
+		List<FlavoringRecipe> FlavoringRecipes = rm.getAllRecipesFor(FlavoringRecipe.FlavoringRecipeType.INSTANCE);
+		List<CentrifugeRecipe> CentrifugeRecipes = rm.getAllRecipesFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE);
+		List<RecyclerRecipe> RecyclerRecipes = rm.getAllRecipesFor(RecyclerRecipe.RecyclerRecipeType.INSTANCE);
+
+		registration.addRecipes(new RecipeType<>(BottlerRecipeCategory.UID, BottlerRecipe.class), BottlerRecipes);
+		registration.addRecipes(new RecipeType<>(FlavoringRecipeCategory.UID, FlavoringRecipe.class), FlavoringRecipes);
+		registration.addRecipes(new RecipeType<>(CentrifugeRecipeCategory.UID, CentrifugeRecipe.class), CentrifugeRecipes);
+		registration.addRecipes(new RecipeType<>(RecyclerRecipeCategory.UID, RecyclerRecipe.class), RecyclerRecipes);
+
+	}
 }

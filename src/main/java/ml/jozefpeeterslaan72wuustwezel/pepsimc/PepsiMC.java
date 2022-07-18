@@ -6,19 +6,28 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.FlavorMachineScreen
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.RecyclerScreen;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.fluid.PepsiMcFluid;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.container.PepsiMcMenu;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.PepsiMcMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.PepsiMcRecipeType;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.effect.PepsiMcEffect;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcProfession;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.villagerPOI.PepsiMcVillagerPOI;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcVillagerPOI;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.PepsimcNetwork;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.soundevent.PepsiMcSoundEvent;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -52,10 +61,12 @@ public class PepsiMC {
 	
 	 private void setup(final FMLCommonSetupEvent event) {
 		 PepsimcNetwork.init();
-	        event.enqueueWork(() -> {
-	           // PepsiMcStructure.setup();
+		 event.enqueueWork(() -> {
+			 PepsiMcEffect.registerPotionRecipes();
+
+			 // PepsiMcStructure.setup();
 	            //PepsiStore.init();
-	        });
+		 });
 	    }
 	 
 	 
