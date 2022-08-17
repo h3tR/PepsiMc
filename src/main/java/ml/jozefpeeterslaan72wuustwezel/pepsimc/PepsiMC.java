@@ -15,6 +15,7 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcVil
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.PepsimcNetwork;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.soundevent.PepsiMcSoundEvent;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world.WorldEvents;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -32,6 +33,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import software.bernie.geckolib3.GeckoLib;
 
@@ -46,7 +48,6 @@ public class PepsiMC {
     	PepsiMcBlockEntity.register(bus);
     	PepsiMcMenu.register(bus);
     	PepsiMcRecipeType.register(bus);
-    	//PepsiMcStructure.register(bus);
     	PepsiMcProfession.register(bus);
     	PepsiMcSoundEvent.register(bus);
     	PepsiMcVillagerPOI.register(bus);
@@ -54,8 +55,8 @@ public class PepsiMC {
     	bus.addListener(this::setup);
 		bus.addListener(this::doClientStuff);
 		GeckoLib.initialize();
-        //MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, PepsiMcTrades::loadTrades);
         MinecraftForge.EVENT_BUS.register(this);
+
 
 	}
 	
@@ -63,13 +64,11 @@ public class PepsiMC {
 		 PepsimcNetwork.init();
 		 event.enqueueWork(() -> {
 			 PepsiMcEffect.registerPotionRecipes();
-
-			 // PepsiMcStructure.setup();
-	            //PepsiStore.init();
 		 });
-	    }
-	 
-	 
+	 }
+
+
+
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		event.enqueueWork(()->{
 			ItemBlockRenderTypes.setRenderLayer(PepsiMcBlock.PEPSI_FLUID_BLOCK.get(), RenderType.translucent());
