@@ -2,6 +2,7 @@
 This mod is a standalone mod centered around the pepsi beverage.  
 It adds powerful consumables along with various other features.
 For example:
+
 - Structures
 - A villager profession
 - A new flower/crop
@@ -9,4 +10,4 @@ For example:
 
 
 
-### Now with [JustEnoughItems](https://github.com/mezz/JustEnoughItems) integrations!
+### Now with [JustEnoughItems](https://github.com/mezz/JustEnoughItems) integration!
