@@ -1,6 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity;
 
-import com.mojang.math.Constants;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.ProcessingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -12,16 +12,23 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Optional;
 
-public class ProcessingMachine extends BlockEntity {
+public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
 
+    protected int Progress;
+    protected int Goal;
+    private Optional<? extends ProcessingRecipe> PreviousRecipe;
     public final CustomEnergyStorage energyStorage = new CustomEnergyStorage(5, 1) {
         @Override
         protected void onEnergyChanged() {
@@ -41,16 +48,34 @@ public class ProcessingMachine extends BlockEntity {
     private LazyOptional<IItemHandler> handler;
     private BlockEntityType<?> type;
     private boolean Powered=false;
-    public ProcessingMachine(BlockEntityType<?> in, BlockPos pos, BlockState state) {
+    public AutomatedProcessingBlockEntity(BlockEntityType<?> in, BlockPos pos, BlockState state) {
         super(in, pos, state);
         this.itemHandler = createHandler();
         this.handler = LazyOptional.of(()->itemHandler);
         this.type = in;
+        this.PreviousRecipe = getRecipe();
     }
 
-    protected ItemStackHandler createHandler() {return null;}
+    protected abstract Optional<? extends ProcessingRecipe> getRecipe();
+    protected abstract void finishProduct();
 
-    public void tickServer(BlockState state) {}
+    protected abstract ItemStackHandler createHandler();
+
+    protected void tickServer(BlockState state) {
+        if(getRecipe().isPresent()&&getRecipe().get() != PreviousRecipe.get()){
+            Goal = getRecipe().get().ticks;
+        }
+        if(energyStorage.hasSufficientPower() && getRecipe().isPresent()){
+            Progress++;
+            if(Progress>=Goal){
+                Progress = 0;
+               finishProduct();
+            }
+            energyStorage.consumeEnergy(1);
+        }else{
+            Progress = 0;
+        }
+    }
 
     @Override
     public void setRemoved() {
@@ -128,7 +153,14 @@ public class ProcessingMachine extends BlockEntity {
     public BlockEntityType<?> getType() {
         return type;
     }
-
+    @Nonnull
+    @Override
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+        if (cap == CapabilityEnergy.ENERGY) {
+            return energy.cast();
+        }
+        return super.getCapability(cap, side);
+    }
     public class CustomEnergyStorage extends EnergyStorage {
         int maxTransfer;
         public CustomEnergyStorage(int capacity, int maxTransfer) {

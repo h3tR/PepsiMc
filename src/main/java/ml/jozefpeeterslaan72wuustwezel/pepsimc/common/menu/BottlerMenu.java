@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class BottlerMenu extends ProcessingTileMenu {
+public class BottlerMenu extends ProcessingMenu {
 
 
 

@@ -8,7 +8,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 
-public class RecyclerMenu extends ProcessingTileMenu {
+public class RecyclerMenu extends ProcessingMenu {
 
 
 	public RecyclerMenu(int ID, Inventory inv, BlockEntity entity) {

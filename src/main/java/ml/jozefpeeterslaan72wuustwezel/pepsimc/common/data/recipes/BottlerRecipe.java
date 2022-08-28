@@ -12,27 +12,19 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class BottlerRecipe implements Recipe<Container>{
+public class BottlerRecipe extends ProcessingRecipe{
 	static ResourceLocation TYPE_ID = new ResourceLocation("pepsimc", "bottler");
+	public BottlerRecipe(ResourceLocation Id, ItemStack Out, NonNullList<Ingredient> In, int ticks) {
+		super(Id, Out, In, ticks);
 
-	private final ResourceLocation id;
-	private final ItemStack out;
-	private final NonNullList<Ingredient> in;
-	
-	public BottlerRecipe(ResourceLocation Id, ItemStack Out, NonNullList<Ingredient> In) {
-		this.id = Id;
-		this.out = Out;
-		this.in = In;
 	}
 	
 	@Override
@@ -40,31 +32,13 @@ public class BottlerRecipe implements Recipe<Container>{
 		return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1))&&in.get(2).test(inv.getItem(2));
 	}
 	
-	@Override
-	public ItemStack getResultItem() {
-		return out.copy();
-	}
-	
-	
-	@Override
-	public ItemStack assemble(Container inv) {
-		return out;
-	}
-	
+
 	@Override
 	public RecipeSerializer<?> getSerializer() {
 		return PepsiMcRecipeType.BOTTLER_SERIALIZER.get();
 	}
 	
-	@Override
-	public NonNullList<Ingredient> getIngredients() {
-		return in;
-	}
-	
-	@Override
-	public ResourceLocation getId() {
-		return id;
-	}
+
 	
 	@Override
 	public ItemStack getToastSymbol() {
@@ -89,11 +63,13 @@ public class BottlerRecipe implements Recipe<Container>{
 			JsonObject Label = GsonHelper.getAsJsonObject(json, "label");
 			JsonObject Container = GsonHelper.getAsJsonObject(json, "container");
 			JsonObject Fluid = GsonHelper.getAsJsonObject(json, "fluid");
+			JsonObject Ticks = GsonHelper.getAsJsonObject(json, "ticks");
+
 			NonNullList<Ingredient> In = NonNullList.withSize(3, Ingredient.EMPTY);
 			In.set(1, Ingredient.fromJson(Label));
 			In.set(0, Ingredient.fromJson(Container));
 			In.set(2, Ingredient.fromJson(Fluid));
-			return new BottlerRecipe(Id, Out, In);
+			return new BottlerRecipe(Id, Out, In, Ticks.getAsInt());
 		}
 
 		@Nullable
@@ -106,8 +82,8 @@ public class BottlerRecipe implements Recipe<Container>{
 			}
 			
 			ItemStack Out = buffer.readItem();
-
-			return new BottlerRecipe(Id, Out, In);
+			int ticks = buffer.readInt();
+			return new BottlerRecipe(Id, Out, In, ticks);
 		}
 
 		@Override
@@ -117,24 +93,18 @@ public class BottlerRecipe implements Recipe<Container>{
 				ing.toNetwork(buffer);
 			}
 			buffer.writeItemStack(Recipe.getResultItem(), false);
-
+			buffer.writeInt(Recipe.ticks);
 		}
 		
 	}
 
-	@Override
-	public boolean canCraftInDimensions(int p_43999_, int p_44000_) {
-		return true;
-	}
+
 
 	@Override
 	public RecipeType<?> getType() {
 		return BottlerRecipeType.INSTANCE;
 	}
 	
-	@Override
-	public boolean isSpecial() {
-		return true;
-	}
+
 	
 }

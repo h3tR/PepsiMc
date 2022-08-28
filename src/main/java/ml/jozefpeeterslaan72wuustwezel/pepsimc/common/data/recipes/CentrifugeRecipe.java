@@ -12,29 +12,20 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class CentrifugeRecipe implements Recipe<Container>{
+public class CentrifugeRecipe extends ProcessingRecipe{
 	static ResourceLocation TYPE_ID = new ResourceLocation("pepsimc", "centrifuge");
-
-	private final ResourceLocation id;
-	private final ItemStack out;
 	private final ItemStack extra;
 
-	private final NonNullList<Ingredient> in;
-	
-	public CentrifugeRecipe(ResourceLocation Id, ItemStack Out, ItemStack Byproduct,NonNullList<Ingredient> In) {
-		this.id = Id;
-		this.out = Out;
-		this.in = In;
+	public CentrifugeRecipe(ResourceLocation Id, ItemStack Out, ItemStack Byproduct,NonNullList<Ingredient> In,int ticks) {
+		super(Id, Out, In, ticks);
 		this.extra = Byproduct;
 	}
 	
@@ -42,36 +33,16 @@ public class CentrifugeRecipe implements Recipe<Container>{
 	public boolean matches(Container inv, Level Win) {
 		return in.get(0).test(inv.getItem(0));
 	}
-	
-	@Override
-	public ItemStack getResultItem() {
-		return out.copy();
-	}
-	
+
 	public ItemStack getByproductItem() {
 		return extra.copy();
 	}
-	
-	
-	@Override
-	public ItemStack assemble(Container inv) {
-		return out;
-	}
-	
+
 	@Override
 	public RecipeSerializer<?> getSerializer() {
 		return PepsiMcRecipeType.CENTRIFUGE_SERIALIZER.get();
 	}
-	
-	@Override
-	public NonNullList<Ingredient> getIngredients() {
-		return in;
-	}
-	
-	@Override
-	public ResourceLocation getId() {
-		return id;
-	}
+
 	
 	@Override
 	public ItemStack getToastSymbol() {
@@ -95,9 +66,11 @@ public class CentrifugeRecipe implements Recipe<Container>{
 			ItemStack Out = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
 			ItemStack Extra = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "byproduct"));
 			JsonObject Extract = GsonHelper.getAsJsonObject(json, "extract");
+			JsonObject Ticks = GsonHelper.getAsJsonObject(json, "ticks");
+
 			NonNullList<Ingredient> In = NonNullList.withSize(1, Ingredient.EMPTY);
 			In.set(0, Ingredient.fromJson(Extract));
-			return new CentrifugeRecipe(Id, Out,Extra, In);
+			return new CentrifugeRecipe(Id, Out, Extra, In, Ticks.getAsInt());
 		}
 
 		@Nullable
@@ -111,8 +84,9 @@ public class CentrifugeRecipe implements Recipe<Container>{
 			
 			ItemStack Extra = buffer.readItem();
 			ItemStack Out = buffer.readItem();
+			int ticks = buffer.readInt();
 
-			return new CentrifugeRecipe(Id, Out, Extra, In);
+			return new CentrifugeRecipe(Id, Out, Extra, In, ticks);
 		}
 
 		@Override
@@ -123,24 +97,17 @@ public class CentrifugeRecipe implements Recipe<Container>{
 			}
 			buffer.writeItemStack(Recipe.getByproductItem(), false);
 			buffer.writeItemStack(Recipe.getResultItem(), false);
+			buffer.writeInt(Recipe.ticks);
 
 		}
 		
 	}
 
-	@Override
-	public boolean canCraftInDimensions(int p_43999_, int p_44000_) {
-		return true;
-	}
 
 	@Override
 	public RecipeType<?> getType() {
 		return CentrifugeRecipeType.INSTANCE;
 	}
 	
-	@Override
-	public boolean isSpecial() {
-		return true;
-	}
-	
+
 }

@@ -8,7 +8,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 
-public class FlavorMachineMenu extends ProcessingTileMenu {
+public class FlavorMachineMenu extends ProcessingMenu {
 
 
 

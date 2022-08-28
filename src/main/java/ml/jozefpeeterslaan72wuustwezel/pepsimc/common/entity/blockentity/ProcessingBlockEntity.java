@@ -21,7 +21,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class ProcessingBlockEntity extends BlockEntity{
+public abstract class ProcessingBlockEntity extends BlockEntity{
 
 	public final ItemStackHandler itemHandler;
 	private LazyOptional<IItemHandler> handler;
@@ -57,13 +57,9 @@ public class ProcessingBlockEntity extends BlockEntity{
 		return toReturn; 
 	}
 	
-	public void process(Level world) {
-		LogManager.getLogger().warn("Process method called outside super class!");
-	}
+	public abstract void process(Level world);
 	
-	public void processAll(Level world) {
-		LogManager.getLogger().warn("Processall method called outside super class!");
-	}
+	public abstract void processAll(Level world);
 	
 	protected SimpleContainer getSimpleInv() {
 		SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
@@ -74,7 +70,7 @@ public class ProcessingBlockEntity extends BlockEntity{
 		return inv;
 	}
 	
-	protected ItemStackHandler createHandler() {return null;}
+	protected abstract ItemStackHandler createHandler();
 
 	@Nonnull
 	@Override

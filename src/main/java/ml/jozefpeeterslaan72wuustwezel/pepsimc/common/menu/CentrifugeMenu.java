@@ -8,7 +8,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 
-public class CentrifugeMenu extends ProcessingTileMenu {
+public class CentrifugeMenu extends ProcessingMenu {
 
 
 

@@ -59,7 +59,7 @@ public class RecyclerEntity extends ProcessingBlockEntity implements IAnimatable
 				itemHandler.extractItem(1, 1, false);
 				itemHandler.insertItem(2, iRecipe.getResultItem(), false);
 				setChanged();
-			});	
+			});
 			recipe = world.getRecipeManager().getRecipeFor(RecyclerRecipe.RecyclerRecipeType.INSTANCE, getSimpleInv(), world);
 		}
 	}

@@ -17,7 +17,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 import java.util.ArrayList;
 
-public class ProcessingTileMenu extends AbstractContainerMenu{
+public abstract class ProcessingMenu extends AbstractContainerMenu{
 	
 	public final BlockEntity entity;
 	private final IItemHandler inv;
@@ -26,7 +26,7 @@ public class ProcessingTileMenu extends AbstractContainerMenu{
     protected final ArrayList<SlotItemHandler> SlotHandlers;
 
 
-    public ProcessingTileMenu(int ID, Inventory inv, BlockEntity entity, MenuType<?> container, int Size, Block block) {
+    public ProcessingMenu(int ID, Inventory inv, BlockEntity entity, MenuType<?> container, int Size, Block block) {
 		super(container, ID);
         this.entity = entity;
 		this.inv = new InvWrapper(inv);
@@ -47,9 +47,7 @@ public class ProcessingTileMenu extends AbstractContainerMenu{
 		return inv.getStackInSlot(slotIndex) != null;
 	}
 	
-	protected void addSlots(IItemHandler h) {
-		LogManager.getLogger().warn("addSlots method called outside super class");
-	}
+	protected abstract void addSlots(IItemHandler h);
 	
 	
     private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {
