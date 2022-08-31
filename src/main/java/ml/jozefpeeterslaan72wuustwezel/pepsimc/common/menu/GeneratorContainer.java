@@ -18,11 +18,14 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class GeneratorContainer extends AbstractContainerMenu {
 
-    private BlockEntity entity;
-    private IItemHandler inv;
+    private final BlockEntity entity;
+    private final IItemHandler inv;
 
     public GeneratorContainer(int ID, Inventory inv, BlockEntity entity) {
         super(PepsiMcMenu.GENERATOR_CONTAINER.get(), ID);
@@ -30,9 +33,7 @@ public class GeneratorContainer extends AbstractContainerMenu {
         this.inv = new InvWrapper(inv);
 
         if (entity != null) {
-            entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
-                addSlot(new SlotItemHandler(h, 0, 64, 24));
-            });
+            entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> addSlot(new SlotItemHandler(h, 0, 64, 24)));
         }
         layoutPlayerInventorySlots(10, 70);
         trackPower();
@@ -42,8 +43,8 @@ public class GeneratorContainer extends AbstractContainerMenu {
 
     // Setup syncing of power from server to client so that the GUI can show the amount of power in the block
     private void trackPower() {
-        // Unfortunatelly on a dedicated server ints are actually truncated to short so we need
-        // to split our integer here (split our 32 bit integer into two 16 bit integers)
+        // Unfortunatelly on a dedicated server ints are actually truncated to shor, so we need
+        // to split our integer here (split our 32-bit integer into two 16-bit integers)
         addDataSlot(new DataSlot() {
             @Override
             public int get() {
@@ -79,8 +80,8 @@ public class GeneratorContainer extends AbstractContainerMenu {
     }
 
     @Override
-    public boolean stillValid(Player playerIn) {
-        return super.stillValid(ContainerLevelAccess.create(entity.getLevel(), entity.getBlockPos()), playerIn, PepsiMcBlock.GENERATOR.get());
+    public boolean stillValid(@NotNull Player playerIn) {
+        return stillValid(ContainerLevelAccess.create(Objects.requireNonNull(entity.getLevel()), entity.getBlockPos()), playerIn, PepsiMcBlock.GENERATOR.get());
     }
 
     @Override
@@ -136,12 +137,11 @@ public class GeneratorContainer extends AbstractContainerMenu {
         return index;
     }
 
-    private int addSlotBox(IItemHandler handler, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
+    private void addSlotBox(IItemHandler handler, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
         for (int j = 0 ; j < verAmount ; j++) {
             index = addSlotRange(handler, index, x, y, horAmount, dx);
             y += dy;
         }
-        return index;
     }
 
     private void layoutPlayerInventorySlots(int leftCol, int topRow) {

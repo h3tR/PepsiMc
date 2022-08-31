@@ -2,12 +2,10 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item;
 
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.fluid.PepsiMcFluid;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.effect.PepsiMcEffect;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.PepsiMcItemGroup;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.soundevent.PepsiMcSoundEvent;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -46,7 +44,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1600, 2),1)
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_CAN.get())));
+					),new ItemStack(PepsiMcItem.USED_CAN::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_BOTTLE = ITEMS.register("pepsi_bottle", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -61,7 +59,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1600, 2),1)
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_BOTTLE.get())));
+					),new ItemStack(PepsiMcItem.USED_BOTTLE::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_LEMON_CAN = ITEMS.register("pepsi_lemon_can", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -77,7 +75,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 1600, 2),1)
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_CAN.get())));
+					),new ItemStack(PepsiMcItem.USED_CAN::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_LEMON_BOTTLE = ITEMS.register("pepsi_lemon_bottle", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -93,7 +91,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 1600, 2),1)
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_BOTTLE.get())));
+					),new ItemStack(PepsiMcItem.USED_BOTTLE::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_BERRY_CAN = ITEMS.register("pepsi_berry_can", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -109,7 +107,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.SLOW_FALLING, 1600, 2),1)
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_CAN.get())));
+					),new ItemStack(PepsiMcItem.USED_CAN::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_BERRY_BOTTLE = ITEMS.register("pepsi_berry_bottle", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -125,7 +123,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.SLOW_FALLING, 1600, 2),1)
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_BOTTLE.get())));
+					),new ItemStack(PepsiMcItem.USED_BOTTLE::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_FIRE_CAN = ITEMS.register("pepsi_fire_can", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -141,7 +139,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 1600, 2),1)
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_CAN.get())));
+					),new ItemStack(PepsiMcItem.USED_CAN::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_FIRE_BOTTLE = ITEMS.register("pepsi_fire_bottle", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -157,7 +155,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 1600, 2),1)
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_BOTTLE.get())));
+					),new ItemStack(PepsiMcItem.USED_BOTTLE::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_CRYSTAL_BOTTLE = ITEMS.register("pepsi_crystal_bottle", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -173,7 +171,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.NIGHT_VISION, 1600, 2),1)
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_BOTTLE.get())));
+					),new ItemStack(PepsiMcItem.USED_BOTTLE::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_MANGO_CAN = ITEMS.register("pepsi_mango_can", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -189,7 +187,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.effect(()->new MobEffectInstance(MobEffects.DIG_SPEED, 1600, 2),1)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_CAN.get())));
+					),new ItemStack(PepsiMcItem.USED_CAN::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_MANGO_BOTTLE = ITEMS.register("pepsi_mango_bottle", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -206,7 +204,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.DIG_SPEED, 1600, 2),1)
 
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_BOTTLE.get())));
+					),new ItemStack(PepsiMcItem.USED_BOTTLE::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_CHERRY_CAN = ITEMS.register("pepsi_cherry_can", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -222,7 +220,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.effect(()->new MobEffectInstance(MobEffects.JUMP, 1600, 2),1)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_CAN.get())));
+					),new ItemStack(PepsiMcItem.USED_CAN::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_CHERRY_BOTTLE = ITEMS.register("pepsi_cherry_bottle", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -238,7 +236,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.effect(()->new MobEffectInstance(MobEffects.JUMP, 1600, 2),1)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_BOTTLE.get())));
+					),new ItemStack(PepsiMcItem.USED_BOTTLE::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_BOOM_CAN = ITEMS.register("pepsi_boom_can", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -252,7 +250,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 2000, 2),1)
 					.effect(()->new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 2000, 2),1)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_CAN.get())));
+					),new ItemStack(PepsiMcItem.USED_CAN::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_BOOM_BOTTLE = ITEMS.register("pepsi_boom_bottle", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -266,7 +264,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 2000, 2),1)
 					.effect(()->new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 2000, 2),1)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_BOTTLE.get())));
+					),new ItemStack(PepsiMcItem.USED_BOTTLE::get)));
 	
 	public static final RegistryObject<BeverageItem> COKE_CAN = ITEMS.register("coke_can", ()-> new CokeItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -332,7 +330,7 @@ public class PepsiMcItem {
 					.build()
 					)));
 	
-	public static final RegistryObject<Item> PEPSI_MAN_TUNE_DISC = ITEMS.register("pepsi_man_tune_disc", ()-> new RecordItem(13,()->PepsiMcSoundEvent.PEPSI_MAN_TUNE.get(),new Item.Properties()
+	public static final RegistryObject<Item> PEPSI_MAN_TUNE_DISC = ITEMS.register("pepsi_man_tune_disc", ()-> new RecordItem(13, PepsiMcSoundEvent.PEPSI_MAN_TUNE::get,new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB).rarity(Rarity.RARE).stacksTo(1)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_MAX_BOTTLE = ITEMS.register("pepsi_max_bottle", ()-> new BeverageItem(new Item.Properties()
@@ -348,7 +346,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200, 2),1)
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.build()
-			),new ItemStack(()->PepsiMcItem.USED_BOTTLE.get())));
+			),new ItemStack(PepsiMcItem.USED_BOTTLE::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_MAX_CAN = ITEMS.register("pepsi_max_can", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -363,7 +361,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200, 2),1)
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.build()
-			),new ItemStack(()->PepsiMcItem.USED_CAN.get())));
+			),new ItemStack(PepsiMcItem.USED_CAN::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_MAX_MANGO_BOTTLE = ITEMS.register("pepsi_max_mango_bottle", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -379,7 +377,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.effect(()->new MobEffectInstance(MobEffects.DIG_SPEED, 1200, 2),1)
 					.build()
-			),new ItemStack(()->PepsiMcItem.USED_BOTTLE.get())));
+			),new ItemStack(PepsiMcItem.USED_BOTTLE::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_MAX_MANGO_CAN = ITEMS.register("pepsi_max_mango_can", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -395,7 +393,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.effect(()->new MobEffectInstance(MobEffects.DIG_SPEED, 1200, 2),1)
 					.build()
-			),new ItemStack(()->PepsiMcItem.USED_CAN.get())));
+			),new ItemStack(PepsiMcItem.USED_CAN::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_MAX_LEMON_BOTTLE = ITEMS.register("pepsi_max_lemon_bottle", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -411,7 +409,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.effect(()->new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 1200, 2),1)
 					.build()
-			),new ItemStack(()->PepsiMcItem.USED_BOTTLE.get())));
+			),new ItemStack(PepsiMcItem.USED_BOTTLE::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_MAX_LEMON_CAN = ITEMS.register("pepsi_max_lemon_can", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -427,7 +425,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.effect(()->new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 1200, 2),1)
 					.build()
-			),new ItemStack(()->PepsiMcItem.USED_CAN.get())));
+			),new ItemStack(PepsiMcItem.USED_CAN::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_MAX_CHERRY_CAN = ITEMS.register("pepsi_max_cherry_can", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -443,7 +441,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.effect(()->new MobEffectInstance(MobEffects.JUMP, 1200, 2),1)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_CAN.get())));
+					),new ItemStack(PepsiMcItem.USED_CAN::get)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_MAX_CHERRY_BOTTLE = ITEMS.register("pepsi_max_cherry_bottle", ()-> new BeverageItem(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
@@ -459,7 +457,7 @@ public class PepsiMcItem {
 					.effect(()->new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(), 6400), .3f)
 					.effect(()->new MobEffectInstance(MobEffects.JUMP, 1200, 2),1)
 					.build()
-					),new ItemStack(()->PepsiMcItem.USED_BOTTLE.get())));
+					),new ItemStack(PepsiMcItem.USED_BOTTLE::get)));
 	
 	public static final RegistryObject<Item> PEPSITE_INGOT = ITEMS.register("pepsite_ingot", ()-> new Item(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 

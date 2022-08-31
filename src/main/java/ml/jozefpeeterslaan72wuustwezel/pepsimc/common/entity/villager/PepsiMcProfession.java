@@ -21,7 +21,7 @@ public class PepsiMcProfession {
 					PepsiMcVillagerPOI.BOTTLING_OPERATOR.get(),
 					ImmutableSet.of(PepsiMcItem.CAFFEINE.get(),PepsiMcItem.STEVIA.get()),
 					ImmutableSet.of(PepsiMcBlock.PEPSITE_BLOCK.get()),
-					(SoundEvent)null));
+					null));
 	
 	public static void register(IEventBus bus) {
 		VILLAGER_PROFESSION.register(bus);

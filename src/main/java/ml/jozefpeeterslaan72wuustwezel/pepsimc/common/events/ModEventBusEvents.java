@@ -2,14 +2,12 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.events;
 
 import javax.annotation.Nonnull;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.FlavoringRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.events.loot.FruitAdditionModifier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = "pepsimc", bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventBusEvents {

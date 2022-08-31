@@ -8,7 +8,6 @@ import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class pepsiMcEvents {
@@ -43,7 +42,7 @@ public class pepsiMcEvents {
             Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
             for(int i=0;i<TradeList.length;i++){
                 for(int j =0;j<TradeList[i].length;j++){
-                    trades.get(i).add(TradeList[i][j]::getOffer);
+                    trades.get(i).add(TradeList[i][j]);
                 }
             }
         }

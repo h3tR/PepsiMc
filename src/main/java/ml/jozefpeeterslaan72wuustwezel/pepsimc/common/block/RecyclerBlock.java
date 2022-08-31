@@ -70,9 +70,8 @@ public class RecyclerBlock extends HorizontalFacedBlock implements EntityBlock{
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState secondState, boolean p_196243_5_) {
 	      if (!state.is(secondState.getBlock())) {
 	         BlockEntity TE = level.getBlockEntity(pos);
-	         if (TE instanceof RecyclerEntity) {
-	        	 RecyclerEntity RT = (RecyclerEntity)TE;
-	            Containers.dropContents(level, pos, RT.getNNLInv());
+	         if (TE instanceof RecyclerEntity RT) {
+				 Containers.dropContents(level, pos, RT.getNNLInv());
 	            level.updateNeighbourForOutputSignal(pos, this);
 	         }
 
@@ -107,18 +106,13 @@ public class RecyclerBlock extends HorizontalFacedBlock implements EntityBlock{
 
 	@Override 
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos p, CollisionContext context) {
-		 switch (state.getValue(FACING)) {
-		 	case NORTH:
-		 		return ShW;
-		 	case EAST:
-		 		return ShL;
-		 	case SOUTH:
-		 		return ShW;
-		 	case WEST:
-		 		return ShL;
-		 	default:
-		 		return ShW;
-		 }
+        return switch (state.getValue(FACING)) {
+            case NORTH -> ShW;
+            case EAST -> ShL;
+            case SOUTH -> ShW;
+            case WEST -> ShL;
+            default -> ShW;
+        };
 	}
 	
 }

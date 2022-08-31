@@ -100,9 +100,8 @@ public class CentrifugeBlock extends HorizontalFacedBlock implements EntityBlock
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState secondState, boolean what) {
 	      if (!state.is(secondState.getBlock())) {
 	         BlockEntity TE = level.getBlockEntity(pos);
-	         if (TE instanceof CentrifugeEntity) {
-	        	 CentrifugeEntity CT = (CentrifugeEntity)TE;
-	            Containers.dropContents(level, pos, CT.getNNLInv());
+	         if (TE instanceof CentrifugeEntity CT) {
+				 Containers.dropContents(level, pos, CT.getNNLInv());
 	            level.updateNeighbourForOutputSignal(pos, this);
 	         }
 
@@ -138,18 +137,13 @@ public class CentrifugeBlock extends HorizontalFacedBlock implements EntityBlock
 
 	@Override 
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos p, CollisionContext context) {
-		 switch (state.getValue(FACING)) {
-		 	case NORTH:
-		 		return N;
-		 	case EAST:
-		 		return E;
-		 	case SOUTH:
-		 		return S;
-		 	case WEST:
-		 		return W;
-		 	default:
-		 		return N;
-		 }
+		return switch (state.getValue(FACING)) {
+			case NORTH -> N;
+			case EAST -> E;
+			case SOUTH -> S;
+			case WEST -> W;
+			default -> N;
+		};
 	}
 	
 }

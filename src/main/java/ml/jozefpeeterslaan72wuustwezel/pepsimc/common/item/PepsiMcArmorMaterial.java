@@ -1,7 +1,5 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item;
 
-import com.google.common.base.Supplier;
-
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.LazyLoadedValue;
@@ -9,16 +7,14 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 
+import java.util.function.Supplier;
+
 @SuppressWarnings("deprecation")
 public enum PepsiMcArmorMaterial implements ArmorMaterial{
 	PEPSITE("pepsite", 150, new int[]{16, 16, 16, 16}, 5, SoundEvents.ARMOR_EQUIP_NETHERITE,
-            4.0F, 0.2F, () -> {
-        return Ingredient.of(PepsiMcItem.PEPSITE_SHARD.get());
-    }),
+            4.0F, 0.2F, () -> Ingredient.of(PepsiMcItem.PEPSITE_SHARD.get())),
 	COREPEPSITE("corepepsite", 300, new int[]{16, 16, 16, 16}, 5, SoundEvents.ARMOR_EQUIP_NETHERITE,
-            4.0F, 0.2F, () -> {
-        return Ingredient.of(PepsiMcItem.PEPSITE_CORE.get());
-    });
+            4.0F, 0.2F, () -> Ingredient.of(PepsiMcItem.PEPSITE_CORE.get()));
 
     private static final int[] HEALTH_PER_SLOT = new int[]{23, 25, 26, 21};
     private final String name;
@@ -30,8 +26,8 @@ public enum PepsiMcArmorMaterial implements ArmorMaterial{
     private final float knockbackResistance;
 	private final LazyLoadedValue<Ingredient> repairIngredient;
 
-	private PepsiMcArmorMaterial(String name, int durabilityMultiplier, int[] slotProtections, int enchantmentValue,
-                             SoundEvent sound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
+	PepsiMcArmorMaterial(String name, int durabilityMultiplier, int[] slotProtections, int enchantmentValue,
+                         SoundEvent sound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
         this.name = name;
         this.durabilityMultiplier = durabilityMultiplier;
         this.slotProtections = slotProtections;

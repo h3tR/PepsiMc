@@ -68,7 +68,7 @@ public class FlavorMachineScreen extends AbstractContainerScreen<FlavorMachineMe
 	}
 	
 	private Component createTooltip() {
-        ArrayList<Component> text = new ArrayList<Component>();
+        ArrayList<Component> text = new ArrayList<>();
         if(RecipeResult() != null) {
         	text.add(RecipeResult().getHoverName());
 			return text.get(0);
@@ -77,7 +77,7 @@ public class FlavorMachineScreen extends AbstractContainerScreen<FlavorMachineMe
     }
 	private boolean hasRecipe() {
 		SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());
-		ArrayList<ItemStack> result = new ArrayList<ItemStack>();
+		ArrayList<ItemStack> result = new ArrayList<>();
 		for(int i=0;i<entity.itemHandler.getSlots();i++) {
 			inv.setItem(i, entity.itemHandler.getStackInSlot(i));
 		}
@@ -89,14 +89,12 @@ public class FlavorMachineScreen extends AbstractContainerScreen<FlavorMachineMe
 	}
 	private ItemStack RecipeResult() {
 		SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());
-		ArrayList<ItemStack> result = new ArrayList<ItemStack>();
+		ArrayList<ItemStack> result = new ArrayList<>();
 		for(int i=0;i<entity.itemHandler.getSlots();i++) {
 			inv.setItem(i, entity.itemHandler.getStackInSlot(i));
 		}
 		Optional<FlavoringRecipe> recipe = world.getRecipeManager().getRecipeFor(FlavoringRecipe.FlavoringRecipeType.INSTANCE, inv, world);
-		recipe.ifPresent(i->{
-			result.add(i.getResultItem());
-		});
+		recipe.ifPresent(i-> result.add(i.getResultItem()));
 		return result.get(0);
 		
 	}

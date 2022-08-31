@@ -1,22 +1,15 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.AutomatedProcessingBlockEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.ProcessingBlockEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractFurnaceMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import org.apache.logging.log4j.LogManager;
 
 public class BottlerMenu extends ProcessingMenu {
-
-
-
 
 	public BottlerMenu(int ID, Inventory inv, BlockEntity entity) {
 		super(ID,  inv, entity, PepsiMcMenu.BOTTLER_MENU.get(), 3);
@@ -31,8 +24,6 @@ public class BottlerMenu extends ProcessingMenu {
 
 		SlotHandlers.forEach(this::addSlot);
 	}
-
-
 
 	@Override
 	public ItemStack quickMoveStack(Player plr, int index) {

@@ -30,7 +30,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatable, MenuProvider {
-    private AnimationFactory factory = new AnimationFactory(this);
+    private final AnimationFactory factory = new AnimationFactory(this);
 
 	public CentrifugeEntity(BlockPos pos, BlockState state) {
 		super(PepsiMcBlockEntity.CENTRIFUGE_BLOCK_ENTITY.get(), pos, state);
@@ -84,14 +84,14 @@ public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatab
 
 			@Override
 			public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-				switch (slot) {
-					case 0: return true;
-					case 1: return stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.EXTRACTED);
-					case 2: return stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.EXTRACTION_BYPRODUCT);
-					default:
-						return false;
-				
-				}
+				return switch (slot) {
+					case 0 -> true;
+					case 1 ->
+							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.EXTRACTED);
+					case 2 ->
+							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.EXTRACTION_BYPRODUCT);
+					default -> false;
+				};
 			}
 			@Override
 			@Nonnull

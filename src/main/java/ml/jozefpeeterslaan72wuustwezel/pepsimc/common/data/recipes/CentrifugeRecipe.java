@@ -76,10 +76,8 @@ public class CentrifugeRecipe extends ProcessingRecipe{
 		@Override
 		public CentrifugeRecipe fromNetwork(ResourceLocation Id, FriendlyByteBuf buffer) {
 			NonNullList<Ingredient> In = NonNullList.withSize(buffer.readInt(), Ingredient.EMPTY);
-			
-			for(int i = 0;i<In.size(); i++) {
-				In.set(i, Ingredient.fromNetwork(buffer));
-			}
+
+            In.replaceAll(ignored -> Ingredient.fromNetwork(buffer));
 			
 			ItemStack Extra = buffer.readItem();
 			ItemStack Out = buffer.readItem();

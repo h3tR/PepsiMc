@@ -1,7 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.animation.model;
 
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 @SuppressWarnings("rawtypes")

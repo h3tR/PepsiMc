@@ -1,7 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.AutomatedProcessingBlockEntity;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.ProcessingBlockEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
@@ -14,13 +13,9 @@ import org.apache.logging.log4j.LogManager;
 
 public class AutomatedBottlerMenu extends AutomatedProcessingMenu {
 
-
-
-
 	public AutomatedBottlerMenu(int ID, Inventory inv, BlockEntity entity, ContainerData data) {
 		super(ID,  inv, entity, PepsiMcMenu.AUTOMATED_BOTTLER_MENU.get(), 5, data);
 	}
-
 
 	@Override
 	protected void addSlots(IItemHandler h) {
@@ -37,7 +32,7 @@ public class AutomatedBottlerMenu extends AutomatedProcessingMenu {
 		AutomatedProcessingBlockEntity rEntity = (AutomatedProcessingBlockEntity)entity;
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.slots.get(index);
-		if (slot != null && slot.hasItem()) {
+		if (slot.hasItem()) {
 			ItemStack itemstack1 = slot.getItem();
 			itemstack = itemstack1.copy();
 

@@ -12,18 +12,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class RecyclerRecipe extends ProcessingRecipe{
-	static ResourceLocation TYPE_ID = new ResourceLocation("pepsimc", "recycler");
+	static final ResourceLocation TYPE_ID = new ResourceLocation("pepsimc", "recycler");
 	
 	public RecyclerRecipe(ResourceLocation Id, ItemStack Out, NonNullList<Ingredient> In, int ticks) {
 		super(Id, Out, In, ticks);
@@ -76,10 +74,8 @@ public class RecyclerRecipe extends ProcessingRecipe{
 		@Override
 		public RecyclerRecipe fromNetwork(ResourceLocation Id, FriendlyByteBuf buffer) {
 			NonNullList<Ingredient> In = NonNullList.withSize(buffer.readInt(), Ingredient.EMPTY);
-			
-			for(int i = 0;i<In.size(); i++) {
-				In.set(i, Ingredient.fromNetwork(buffer));
-			}
+
+			In.replaceAll(ignored -> Ingredient.fromNetwork(buffer));
 			
 			ItemStack Out = buffer.readItem();
 			int ticks = buffer.readInt();

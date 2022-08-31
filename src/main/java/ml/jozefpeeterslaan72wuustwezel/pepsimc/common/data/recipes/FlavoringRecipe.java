@@ -12,12 +12,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
@@ -76,10 +74,8 @@ public class FlavoringRecipe extends ProcessingRecipe{
 		@Override
 		public FlavoringRecipe fromNetwork(ResourceLocation Id, FriendlyByteBuf buffer) {
 			NonNullList<Ingredient> In = NonNullList.withSize(buffer.readInt(), Ingredient.EMPTY);
-			
-			for(int i = 0;i<In.size(); i++) {
-				In.set(i, Ingredient.fromNetwork(buffer));
-			}
+
+			In.replaceAll(ignored -> Ingredient.fromNetwork(buffer));
 			
 			ItemStack Out = buffer.readItem();
 			int ticks = buffer.readInt();

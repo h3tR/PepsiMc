@@ -18,7 +18,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.apache.logging.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -77,7 +76,7 @@ public class AutomatedBottlerScreen extends AbstractContainerScreen<AutomatedBot
 	}
 	
 	private Component createTooltip() {
-        ArrayList<Component> text = new ArrayList<Component>();
+        ArrayList<Component> text = new ArrayList<>();
         if(RecipeResult() != null) {
         	text.add(RecipeResult().getHoverName());
 			return text.get(0);
@@ -104,7 +103,7 @@ public class AutomatedBottlerScreen extends AbstractContainerScreen<AutomatedBot
 		}
 		
 		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, inv, world);
-		recipe.ifPresent(i->{result.add(i.getResultItem());});
+		recipe.ifPresent(i-> result.add(i.getResultItem()));
 		return result.get(0);
 		
 	}

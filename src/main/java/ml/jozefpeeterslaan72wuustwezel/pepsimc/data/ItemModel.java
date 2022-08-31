@@ -21,7 +21,7 @@ public class ItemModel extends ItemModelProvider {
 
 	@Override
 	protected void registerModels() {
-		List<RegistryObject<Item>> singleTextureGen = new ArrayList<RegistryObject<Item>>();
+		List<RegistryObject<Item>> singleTextureGen = new ArrayList<>();
 				singleTextureGen.add(PepsiMcItem.TOKEN);
 				singleTextureGen.add(PepsiMcItem.USED_CAN);
 				singleTextureGen.add(PepsiMcItem.USED_BOTTLE);
@@ -55,7 +55,7 @@ public class ItemModel extends ItemModelProvider {
 				singleTextureGen.add(PepsiMcItem.PEPSITE_BOOTS);
 				singleTextureGen.add(PepsiMcItem.PEPSITE_CORE);
 				singleTextureGen.add(PepsiMcItem.POWERED_PEPSITE_CHESTPLATE);
-		List<RegistryObject<BeverageItem>> singleTextureGenB = new ArrayList<RegistryObject<BeverageItem>>();
+		List<RegistryObject<BeverageItem>> singleTextureGenB = new ArrayList<>();
 				singleTextureGenB.add(PepsiMcItem.PEPSI_CAN);
 				singleTextureGenB.add(PepsiMcItem.PEPSI_BOTTLE);
 				singleTextureGenB.add(PepsiMcItem.PEPSI_LEMON_CAN);
@@ -82,9 +82,9 @@ public class ItemModel extends ItemModelProvider {
 				singleTextureGenB.add(PepsiMcItem.PEPSI_MAX_CHERRY_CAN);
 				singleTextureGenB.add(PepsiMcItem.PEPSI_MAX_CHERRY_BOTTLE);
 
-		for (int i = 0; i < singleTextureGen.size(); i++) {
-			String noIDName = "items/"+singleTextureGen.get(i).getId().toString().split(":")[1];
-			singleTexture(singleTextureGen.get(i).getId().getPath(),new ResourceLocation("item/generated"),"layer0",new ResourceLocation("pepsimc",noIDName));
+		for (RegistryObject<Item> itemRegistryObject : singleTextureGen) {
+			String noIDName = "items/" + itemRegistryObject.getId().toString().split(":")[1];
+			singleTexture(itemRegistryObject.getId().getPath(), new ResourceLocation("item/generated"), "layer0", new ResourceLocation("pepsimc", noIDName));
 
 		}
 	}

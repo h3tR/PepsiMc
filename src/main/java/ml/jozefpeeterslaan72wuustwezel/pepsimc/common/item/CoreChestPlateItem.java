@@ -26,16 +26,15 @@ public class CoreChestPlateItem extends PepsiteArmorItem {
 	  @Override
 	    public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
 	        if(!world.isClientSide()) {
-	            if(entity instanceof Player) {
-	                Player player = (Player)entity;
-	                if(
+	            if(entity instanceof Player player) {
+                    if(
 		                player.getInventory().getArmor(slotmap.get(EquipmentSlot.FEET)).sameItem(new ItemStack(PepsiMcItem.PEPSITE_BOOTS.get()))&&
 		                player.getInventory().getArmor(slotmap.get(EquipmentSlot.LEGS)).sameItem(new ItemStack(PepsiMcItem.PEPSITE_LEGGINGS.get()))&&
 	                	player.getInventory().getArmor(slotmap.get(EquipmentSlot.CHEST)).sameItem(new ItemStack(this))&&
 	                	player.getInventory().getArmor(slotmap.get(EquipmentSlot.HEAD)).sameItem(new ItemStack(PepsiMcItem.PEPSITE_HELMET.get()))) {
-	                	for (int i = 0; i < CommonEffects.length; i++) {
-	                		player.addEffect(new MobEffectInstance(CommonEffects[i],100));
-	                	}
+						for (MobEffect commonEffect : CommonEffects) {
+							player.addEffect(new MobEffectInstance(commonEffect, 100));
+						}
 	                	player.addEffect(new MobEffectInstance(UniqueEffect,100));
 	                	player.addEffect(new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(),3200));
 	                }

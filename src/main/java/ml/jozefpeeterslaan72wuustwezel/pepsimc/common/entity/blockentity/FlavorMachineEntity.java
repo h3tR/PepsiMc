@@ -74,14 +74,14 @@ public class FlavorMachineEntity extends ProcessingBlockEntity implements MenuPr
 
 			@Override
 			public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-				switch (slot) {
-					case 0: return true;
-					case 1: return stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.FLAVOR);
-					case 2: return stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.FLAVORED);
-					default:
-						return false;
-				
-				}
+				return switch (slot) {
+					case 0 -> true;
+					case 1 ->
+							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.FLAVOR);
+					case 2 ->
+							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.FLAVORED);
+					default -> false;
+				};
 			}
 			@Override
 			@Nonnull

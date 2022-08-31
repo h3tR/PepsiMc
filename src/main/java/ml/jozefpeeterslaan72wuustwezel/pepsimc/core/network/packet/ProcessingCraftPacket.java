@@ -11,8 +11,8 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
 
 public class ProcessingCraftPacket {
-	public BlockPos pos;
-	public boolean shift;
+	public final BlockPos pos;
+	public final boolean shift;
 	public ProcessingCraftPacket(BlockPos pos,boolean shift) {
 		this.pos = pos;
 		this.shift = shift;
@@ -32,8 +32,7 @@ public class ProcessingCraftPacket {
 			ServerPlayer plrEntity = ctx.getSender();
 			Level world = plrEntity.level;
 			BlockEntity TE = world.getBlockEntity(message.pos);
-			if(TE instanceof ProcessingBlockEntity) {
-				ProcessingBlockEntity PT = (ProcessingBlockEntity) TE;
+			if(TE instanceof ProcessingBlockEntity PT) {
 				if(message.shift) {
 					PT.processAll(world);
 				} else {

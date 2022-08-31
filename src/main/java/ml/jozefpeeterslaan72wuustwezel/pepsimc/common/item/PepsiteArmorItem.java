@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 public class PepsiteArmorItem extends ArmorItem {
 	protected final MobEffect UniqueEffect;
 	protected final EquipmentSlot slot;
-	protected HashMap<EquipmentSlot, Integer> slotmap = new HashMap<EquipmentSlot, Integer>();
+	protected final HashMap<EquipmentSlot, Integer> slotmap = new HashMap<>();
 	
     public PepsiteArmorItem(ArmorMaterial material,
     						EquipmentSlot slot,
@@ -36,9 +36,8 @@ public class PepsiteArmorItem extends ArmorItem {
     @Override
     public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
         if(!world.isClientSide()) {
-            if(entity instanceof Player) {
-                Player player = (Player)entity;
-                if(player.getInventory().getArmor(slotmap.get(this.slot)).sameItem(new ItemStack(this))) {
+            if(entity instanceof Player player) {
+				if(player.getInventory().getArmor(slotmap.get(this.slot)).sameItem(new ItemStack(this))) {
                 	player.addEffect(new MobEffectInstance(UniqueEffect,100));
                 	player.addEffect(new MobEffectInstance(PepsiMcEffect.INSOMNIA.get(),3200));
                 }

@@ -10,7 +10,6 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,14 +20,11 @@ import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
-import org.apache.logging.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.Optional;
 
 public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
@@ -46,24 +42,17 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
 
     protected final ContainerData dataAccess = new ContainerData() {
         public int get(int index) {
-            switch(index) {
-                case 0:
-                    return AutomatedProcessingBlockEntity.this.Progress;
-                case 1:
-                    return AutomatedProcessingBlockEntity.this.Goal;
-                default:
-                    return 0;
-            }
+            return switch (index) {
+                case 0 -> AutomatedProcessingBlockEntity.this.Progress;
+                case 1 -> AutomatedProcessingBlockEntity.this.Goal;
+                default -> 0;
+            };
         }
 
         public void set(int index, int value) {
-            switch(index) {
-                case 0:
-                    AutomatedProcessingBlockEntity.this.Progress = value;
-                    break;
-                case 1:
-                    AutomatedProcessingBlockEntity.this.Goal = value;
-                    break;
+            switch (index) {
+                case 0 -> AutomatedProcessingBlockEntity.this.Progress = value;
+                case 1 -> AutomatedProcessingBlockEntity.this.Goal = value;
             }
 
         }
@@ -102,7 +91,7 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
     protected abstract ItemStackHandler createHandler();
 
     private boolean isSlotFull(int slotIndex){
-        return itemHandler.getStackInSlot(slotIndex).getCount()>= itemHandler.getSlotLimit(slotIndex);
+        return itemHandler.getStackInSlot(slotIndex).getCount() < itemHandler.getSlotLimit(slotIndex);
     }
 
     private boolean isSlotEmpty(int slotIndex){
@@ -115,7 +104,7 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
         }
         PreviousRecipe = getRecipe();
         if(energyStorage.hasSufficientPower() && getRecipe().isPresent() &&
-                (isSlotEmpty(getOutputSlot()) || (!isSlotFull(getOutputSlot())) && getRecipe().get().getResultItem().sameItem(itemHandler.getStackInSlot(getOutputSlot())) &&  (getByProductSlot() < 0 ||isSlotEmpty(getByProductSlot()) || (!isSlotFull(getByProductSlot())) && getRecipe().get().getByproductItem().sameItem(itemHandler.getStackInSlot(getByProductSlot()))))) {
+                (isSlotEmpty(getOutputSlot()) || (isSlotFull(getOutputSlot())) && getRecipe().get().getResultItem().sameItem(itemHandler.getStackInSlot(getOutputSlot())) &&  (getByProductSlot() < 0 ||isSlotEmpty(getByProductSlot()) || (isSlotFull(getByProductSlot())) && getRecipe().get().getByproductItem().sameItem(itemHandler.getStackInSlot(getByProductSlot()))))) {
             Progress++;
             if(Progress>=Goal){
                 Progress = 0;

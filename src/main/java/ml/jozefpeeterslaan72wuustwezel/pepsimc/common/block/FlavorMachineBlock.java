@@ -79,9 +79,8 @@ public class FlavorMachineBlock extends HorizontalFacedBlock implements EntityBl
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState secondState, boolean p_196243_5_) {
 	      if (!state.is(secondState.getBlock())) {
 	         BlockEntity TE = level.getBlockEntity(pos);
-	         if (TE instanceof FlavorMachineEntity) {
-	        	 FlavorMachineEntity FB = (FlavorMachineEntity)TE;
-	            Containers.dropContents(level, pos, FB.getNNLInv());
+	         if (TE instanceof FlavorMachineEntity FB) {
+				 Containers.dropContents(level, pos, FB.getNNLInv());
 	            level.updateNeighbourForOutputSignal(pos, this);
 	         }
 
@@ -112,18 +111,13 @@ public class FlavorMachineBlock extends HorizontalFacedBlock implements EntityBl
 
 	@Override 
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos p, CollisionContext context) {
-		 switch (state.getValue(FACING)) {
-		 	case NORTH:
-		 		return N;
-		 	case EAST:
-		 		return E;
-		 	case SOUTH:
-		 		return S;
-		 	case WEST:
-		 		return W;
-		 	default:
-		 		return N;
-		 }
+        return switch (state.getValue(FACING)) {
+            case NORTH -> N;
+            case EAST -> E;
+            case SOUTH -> S;
+            case WEST -> W;
+            default -> N;
+        };
 	}
 	
 }

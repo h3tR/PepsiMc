@@ -1,7 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.AutomatedBottlerEntity;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.BottlerEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -89,9 +88,8 @@ public class AutomatedBottlerBlock extends HorizontalFacedBlock implements Entit
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState secondState, boolean p_196243_5_) {
 	      if (!state.is(secondState.getBlock())) {
 	         BlockEntity blockEntity = level.getBlockEntity(pos);
-	         if (blockEntity instanceof AutomatedBottlerEntity) {
-		         AutomatedBottlerEntity automatedbottlerentity = (AutomatedBottlerEntity)blockEntity;
-	            Containers.dropContents(level, pos, automatedbottlerentity.getNNLInv());
+	         if (blockEntity instanceof AutomatedBottlerEntity automatedbottlerentity) {
+				 Containers.dropContents(level, pos, automatedbottlerentity.getNNLInv());
 	            level.updateNeighbourForOutputSignal(pos, this);
 	         }
 
@@ -116,19 +114,11 @@ public class AutomatedBottlerBlock extends HorizontalFacedBlock implements Entit
 
 	
 	@Override 
-	public @NotNull VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos p, CollisionContext context) {
-		 switch (state.getValue(FACING)) {
-		 	case NORTH:
-		 		return ShW;
-		 	case EAST:
-		 		return ShL;
-		 	case SOUTH:
-		 		return ShW;
-		 	case WEST:
-		 		return ShL;
-		 	default:
-		 		return ShW;
-		 }
+	public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos p, @NotNull CollisionContext context) {
+		return switch (state.getValue(FACING)) {
+			case EAST, WEST -> ShL;
+			default -> ShW;
+		};
 	}
 
 	@Override
@@ -140,11 +130,7 @@ public class AutomatedBottlerBlock extends HorizontalFacedBlock implements Entit
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
 		if (level.isClientSide()) {
-			return (level1, pos, state1, tile) -> {
-				/*if (tile instanceof AutomatedBottlerEntity Machine) {
-					Machine.tickClient(state1);
-				}*/
-			};
+			return null;
 		} else {
 			return (level1, pos, state1, tile) -> {
 				if (tile instanceof AutomatedBottlerEntity Machine) {

@@ -1,6 +1,5 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.effect;
 
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player.BedSleepingProblem;
 import net.minecraft.world.effect.MobEffect;

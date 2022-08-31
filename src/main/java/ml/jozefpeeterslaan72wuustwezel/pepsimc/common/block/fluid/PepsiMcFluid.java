@@ -15,7 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class PepsiMcFluid {
 
-	public static DeferredRegister<Fluid> FLUIDS =
+	public static final DeferredRegister<Fluid> FLUIDS =
 			DeferredRegister.create(ForgeRegistries.FLUIDS, "pepsimc");
 
 	public static final RegistryObject<Source> PEPSI_FLUID =
@@ -36,8 +36,8 @@ public class PepsiMcFluid {
 
 	public static final ForgeFlowingFluid.Properties PEPSI_PROPERTIES =
 			new ForgeFlowingFluid.Properties(
-					() -> PEPSI_FLUID.get(),
-					() -> PEPSI_FLOW.get(),
+					PEPSI_FLUID,
+					PEPSI_FLOW,
 					FluidAttributes.builder(
 									new ResourceLocation("block/water_still"),
 									new ResourceLocation("block/water_flow"))
@@ -48,13 +48,13 @@ public class PepsiMcFluid {
 							.color(0xff3d1f01))
 					.levelDecreasePerBlock(2)
 					.slopeFindDistance(6)
-					.bucket(()->PepsiMcItem.PEPSI_FLUID_BUCKET.get())
-					.block(()->PepsiMcBlock.PEPSI_FLUID_BLOCK.get());
+					.bucket(PepsiMcItem.PEPSI_FLUID_BUCKET)
+					.block(PepsiMcBlock.PEPSI_FLUID_BLOCK);
 
 	public static final ForgeFlowingFluid.Properties PEPSI_MAX_PROPERTIES =
 			new ForgeFlowingFluid.Properties(
-					() -> PEPSI_MAX_FLUID.get(),
-					() -> PEPSI_MAX_FLOW.get(),
+					PEPSI_MAX_FLUID,
+					PEPSI_MAX_FLOW,
 					FluidAttributes.builder(
 									new ResourceLocation("block/water_still"),
 									new ResourceLocation("block/water_flow"))
@@ -66,8 +66,8 @@ public class PepsiMcFluid {
 							.color(0xff241201))
 					.levelDecreasePerBlock(2)
 					.slopeFindDistance(6)
-					.bucket(()->PepsiMcItem.PEPSI_MAX_FLUID_BUCKET.get())
-					.block(()->PepsiMcBlock.PEPSI_MAX_FLUID_BLOCK.get());
+					.bucket(PepsiMcItem.PEPSI_MAX_FLUID_BUCKET)
+					.block(PepsiMcBlock.PEPSI_MAX_FLUID_BLOCK);
 
 	public static void register(IEventBus bus) {
 		FLUIDS.register(bus);

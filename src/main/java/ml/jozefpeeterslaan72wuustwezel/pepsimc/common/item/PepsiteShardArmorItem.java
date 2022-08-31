@@ -25,7 +25,7 @@ import net.minecraft.world.phys.HitResult;
 
 public class PepsiteShardArmorItem extends Item {	
 
-	private Item result;
+	private final Item result;
     public PepsiteShardArmorItem(Properties properties,Item result) {
 		super(properties);
 		this.result = result;

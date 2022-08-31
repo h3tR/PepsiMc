@@ -27,6 +27,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 	
@@ -82,12 +83,11 @@ public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 	
 	
 	@SuppressWarnings("deprecation")
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState secondState, boolean p_196243_5_) {
+	public void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState secondState, boolean p_196243_5_) {
 	      if (!state.is(secondState.getBlock())) {
 	         BlockEntity tileentity = level.getBlockEntity(pos);
-	         if (tileentity instanceof BottlerEntity) {
-		         BottlerEntity bottlerTile = (BottlerEntity)tileentity;
-	            Containers.dropContents(level, pos, bottlerTile.getNNLInv());
+	         if (tileentity instanceof BottlerEntity bottlerTile) {
+				 Containers.dropContents(level, pos, bottlerTile.getNNLInv());
 	            level.updateNeighbourForOutputSignal(pos, this);
 	         }
 
@@ -113,18 +113,13 @@ public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 	
 	@Override 
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos p, CollisionContext context) {
-		 switch (state.getValue(FACING)) {
-		 	case NORTH:
-		 		return ShW;
-		 	case EAST:
-		 		return ShL;
-		 	case SOUTH:
-		 		return ShW;
-		 	case WEST:
-		 		return ShL;
-		 	default:
-		 		return ShW;
-		 }
+        return switch (state.getValue(FACING)) {
+            case NORTH -> ShW;
+            case EAST -> ShL;
+            case SOUTH -> ShW;
+            case WEST -> ShL;
+            default -> ShW;
+        };
 	}
 
 	@Override

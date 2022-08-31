@@ -24,7 +24,7 @@ public class AnimatedBlockItem extends BlockItem implements IAnimatable {
 	
 	@Override
 	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<AnimatedBlockItem>(this, "controller", 1, this::predicate));
+		data.addAnimationController(new AnimationController<>(this, "controller", 1, this::predicate));
 
 	}
 

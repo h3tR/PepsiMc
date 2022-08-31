@@ -1,7 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu;
 
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.ProcessingBlockEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -13,7 +12,6 @@ import net.minecraftforge.items.SlotItemHandler;
 
 
 public class RecyclerMenu extends ProcessingMenu {
-
 
 	public RecyclerMenu(int ID, Inventory inv, BlockEntity entity) {
 		super(ID,  inv, entity, PepsiMcMenu.RECYCLER_MENU.get(), 3);

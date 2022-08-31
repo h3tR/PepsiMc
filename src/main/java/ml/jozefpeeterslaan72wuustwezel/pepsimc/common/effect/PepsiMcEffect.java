@@ -3,7 +3,6 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.effect;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -24,9 +23,9 @@ public class PepsiMcEffect {
 	public static final DeferredRegister<Potion> POTIONS =
 			DeferredRegister.create(ForgeRegistries.POTIONS, "pepsimc");
 	
-	public static RegistryObject<MobEffect> INSOMNIA = EFFECTS.register("insomnia",InsomniaEffect::new);
+	public static final RegistryObject<MobEffect> INSOMNIA = EFFECTS.register("insomnia",InsomniaEffect::new);
 
-	public static RegistryObject<Potion> INSOMNIA_POTION = POTIONS.register("insomnia_potion",()->new Potion(new MobEffectInstance(INSOMNIA.get(), 3600)));
+	public static final RegistryObject<Potion> INSOMNIA_POTION = POTIONS.register("insomnia_potion",()->new Potion(new MobEffectInstance(INSOMNIA.get(), 3600)));
 
 
 	public static void register(IEventBus bus) {
@@ -36,11 +35,11 @@ public class PepsiMcEffect {
 
 	public static void registerPotionRecipes(){
 		Item[] PotionTypes={Items.POTION,Items.SPLASH_POTION,Items.LINGERING_POTION};
-		for (int i=0;i<PotionTypes.length;i++) {
+		for (Item potionType : PotionTypes) {
 			BrewingRecipeRegistry.addRecipe(
-					Ingredient.of(PotionUtils.setPotion(new ItemStack(PotionTypes[i]), Potions.WATER)),
+					Ingredient.of(PotionUtils.setPotion(new ItemStack(potionType), Potions.WATER)),
 					Ingredient.of(new ItemStack(PepsiMcItem.CAFFEINE.get())),
-					PotionUtils.setPotion(new ItemStack(PotionTypes[i]), PepsiMcEffect.INSOMNIA_POTION.get()));
+					PotionUtils.setPotion(new ItemStack(potionType), PepsiMcEffect.INSOMNIA_POTION.get()));
 		}
 	}
 }

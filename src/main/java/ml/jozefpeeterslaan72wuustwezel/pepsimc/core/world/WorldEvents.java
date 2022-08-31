@@ -20,7 +20,6 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import org.apache.logging.log4j.LogManager;
 
 @Mod.EventBusSubscriber(modid = "pepsimc")
 public class WorldEvents {
@@ -49,8 +48,8 @@ public class WorldEvents {
 		Registry<StructureProcessorList> processorListRegistry = event.getServer().registryAccess().registry(Registry.PROCESSOR_LIST_REGISTRY).orElseThrow();
 
 		String[] biomes = {"plains","snowy","savanna","desert","taiga"};
-		for(int i=0;i<biomes.length;i++){
-			addBuildingToPool(templatePoolRegistry,processorListRegistry,new ResourceLocation("village/"+biomes[i]+"/houses"),"pepsimc:village/"+biomes[i]+"/houses/"+biomes[i]+"_pepsi_store_1", 250);
+		for (String biome : biomes) {
+			addBuildingToPool(templatePoolRegistry, processorListRegistry, new ResourceLocation("village/" + biome + "/houses"), "pepsimc:village/" + biome + "/houses/" + biome + "_pepsi_store_1", 250);
 		}
 	}
 
@@ -82,11 +81,11 @@ public class WorldEvents {
 		for (int i = 0; i < weight; i++) {
 			pool.templates.add(piece);
 		}
-		;
+
 
 		// Use AccessTransformer or Accessor Mixin to make StructureTemplatePool's rawTemplates field public for us to see.
 		// This list of pairs of pieces and weights is not used by vanilla by default but another mod may need it for efficiency.
-		// So lets add to this list for completeness. We need to make a copy of the array as it can be an immutable list.
+		// So let's add to this list for completeness. We need to make a copy of the array as it can be an immutable list.
 		List<Pair<StructurePoolElement, Integer>> listOfPieceEntries = new ArrayList<>(pool.rawTemplates);
 		listOfPieceEntries.add(new Pair<>(piece, weight));
 		pool.rawTemplates = listOfPieceEntries;

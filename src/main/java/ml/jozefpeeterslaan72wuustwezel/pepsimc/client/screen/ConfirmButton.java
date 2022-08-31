@@ -10,7 +10,6 @@ import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -24,7 +23,8 @@ public class ConfirmButton extends AbstractButton{
 	      int SizeX;
 	      int SizeY;
 	      ResourceLocation GUI;
-	      protected ConfirmButton(int X, int Y, int IconX, int IconY, int SizeX, int SizeY, BlockPos Pos, ResourceLocation GUI) {
+	      @SuppressWarnings("SameParameterValue")
+		  protected ConfirmButton(int X, int Y, int IconX, int IconY, int SizeX, int SizeY, BlockPos Pos, ResourceLocation GUI) {
 	         super(X, Y, SizeX, SizeY, TextComponent.EMPTY);
 	         this.IconX = IconX;
 	         this.IconY= IconY; 
@@ -42,7 +42,7 @@ public class ConfirmButton extends AbstractButton{
 	         if (!this.active) {
 	            j += this.width * 2;
 	         } else if (this.selected) {
-	            j += this.width * 1;
+	            j += this.width;
 	         } else if (this.isHoveredOrFocused()) {
 	            j += this.width * 3;
 	         }

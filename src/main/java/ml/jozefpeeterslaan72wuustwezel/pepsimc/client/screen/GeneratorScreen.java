@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class GeneratorScreen extends AbstractContainerScreen<GeneratorContainer> {
 
-    private ResourceLocation GUI = new ResourceLocation("pepsimc", "textures/gui/generator_gui.png");
+    private final ResourceLocation GUI = new ResourceLocation("pepsimc", "textures/gui/generator_gui.png");
 
     public GeneratorScreen(GeneratorContainer container, Inventory inv, Component name) {
         super(container, inv, name);

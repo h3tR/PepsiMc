@@ -73,7 +73,7 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerMenu>{
 	}
 	
 	private Component createTooltip() {
-        ArrayList<Component> text = new ArrayList<Component>();
+        ArrayList<Component> text = new ArrayList<>();
         if(RecipeResult() != null) {
         	text.add(RecipeResult().getHoverName());
 			return text.get(0);
@@ -94,15 +94,13 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerMenu>{
 	}
 	private ItemStack RecipeResult() {
         SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());
-        ArrayList<ItemStack> result = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> result = new ArrayList<>();
 		for(int i=0;i<entity.itemHandler.getSlots();i++) {
 			inv.setItem(i, entity.itemHandler.getStackInSlot(i));
 		}
 		
 		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, inv, world);
-		recipe.ifPresent(i->{
-			result.add(i.getResultItem());
-		});
+		recipe.ifPresent(i-> result.add(i.getResultItem()));
 		return result.get(0);
 		
 	}

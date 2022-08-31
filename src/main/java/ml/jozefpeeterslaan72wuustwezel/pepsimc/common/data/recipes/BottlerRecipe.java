@@ -80,10 +80,8 @@ public class BottlerRecipe extends ProcessingRecipe{
 		@Override
 		public BottlerRecipe fromNetwork(ResourceLocation Id, FriendlyByteBuf buffer) {
 			NonNullList<Ingredient> In = NonNullList.withSize(buffer.readInt(), Ingredient.EMPTY);
-			
-			for(int i = 0;i<In.size(); i++) {
-				In.set(i, Ingredient.fromNetwork(buffer));
-			}
+
+            In.replaceAll(ignored -> Ingredient.fromNetwork(buffer));
 			
 			ItemStack Out = buffer.readItem();
 			int ticks = buffer.readInt();

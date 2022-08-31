@@ -1,12 +1,9 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu;
 
-import org.apache.logging.log4j.LogManager;
-
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.MenuType;
@@ -22,7 +19,7 @@ public abstract class ProcessingMenu extends AbstractContainerMenu{
 	
 	public final BlockEntity entity;
 	private final IItemHandler inv;
-	public int Size;
+	public final int Size;
     protected final ArrayList<SlotItemHandler> SlotHandlers;
 
 
@@ -61,13 +58,12 @@ public abstract class ProcessingMenu extends AbstractContainerMenu{
         return index;
     }
 
-    private int addSlotBox(IItemHandler handler, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
+    private void addSlotBox(IItemHandler handler, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
         for (int j = 0; j < verAmount; j++) {
             index = addSlotRange(handler, index, x, y, horAmount, dx);
             y += dy;
         }
 
-        return index;
     }
 
     private void layoutPlayerInventorySlots(int leftCol, int topRow) {
@@ -76,14 +72,7 @@ public abstract class ProcessingMenu extends AbstractContainerMenu{
         topRow += 58;
         addSlotRange(inv, 0, leftCol, topRow, 9, 18);
     }
-   
-  /*  private static final int HOTBAR_SLOT_COUNT = 9;
-    private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
-    private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
-    private static final int PLAYER_INVENTORY_SLOT_COUNT = PLAYER_INVENTORY_COLUMN_COUNT * PLAYER_INVENTORY_ROW_COUNT;
-    private static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
-    private static final int VANILLA_FIRST_SLOT_INDEX = 0;
-    private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;*/
+
 
     @Override
     public abstract ItemStack quickMoveStack(Player playerIn, int index);

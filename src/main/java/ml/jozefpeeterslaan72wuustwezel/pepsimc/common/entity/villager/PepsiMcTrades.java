@@ -100,11 +100,10 @@ public class PepsiMcTrades {
 
 		@Nullable
 		public MerchantOffer getOffer(Entity p_35817_, Random p_35818_) {
-			if (!(p_35817_.level instanceof ServerLevel)) {
+			if (!(p_35817_.level instanceof ServerLevel serverlevel)) {
 				return null;
 			} else {
-				ServerLevel serverlevel = (ServerLevel)p_35817_.level;
-				BlockPos blockpos = serverlevel.findNearestMapFeature(this.destination, p_35817_.blockPosition(), 100, true);
+                BlockPos blockpos = serverlevel.findNearestMapFeature(this.destination, p_35817_.blockPosition(), 100, true);
 				if (blockpos != null) {
 					ItemStack itemstack = MapItem.create(serverlevel, blockpos.getX(), blockpos.getZ(), (byte)2, true, true);
 					MapItem.renderBiomePreviewMap(serverlevel, itemstack);
