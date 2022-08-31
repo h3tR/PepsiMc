@@ -4,5 +4,7 @@
     "flavor": { "item": "minecraft:sweet_berries" }, 
     "result": {
         "item": "pepsimc:pepsi_berry_can"
-    }
+    },
+    "ticks": 50
+
 }

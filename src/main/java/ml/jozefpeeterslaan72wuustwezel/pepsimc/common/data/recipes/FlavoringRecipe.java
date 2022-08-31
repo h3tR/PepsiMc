@@ -22,48 +22,27 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class FlavoringRecipe implements Recipe<Container>{
+public class FlavoringRecipe extends ProcessingRecipe{
 	static ResourceLocation TYPE_ID = new ResourceLocation("pepsimc", "flavor");
-
-	private final ResourceLocation id;
-	private final ItemStack out;
-	private final NonNullList<Ingredient> in;
 	
-	public FlavoringRecipe(ResourceLocation Id, ItemStack Out, NonNullList<Ingredient> In) {
-		this.id = Id;
-		this.out = Out;
-		this.in = In;
+	public FlavoringRecipe(ResourceLocation Id, ItemStack Out, NonNullList<Ingredient> In,int Ticks) {
+		super(Id,Out,In,Ticks);
 	}
-	
+
+	@org.jetbrains.annotations.Nullable
+	@Override
+	public ItemStack getByproductItem() {
+		return null;
+	}
+
 	@Override
 	public boolean matches(Container inv, Level Win) {
 		return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1));
 	}
 	
 	@Override
-	public ItemStack getResultItem() {
-		return out.copy();
-	}
-	
-	
-	@Override
-	public ItemStack assemble(Container inv) {
-		return out;
-	}
-	
-	@Override
 	public RecipeSerializer<?> getSerializer() {
 		return PepsiMcRecipeType.FLAVORING_SERIALIZER.get();
-	}
-	
-	@Override
-	public NonNullList<Ingredient> getIngredients() {
-		return in;
-	}
-	
-	@Override
-	public ResourceLocation getId() {
-		return id;
 	}
 	
 	@Override
@@ -90,7 +69,7 @@ public class FlavoringRecipe implements Recipe<Container>{
 			NonNullList<Ingredient> In = NonNullList.withSize(2, Ingredient.EMPTY);
 			In.set(0, Ingredient.fromJson(Product));
 			In.set(1, Ingredient.fromJson(Flavor));
-			return new FlavoringRecipe(Id, Out, In);
+			return new FlavoringRecipe(Id, Out, In,GsonHelper.getAsInt(json, "ticks"));
 		}
 
 		@Nullable
@@ -103,8 +82,9 @@ public class FlavoringRecipe implements Recipe<Container>{
 			}
 			
 			ItemStack Out = buffer.readItem();
+			int ticks = buffer.readInt();
 
-			return new FlavoringRecipe(Id, Out, In);
+			return new FlavoringRecipe(Id, Out, In,ticks);
 		}
 
 		@Override
@@ -114,24 +94,16 @@ public class FlavoringRecipe implements Recipe<Container>{
 				ing.toNetwork(buffer);
 			}
 			buffer.writeItemStack(Recipe.getResultItem(), false);
+			buffer.writeInt(Recipe.ticks);
 
 		}
 		
 	}
 
 	@Override
-	public boolean canCraftInDimensions(int p_43999_, int p_44000_) {
-		return true;
-	}
-
-	@Override
 	public RecipeType<?> getType() {
 		return FlavoringRecipeType.INSTANCE;
 	}
-	
-	@Override
-	public boolean isSpecial() {
-		return true;
-	}
+
 	
 }

@@ -82,9 +82,7 @@ public class WorldEvents {
 		for (int i = 0; i < weight; i++) {
 			pool.templates.add(piece);
 		}
-		pool.templates.forEach(t->{
-			LogManager.getLogger().debug(t);
-		});
+		;
 
 		// Use AccessTransformer or Accessor Mixin to make StructureTemplatePool's rawTemplates field public for us to see.
 		// This list of pairs of pieces and weights is not used by vanilla by default but another mod may need it for efficiency.

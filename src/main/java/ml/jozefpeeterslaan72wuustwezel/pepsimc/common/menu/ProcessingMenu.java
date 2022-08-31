@@ -14,6 +14,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -21,31 +22,31 @@ public abstract class ProcessingMenu extends AbstractContainerMenu{
 	
 	public final BlockEntity entity;
 	private final IItemHandler inv;
-	public Block block;
 	public int Size;
     protected final ArrayList<SlotItemHandler> SlotHandlers;
 
 
-    public ProcessingMenu(int ID, Inventory inv, BlockEntity entity, MenuType<?> container, int Size, Block block) {
+    public ProcessingMenu(int ID, Inventory inv, BlockEntity entity, MenuType<?> container, int Size) {
 		super(container, ID);
         this.entity = entity;
 		this.inv = new InvWrapper(inv);
-		this.block = block;
 		this.Size = Size;
-        this.SlotHandlers = new ArrayList<SlotItemHandler>();
+        this.SlotHandlers = new ArrayList<>();
         layoutPlayerInventorySlots(8, 86);
 		
 		if(entity !=null) {
-            entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h->{
-				addSlots(h);
-			});
+            entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(this::addSlots);
 		}
-		
+
 	}
 
 	public boolean slotHasItem(int slotIndex) {
-		return inv.getStackInSlot(slotIndex) != null;
-	}
+        if(SlotHandlers.size()>slotIndex) {
+            return SlotHandlers.get(slotIndex).hasItem();
+        }else{
+            return false;
+        }
+    }
 	
 	protected abstract void addSlots(IItemHandler h);
 	
@@ -85,14 +86,20 @@ public abstract class ProcessingMenu extends AbstractContainerMenu{
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;*/
 
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {     
-    	return ItemStack.EMPTY;        
-    }
+    public abstract ItemStack quickMoveStack(Player playerIn, int index);
 
     @Override
     public boolean stillValid(Player playerIn) {
-        return super.stillValid(ContainerLevelAccess.create(entity.getLevel(), entity.getBlockPos()), playerIn,block);
+        return stillValid(ContainerLevelAccess.create(entity.getLevel(), entity.getBlockPos()), playerIn,entity.getBlockState().getBlock());
     }
 
-    
+    protected static class OutputSlot extends SlotItemHandler{
+
+        public OutputSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+            super(itemHandler, index, xPosition, yPosition);
+        }
+
+        @Override
+        public boolean mayPlace(@NotNull ItemStack stack) { return false; }
+    }
 }

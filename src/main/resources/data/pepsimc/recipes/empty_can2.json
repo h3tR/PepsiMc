@@ -4,5 +4,6 @@
     "catalyst": { "item": "pepsimc:can_lid" }, 
     "result": {
         "item": "pepsimc:empty_can"
-    }
+    },
+    "ticks": 50
 }

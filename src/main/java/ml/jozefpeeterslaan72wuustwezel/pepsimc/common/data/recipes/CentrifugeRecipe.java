@@ -66,11 +66,10 @@ public class CentrifugeRecipe extends ProcessingRecipe{
 			ItemStack Out = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
 			ItemStack Extra = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "byproduct"));
 			JsonObject Extract = GsonHelper.getAsJsonObject(json, "extract");
-			JsonObject Ticks = GsonHelper.getAsJsonObject(json, "ticks");
 
 			NonNullList<Ingredient> In = NonNullList.withSize(1, Ingredient.EMPTY);
 			In.set(0, Ingredient.fromJson(Extract));
-			return new CentrifugeRecipe(Id, Out, Extra, In, Ticks.getAsInt());
+			return new CentrifugeRecipe(Id, Out, Extra, In,GsonHelper.getAsInt(json, "ticks"));
 		}
 
 		@Nullable

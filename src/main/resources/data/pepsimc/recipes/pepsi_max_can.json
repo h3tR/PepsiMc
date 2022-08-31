@@ -5,5 +5,7 @@
     "fluid": { "item": "pepsimc:pepsi_max_bucket" },  
     "result": {
         "item": "pepsimc:pepsi_max_can"
-    }
+    },
+    "ticks": 50
+
 }

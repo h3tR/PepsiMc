@@ -10,6 +10,8 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
+import javax.annotation.Nullable;
+
 public abstract class ProcessingRecipe implements Recipe<Container> {
     public final int ticks;
 
@@ -53,4 +55,8 @@ public abstract class ProcessingRecipe implements Recipe<Container> {
     public ResourceLocation getId() {
         return id;
     }
+
+    @Nullable
+    public abstract ItemStack getByproductItem();
+
 }

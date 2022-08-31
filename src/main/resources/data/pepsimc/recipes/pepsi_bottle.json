@@ -5,5 +5,7 @@
     "fluid": { "item": "pepsimc:pepsi_bucket" },  
     "result": {
         "item": "pepsimc:pepsi_bottle"
-    }
+    },
+    "ticks": 50
+
 }

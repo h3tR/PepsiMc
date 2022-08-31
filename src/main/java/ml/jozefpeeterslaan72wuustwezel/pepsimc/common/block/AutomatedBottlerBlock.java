@@ -1,37 +1,41 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block;
 
-import java.util.stream.Stream;
-
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.AutomatedBottlerEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.BottlerEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
-	
+import java.util.stream.Stream;
+
+public class AutomatedBottlerBlock extends HorizontalFacedBlock implements EntityBlock {
+
 	private static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-	
+
 	private static final VoxelShape ShW = Stream.of(
 			Block.box(5, 7, 10, 6, 9, 11),
 			Block.box(10, 7, 10, 11, 9, 11),
@@ -70,9 +74,9 @@ public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 			Block.box(0, 7, 13, 6, 9, 14),
 			Block.box(0, 0, 0, 16, 7, 16)
 			).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-			
-	public BottlerBlock() {
-		super(BlockBehaviour.Properties
+
+	public AutomatedBottlerBlock() {
+		super(Properties
 				.of(Material.PISTON)
 				.strength(4.5f,15)
 				.sound(SoundType.METAL)
@@ -84,10 +88,10 @@ public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 	@SuppressWarnings("deprecation")
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState secondState, boolean p_196243_5_) {
 	      if (!state.is(secondState.getBlock())) {
-	         BlockEntity tileentity = level.getBlockEntity(pos);
-	         if (tileentity instanceof BottlerEntity) {
-		         BottlerEntity bottlerTile = (BottlerEntity)tileentity;
-	            Containers.dropContents(level, pos, bottlerTile.getNNLInv());
+	         BlockEntity blockEntity = level.getBlockEntity(pos);
+	         if (blockEntity instanceof AutomatedBottlerEntity) {
+		         AutomatedBottlerEntity automatedbottlerentity = (AutomatedBottlerEntity)blockEntity;
+	            Containers.dropContents(level, pos, automatedbottlerentity.getNNLInv());
 	            level.updateNeighbourForOutputSignal(pos, this);
 	         }
 
@@ -96,12 +100,12 @@ public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 	   }
 
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos,
-								 Player plr, InteractionHand hand, BlockHitResult hit) {
+	public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos,
+										  Player plr, InteractionHand hand, BlockHitResult hit) {
 		if (!world.isClientSide()) {
 			BlockEntity entity = world.getBlockEntity(pos);
-			if(entity instanceof BottlerEntity) {
-				NetworkHooks.openGui(((ServerPlayer)plr), (BottlerEntity)entity, pos);
+			if(entity instanceof AutomatedBottlerEntity) {
+				NetworkHooks.openGui(((ServerPlayer)plr), (AutomatedBottlerEntity)entity, pos);
 			} else {
 				throw new IllegalStateException("Container provider is missing!");
 			}
@@ -112,7 +116,7 @@ public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 
 	
 	@Override 
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos p, CollisionContext context) {
+	public @NotNull VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos p, CollisionContext context) {
 		 switch (state.getValue(FACING)) {
 		 	case NORTH:
 		 		return ShW;
@@ -129,8 +133,24 @@ public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return PepsiMcBlockEntity.BOTTLER_BLOCK_ENTITY.get().create(pos, state);
+		return PepsiMcBlockEntity.AUTOMATED_BOTTLER_BLOCK_ENTITY.get().create(pos, state);
 	}
 
-	
+	@Nullable
+	@Override
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+		if (level.isClientSide()) {
+			return (level1, pos, state1, tile) -> {
+				/*if (tile instanceof AutomatedBottlerEntity Machine) {
+					Machine.tickClient(state1);
+				}*/
+			};
+		} else {
+			return (level1, pos, state1, tile) -> {
+				if (tile instanceof AutomatedBottlerEntity Machine) {
+					Machine.tickServer();
+				}
+			};
+		}
+	}
 }

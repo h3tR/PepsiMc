@@ -60,7 +60,11 @@ public class PepsiMcBlock {
 			()-> new LiquidBlock(()->PepsiMcFluid.PEPSI_MAX_FLUID.get(), BlockBehaviour.Properties.of(Material.WATER).strength(100f).noDrops().noCollission()));
 	
 	public static final RegistryObject<Block> BOTTLER = BLOCKS.register("bottler",BottlerBlock::new);
-	
+
+	public static final RegistryObject<Block> AUTOMATED_BOTTLER = BLOCKS.register("automated_bottler",AutomatedBottlerBlock::new);
+
+	public static final RegistryObject<Block> GENERATOR = BLOCKS.register("generator",GeneratorBlock::new);
+
 	public static final RegistryObject<Block> FLAVOR_MACHINE = BLOCKS.register("flavor_machine",FlavorMachineBlock::new);
 
 	public static final RegistryObject<Block> RECYCLER = BLOCKS.register("recycler",RecyclerBlock::new);

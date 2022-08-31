@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 public class FlavorMachineEntity extends ProcessingBlockEntity implements MenuProvider {
 	
 	public FlavorMachineEntity(BlockPos pos, BlockState state) {
-		super(PepsiMcBlockEntity.FLAVOR_MACHINE_TILE.get(), pos, state);
+		super(PepsiMcBlockEntity.FLAVOR_MACHINE_BLOCK_ENTITY.get(), pos, state);
 	}
 
 	@Override

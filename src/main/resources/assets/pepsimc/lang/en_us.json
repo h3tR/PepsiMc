@@ -58,6 +58,7 @@
 	"block.pepsimc.recycler":"Recycler",
 	"block.pepsimc.stevia_plant":"Stevia Rebaudiana",
 	"block.pepsimc.stevia_crop":"Stevia Rebaudiana Seeds",
+	"block.minecraft.bed.insomnia_effect": "Your insomnia prevents you from sleeping",
 	"item.pepsimc.pepsite_shard":"Hardened Pepsite Shard",
 	"item.pepsimc.shard_helmet":"Pepsite Shard Helmet Pattern",
 	"item.pepsimc.shard_chestplate":"Pepsite Shard Chestplate Pattern",

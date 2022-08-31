@@ -133,7 +133,7 @@ public class CentrifugeBlock extends HorizontalFacedBlock implements EntityBlock
 	
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return PepsiMcBlockEntity.CENTRIFUGE_TILE.get().create(pos, state);
+		return PepsiMcBlockEntity.CENTRIFUGE_BLOCK_ENTITY.get().create(pos, state);
 	}
 
 	@Override 

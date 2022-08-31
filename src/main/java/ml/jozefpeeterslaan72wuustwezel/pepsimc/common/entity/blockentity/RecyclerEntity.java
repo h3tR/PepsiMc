@@ -33,7 +33,7 @@ public class RecyclerEntity extends ProcessingBlockEntity implements IAnimatable
     private AnimationFactory factory = new AnimationFactory(this);
 
 	public RecyclerEntity(BlockPos pos, BlockState state) {
-		super(PepsiMcBlockEntity.RECYCLER_TILE.get(), pos, state);
+		super(PepsiMcBlockEntity.RECYCLER_BLOCK_ENTITY.get(), pos, state);
 	}
 
 

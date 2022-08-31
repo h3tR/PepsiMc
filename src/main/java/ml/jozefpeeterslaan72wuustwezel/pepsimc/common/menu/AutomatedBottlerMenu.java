@@ -1,8 +1,10 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu;
 
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.AutomatedProcessingBlockEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.ProcessingBlockEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -10,35 +12,48 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import org.apache.logging.log4j.LogManager;
 
-
-public class CentrifugeMenu extends ProcessingMenu {
-
+public class AutomatedBottlerMenu extends AutomatedProcessingMenu {
 
 
 
 
-	public CentrifugeMenu(int ID, Inventory inv, BlockEntity entity) {
-		super(ID,  inv, entity, PepsiMcMenu.CENTRIFUGE_MENU.get(), 3);
-
+	public AutomatedBottlerMenu(int ID, Inventory inv, BlockEntity entity, ContainerData data) {
+		super(ID,  inv, entity, PepsiMcMenu.AUTOMATED_BOTTLER_MENU.get(), 5, data);
 	}
+
+
+	@Override
 	protected void addSlots(IItemHandler h) {
-		SlotHandlers.add(new SlotItemHandler(h,0,80,9));
-		SlotHandlers.add(new OutputSlot(h,1,66,53));
-		SlotHandlers.add(new OutputSlot(h,2,94,53));
+		SlotHandlers.add(new SlotItemHandler(h,0,12,15));
+		SlotHandlers.add(new SlotItemHandler(h,1,30,15));
+		SlotHandlers.add(new SlotItemHandler(h,2,12,43));
+		SlotHandlers.add(new OutputSlot(h,3,143,30));
+		SlotHandlers.add(new OutputSlot(h,4,143,51));
 		SlotHandlers.forEach(this::addSlot);
 	}
 
 	@Override
 	public ItemStack quickMoveStack(Player plr, int index) {
-		ProcessingBlockEntity rEntity = (ProcessingBlockEntity)entity;
+		AutomatedProcessingBlockEntity rEntity = (AutomatedProcessingBlockEntity)entity;
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.slots.get(index);
 		if (slot != null && slot.hasItem()) {
 			ItemStack itemstack1 = slot.getItem();
 			itemstack = itemstack1.copy();
+
 			if (index < 36) {
 				if (this.slots.get(36).mayPlace(itemstack)&&rEntity.itemHandler.isItemValid(0,itemstack)) {
+					LogManager.getLogger().debug("secondcheck:"+this.moveItemStackTo(itemstack1, 36, 37, false));
+
 					if (this.moveItemStackTo(itemstack1, 36, 37, false)) {
+						return ItemStack.EMPTY;
+					}
+				}else if (this.slots.get(37).mayPlace(itemstack)&&rEntity.itemHandler.isItemValid(1,itemstack)) {
+					if (this.moveItemStackTo(itemstack1, 37, 38, false)) {
+						return ItemStack.EMPTY;
+					}
+				}else if (this.slots.get(38).mayPlace(itemstack)&&rEntity.itemHandler.isItemValid(2,itemstack)) {
+					if (this.moveItemStackTo(itemstack1, 38, 39, false)) {
 						return ItemStack.EMPTY;
 					}
 				} else if (index >= 0 && index < 27) {
@@ -75,6 +90,5 @@ public class CentrifugeMenu extends ProcessingMenu {
 
 		return itemstack;
 	}
-
 
 }

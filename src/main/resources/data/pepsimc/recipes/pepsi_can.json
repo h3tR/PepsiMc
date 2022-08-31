@@ -5,5 +5,7 @@
     "fluid": { "item": "pepsimc:pepsi_bucket" },  
     "result": {
         "item": "pepsimc:pepsi_can"
-    }
+    },
+  "ticks": 100
+
 }

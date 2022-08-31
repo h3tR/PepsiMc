@@ -4,5 +4,7 @@
     "flavor": { "item": "pepsimc:cherry" }, 
     "result": {
         "item": "pepsimc:pepsi_cherry_can"
-    }
+    },
+    "ticks": 50
+
 }

@@ -33,7 +33,7 @@ public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatab
     private AnimationFactory factory = new AnimationFactory(this);
 
 	public CentrifugeEntity(BlockPos pos, BlockState state) {
-		super(PepsiMcBlockEntity.CENTRIFUGE_TILE.get(), pos, state);
+		super(PepsiMcBlockEntity.CENTRIFUGE_BLOCK_ENTITY.get(), pos, state);
 	}
 
 	@Override

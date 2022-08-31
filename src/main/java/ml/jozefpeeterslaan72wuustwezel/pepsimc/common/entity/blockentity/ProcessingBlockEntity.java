@@ -3,8 +3,6 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.apache.logging.log4j.LogManager;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -20,12 +18,13 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class ProcessingBlockEntity extends BlockEntity{
 
 	public final ItemStackHandler itemHandler;
-	private LazyOptional<IItemHandler> handler;
-	private BlockEntityType<?> type;
+	private final LazyOptional<IItemHandler> handler;
+	private final BlockEntityType<?> type;
 	public ProcessingBlockEntity(BlockEntityType<?> in, BlockPos pos, BlockState state) {
 		super(in, pos, state);
 		this.itemHandler = createHandler();
@@ -44,11 +43,7 @@ public abstract class ProcessingBlockEntity extends BlockEntity{
 		nbt.put("inv", itemHandler.serializeNBT());
 		super.saveAdditional(nbt);
 	}
-	
-	public boolean slotHasItem(int index) {
-		return itemHandler.getStackInSlot(index).getCount() > 0;
-	}
-	
+
 	public NonNullList<ItemStack> getNNLInv(){
 		NonNullList<ItemStack> toReturn = NonNullList.withSize(itemHandler.getSlots(), ItemStack.EMPTY);
 		for(int i=0;i<itemHandler.getSlots();i++) {
@@ -82,7 +77,7 @@ public abstract class ProcessingBlockEntity extends BlockEntity{
 	}
 	
 	@Override
-	public BlockEntityType<?> getType() {
+	public @NotNull BlockEntityType<?> getType() {
 		return type;
 	}
 }

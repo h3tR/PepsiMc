@@ -4,5 +4,7 @@
     "flavor": { "item": "pepsimc:lemon" }, 
     "result": {
         "item": "pepsimc:pepsi_lemon_can"
-    }
+    },
+    "ticks": 50
+
 }

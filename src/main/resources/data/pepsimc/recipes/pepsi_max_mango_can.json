@@ -4,5 +4,7 @@
     "flavor": { "item": "pepsimc:mango" }, 
     "result": {
         "item": "pepsimc:pepsi_max_mango_can"
-    }
+    },
+    "ticks": 50
+
 }

@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 public class BottlerEntity extends ProcessingBlockEntity implements MenuProvider {
 	
 	public BottlerEntity(BlockPos pos, BlockState state) {
-		super(PepsiMcBlockEntity.BOTTLER_TILE.get(), pos, state);
+		super(PepsiMcBlockEntity.BOTTLER_BLOCK_ENTITY.get(), pos, state);
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class BottlerEntity extends ProcessingBlockEntity implements MenuProvider
 				itemHandler.extractItem(1, 1, false);
 				itemHandler.extractItem(2, 1, false);
 				itemHandler.insertItem(3, iRecipe.getResultItem(), false);
-				itemHandler.insertItem(4, new ItemStack(Items.BUCKET), false);
+				itemHandler.insertItem(4, iRecipe.getByproductItem(), false);
 				setChanged();
 			});	
 			recipe = world.getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, getSimpleInv(), world);
@@ -78,17 +78,18 @@ public class BottlerEntity extends ProcessingBlockEntity implements MenuProvider
 			
 			@Override
 			public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-				switch (slot) {
-					case 0: return stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_CONTAINER);
-					case 1: return stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_LABEL);
-					case 2: return stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_LIQUID);
-					case 3: return stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLED_LIQUID);
-					case 4: return stack.getItem() == Items.BUCKET;
-
-					default:
-						return false;
-				
-				}
+				return switch (slot) {
+					case 0 ->
+							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_CONTAINER);
+					case 1 ->
+							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_LABEL);
+					case 2 ->
+							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_LIQUID);
+					case 3 ->
+							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLED_LIQUID);
+					case 4 -> stack.getItem() == Items.BUCKET;
+					default -> false;
+				};
 			}
 			
 			@Override
@@ -103,7 +104,7 @@ public class BottlerEntity extends ProcessingBlockEntity implements MenuProvider
 	}
 	@Override
 	public Component getDisplayName() {
-		return new TranslatableComponent("block.pepsimc.recycler");
+		return new TranslatableComponent("block.pepsimc.bottler");
 	}
 
 	@Nullable

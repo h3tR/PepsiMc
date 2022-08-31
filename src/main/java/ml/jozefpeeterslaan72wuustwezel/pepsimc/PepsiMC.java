@@ -1,9 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.BottlerScreen;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.CentrifugeScreen;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.FlavorMachineScreen;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.RecyclerScreen;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.*;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.fluid.PepsiMcFluid;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.PepsiMcMenu;
@@ -84,6 +81,8 @@ public class PepsiMC {
 		MenuScreens.register(PepsiMcMenu.RECYCLER_MENU.get(), RecyclerScreen::new);
 		MenuScreens.register(PepsiMcMenu.FLAVOR_MACHINE_MENU.get(), FlavorMachineScreen::new);
 		MenuScreens.register(PepsiMcMenu.CENTRIFUGE_MENU.get(), CentrifugeScreen::new);
+		MenuScreens.register(PepsiMcMenu.AUTOMATED_BOTTLER_MENU.get(), AutomatedBottlerScreen::new);
+		MenuScreens.register(PepsiMcMenu.GENERATOR_CONTAINER.get(), GeneratorScreen::new);
 
 	}
 

@@ -6,5 +6,7 @@
     },
 	"byproduct": {
 		"item":"pepsimc:stevia_seeds" 
-	   }
+	   },
+  "ticks": 50
+
 }

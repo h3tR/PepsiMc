@@ -107,7 +107,7 @@ public class FlavorMachineBlock extends HorizontalFacedBlock implements EntityBl
 
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return PepsiMcBlockEntity.FLAVOR_MACHINE_TILE.get().create(pos, state);
+		return PepsiMcBlockEntity.FLAVOR_MACHINE_BLOCK_ENTITY.get().create(pos, state);
 	}
 
 	@Override 

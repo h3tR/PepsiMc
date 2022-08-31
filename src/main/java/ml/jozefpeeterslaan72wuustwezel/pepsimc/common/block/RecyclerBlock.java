@@ -102,7 +102,7 @@ public class RecyclerBlock extends HorizontalFacedBlock implements EntityBlock{
 	
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return PepsiMcBlockEntity.RECYCLER_TILE.get().create(pos, state);
+		return PepsiMcBlockEntity.RECYCLER_BLOCK_ENTITY.get().create(pos, state);
 	}
 
 	@Override 

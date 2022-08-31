@@ -4,5 +4,7 @@
     "flavor": { "item": "minecraft:sand" }, 
     "result": {
         "item": "pepsimc:coke_can"
-    }
+    },
+    "ticks": 50
+
 }

@@ -18,8 +18,8 @@ public class ClientSetup {
 
 	@SubscribeEvent
 	public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-			event.registerBlockEntityRenderer(PepsiMcBlockEntity.RECYCLER_TILE.get(), RecyclerRender::new);
-			event.registerBlockEntityRenderer(PepsiMcBlockEntity.CENTRIFUGE_TILE.get(), CentrifugeRender::new);
+			event.registerBlockEntityRenderer(PepsiMcBlockEntity.RECYCLER_BLOCK_ENTITY.get(), RecyclerRender::new);
+			event.registerBlockEntityRenderer(PepsiMcBlockEntity.CENTRIFUGE_BLOCK_ENTITY.get(), CentrifugeRender::new);
 
 	}
 	

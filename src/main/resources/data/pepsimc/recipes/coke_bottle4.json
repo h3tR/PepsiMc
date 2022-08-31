@@ -4,5 +4,7 @@
     "flavor": { "item": "minecraft:rotten_flesh" }, 
     "result": {
         "item": "pepsimc:coke_bottle"
-    }
+    },
+    "ticks": 50
+
 }

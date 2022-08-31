@@ -4,5 +4,7 @@
     "catalyst": { "item": "pepsimc:bottlecap" }, 
     "result": {
         "item": "pepsimc:empty_bottle"
-    }
+    },
+    "ticks": 50
+
 }

@@ -4,5 +4,7 @@
     "flavor": { "item": "minecraft:quartz" }, 
     "result": {
         "item": "pepsimc:pepsi_crystal_bottle"
-    }
+    },
+    "ticks": 50
+
 }

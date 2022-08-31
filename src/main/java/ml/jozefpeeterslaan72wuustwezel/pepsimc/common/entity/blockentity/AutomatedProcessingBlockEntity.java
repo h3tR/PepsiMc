@@ -8,7 +8,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,55 +19,103 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import org.apache.logging.log4j.LogManager;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
 
-    protected int Progress;
-    protected int Goal;
+    public int Progress;
+    public int Goal;
     private Optional<? extends ProcessingRecipe> PreviousRecipe;
-    public final CustomEnergyStorage energyStorage = new CustomEnergyStorage(5, 1) {
-        @Override
-        protected void onEnergyChanged() {
-            boolean nextPowered = this.hasSufficientPower();
-            if (nextPowered != Powered) {
-                Powered = nextPowered;
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(),3);
-            }
-            setChanged();
-        }
-    };
+    public final CustomEnergyStorage energyStorage;
 
-    // Never create lazy optionals in getCapability. Always place them as fields in the tile entity:
-    private final LazyOptional<IEnergyStorage> energy = LazyOptional.of(() -> energyStorage);
+    private final LazyOptional<IEnergyStorage> energy;
 
     public final ItemStackHandler itemHandler;
-    private LazyOptional<IItemHandler> handler;
-    private BlockEntityType<?> type;
+    private final LazyOptional<IItemHandler> handler;
+    private final BlockEntityType<?> type;
+
+    protected final ContainerData dataAccess = new ContainerData() {
+        public int get(int index) {
+            switch(index) {
+                case 0:
+                    return AutomatedProcessingBlockEntity.this.Progress;
+                case 1:
+                    return AutomatedProcessingBlockEntity.this.Goal;
+                default:
+                    return 0;
+            }
+        }
+
+        public void set(int index, int value) {
+            switch(index) {
+                case 0:
+                    AutomatedProcessingBlockEntity.this.Progress = value;
+                    break;
+                case 1:
+                    AutomatedProcessingBlockEntity.this.Goal = value;
+                    break;
+            }
+
+        }
+
+        public int getCount() {
+            return 2;
+        }
+    };
     private boolean Powered=false;
-    public AutomatedProcessingBlockEntity(BlockEntityType<?> in, BlockPos pos, BlockState state) {
+    public AutomatedProcessingBlockEntity(BlockEntityType<?> in, BlockPos pos, BlockState state, int EnergyCapacity, int EnergyMaxTransfer) {
         super(in, pos, state);
         this.itemHandler = createHandler();
         this.handler = LazyOptional.of(()->itemHandler);
         this.type = in;
-        this.PreviousRecipe = getRecipe();
+        this.energyStorage = new CustomEnergyStorage(EnergyCapacity, EnergyMaxTransfer) {
+            @Override
+            protected void onEnergyChanged() {
+                boolean nextPowered = this.hasSufficientPower();
+                if (nextPowered != Powered) {
+                    Powered = nextPowered;
+                    assert level != null;
+                    level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(),3);
+                }
+                setChanged();
+            }
+        };
+        energy = LazyOptional.of(() -> energyStorage);
     }
 
     protected abstract Optional<? extends ProcessingRecipe> getRecipe();
     protected abstract void finishProduct();
 
+    protected abstract int getOutputSlot();
+
+    protected abstract int getByProductSlot();
     protected abstract ItemStackHandler createHandler();
 
-    protected void tickServer(BlockState state) {
-        if(getRecipe().isPresent()&&getRecipe().get() != PreviousRecipe.get()){
+    private boolean isSlotFull(int slotIndex){
+        return itemHandler.getStackInSlot(slotIndex).getCount()>= itemHandler.getSlotLimit(slotIndex);
+    }
+
+    private boolean isSlotEmpty(int slotIndex){
+        return itemHandler.getStackInSlot(slotIndex).getCount()<1;
+    }
+
+    public void tickServer() {
+        if (getRecipe().isPresent() && (PreviousRecipe==null || PreviousRecipe.isEmpty() || getRecipe().get() != PreviousRecipe.get())) {
             Goal = getRecipe().get().ticks;
         }
-        if(energyStorage.hasSufficientPower() && getRecipe().isPresent()){
+        PreviousRecipe = getRecipe();
+        if(energyStorage.hasSufficientPower() && getRecipe().isPresent() &&
+                (isSlotEmpty(getOutputSlot()) || (!isSlotFull(getOutputSlot())) && getRecipe().get().getResultItem().sameItem(itemHandler.getStackInSlot(getOutputSlot())) &&  (getByProductSlot() < 0 ||isSlotEmpty(getByProductSlot()) || (!isSlotFull(getByProductSlot())) && getRecipe().get().getByproductItem().sameItem(itemHandler.getStackInSlot(getByProductSlot()))))) {
             Progress++;
             if(Progress>=Goal){
                 Progress = 0;
@@ -93,16 +143,22 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         CompoundTag tag = pkt.getTag();
+        assert tag != null;
         Powered = tag.getBoolean("Powered");
+        Goal = tag.getInt("Goal");
+        Progress = tag.getInt("Progress");
+      //  updateDataAccess();
     }
 
 
     // getUpdateTag() and handleUpdateTag() are for synchronizing the client side BE on chunk load
     // getUpdateTag() is called server side and collects data for the client
     @Override
-    public CompoundTag getUpdateTag() {
+    public @NotNull CompoundTag getUpdateTag() {
         CompoundTag tag = super.getUpdateTag();
         tag.putBoolean("Powered", energyStorage.hasSufficientPower());
+        tag.putInt("Progress", Progress);
+        tag.putInt("Goal", Goal);
         return tag;
     }
 
@@ -110,11 +166,20 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
     public void handleUpdateTag(CompoundTag tag) {
         super.handleUpdateTag(tag);
         Powered = tag.getBoolean("Powered");
+        Goal = tag.getInt("Goal");
+        Progress = tag.getInt("Progress");
+        //updateDataAccess();
     }
     @Override
     public void load(CompoundTag tag) {
         if (tag.contains("energy")) {
             energyStorage.deserializeNBT(tag.get("energy"));
+        }
+        if (tag.contains("goal")) {
+            Goal = tag.getInt("goal");
+        }
+        if (tag.contains("progress")) {
+            Progress = tag.getInt("progress");
         }
         itemHandler.deserializeNBT(tag.getCompound("inv"));
         super.load(tag);
@@ -124,6 +189,8 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
     protected void saveAdditional(CompoundTag nbt) {
         nbt.put("inv", itemHandler.serializeNBT());
         nbt.put("energy",energyStorage.serializeNBT());
+        nbt.putInt("progress",Progress);
+        nbt.putInt("goal",Goal);
         super.saveAdditional(nbt);
     }
 
@@ -137,9 +204,6 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
     }
 
 
-    public boolean slotHasItem(int index) {
-        return itemHandler.getStackInSlot(index).getCount() > 0;
-    }
 
     public NonNullList<ItemStack> getNNLInv(){
         NonNullList<ItemStack> toReturn = NonNullList.withSize(itemHandler.getSlots(), ItemStack.EMPTY);
@@ -150,7 +214,7 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
     }
 
     @Override
-    public BlockEntityType<?> getType() {
+    public @NotNull BlockEntityType<?> getType() {
         return type;
     }
     @Nonnull
@@ -159,16 +223,19 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
         if (cap == CapabilityEnergy.ENERGY) {
             return energy.cast();
         }
+        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY  ) {
+            return handler.cast();
+        }
         return super.getCapability(cap, side);
     }
-    public class CustomEnergyStorage extends EnergyStorage {
+    public static class CustomEnergyStorage extends EnergyStorage {
         int maxTransfer;
         public CustomEnergyStorage(int capacity, int maxTransfer) {
             super(capacity, maxTransfer);
             this.maxTransfer = maxTransfer;
         }
         public boolean hasSufficientPower() {
-            return energyStorage.getEnergyStored() >= energyStorage.maxTransfer;
+            return this.getEnergyStored() >= this.maxTransfer;
         }
         protected void onEnergyChanged() {
 

@@ -9,6 +9,7 @@ import com.google.gson.JsonObject;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -31,7 +32,11 @@ public class BottlerRecipe extends ProcessingRecipe{
 	public boolean matches(Container inv, Level Win) {
 		return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1))&&in.get(2).test(inv.getItem(2));
 	}
-	
+
+	public ItemStack getByproductItem() {
+		return new ItemStack(Items.BUCKET);
+	}
+
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
@@ -63,13 +68,12 @@ public class BottlerRecipe extends ProcessingRecipe{
 			JsonObject Label = GsonHelper.getAsJsonObject(json, "label");
 			JsonObject Container = GsonHelper.getAsJsonObject(json, "container");
 			JsonObject Fluid = GsonHelper.getAsJsonObject(json, "fluid");
-			JsonObject Ticks = GsonHelper.getAsJsonObject(json, "ticks");
 
 			NonNullList<Ingredient> In = NonNullList.withSize(3, Ingredient.EMPTY);
 			In.set(1, Ingredient.fromJson(Label));
 			In.set(0, Ingredient.fromJson(Container));
 			In.set(2, Ingredient.fromJson(Fluid));
-			return new BottlerRecipe(Id, Out, In, Ticks.getAsInt());
+			return new BottlerRecipe(Id, Out, In,GsonHelper.getAsInt(json, "ticks"));
 		}
 
 		@Nullable

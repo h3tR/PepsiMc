@@ -4,5 +4,7 @@
     "flavor": { "item": "minecraft:tnt" }, 
     "result": {
         "item": "pepsimc:pepsi_boom_bottle"
-    }
+    },
+    "ticks": 50
+
 }
