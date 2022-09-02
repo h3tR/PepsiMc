@@ -23,7 +23,7 @@ import java.util.Optional;
 public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity implements MenuProvider {
 
     public AutomatedBottlerEntity(BlockPos pos, BlockState state) {
-        super(PepsiMcBlockEntity.AUTOMATED_BOTTLER_BLOCK_ENTITY.get(), pos, state, 500, 5);
+        super(PepsiMcBlockEntity.AUTOMATED_BOTTLER_BLOCK_ENTITY.get(), pos, state, 1000, 5);
     }
 
     protected Optional<BottlerRecipe> getRecipe(){

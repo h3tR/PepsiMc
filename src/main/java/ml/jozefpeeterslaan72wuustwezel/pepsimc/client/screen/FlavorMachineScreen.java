@@ -1,11 +1,13 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.ConfirmButton;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.FlavorMachineMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.FlavoringRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.FlavorMachineEntity;
@@ -19,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
+import org.jetbrains.annotations.NotNull;
 
 
 public class FlavorMachineScreen extends AbstractContainerScreen<FlavorMachineMenu>{
@@ -43,7 +46,7 @@ public class FlavorMachineScreen extends AbstractContainerScreen<FlavorMachineMe
 	   }
 	
 	@Override
-	public void render(PoseStack stack, int mouseX, int mouseY, float Ptick) {
+	public void render(@NotNull PoseStack stack, int mouseX, int mouseY, float Ptick) {
 		this.renderBackground(stack);
 		super.render(stack, mouseX, mouseY, Ptick);
 		this.renderTooltip(stack, mouseX, mouseY);
@@ -52,11 +55,11 @@ public class FlavorMachineScreen extends AbstractContainerScreen<FlavorMachineMe
 
 				if(this.createTooltip()!=null) {
 
-					this.renderTooltip(stack, this.createTooltip(), mouseX,mouseY);
+					this.renderTooltip(stack, Objects.requireNonNull(this.createTooltip()), mouseX,mouseY);
 				}
 			}			
 			if(!this.menu.slotHasItem(2))
-			Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(RecipeResult(), this.getGuiLeft()+80, this.getGuiTop()+64);
+				Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(RecipeResult(), this.getGuiLeft()+80, this.getGuiTop()+64);
 			for (int i = 0; i < 3; i++) {
 		        RenderSystem.depthFunc(516+i);
 				if(!this.menu.slotHasItem(2))
@@ -77,7 +80,6 @@ public class FlavorMachineScreen extends AbstractContainerScreen<FlavorMachineMe
     }
 	private boolean hasRecipe() {
 		SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());
-		ArrayList<ItemStack> result = new ArrayList<>();
 		for(int i=0;i<entity.itemHandler.getSlots();i++) {
 			inv.setItem(i, entity.itemHandler.getStackInSlot(i));
 		}
@@ -100,7 +102,7 @@ public class FlavorMachineScreen extends AbstractContainerScreen<FlavorMachineMe
 	}
 	
 	@Override
-	protected void renderBg(PoseStack stack, float Ptick, int X, int Y) {
+	protected void renderBg(@NotNull PoseStack stack, float Ptick, int X, int Y) {
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 		RenderSystem.setShaderTexture(0, GUI);

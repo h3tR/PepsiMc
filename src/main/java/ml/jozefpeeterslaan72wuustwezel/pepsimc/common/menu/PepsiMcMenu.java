@@ -20,13 +20,13 @@ public class PepsiMcMenu {
 
 	//No changes are needed to the classes but they have to be separate to have different screens.
 
-	public static final RegistryObject<MenuType<AutomatedBottlerMenu>> AUTOMATED_BOTTLER_MENU= MENUS.register("automated_bottler_menu", ()-> IForgeMenuType.create((ID, inv, dat)-> new AutomatedBottlerMenu(ID, inv, inv.player.getCommandSenderWorld().getBlockEntity(dat.readBlockPos()),new SimpleContainerData(2))));
+	public static final RegistryObject<MenuType<AutomatedBottlerMenu>> AUTOMATED_BOTTLER_MENU= MENUS.register("automated_bottler_menu", ()-> IForgeMenuType.create((ID, inv, dat)-> new AutomatedBottlerMenu(ID, inv, inv.player.getCommandSenderWorld().getBlockEntity(dat.readBlockPos()),new SimpleContainerData(4))));
 
-	public static RegistryObject<MenuType<RecyclerMenu>> AUTOMATED_RECYCLER_MENU = MENUS.register("automated_recycler_menu", ()-> IForgeMenuType.create((ID, inv, dat)-> new RecyclerMenu(ID, inv, inv.player.getCommandSenderWorld().getBlockEntity(dat.readBlockPos()))));
+	public static RegistryObject<MenuType<AutomatedRecyclerMenu>> AUTOMATED_RECYCLER_MENU = MENUS.register("automated_recycler_menu", ()-> IForgeMenuType.create((ID, inv, dat)-> new AutomatedRecyclerMenu(ID, inv, inv.player.getCommandSenderWorld().getBlockEntity(dat.readBlockPos()),new SimpleContainerData(4))));
 
-	public static RegistryObject<MenuType<FlavorMachineMenu>> AUTOMATED_FLAVOR_MACHINE_MENU = MENUS.register("automated_flavor_menu", ()-> IForgeMenuType.create((ID, inv, dat)-> new FlavorMachineMenu(ID, inv, inv.player.getCommandSenderWorld().getBlockEntity(dat.readBlockPos()))));
+	public static RegistryObject<MenuType<AutomatedFlavorMachineMenu>> AUTOMATED_FLAVOR_MACHINE_MENU = MENUS.register("automated_flavor_menu", ()-> IForgeMenuType.create((ID, inv, dat)-> new AutomatedFlavorMachineMenu(ID, inv, inv.player.getCommandSenderWorld().getBlockEntity(dat.readBlockPos()),new SimpleContainerData(4))));
 
-	public static RegistryObject<MenuType<CentrifugeMenu>> AUTOMATED_CENTRIFUGE_MENU = MENUS.register("automated_centrifuge_machine_menu", ()-> IForgeMenuType.create((ID, inv, dat)-> new CentrifugeMenu(ID, inv, inv.player.getCommandSenderWorld().getBlockEntity(dat.readBlockPos()))));
+	public static RegistryObject<MenuType<AutomatedCentrifugeMenu>> AUTOMATED_CENTRIFUGE_MENU = MENUS.register("automated_centrifuge_machine_menu", ()-> IForgeMenuType.create((ID, inv, dat)-> new AutomatedCentrifugeMenu(ID, inv, inv.player.getCommandSenderWorld().getBlockEntity(dat.readBlockPos()),new SimpleContainerData(4))));
 
 	public static final RegistryObject<MenuType<GeneratorContainer>> GENERATOR_CONTAINER = MENUS.register("gen_menu", ()-> IForgeMenuType.create((ID, inv, dat)-> new GeneratorContainer(ID, inv, inv.player.getCommandSenderWorld().getBlockEntity(dat.readBlockPos()))));
 

@@ -45,6 +45,8 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
             return switch (index) {
                 case 0 -> AutomatedProcessingBlockEntity.this.Progress;
                 case 1 -> AutomatedProcessingBlockEntity.this.Goal;
+                case 2 -> AutomatedProcessingBlockEntity.this.energyStorage.getEnergyStored();
+                case 3 -> AutomatedProcessingBlockEntity.this.energyStorage.getMaxEnergyStored();
                 default -> 0;
             };
         }
@@ -53,12 +55,13 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
             switch (index) {
                 case 0 -> AutomatedProcessingBlockEntity.this.Progress = value;
                 case 1 -> AutomatedProcessingBlockEntity.this.Goal = value;
+                case 2 -> AutomatedProcessingBlockEntity.this.energyStorage.setEnergy(value);
             }
 
         }
 
         public int getCount() {
-            return 2;
+            return 4;
         }
     };
     private boolean Powered=false;
@@ -81,6 +84,8 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
         };
         energy = LazyOptional.of(() -> energyStorage);
     }
+
+
 
     protected abstract Optional<? extends ProcessingRecipe> getRecipe();
     protected abstract void finishProduct();

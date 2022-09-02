@@ -15,7 +15,6 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.ItemStack;
@@ -37,8 +36,8 @@ public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatab
 	}
 
 	@Override
-	public void process(Level world) {
-		Optional<CentrifugeRecipe> recipe = world.getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, getSimpleInv(), world);
+	public void process() {
+		Optional<CentrifugeRecipe> recipe = this.getLevel().getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
 
 		recipe.ifPresent(iRecipe->{
 			itemHandler.extractItem(0, 1, false);
@@ -50,8 +49,8 @@ public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatab
 	}
 	
 	@Override
-	public void processAll(Level world) {
-		Optional<CentrifugeRecipe> recipe = world.getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, getSimpleInv(), world);
+	public void processAll() {
+		Optional<CentrifugeRecipe> recipe = this.getLevel().getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
 		while (recipe.isPresent()) {
 			recipe.ifPresent(iRecipe->{
 				itemHandler.extractItem(0, 1, false);
@@ -60,7 +59,7 @@ public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatab
 
 				setChanged();
 			});	
-			recipe = world.getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, getSimpleInv(), world);
+			recipe = this.getLevel().getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
 		}
 		
 

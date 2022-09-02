@@ -1,4 +1,4 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -14,17 +14,19 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
+
 @OnlyIn(Dist.CLIENT)
 public class ConfirmButton extends AbstractButton{
 	      private boolean selected;
-	      BlockPos Pos;
-	      int IconX;
-	      int IconY;
-	      int SizeX;
-	      int SizeY;
-	      ResourceLocation GUI;
+		  private final BlockPos Pos;
+		  private final int IconX;
+		  private final int IconY;
+		  private final int SizeX;
+		  private final int SizeY;
+	      private final ResourceLocation GUI;
 	      @SuppressWarnings("SameParameterValue")
-		  protected ConfirmButton(int X, int Y, int IconX, int IconY, int SizeX, int SizeY, BlockPos Pos, ResourceLocation GUI) {
+		  public ConfirmButton(int X, int Y, int IconX, int IconY, int SizeX, int SizeY, BlockPos Pos, ResourceLocation GUI) {
 	         super(X, Y, SizeX, SizeY, TextComponent.EMPTY);
 	         this.IconX = IconX;
 	         this.IconY= IconY; 
@@ -34,7 +36,7 @@ public class ConfirmButton extends AbstractButton{
 	         this.GUI = GUI;
 	      }
 
-		public void renderButton(PoseStack stack, int X, int Y, float Ptick) {
+		public void renderButton(@NotNull PoseStack stack, int X, int Y, float Ptick) {
 	         Minecraft.getInstance().getTextureManager().bindForSetup(this.GUI);
 	         RenderSystem.clearColor(1.0F, 1.0F, 1.0F, 1.0F);
 	         int i = 219;
@@ -54,19 +56,15 @@ public class ConfirmButton extends AbstractButton{
     	  		this.blit(stack, this.x + 2, this.y + 2, this.IconX, this.IconY, this.SizeX, this.SizeY);
 	      }
 
-		public boolean isSelected() {
-	        return this.selected;
-	    }
-
 	    public void setSelected(boolean selected) {
 	        this.selected = selected;
 	    }
-	      
+
 	    public void onPress() {
 	    	  PepsimcNetwork.CHANNEL.sendToServer(new ProcessingCraftPacket(this.Pos,Screen.hasShiftDown()));
 	    }
 
 		@Override
-		public void updateNarration(NarrationElementOutput p_169152_) {}
+		public void updateNarration(@NotNull NarrationElementOutput NEO) {}
 
 }

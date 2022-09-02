@@ -1,11 +1,13 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.ConfirmButton;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.BottlerMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.BottlerEntity;
@@ -20,6 +22,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 public class BottlerScreen extends AbstractContainerScreen<BottlerMenu>{
 	private final BottlerEntity entity;
@@ -43,7 +46,7 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerMenu>{
 	}
 	
 	@Override
-	public void render(PoseStack stack, int mouseX, int mouseY, float Ptick) {
+	public void render(@NotNull PoseStack stack, int mouseX, int mouseY, float Ptick) {
 		this.renderBackground(stack);
 		super.render(stack, mouseX, mouseY, Ptick);
 		this.renderTooltip(stack, mouseX, mouseY);
@@ -52,13 +55,13 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerMenu>{
 
 				if(this.createTooltip()!=null) {
 
-					this.renderTooltip(stack, this.createTooltip(), mouseX,mouseY);
+					this.renderTooltip(stack, Objects.requireNonNull(this.createTooltip()), mouseX,mouseY);
 				}
 			}			
 			if(!this.menu.slotHasItem(3))
-			Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(RecipeResult(), this.getGuiLeft()+143, this.getGuiTop()+30);
+				Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(RecipeResult(), this.getGuiLeft()+143, this.getGuiTop()+30);
 			if(!this.menu.slotHasItem(4))
-			Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(new ItemStack(Items.BUCKET), this.getGuiLeft()+143, this.getGuiTop()+51);
+				Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(new ItemStack(Items.BUCKET), this.getGuiLeft()+143, this.getGuiTop()+51);
 			for (int i = 0; i < 3; i++) {
 		        RenderSystem.depthFunc(516+i);
 				if(!this.menu.slotHasItem(3))
@@ -87,6 +90,7 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerMenu>{
 		for(int i=0;i<entity.itemHandler.getSlots();i++) {
 			inv.setItem(i, entity.itemHandler.getStackInSlot(i));
 		}
+		assert world != null;
 		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, inv, world);
 
 		return recipe.isPresent();
@@ -106,7 +110,7 @@ public class BottlerScreen extends AbstractContainerScreen<BottlerMenu>{
 	}
 	
 	@Override
-	protected void renderBg(PoseStack stack, float Ptick, int X, int Y) {
+	protected void renderBg(@NotNull PoseStack stack, float Ptick, int X, int Y) {
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 		RenderSystem.setShaderTexture(0, GUI);

@@ -52,9 +52,9 @@ public abstract class ProcessingBlockEntity extends BlockEntity{
 		return toReturn; 
 	}
 	
-	public abstract void process(Level world);
+	public abstract void process();
 	
-	public abstract void processAll(Level world);
+	public abstract void processAll();
 	
 	protected SimpleContainer getSimpleInv() {
 		SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());

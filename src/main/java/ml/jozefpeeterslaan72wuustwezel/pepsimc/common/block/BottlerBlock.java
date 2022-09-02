@@ -31,8 +31,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 	
-	private static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-	
+
 	private static final VoxelShape ShW = Stream.of(
 			Block.box(5, 7, 10, 6, 9, 11),
 			Block.box(10, 7, 10, 11, 9, 11),

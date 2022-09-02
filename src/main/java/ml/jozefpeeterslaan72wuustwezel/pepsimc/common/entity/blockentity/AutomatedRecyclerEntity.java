@@ -1,12 +1,8 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity;
 
 
-import java.util.Optional;
-
-import javax.annotation.Nonnull;
-
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.RecyclerMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.RecyclerRecipe;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedRecyclerMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -15,10 +11,11 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
+import org.apache.logging.log4j.LogManager;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -28,41 +25,45 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class RecyclerEntity extends ProcessingBlockEntity implements IAnimatable, MenuProvider {
+import javax.annotation.Nonnull;
+import java.util.Objects;
+import java.util.Optional;
+
+public class AutomatedRecyclerEntity extends AutomatedProcessingBlockEntity implements IAnimatable, MenuProvider {
     private final AnimationFactory factory = new AnimationFactory(this);
 
-	public RecyclerEntity(BlockPos pos, BlockState state) {
-		super(PepsiMcBlockEntity.RECYCLER_BLOCK_ENTITY.get(), pos, state);
+	public AutomatedRecyclerEntity(BlockPos pos, BlockState state) {
+		super(PepsiMcBlockEntity.RECYCLER_BLOCK_ENTITY.get(), pos, state,500,50);
 	}
 
+	@Override
+	protected Optional<RecyclerRecipe> getRecipe() {
+		LogManager.getLogger().debug(Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(RecyclerRecipe.RecyclerRecipeType.INSTANCE, getSimpleInv(), this.getLevel()).isPresent());
+		return Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(RecyclerRecipe.RecyclerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
+	}
 
 	@Override
-	public void process() {
-		Optional<RecyclerRecipe> recipe = this.getLevel().getRecipeManager().getRecipeFor(RecyclerRecipe.RecyclerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
+	protected void finishProduct() {
+		Optional<RecyclerRecipe> recipe = getRecipe();
 
 		recipe.ifPresent(iRecipe->{
 			itemHandler.extractItem(0, 1, false);
 			itemHandler.extractItem(1, 1, false);
 			itemHandler.insertItem(2, iRecipe.getResultItem(), false);
 			setChanged();
-		});	
+		});
+	}
 
-	}
-	
 	@Override
-	public void processAll() {
-		Optional<RecyclerRecipe> recipe = this.getLevel().getRecipeManager().getRecipeFor(RecyclerRecipe.RecyclerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
-		while (recipe.isPresent()) {
-			recipe.ifPresent(iRecipe->{
-				itemHandler.extractItem(0, 1, false);
-				itemHandler.extractItem(1, 1, false);
-				itemHandler.insertItem(2, iRecipe.getResultItem(), false);
-				setChanged();
-			});
-			recipe = this.getLevel().getRecipeManager().getRecipeFor(RecyclerRecipe.RecyclerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
-		}
+	protected int getOutputSlot() {
+		return 2;
 	}
-	
+
+	@Override
+	protected int getByProductSlot() {
+		return -1;
+	}
+
 	@Override
 	protected ItemStackHandler createHandler() {
 
@@ -128,6 +129,6 @@ public class RecyclerEntity extends ProcessingBlockEntity implements IAnimatable
 	@Nullable
 	@Override
 	public AbstractContainerMenu createMenu(int id, Inventory inv, Player plr) {
-		return new RecyclerMenu(id,inv,this);
+		return new AutomatedRecyclerMenu(id,inv,this,dataAccess);
 	}
 }

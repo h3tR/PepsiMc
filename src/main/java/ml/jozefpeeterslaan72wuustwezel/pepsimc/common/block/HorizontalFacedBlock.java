@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.Rotation;
 
 public class HorizontalFacedBlock extends Block{
 	
-	private static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+	protected static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	
 	public HorizontalFacedBlock(Properties prop) {
 		super(prop);

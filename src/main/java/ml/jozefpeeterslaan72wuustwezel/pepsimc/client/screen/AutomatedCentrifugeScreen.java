@@ -1,34 +1,34 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen;
 
-import java.util.ArrayList;
-import java.util.Optional;
-
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-
+import com.mojang.blaze3d.vertex.PoseStack;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.ConfirmButton;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.CentrifugeMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.CentrifugeRecipe;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.CentrifugeEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.AutomatedCentrifugeEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedCentrifugeMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.Component;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Optional;
 
 
-public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeMenu>{
+public class AutomatedCentrifugeScreen extends AbstractContainerScreen<AutomatedCentrifugeMenu>{
 
-	private final CentrifugeEntity entity;
+private final AutomatedCentrifugeEntity entity;
 	private final Level world;
-	public CentrifugeScreen(CentrifugeMenu Menu, Inventory plrInv, Component Text) {
+	public AutomatedCentrifugeScreen(AutomatedCentrifugeMenu Menu, Inventory plrInv, Component Text) {
 		super(Menu, plrInv, Text);
-		this.entity = (CentrifugeEntity) Menu.entity;
+		this.entity = (AutomatedCentrifugeEntity) Menu.entity;
 		this.world = this.entity.getLevel();
 	}
 
@@ -133,7 +133,12 @@ public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeMenu>{
         int y = this.getGuiTop();
         this.blit(stack, x, y, 0, 0, 176, 167);
 	}
-	
+
+	@Override
+	protected void renderLabels(@NotNull PoseStack matrixStack, int p_97809_, int p_97810_) {
+		drawString(matrixStack, Minecraft.getInstance().font,   menu.getProgress()+"/"+menu.getGoal(), 50, 10, 0xffffff);
+		super.renderLabels(matrixStack, p_97809_, p_97810_);
+	}
 
 }
 	 

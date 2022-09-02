@@ -59,18 +59,20 @@ public class PepsiMcBlock {
 	public static final RegistryObject<LiquidBlock> PEPSI_MAX_FLUID_BLOCK = BLOCKS.register("pepsi_max",
 			()-> new LiquidBlock(PepsiMcFluid.PEPSI_MAX_FLUID, BlockBehaviour.Properties.of(Material.WATER).strength(100f).noDrops().noCollission()));
 	
-	public static final RegistryObject<Block> BOTTLER = BLOCKS.register("bottler",BottlerBlock::new);
 
 	public static final RegistryObject<Block> AUTOMATED_BOTTLER = BLOCKS.register("automated_bottler",AutomatedBottlerBlock::new);
+	public static final RegistryObject<Block> AUTOMATED_CENTRIFUGE = BLOCKS.register("automated_centrifuge",AutomatedCentrifugeBlock::new);
+	public static final RegistryObject<Block> AUTOMATED_FLAVOR_MACHINE = BLOCKS.register("automated_flavor_machine",AutomatedFlavorMachineBlock::new);
+	public static final RegistryObject<Block> AUTOMATED_RECYCLER = BLOCKS.register("automated_recycler",AutomatedRecyclerBlock::new);
+
+	public static final RegistryObject<Block> BOTTLER = BLOCKS.register("bottler",BottlerBlock::new);
+	public static final RegistryObject<Block> FLAVOR_MACHINE = BLOCKS.register("flavor_machine",FlavorMachineBlock::new);
+	public static final RegistryObject<Block> RECYCLER = BLOCKS.register("recycler",RecyclerBlock::new);
+	public static final RegistryObject<Block> CENTRIFUGE = BLOCKS.register("centrifuge",CentrifugeBlock::new);
 
 	public static final RegistryObject<Block> GENERATOR = BLOCKS.register("generator",GeneratorBlock::new);
 
-	public static final RegistryObject<Block> FLAVOR_MACHINE = BLOCKS.register("flavor_machine",FlavorMachineBlock::new);
 
-	public static final RegistryObject<Block> RECYCLER = BLOCKS.register("recycler",RecyclerBlock::new);
-
-	public static final RegistryObject<Block> CENTRIFUGE = BLOCKS.register("centrifuge",CentrifugeBlock::new);
-	
 	public static final RegistryObject<Block> STEVIA_PLANT = BLOCKS.register("stevia_plant", 
 			()-> new FlowerBlock(MobEffects.MOVEMENT_SPEED,2,BlockBehaviour.Properties.copy(Blocks.POPPY)));
 

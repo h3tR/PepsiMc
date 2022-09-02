@@ -2,6 +2,7 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.BatteryDisplay;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.AutomatedBottlerEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedBottlerMenu;
@@ -18,8 +19,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 
 @OnlyIn(Dist.CLIENT)
@@ -31,22 +34,26 @@ public class AutomatedBottlerScreen extends AbstractContainerScreen<AutomatedBot
 		super(Menu, plrInv, Text);
 		this.entity = (AutomatedBottlerEntity) Menu.entity;
 		this.world = this.entity.getLevel();
+
 	}
 
-	private static final ResourceLocation GUI = new ResourceLocation("pepsimc","textures/gui/bottler_gui.png");
-	
 	@Override
 	protected void containerTick() {
 		super.containerTick();
-		if(hasRecipe()) {
-			this.addRenderableWidget(new ConfirmButton(this.getGuiLeft()+95,this.getGuiTop()+30,176,3,23,9,entity.getBlockPos(),GUI));
-		} else {
-			this.clearWidgets();
-		}
+
+}
+
+	@Override
+	protected void init() {
+		super.init();
+		this.addRenderableWidget(new BatteryDisplay(this.getGuiLeft()+82,this.getGuiTop()+37,this.menu));
 	}
+
+	private static final ResourceLocation GUI = new ResourceLocation("pepsimc","textures/gui/bottler_gui.png");
+
 	
 	@Override
-	public void render(PoseStack stack, int mouseX, int mouseY, float Ptick) {
+	public void render(@NotNull PoseStack stack, int mouseX, int mouseY, float Ptick) {
 		this.renderBackground(stack);
 		super.render(stack, mouseX, mouseY, Ptick);
 		this.renderTooltip(stack, mouseX, mouseY);
@@ -55,13 +62,13 @@ public class AutomatedBottlerScreen extends AbstractContainerScreen<AutomatedBot
 
 				if(this.createTooltip()!=null) {
 
-					this.renderTooltip(stack, this.createTooltip(), mouseX,mouseY);
+					this.renderTooltip(stack, Objects.requireNonNull(this.createTooltip()), mouseX,mouseY);
 				}
 			}			
 			if(!this.menu.slotHasItem(3))
-			Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(RecipeResult(), this.getGuiLeft()+143, this.getGuiTop()+30);
+				Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(RecipeResult(), this.getGuiLeft()+143, this.getGuiTop()+30);
 			if(!this.menu.slotHasItem(4))
-			Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(new ItemStack(Items.BUCKET), this.getGuiLeft()+143, this.getGuiTop()+51);
+				Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(new ItemStack(Items.BUCKET), this.getGuiLeft()+143, this.getGuiTop()+51);
 			for (int i = 0; i < 3; i++) {
 		        RenderSystem.depthFunc(516+i);
 				if(!this.menu.slotHasItem(3))
@@ -72,7 +79,7 @@ public class AutomatedBottlerScreen extends AbstractContainerScreen<AutomatedBot
 	        RenderSystem.depthFunc(515);
 
 		}
-		
+
 	}
 	
 	private Component createTooltip() {
@@ -81,6 +88,7 @@ public class AutomatedBottlerScreen extends AbstractContainerScreen<AutomatedBot
         	text.add(RecipeResult().getHoverName());
 			return text.get(0);
 		}
+
 		return null;
     }
 	private boolean hasRecipe() {
@@ -90,6 +98,7 @@ public class AutomatedBottlerScreen extends AbstractContainerScreen<AutomatedBot
 		for(int i=0;i<entity.itemHandler.getSlots();i++) {
 			inv.setItem(i, entity.itemHandler.getStackInSlot(i));
 		}
+		assert world != null;
 		Optional<BottlerRecipe> recipe = world.getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, inv, world);
 
 		return recipe.isPresent();
@@ -109,7 +118,7 @@ public class AutomatedBottlerScreen extends AbstractContainerScreen<AutomatedBot
 	}
 	
 	@Override
-	protected void renderBg(PoseStack stack, float Ptick, int X, int Y) {
+	protected void renderBg(@NotNull PoseStack stack, float Ptick, int X, int Y) {
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 		RenderSystem.setShaderTexture(0, GUI);
@@ -125,11 +134,12 @@ public class AutomatedBottlerScreen extends AbstractContainerScreen<AutomatedBot
 		if (this.menu.slotHasItem(2)) {
 			this.blit(stack, x+77, y+35, 176, 0, 3, 3);
 		}
+
 	}
 
 	@Override
-	protected void renderLabels(PoseStack matrixStack, int p_97809_, int p_97810_) {
-		drawString(matrixStack, Minecraft.getInstance().font,   menu.getProgress()+"/"+menu.getGoal(), 50, 10, 0xffffff);
+	protected void renderLabels(@NotNull PoseStack matrixStack, int p_97809_, int p_97810_) {
+		drawString(matrixStack, Minecraft.getInstance().font,   menu.getProgress()+"/"+menu.getGoal()+"\t"+menu.getEnergy(), 50, 10, 0xffffff);
 		super.renderLabels(matrixStack, p_97809_, p_97810_);
 	}
 }

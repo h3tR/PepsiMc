@@ -1,36 +1,33 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block;
 
-import java.util.stream.Stream;
-
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.AutomatedRecyclerEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.RecyclerEntity;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.BooleanOp;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.network.NetworkHooks;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
-public class RecyclerBlock extends HorizontalFacedBlock implements EntityBlock{
-			
+import java.util.stream.Stream;
+
+public class AutomatedRecyclerBlock extends HorizontalFacedBlock implements EntityBlock{
+
 
 		private static final VoxelShape ShW = Stream.of(
 				Block.box(0, 0, 0, 1, 8, 16),
@@ -54,9 +51,9 @@ public class RecyclerBlock extends HorizontalFacedBlock implements EntityBlock{
 			Block.box(0, 8, 13, 16, 16, 15),
 			Block.box(0, 8, 1, 16, 16, 3)
 			).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-	
-	public RecyclerBlock() {
-		super(BlockBehaviour.Properties
+
+	public AutomatedRecyclerBlock() {
+		super(Properties
 				.of(Material.PISTON)
 				.strength(4.5f,15)
 				.sound(SoundType.METAL)
@@ -66,10 +63,10 @@ public class RecyclerBlock extends HorizontalFacedBlock implements EntityBlock{
 	
 	
 	@SuppressWarnings("deprecation")
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState secondState, boolean p_196243_5_) {
+	public void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState secondState, boolean p_196243_5_) {
 	      if (!state.is(secondState.getBlock())) {
 	         BlockEntity TE = level.getBlockEntity(pos);
-	         if (TE instanceof RecyclerEntity RT) {
+	         if (TE instanceof AutomatedRecyclerEntity RT) {
 				 Containers.dropContents(level, pos, RT.getNNLInv());
 	            level.updateNeighbourForOutputSignal(pos, this);
 	         }
@@ -79,12 +76,12 @@ public class RecyclerBlock extends HorizontalFacedBlock implements EntityBlock{
 	   }
 
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos,
-								 Player plr, InteractionHand hand, BlockHitResult hit) {
+	public @NotNull InteractionResult use(@NotNull BlockState state, Level world, @NotNull BlockPos pos,
+										  @NotNull Player plr, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
 		if (!world.isClientSide()) {
 			BlockEntity entity = world.getBlockEntity(pos);
-			if(entity instanceof RecyclerEntity) {
-				NetworkHooks.openGui(((ServerPlayer)plr), (RecyclerEntity)entity, pos);
+			if(entity instanceof AutomatedRecyclerEntity) {
+				NetworkHooks.openGui(((ServerPlayer)plr), (AutomatedRecyclerEntity)entity, pos);
 			} else {
 				throw new IllegalStateException("Container provider is missing!");
 			}
@@ -94,23 +91,20 @@ public class RecyclerBlock extends HorizontalFacedBlock implements EntityBlock{
 	}
 
 	@Override
-	public RenderShape getRenderShape(BlockState p_60550_) {
+	public @NotNull RenderShape getRenderShape(@NotNull BlockState p_60550_) {
 		return RenderShape.ENTITYBLOCK_ANIMATED;
 	}
 	
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return PepsiMcBlockEntity.RECYCLER_BLOCK_ENTITY.get().create(pos, state);
+	public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+		return PepsiMcBlockEntity.AUTOMATED_RECYCLER_BLOCK_ENTITY.get().create(pos, state);
 	}
 
 	@Override 
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos p, CollisionContext context) {
+	public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos p, @NotNull CollisionContext context) {
         return switch (state.getValue(FACING)) {
-            case NORTH -> ShW;
-            case EAST -> ShL;
-            case SOUTH -> ShW;
-            case WEST -> ShL;
-            default -> ShW;
+            case EAST, WEST -> ShL;
+			default -> ShW;
         };
 	}
 	

@@ -68,7 +68,12 @@ public class PepsiMC {
 		MenuScreens.register(PepsiMcMenu.RECYCLER_MENU.get(), RecyclerScreen::new);
 		MenuScreens.register(PepsiMcMenu.FLAVOR_MACHINE_MENU.get(), FlavorMachineScreen::new);
 		MenuScreens.register(PepsiMcMenu.CENTRIFUGE_MENU.get(), CentrifugeScreen::new);
+
 		MenuScreens.register(PepsiMcMenu.AUTOMATED_BOTTLER_MENU.get(), AutomatedBottlerScreen::new);
+		MenuScreens.register(PepsiMcMenu.AUTOMATED_CENTRIFUGE_MENU.get(), AutomatedCentrifugeScreen::new);
+		MenuScreens.register(PepsiMcMenu.AUTOMATED_FLAVOR_MACHINE_MENU.get(), AutomatedFlavorMachineScreen::new);
+		MenuScreens.register(PepsiMcMenu.AUTOMATED_RECYCLER_MENU.get(), AutomatedRecyclerScreen::new);
+
 		MenuScreens.register(PepsiMcMenu.GENERATOR_CONTAINER.get(), GeneratorScreen::new);
 
 	}

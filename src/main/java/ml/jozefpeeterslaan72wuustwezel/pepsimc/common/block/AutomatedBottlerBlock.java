@@ -1,6 +1,7 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.AutomatedBottlerEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.AutomatedProcessingBlockEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -33,7 +34,6 @@ import java.util.stream.Stream;
 
 public class AutomatedBottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 
-	private static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
 	private static final VoxelShape ShW = Stream.of(
 			Block.box(5, 7, 10, 6, 9, 11),
@@ -133,7 +133,7 @@ public class AutomatedBottlerBlock extends HorizontalFacedBlock implements Entit
 			return null;
 		} else {
 			return (level1, pos, state1, tile) -> {
-				if (tile instanceof AutomatedBottlerEntity Machine) {
+				if (tile instanceof AutomatedProcessingBlockEntity Machine) {
 					Machine.tickServer();
 				}
 			};

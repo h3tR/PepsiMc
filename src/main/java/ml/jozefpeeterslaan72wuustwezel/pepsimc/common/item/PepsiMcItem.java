@@ -330,7 +330,7 @@ public class PepsiMcItem {
 					.build()
 					)));
 	
-	public static final RegistryObject<Item> PEPSI_MAN_TUNE_DISC = ITEMS.register("pepsi_man_tune_disc", ()-> new RecordItem(13, PepsiMcSoundEvent.PEPSI_MAN_TUNE::get,new Item.Properties()
+	public static final RegistryObject<Item> PEPSI_MAN_TUNE_DISC = ITEMS.register("pepsi_man_tune_disc", ()-> new RecordItem(13, PepsiMcSoundEvent.PEPSI_MAN_TUNE,new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB).rarity(Rarity.RARE).stacksTo(1)));
 	
 	public static final RegistryObject<BeverageItem> PEPSI_MAX_BOTTLE = ITEMS.register("pepsi_max_bottle", ()-> new BeverageItem(new Item.Properties()
@@ -540,6 +540,13 @@ public class PepsiMcItem {
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
 
 	public static final RegistryObject<BlockItem> AUTOMATED_BOTTLER = ITEMS.register("automated_bottler", ()-> new BlockItem(PepsiMcBlock.AUTOMATED_BOTTLER.get(), new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
+
+	public static final RegistryObject<BlockItem> AUTOMATED_CENTRIFUGE = ITEMS.register("automated_centrifuge", ()-> new BlockItem(PepsiMcBlock.AUTOMATED_CENTRIFUGE.get(), new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
+	public static final RegistryObject<BlockItem> AUTOMATED_FLAVOR_MACHINE = ITEMS.register("automated_flavor_machine", ()-> new BlockItem(PepsiMcBlock.AUTOMATED_FLAVOR_MACHINE.get(), new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
+	public static final RegistryObject<BlockItem> AUTOMATED_RECYCLER = ITEMS.register("automated_recycler", ()-> new BlockItem(PepsiMcBlock.AUTOMATED_RECYCLER.get(), new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
 
 	public static final RegistryObject<BlockItem> GENERATOR = ITEMS.register("generator", ()-> new BlockItem(PepsiMcBlock.GENERATOR.get(), new Item.Properties()

@@ -34,9 +34,9 @@ public class ProcessingCraftPacket {
 			BlockEntity TE = world.getBlockEntity(message.pos);
 			if(TE instanceof ProcessingBlockEntity PT) {
 				if(message.shift) {
-					PT.processAll(world);
+					PT.processAll();
 				} else {
-					PT.process(world);
+					PT.process();
 				}
 			}
 		});
