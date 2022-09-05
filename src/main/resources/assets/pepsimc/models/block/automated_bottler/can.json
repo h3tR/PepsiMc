@@ -1,0 +1,8 @@
+{
+  "parent": "pepsimc:block/automated_bottler/default",
+  "textures": {
+    "left":"pepsimc:blocks/automated_bottler/left_active",
+    "back":"pepsimc:blocks/automated_bottler/back_can",
+    "front":"pepsimc:blocks/automated_bottler/front_active"
+  }
+}

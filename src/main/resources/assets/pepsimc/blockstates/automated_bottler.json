@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north,powered=false,bottling=none": { "model": "pepsimc:block/automated_bottler/default" },
+    "facing=south,powered=false,bottling=none": { "model": "pepsimc:block/automated_bottler/default", "y":180  },
+    "facing=west,powered=false,bottling=none": { "model": "pepsimc:block/automated_bottler/default", "y":270 },
+    "facing=east,powered=false,bottling=none": { "model": "pepsimc:block/automated_bottler/default", "y":90 },
+    "facing=north,powered=true,bottling=none": { "model": "pepsimc:block/automated_bottler/idle" },
+    "facing=south,powered=true,bottling=none": { "model": "pepsimc:block/automated_bottler/idle", "y":180  },
+    "facing=west,powered=true,bottling=none": { "model": "pepsimc:block/automated_bottler/idle", "y":270 },
+    "facing=east,powered=true,bottling=none": { "model": "pepsimc:block/automated_bottler/idle", "y":90 },
+    "facing=north,powered=true,bottling=can": { "model": "pepsimc:block/automated_bottler/can" },
+    "facing=south,powered=true,bottling=can": { "model": "pepsimc:block/automated_bottler/can", "y":180  },
+    "facing=west,powered=true,bottling=can": { "model": "pepsimc:block/automated_bottler/can", "y":270 },
+    "facing=east,powered=true,bottling=can": { "model": "pepsimc:block/automated_bottler/can", "y":90 },
+    "facing=north,powered=true,bottling=bottle": { "model": "pepsimc:block/automated_bottler/bottle" },
+    "facing=south,powered=true,bottling=bottle": { "model": "pepsimc:block/automated_bottler/bottle", "y":180  },
+    "facing=west,powered=true,bottling=bottle": { "model": "pepsimc:block/automated_bottler/bottle", "y":270 },
+    "facing=east,powered=true,bottling=bottle": { "model": "pepsimc:block/automated_bottler/bottle", "y":90 }
+  }
+}

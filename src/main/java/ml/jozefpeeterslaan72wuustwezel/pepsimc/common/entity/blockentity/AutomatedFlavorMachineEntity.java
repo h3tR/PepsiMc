@@ -13,6 +13,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -91,6 +93,45 @@ public class AutomatedFlavorMachineEntity extends AutomatedProcessingBlockEntity
 				return super.insertItem(slot, stack, simulate);
 			}
 		};
+	}
+
+	@Override
+	protected LazyOptional<IItemHandler> getOutHandler() {
+		return LazyOptional.of(()->new IItemHandler(){
+
+			@Override
+			public int getSlots() {
+				return 1;
+			}
+
+			@NotNull
+			@Override
+			public ItemStack getStackInSlot(int slot) {
+				return itemHandler.getStackInSlot(slot+2);
+			}
+
+			@NotNull
+			@Override
+			public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+				return itemHandler.insertItem(slot+2, stack, simulate);
+			}
+
+			@NotNull
+			@Override
+			public ItemStack extractItem(int slot, int amount, boolean simulate) {
+				return itemHandler.extractItem(slot+2,amount,simulate);
+			}
+
+			@Override
+			public int getSlotLimit(int slot) {
+				return itemHandler.getSlotLimit(slot+2);
+			}
+
+			@Override
+			public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+				return itemHandler.isItemValid(slot+2,stack);
+			}
+		});
 	}
 
 	@Override

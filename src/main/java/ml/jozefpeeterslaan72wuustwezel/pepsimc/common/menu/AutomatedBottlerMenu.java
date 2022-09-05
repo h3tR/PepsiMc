@@ -19,11 +19,11 @@ public class AutomatedBottlerMenu extends AutomatedProcessingMenu {
 
 	@Override
 	protected void addSlots(IItemHandler h) {
-		SlotHandlers.add(new SlotItemHandler(h,0,12,15));
-		SlotHandlers.add(new SlotItemHandler(h,1,30,15));
-		SlotHandlers.add(new SlotItemHandler(h,2,12,43));
-		SlotHandlers.add(new OutputSlot(h,3,143,30));
-		SlotHandlers.add(new OutputSlot(h,4,143,51));
+		SlotHandlers.add(new SlotItemHandler(h,0,12,29));
+		SlotHandlers.add(new SlotItemHandler(h,1,30,29));
+		SlotHandlers.add(new SlotItemHandler(h,2,48,29));
+		SlotHandlers.add(new OutputSlot(h,3,129,29));
+		SlotHandlers.add(new OutputSlot(h,4,129,50));
 		SlotHandlers.forEach(this::addSlot);
 	}
 
@@ -38,8 +38,6 @@ public class AutomatedBottlerMenu extends AutomatedProcessingMenu {
 
 			if (index < 36) {
 				if (this.slots.get(36).mayPlace(itemstack)&&rEntity.itemHandler.isItemValid(0,itemstack)) {
-					LogManager.getLogger().debug("secondcheck:"+this.moveItemStackTo(itemstack1, 36, 37, false));
-
 					if (this.moveItemStackTo(itemstack1, 36, 37, false)) {
 						return ItemStack.EMPTY;
 					}

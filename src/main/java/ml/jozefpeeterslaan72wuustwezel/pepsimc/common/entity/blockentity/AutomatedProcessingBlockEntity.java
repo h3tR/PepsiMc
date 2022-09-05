@@ -38,6 +38,7 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
 
     public final ItemStackHandler itemHandler;
     private final LazyOptional<IItemHandler> handler;
+
     private final BlockEntityType<?> type;
 
     protected final ContainerData dataAccess = new ContainerData() {
@@ -69,6 +70,7 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
         super(in, pos, state);
         this.itemHandler = createHandler();
         this.handler = LazyOptional.of(()->itemHandler);
+
         this.type = in;
         this.energyStorage = new CustomEnergyStorage(EnergyCapacity, EnergyMaxTransfer) {
             @Override
@@ -92,13 +94,19 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
 
     protected abstract int getOutputSlot();
 
+    @Nonnull
     protected abstract int getByProductSlot();
     protected abstract ItemStackHandler createHandler();
+    protected abstract LazyOptional<IItemHandler> getOutHandler();
+
 
     private boolean isSlotFull(int slotIndex){
         return itemHandler.getStackInSlot(slotIndex).getCount() < itemHandler.getSlotLimit(slotIndex);
     }
 
+    protected boolean isActive(){
+        return energyStorage.getEnergyStored()>0 && getRecipe().isPresent() && (isSlotEmpty(getOutputSlot()) || (isSlotFull(getOutputSlot())) && getRecipe().get().getResultItem().sameItem(itemHandler.getStackInSlot(getOutputSlot())) &&  (getByProductSlot() < 0 ||isSlotEmpty(getByProductSlot()) || (isSlotFull(getByProductSlot())) && getRecipe().get().getByproductItem().sameItem(itemHandler.getStackInSlot(getByProductSlot()))));
+    }
     private boolean isSlotEmpty(int slotIndex){
         return itemHandler.getStackInSlot(slotIndex).getCount()<1;
     }
@@ -108,8 +116,7 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
             Goal = getRecipe().get().ticks;
         }
         PreviousRecipe = getRecipe();
-        if(energyStorage.hasSufficientPower() && getRecipe().isPresent() &&
-                (isSlotEmpty(getOutputSlot()) || (isSlotFull(getOutputSlot())) && getRecipe().get().getResultItem().sameItem(itemHandler.getStackInSlot(getOutputSlot())) &&  (getByProductSlot() < 0 ||isSlotEmpty(getByProductSlot()) || (isSlotFull(getByProductSlot())) && getRecipe().get().getByproductItem().sameItem(itemHandler.getStackInSlot(getByProductSlot()))))) {
+        if(isActive()) {
             Progress++;
             if(Progress>=Goal){
                 Progress = 0;
@@ -217,8 +224,11 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
         if (cap == CapabilityEnergy.ENERGY) {
             return energy.cast();
         }
-        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY  ) {
-            return handler.cast();
+        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if(side == Direction.DOWN)
+                return getOutHandler().cast();
+            else
+                return handler.cast();
         }
         return super.getCapability(cap, side);
     }
