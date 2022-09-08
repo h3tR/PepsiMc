@@ -1,0 +1,7 @@
+{
+  "parent": "pepsimc:block/automated_centrifuge/inactive",
+  "textures": {
+    "side":"pepsimc:blocks/automated_centrifuge/side_active",
+    "front":"pepsimc:blocks/automated_centrifuge/front_active"
+  }
+}

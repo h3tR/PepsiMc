@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,enabled=false": { "model": "pepsimc:block/automated_centrifuge/inactive" },
+    "facing=south,enabled=false": { "model": "pepsimc:block/automated_centrifuge/inactive", "y":180  },
+    "facing=west,enabled=false": { "model": "pepsimc:block/automated_centrifuge/inactive", "y":270 },
+    "facing=east,enabled=false": { "model": "pepsimc:block/automated_centrifuge/inactive", "y":90 },
+    "facing=north,enabled=true": { "model": "pepsimc:block/automated_centrifuge/active" },
+    "facing=south,enabled=true": { "model": "pepsimc:block/automated_centrifuge/active", "y":180  },
+    "facing=west,enabled=true": { "model": "pepsimc:block/automated_centrifuge/active", "y":270 },
+    "facing=east,enabled=true": { "model": "pepsimc:block/automated_centrifuge/active", "y":90 }
+  }
+}

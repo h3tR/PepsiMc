@@ -1,0 +1,24 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "pepsimc:blocks/automated_centrifuge/bottom",
+    "side":"pepsimc:blocks/automated_centrifuge/side_inactive",
+    "top":"pepsimc:blocks/automated_centrifuge/top",
+    "bottom":"pepsimc:blocks/automated_centrifuge/bottom",
+    "front":"pepsimc:blocks/automated_centrifuge/front_inactive"
+  },
+  "elements": [
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "texture": "#bottom", "cullface": "down" },
+        "up":    { "texture": "#top", "cullface": "up" },
+        "north": { "texture": "#front", "cullface": "north" },
+        "south": { "texture": "#side", "cullface": "south" },
+        "west":  { "texture": "#side", "cullface": "west" },
+        "east":  { "texture": "#side", "cullface": "east" }
+      }
+    }
+  ]
+}

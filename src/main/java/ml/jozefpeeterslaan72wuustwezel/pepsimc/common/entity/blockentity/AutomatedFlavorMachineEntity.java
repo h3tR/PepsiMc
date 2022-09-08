@@ -136,7 +136,7 @@ public class AutomatedFlavorMachineEntity extends AutomatedProcessingBlockEntity
 
 	@Override
 	public @NotNull Component getDisplayName() {
-		return new TranslatableComponent("block.pepsimc.flavor_machine");
+		return new TranslatableComponent("block.pepsimc.automated_flavor_machine");
 	}
 
 	@Nullable

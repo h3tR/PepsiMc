@@ -164,7 +164,7 @@ public class AutomatedRecyclerEntity extends AutomatedProcessingBlockEntity impl
 
 	@Override
 	public Component getDisplayName() {
-		return new TranslatableComponent("block.pepsimc.recycler");
+		return new TranslatableComponent("block.pepsimc.automated_recycler");
 	}
 
 	@Nullable

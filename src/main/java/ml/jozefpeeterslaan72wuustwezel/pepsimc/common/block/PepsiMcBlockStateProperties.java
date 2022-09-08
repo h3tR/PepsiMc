@@ -15,8 +15,8 @@ public class PepsiMcBlockStateProperties {
 
         private final String name;
 
-        private BottlerActivity(String p_61824_) {
-            this.name = p_61824_;
+        BottlerActivity(String name) {
+            this.name = name;
         }
 
         public String toString() {

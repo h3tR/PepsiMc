@@ -10,6 +10,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -17,6 +18,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
@@ -30,60 +33,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.Stream;
 
 public class AutomatedCentrifugeBlock extends HorizontalFacedBlock implements EntityBlock{
-
-
-	private static final VoxelShape N = Stream.of(
-			Block.box(0, 0, 0, 16, 1, 2),
-			Block.box(0, 0, 14, 16, 1, 16),
-			Block.box(0, 0, 2, 2, 1, 14),
-			Block.box(14, 0, 2, 16, 1, 14),
-			Block.box(13, 0, 13, 15, 13, 15),
-			Block.box(13, 0, 1, 15, 13, 3),
-			Block.box(1, 0, 1, 3, 13, 3),
-			Block.box(2, 5, 2, 14, 6, 14),
-			Block.box(2, 11, 2, 14, 12, 14),
-			Block.box(5, 0, 7, 11, 5, 14),
-			Block.box(1, 0, 13, 3, 13, 15)
-			).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-	private static final VoxelShape E = Stream.of(
-			Block.box(0, 0, 0, 16, 1, 2),
-			Block.box(0, 0, 14, 16, 1, 16),
-			Block.box(0, 0, 2, 2, 1, 14),
-			Block.box(14, 0, 2, 16, 1, 14),
-			Block.box(13, 0, 13, 15, 13, 15),
-			Block.box(13, 0, 1, 15, 13, 3),
-			Block.box(1, 0, 1, 3, 13, 3),
-			Block.box(2, 5, 2, 14, 6, 14),
-			Block.box(2, 11, 2, 14, 12, 14),
-			Block.box(2, 0, 5, 9, 5, 11),
-			Block.box(1, 0, 13, 3, 13, 15)
-			).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-	private static final VoxelShape S = Stream.of(
-			Block.box(0, 0, 0, 16, 1, 2),
-			Block.box(0, 0, 14, 16, 1, 16),
-			Block.box(0, 0, 2, 2, 1, 14),
-			Block.box(14, 0, 2, 16, 1, 14),
-			Block.box(13, 0, 13, 15, 13, 15),
-			Block.box(13, 0, 1, 15, 13, 3),
-			Block.box(1, 0, 1, 3, 13, 3),
-			Block.box(2, 5, 2, 14, 6, 14),
-			Block.box(2, 11, 2, 14, 12, 14),
-			Block.box(5, 0, 2, 11, 5, 9),
-			Block.box(1, 0, 13, 3, 13, 15)
-		).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-	private static final VoxelShape W = Stream.of(
-			Block.box(0, 0, 0, 16, 1, 2),
-			Block.box(0, 0, 14, 16, 1, 16),
-			Block.box(0, 0, 2, 2, 1, 14),
-			Block.box(14, 0, 2, 16, 1, 14),
-			Block.box(13, 0, 13, 15, 13, 15),
-			Block.box(13, 0, 1, 15, 13, 3),
-			Block.box(1, 0, 1, 3, 13, 3),
-			Block.box(2, 5, 2, 14, 6, 14),
-			Block.box(2, 11, 2, 14, 12, 14),
-			Block.box(7, 0, 5, 14, 5, 11),
-			Block.box(1, 0, 13, 3, 13, 15)
-		).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
 	public AutomatedCentrifugeBlock() {
 		super(Properties
@@ -125,24 +74,20 @@ public class AutomatedCentrifugeBlock extends HorizontalFacedBlock implements En
 
 
 	@Override
-	public RenderShape getRenderShape(BlockState p_60550_) {
-		return RenderShape.ENTITYBLOCK_ANIMATED;
-	}
-	
-	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return PepsiMcBlockEntity.AUTOMATED_CENTRIFUGE_BLOCK_ENTITY.get().create(pos, state);
 	}
 
-	@Override 
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos p, CollisionContext context) {
-		return switch (state.getValue(FACING)) {
-			case NORTH -> N;
-			case EAST -> E;
-			case SOUTH -> S;
-			case WEST -> W;
-			default -> N;
-		};
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
+		builder.add(BlockStateProperties.ENABLED);
+	}
+
+	@Nullable
+	@Override
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		return super.getStateForPlacement(context).setValue(BlockStateProperties.ENABLED,false);
 	}
 
 	@Nullable

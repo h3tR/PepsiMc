@@ -2,7 +2,10 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.BatteryDisplay;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.ConfirmButton;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.ProgressBar;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.Slider;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.CentrifugeRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.AutomatedCentrifugeEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedCentrifugeMenu;
@@ -15,6 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,26 +26,21 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 
-public class AutomatedCentrifugeScreen extends AbstractContainerScreen<AutomatedCentrifugeMenu>{
+public class AutomatedCentrifugeScreen extends AutomatedProcessingScreen<AutomatedCentrifugeMenu>{
 
-private final AutomatedCentrifugeEntity entity;
-	private final Level world;
+	private static final ResourceLocation GUI = new ResourceLocation("pepsimc","textures/gui/automated_centrifuge_gui.png");
 	public AutomatedCentrifugeScreen(AutomatedCentrifugeMenu Menu, Inventory plrInv, Component Text) {
 		super(Menu, plrInv, Text);
-		this.entity = (AutomatedCentrifugeEntity) Menu.entity;
-		this.world = this.entity.getLevel();
 	}
 
-	private static final ResourceLocation GUI = new ResourceLocation("pepsimc","textures/gui/centrifuge_gui.png");
+	@Override
+	protected void init() {
+		super.init();
+		this.addRenderableWidget(new BatteryDisplay(this.getGuiLeft()+152,this.getGuiTop()+9,this.menu,this));
+		this.addRenderableWidget(new ProgressBar(this.getGuiLeft()+59,this.getGuiTop()+41,this.menu,this));
+		//this.addRenderableWidget(new Slider(this.getGuiLeft()+10,this.getGuiTop()+40,45,this.menu,this));
+	}
 
-	public void containerTick() {
-	      super.containerTick();
-	      if (hasRecipe()) {
-				this.addRenderableWidget(new ConfirmButton(this.getGuiLeft()+77,this.getGuiTop()+28,176,0,18,15,entity.getBlockPos(),GUI));
-	      } else {
-	  		this.clearWidgets();
-	      }
-	   }
 	
 	@Override
 	public void render(PoseStack stack, int mouseX, int mouseY, float Ptick) {
@@ -49,43 +48,25 @@ private final AutomatedCentrifugeEntity entity;
 		super.render(stack, mouseX, mouseY, Ptick);
 		this.renderTooltip(stack, mouseX, mouseY);
 		if (hasRecipe()) {
-			if(this.isHovering(78,29, 18, 15, mouseX, mouseY)) {
-
-				if(this.createTooltip()!=null) {
-
-					this.renderTooltip(stack, this.createTooltip(), mouseX,mouseY);
-				}
-			}			
 			if(!this.menu.slotHasItem(1))
-			Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(RecipeResult(), this.getGuiLeft()+65, this.getGuiTop()+53);
-			for (int i = 0; i < 3; i++) {
-		        RenderSystem.depthFunc(516+i);
-				if(!this.menu.slotHasItem(2))
-					GuiComponent.fill(stack, this.getGuiLeft()+66, this.getGuiTop()+53, this.getGuiLeft()+81, this.getGuiTop()+69,822083583);
-				
-			}
-	        RenderSystem.depthFunc(515);
+				Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(RecipeResult(), this.getGuiLeft()+menu.slots.get(1+36).x, this.getGuiTop()+menu.slots.get(1+36).y);
 			if(!this.menu.slotHasItem(2))
-				Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(RecipeByproduct(), this.getGuiLeft()+94, this.getGuiTop()+53);
-				for (int i = 0; i < 3; i++) {
-			        RenderSystem.depthFunc(516+i);
-					if(!this.menu.slotHasItem(2))
-						GuiComponent.fill(stack, this.getGuiLeft()+94, this.getGuiTop()+53, this.getGuiLeft()+110, this.getGuiTop()+69,822083583);
-					
-				}
-	        RenderSystem.depthFunc(515);
+				Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(RecipeByproduct(), this.getGuiLeft()+menu.slots.get(2+36).x, this.getGuiTop()+menu.slots.get(2+36).y);
+			for (int i = 0; i < 3; i++) {
+				RenderSystem.depthFunc(516+i);
+				if(!this.menu.slotHasItem(1))
+					GuiComponent.fill(stack, this.getGuiLeft()+menu.slots.get(1+36).x, this.getGuiTop()+menu.slots.get(1+36).y, this.getGuiLeft()+menu.slots.get(1+36).x+16, this.getGuiTop()+menu.slots.get(1+36).y+16,822083583);
+				if(!this.menu.slotHasItem(2))
+					GuiComponent.fill(stack, this.getGuiLeft()+menu.slots.get(2+36).x, this.getGuiTop()+menu.slots.get(2+36).y, this.getGuiLeft()+menu.slots.get(2+36).x+16, this.getGuiTop()+menu.slots.get(2+36).y+16,822083583);
+			}
+			RenderSystem.depthFunc(515);
 		}
 	}
-	
-	private Component createTooltip() {
-        ArrayList<Component> text = new ArrayList<>();
-        if(RecipeResult() != null) {
-        	text.add(RecipeResult().getHoverName());
-			return text.get(0);
-		}
-		return null;
-    }
-	private boolean hasRecipe() {
+
+
+
+	@Override
+	public boolean hasRecipe() {
 		Level world = entity.getLevel();
 		SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());
 
@@ -98,7 +79,9 @@ private final AutomatedCentrifugeEntity entity;
 		return recipe.isPresent();
 		
 	}
-	private ItemStack RecipeResult() {
+
+	@Override
+	protected ItemStack RecipeResult() {
 		SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());
 		ArrayList<ItemStack> result = new ArrayList<>();
 		for(int i=0;i<entity.itemHandler.getSlots();i++) {
@@ -132,12 +115,6 @@ private final AutomatedCentrifugeEntity entity;
         int x = this.getGuiLeft();
         int y = this.getGuiTop();
         this.blit(stack, x, y, 0, 0, 176, 167);
-	}
-
-	@Override
-	protected void renderLabels(@NotNull PoseStack matrixStack, int p_97809_, int p_97810_) {
-		drawString(matrixStack, Minecraft.getInstance().font,   menu.getProgress()+"/"+menu.getGoal(), 50, 10, 0xffffff);
-		super.renderLabels(matrixStack, p_97809_, p_97810_);
 	}
 
 }

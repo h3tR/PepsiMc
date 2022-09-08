@@ -23,7 +23,7 @@ public class BatteryDisplay extends AbstractWidget {
     private final AutomatedProcessingMenu menu;
     private final Screen screen;
     public BatteryDisplay(int x, int y, AutomatedProcessingMenu menu, Screen screen){
-        super(x,y, 13,20, CommonComponents.GUI_DONE);
+        super(x,y, 13,20, TextComponent.EMPTY);
         this.menu = menu;
         this.screen = screen;
     }
@@ -35,7 +35,7 @@ public class BatteryDisplay extends AbstractWidget {
         RenderSystem.setShaderTexture(0,RL);
         RenderSystem.clearColor(1.0F, 1.0F, 1.0F, 1.0F);
         //blits the battery Background
-        this.blit(stack,x,y,0,0,this.width,this.height,49,20);
+        blit(stack,x,y,0,0,this.width,this.height,49,20);
 
         int energy = menu.getEnergy();
         int maxEnergy = menu.getMaxEnergy();
@@ -44,7 +44,7 @@ public class BatteryDisplay extends AbstractWidget {
         if(chargeColor<0)
             chargeColor = 0;
         //blits the charge
-        this.blit(stack,x+2,y+18-chargeLevel,this.width+chargeColor*9,16-chargeLevel,9,chargeLevel,49,20);
+        blit(stack,x+2,y+18-chargeLevel,this.width+chargeColor*9,16-chargeLevel,9,chargeLevel,49,20);
         if(this.isHovered){
             this.renderToolTip(stack,MouseX,MouseY);
         }
@@ -61,7 +61,7 @@ public class BatteryDisplay extends AbstractWidget {
 
     @Override
     public void renderToolTip(PoseStack stack, int MouseX, int MouseY) {
-        if(this.screen.hasShiftDown())
+        if(Screen.hasShiftDown())
             this.screen.renderTooltip(stack,new TextComponent(getFEValue(menu.getEnergy())+" / "+getFEValue(menu.getMaxEnergy())),MouseX,MouseY);
         else
             this.screen.renderTooltip(stack,new TextComponent(getFEValue(menu.getEnergy())),MouseX,MouseY);
