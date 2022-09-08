@@ -1,5 +1,5 @@
 # PepsiMc 
-This mod is a standalone mod centered around the pepsi beverage.  
+This mod is a mod centered around the pepsi beverage.  
 It adds powerful consumables along with various other features.
 For example:
 
