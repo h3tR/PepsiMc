@@ -35,6 +35,7 @@ public class RecyclerScreen extends AbstractContainerScreen<RecyclerMenu>{
 	}
 	private static final ResourceLocation GUI = new ResourceLocation("pepsimc","textures/gui/recycler_gui.png");
 
+	@Override
 	public void containerTick() {
 	      super.containerTick();
 	      if (hasRecipe()) {

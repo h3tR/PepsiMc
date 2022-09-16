@@ -35,7 +35,7 @@ public class FlavorMachineScreen extends AbstractContainerScreen<FlavorMachineMe
 	}
 
 	private static final ResourceLocation GUI = new ResourceLocation("pepsimc","textures/gui/flavor_machine_gui.png");
-
+	@Override
 	public void containerTick() {
 	      super.containerTick();
 	      if (hasRecipe()) {

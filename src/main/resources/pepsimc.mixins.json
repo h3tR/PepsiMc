@@ -1,0 +1,14 @@
+{
+  "required": false,
+  "package": "ml.jozefpeeterslaan72wuustwezel.pepsimc.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "pepsimc.mixin-refmap.json",
+  "mixins": [
+    "SingleJigsawAccess"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

@@ -22,7 +22,7 @@ public class AutomatedFlavorMachineMenu extends AutomatedProcessingMenu {
 	@Override
 	protected void addSlots(IItemHandler h) {
 		SlotHandlers.add(new SlotItemHandler(h,0,80,20));
-		SlotHandlers.add(new SlotItemHandler(h,1,42,42));
+		SlotHandlers.add(new SlotItemHandler(h,1,117,20));
 		SlotHandlers.add(new OutputSlot(h,2,80,64));
 		SlotHandlers.forEach(this::addSlot);
 	}

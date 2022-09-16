@@ -18,8 +18,6 @@ public class PepsiMcMenu {
 	
 	public static final RegistryObject<MenuType<CentrifugeMenu>> CENTRIFUGE_MENU = MENUS.register("centrifuge_menu", ()-> IForgeMenuType.create((ID, inv, dat)-> new CentrifugeMenu(ID, inv, inv.player.getCommandSenderWorld().getBlockEntity(dat.readBlockPos()))));
 
-	//No changes are needed to the classes but they have to be separate to have different screens.
-
 	public static final RegistryObject<MenuType<AutomatedBottlerMenu>> AUTOMATED_BOTTLER_MENU= MENUS.register("automated_bottler_menu", ()-> IForgeMenuType.create((ID, inv, dat)-> new AutomatedBottlerMenu(ID, inv, inv.player.getCommandSenderWorld().getBlockEntity(dat.readBlockPos()),new SimpleContainerData(4))));
 
 	public static RegistryObject<MenuType<AutomatedRecyclerMenu>> AUTOMATED_RECYCLER_MENU = MENUS.register("automated_recycler_menu", ()-> IForgeMenuType.create((ID, inv, dat)-> new AutomatedRecyclerMenu(ID, inv, inv.player.getCommandSenderWorld().getBlockEntity(dat.readBlockPos()),new SimpleContainerData(4))));

@@ -545,7 +545,7 @@ public class PepsiMcItem {
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
 	public static final RegistryObject<BlockItem> AUTOMATED_FLAVOR_MACHINE = ITEMS.register("automated_flavor_machine", ()-> new BlockItem(PepsiMcBlock.AUTOMATED_FLAVOR_MACHINE.get(), new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
-	public static final RegistryObject<BlockItem> AUTOMATED_RECYCLER = ITEMS.register("automated_recycler", ()-> new BlockItem(PepsiMcBlock.AUTOMATED_RECYCLER.get(), new Item.Properties()
+	public static final RegistryObject<BlockItem> AUTOMATED_RECYCLER = ITEMS.register("automated_recycler.json", ()-> new BlockItem(PepsiMcBlock.AUTOMATED_RECYCLER.get(), new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
 
 	public static final RegistryObject<BlockItem> BOTTLER = ITEMS.register("bottler", ()-> new BlockItem(PepsiMcBlock.BOTTLER.get(), new Item.Properties()

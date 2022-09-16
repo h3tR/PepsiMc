@@ -33,7 +33,7 @@ public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeMenu>{
 	}
 
 	private static final ResourceLocation GUI = new ResourceLocation("pepsimc","textures/gui/centrifuge_gui.png");
-
+	@Override
 	public void containerTick() {
 	      super.containerTick();
 	      if (hasRecipe()) {

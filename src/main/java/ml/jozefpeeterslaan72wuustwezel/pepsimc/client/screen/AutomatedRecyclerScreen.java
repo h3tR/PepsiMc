@@ -2,7 +2,9 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.BatteryDisplay;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.ConfirmButton;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.ProgressBar;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.RecyclerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.AutomatedRecyclerEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedRecyclerMenu;
@@ -10,12 +12,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.apache.logging.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -23,60 +27,47 @@ import java.util.Objects;
 import java.util.Optional;
 
 
-public class AutomatedRecyclerScreen extends AbstractContainerScreen<AutomatedRecyclerMenu>{
+public class AutomatedRecyclerScreen extends AutomatedProcessingScreen<AutomatedRecyclerMenu>{
 
 	private final AutomatedRecyclerEntity entity;
+	private int shuttery = 16;
 	private final Level world;
 	public AutomatedRecyclerScreen(AutomatedRecyclerMenu Menu, Inventory plrInv, Component Text) {
 		super(Menu, plrInv, Text);
 		this.entity = (AutomatedRecyclerEntity) Menu.entity;
 		this.world = this.entity.getLevel();
 	}
-	private static final ResourceLocation GUI = new ResourceLocation("pepsimc","textures/gui/recycler_gui.png");
+	private static final ResourceLocation GUI = new ResourceLocation("pepsimc","textures/gui/automated_recycler_gui.png");
 
+	@Override
 	public void containerTick() {
 	      super.containerTick();
-	      if (hasRecipe()) {
-				this.addRenderableWidget(new ConfirmButton(this.getGuiLeft()+77,this.getGuiTop()+28,176,0,18,15,entity.getBlockPos(),GUI));
-	      } else {
-	  		this.clearWidgets();
-	      }
-	   }
+		  if(menu.slotHasItem(2)&&shuttery<16)
+			  shuttery++;
+		  else if (!menu.slotHasItem(2)&&shuttery>0)
+			  shuttery--;
+	}
+
+	@Override
+	protected void init() {
+		super.init();
+		this.addRenderableWidget(new BatteryDisplay(this.getGuiLeft()+152,this.getGuiTop()+9,this.menu,this));
+		this.addRenderableWidget(new ProgressBar(this.getGuiLeft()+60,this.getGuiTop()+38,this.menu,this));
+	}
 	
 	@Override
 	public void render(@NotNull PoseStack stack, int mouseX, int mouseY, float Ptick) {
 		this.renderBackground(stack);
 		super.render(stack, mouseX, mouseY, Ptick);
 		this.renderTooltip(stack, mouseX, mouseY);
-		if (hasRecipe()) {
-			if(this.isHovering(77,28, 18, 15, mouseX, mouseY)) {
-
-				if(this.createTooltip()!=null) {
-
-					this.renderTooltip(stack, Objects.requireNonNull(this.createTooltip()), mouseX,mouseY);
-				}
-			}			
-			if(!this.menu.slotHasItem(2))
-				Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(RecipeResult(), this.getGuiLeft()+80, this.getGuiTop()+53);
-			for (int i = 0; i < 3; i++) {
-		        RenderSystem.depthFunc(516+i);
-				if(!this.menu.slotHasItem(2))
-					GuiComponent.fill(stack, this.getGuiLeft()+80, this.getGuiTop()+53, this.getGuiLeft()+96, this.getGuiTop()+69,822083583);
-				
-			}
-	        RenderSystem.depthFunc(515);
-		}
+		RenderSystem.setShaderTexture(0,GUI);
+		RenderSystem.depthMask(false);
+		this.blit(stack,this.getGuiLeft()+menu.slots.get(2+36).x,this.getGuiTop()+menu.slots.get(2+36).y,176,shuttery,16,16);
 	}
 	
-	private Component createTooltip() {
-        ArrayList<Component> text = new ArrayList<>();
-        if(RecipeResult() != null) {
-        	text.add(RecipeResult().getHoverName());
-			return text.get(0);
-		}
-		return null;
-    }
-	private boolean hasRecipe() {
+
+	@Override
+	public boolean hasRecipe() {
 		SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());
 		for(int i=0;i<entity.itemHandler.getSlots();i++) {
 			inv.setItem(i, entity.itemHandler.getStackInSlot(i));
@@ -86,7 +77,8 @@ public class AutomatedRecyclerScreen extends AbstractContainerScreen<AutomatedRe
 		return recipe.isPresent();
 		
 	}
-	private ItemStack RecipeResult() {
+	@Override
+	public ItemStack RecipeResult() {
 		SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());
 		ArrayList<ItemStack> result = new ArrayList<>();
 		for(int i=0;i<entity.itemHandler.getSlots();i++) {
@@ -111,7 +103,6 @@ public class AutomatedRecyclerScreen extends AbstractContainerScreen<AutomatedRe
 
 	@Override
 	protected void renderLabels(@NotNull PoseStack matrixStack, int p_97809_, int p_97810_) {
-		drawString(matrixStack, Minecraft.getInstance().font,   menu.getProgress()+"/"+menu.getGoal(), 50, 10, 0xffffff);
 		super.renderLabels(matrixStack, p_97809_, p_97810_);
 	}
 

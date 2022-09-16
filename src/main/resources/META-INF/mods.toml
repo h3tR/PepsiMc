@@ -40,4 +40,11 @@ This is a mod dedicated to the sacred drink.
     versionRange="[1.18.2,)"
     ordering="NONE"
     side="BOTH"
+[[dependencies.pepsimc]]
+    modId="geckolib3"
+    mandatory=true
+    versionRange="[3,)"
+    ordering="NONE"
+    side="BOTH"
+
 

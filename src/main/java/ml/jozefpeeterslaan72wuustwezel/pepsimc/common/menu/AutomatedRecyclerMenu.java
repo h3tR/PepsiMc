@@ -20,8 +20,8 @@ public class AutomatedRecyclerMenu extends AutomatedProcessingMenu {
 	
 	@Override
 	protected void addSlots(IItemHandler h) {
-		SlotHandlers.add(new SlotItemHandler(h,0,80,9));
-		SlotHandlers.add(new SlotItemHandler(h,1,42,31));
+		SlotHandlers.add(new SlotItemHandler(h,0,66,17));
+		SlotHandlers.add(new SlotItemHandler(h,1,94,17));
 		SlotHandlers.add(new OutputSlot(h,2,80,53));
 		SlotHandlers.forEach(this::addSlot);
 	}

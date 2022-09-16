@@ -12,7 +12,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
@@ -20,28 +19,19 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.apache.logging.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.Optional;
 
-public class AutomatedRecyclerEntity extends AutomatedProcessingBlockEntity implements IAnimatable, MenuProvider {
-    private final AnimationFactory factory = new AnimationFactory(this);
+public class AutomatedRecyclerEntity extends AutomatedProcessingBlockEntity implements MenuProvider {
 
 	public AutomatedRecyclerEntity(BlockPos pos, BlockState state) {
-		super(PepsiMcBlockEntity.RECYCLER_BLOCK_ENTITY.get(), pos, state,500,50);
+		super(PepsiMcBlockEntity.AUTOMATED_RECYCLER_BLOCK_ENTITY.get(), pos, state,500,50);
 	}
 
 	@Override
 	protected Optional<RecyclerRecipe> getRecipe() {
-		LogManager.getLogger().debug(Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(RecyclerRecipe.RecyclerRecipeType.INSTANCE, getSimpleInv(), this.getLevel()).isPresent());
 		return Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(RecyclerRecipe.RecyclerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
 	}
 
@@ -145,31 +135,14 @@ public class AutomatedRecyclerEntity extends AutomatedProcessingBlockEntity impl
 		});	}
 
 
-	private <E extends BlockEntity & IAnimatable> PlayState predicate(AnimationEvent<E> event)
-    {		
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pepsimc.recycler", true));
-        return PlayState.CONTINUE;
-    }
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void registerControllers(AnimationData data) {
-		 data.addAnimationController(new AnimationController(this, "controller", 0, this::predicate));
-	}
-
-	@Override
-	public AnimationFactory getFactory() {
-		 return this.factory;
-	}
-
-	@Override
-	public Component getDisplayName() {
+	public @NotNull Component getDisplayName() {
 		return new TranslatableComponent("block.pepsimc.automated_recycler");
 	}
 
 	@Nullable
 	@Override
-	public AbstractContainerMenu createMenu(int id, Inventory inv, Player plr) {
+	public AbstractContainerMenu createMenu(int id, @NotNull Inventory inv, @NotNull Player plr) {
 		return new AutomatedRecyclerMenu(id,inv,this,dataAccess);
 	}
 }

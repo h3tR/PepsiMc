@@ -19,9 +19,9 @@ public class AutomatedCentrifugeMenu extends AutomatedProcessingMenu {
 
 	}
 	protected void addSlots(IItemHandler h) {
-		SlotHandlers.add(new SlotItemHandler(h,0,80,23));
-		SlotHandlers.add(new OutputSlot(h,1,66,53));
-		SlotHandlers.add(new OutputSlot(h,2,94,53));
+		SlotHandlers.add(new SlotItemHandler(h,0,80,18));
+		SlotHandlers.add(new OutputSlot(h,1,63,56));
+		SlotHandlers.add(new OutputSlot(h,2,97,56));
 		SlotHandlers.forEach(this::addSlot);
 	}
 
