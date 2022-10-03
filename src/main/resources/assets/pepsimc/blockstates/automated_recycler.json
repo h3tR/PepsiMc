@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,enabled=false": { "model": "pepsimc:block/automated_recycler/default" },
+    "facing=south,enabled=false": { "model": "pepsimc:block/automated_recycler/default", "y":180 },
+    "facing=west,enabled=false": { "model": "pepsimc:block/automated_recycler/default", "y":270 },
+    "facing=east,enabled=false": { "model": "pepsimc:block/automated_recycler/default", "y":90 },
+    "facing=north,enabled=true": { "model": "pepsimc:block/automated_recycler/active" },
+    "facing=south,enabled=true": { "model": "pepsimc:block/automated_recycler/active", "y":180 },
+    "facing=west,enabled=true": { "model": "pepsimc:block/automated_recycler/active", "y":270 },
+    "facing=east,enabled=true": { "model": "pepsimc:block/automated_recycler/active", "y":90 }
+  }
+}

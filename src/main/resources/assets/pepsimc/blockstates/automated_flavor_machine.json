@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north,powered=false,enabled=false": { "model": "pepsimc:block/automated_flavor_machine/default" },
+    "facing=south,powered=false,enabled=false": { "model": "pepsimc:block/automated_flavor_machine/default", "y":180 },
+    "facing=west,powered=false,enabled=false": { "model": "pepsimc:block/automated_flavor_machine/default", "y":270 },
+    "facing=east,powered=false,enabled=false": { "model": "pepsimc:block/automated_flavor_machine/default", "y":90 },
+    "facing=north,powered=true,enabled=false": { "model": "pepsimc:block/automated_flavor_machine/inactive" },
+    "facing=south,powered=true,enabled=false": { "model": "pepsimc:block/automated_flavor_machine/inactive", "y":180 },
+    "facing=west,powered=true,enabled=false": { "model": "pepsimc:block/automated_flavor_machine/inactive", "y":270 },
+    "facing=east,powered=true,enabled=false": { "model": "pepsimc:block/automated_flavor_machine/inactive", "y":90 },
+    "facing=north,powered=true,enabled=true": { "model": "pepsimc:block/automated_flavor_machine/active" },
+    "facing=south,powered=true,enabled=true": { "model": "pepsimc:block/automated_flavor_machine/active", "y":180 },
+    "facing=west,powered=true,enabled=true": { "model": "pepsimc:block/automated_flavor_machine/active", "y":270 },
+    "facing=east,powered=true,enabled=true": { "model": "pepsimc:block/automated_flavor_machine/active", "y":90 }
+  }
+}

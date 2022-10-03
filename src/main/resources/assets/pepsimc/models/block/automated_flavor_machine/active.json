@@ -1,0 +1,8 @@
+{
+  "parent": "pepsimc:block/automated_flavor_machine/default",
+  "textures": {
+    "back":"pepsimc:blocks/automated_flavor_machine/back_active",
+    "left":"pepsimc:blocks/automated_flavor_machine/left_active",
+    "right":"pepsimc:blocks/automated_flavor_machine/right_active"
+  }
+}

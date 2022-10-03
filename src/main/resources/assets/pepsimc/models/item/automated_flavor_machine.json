@@ -1,1 +1,4 @@
-{}
+{
+  "parent": "pepsimc:block/automated_flavor_machine/default"
+
+}

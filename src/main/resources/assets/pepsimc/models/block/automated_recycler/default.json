@@ -1,0 +1,11 @@
+{
+  "parent": "pepsimc:block/automated_processing_machine",
+  "textures": {
+    "front":"pepsimc:blocks/automated_recycler/hatch",
+    "left":"pepsimc:blocks/automated_recycler/icon",
+    "right":"pepsimc:blocks/automated_processing_machine/vent",
+    "back":"pepsimc:blocks/automated_recycler/spark"
+
+
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "pepsimc:block/automated_recycler/default",
+  "textures": {
+    "back":"pepsimc:blocks/automated_recycler/spark_active"
+  }
+}

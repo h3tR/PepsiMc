@@ -1,0 +1,9 @@
+{
+  "parent": "pepsimc:block/automated_processing_machine",
+  "textures": {
+    "back":"pepsimc:blocks/automated_flavor_machine/back_unpowered",
+    "left":"pepsimc:blocks/automated_flavor_machine/left",
+    "right":"pepsimc:blocks/automated_flavor_machine/right",
+    "front":"pepsimc:blocks/automated_processing_machine/vent"
+  }
+}

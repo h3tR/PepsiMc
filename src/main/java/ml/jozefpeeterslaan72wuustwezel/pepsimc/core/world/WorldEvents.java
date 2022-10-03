@@ -70,7 +70,7 @@ public class WorldEvents {
 
 		String[] biomes = {"plains","snowy","savanna","desert","taiga"};
 		for (String biome : biomes) {
-			addToPool(new ResourceLocation("village/" + biome + "/houses"), new ResourceLocation("pepsimc:village/" + biome + "/houses/" + biome + "_pepsi_store_1"), 50);
+			addToPool(new ResourceLocation("village/" + biome + "/houses"), new ResourceLocation("pepsimc:village/" + biome + "/houses/" + biome + "_pepsi_store_1"), 500);
 		}
 	}
 

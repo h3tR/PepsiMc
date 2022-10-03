@@ -1,6 +1,7 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity;
 
 
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlockStateProperties;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.FlavoringRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedFlavorMachineMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
@@ -12,7 +13,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -44,6 +47,21 @@ public class AutomatedFlavorMachineEntity extends AutomatedProcessingBlockEntity
 			itemHandler.insertItem(2, iRecipe.getResultItem(), false);
 			setChanged();
 		});
+	}
+
+	@Override
+	public void tickServer() {
+		super.tickServer();
+		boolean Powered = false;
+		boolean Enabled = false;
+
+		if (isActive()) {
+			Powered = true; Enabled = true;
+		} else if (energyStorage.getEnergyStored()>0)
+			Powered = true;
+		if (!getBlockState().equals(getBlockState().setValue(BlockStateProperties.ENABLED, Enabled).setValue(BlockStateProperties.POWERED, Powered)))
+			level.setBlock(worldPosition, getBlockState().setValue(BlockStateProperties.ENABLED, Enabled).setValue(BlockStateProperties.POWERED, Powered), Block.UPDATE_ALL);
+
 	}
 
 	@Override

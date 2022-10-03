@@ -12,7 +12,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -45,6 +47,14 @@ public class AutomatedRecyclerEntity extends AutomatedProcessingBlockEntity impl
 			itemHandler.insertItem(2, iRecipe.getResultItem(), false);
 			setChanged();
 		});
+	}
+	@Override
+	public void tickServer() {
+		super.tickServer();
+
+		if (!getBlockState().equals(getBlockState().setValue(BlockStateProperties.ENABLED, isActive())))
+			level.setBlock(worldPosition, getBlockState().setValue(BlockStateProperties.ENABLED, isActive()), Block.UPDATE_ALL);
+
 	}
 
 	@Override

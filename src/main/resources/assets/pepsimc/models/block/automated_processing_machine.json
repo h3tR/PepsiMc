@@ -1,0 +1,26 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "pepsimc:blocks/automated_processing_machine/side",
+    "top":"pepsimc:blocks/automated_processing_machine/top",
+    "bottom":"pepsimc:blocks/automated_processing_machine/bottom",
+    "front":"pepsimc:blocks/automated_processing_machine/side",
+    "back":"pepsimc:blocks/automated_processing_machine/side",
+    "left":"pepsimc:blocks/automated_processing_machine/side",
+    "right":"pepsimc:blocks/automated_processing_machine/side"
+  },
+  "elements": [
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "texture": "#bottom", "cullface": "down" },
+        "up":    { "texture": "#top", "cullface": "up" },
+        "north": { "texture": "#front", "cullface": "north" },
+        "south": { "texture": "#back", "cullface": "south" },
+        "west":  { "texture": "#left", "cullface": "west" },
+        "east":  { "texture": "#right", "cullface": "east" }
+      }
+    }
+  ]
+}

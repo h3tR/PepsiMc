@@ -51,5 +51,6 @@ public class PepsiMcJEI implements IModPlugin{
 		registration.addRecipes(new RecipeType<>(CentrifugeRecipeCategory.UID, CentrifugeRecipe.class), CentrifugeRecipes);
 		registration.addRecipes(new RecipeType<>(RecyclerRecipeCategory.UID, RecyclerRecipe.class), RecyclerRecipes);
 
+
 	}
 }
