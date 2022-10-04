@@ -1,6 +1,7 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.configuration.CommonConfig;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.features.OreFeatures;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class PepsiMcConfiguredFeature {
 	public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> STEVIA_PLANT_CONFIG =  FeatureUtils.register("stevia_plant_configured",Feature.FLOWER,
-			new RandomPatchConfiguration(32, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+			new RandomPatchConfiguration(CommonConfig.STEVIA_SPAWNRATE.get(), 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
 					new SimpleBlockConfiguration(BlockStateProvider.simple(PepsiMcBlock.STEVIA_PLANT.get())))));
 
 

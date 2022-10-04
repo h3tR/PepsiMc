@@ -4,6 +4,7 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.CentrifugeRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedCentrifugeMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.configuration.CommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -26,7 +27,7 @@ import java.util.Optional;
 
 public class AutomatedCentrifugeEntity extends AutomatedProcessingBlockEntity implements MenuProvider {
 	public AutomatedCentrifugeEntity(BlockPos pos, BlockState state) {
-		super(PepsiMcBlockEntity.AUTOMATED_CENTRIFUGE_BLOCK_ENTITY.get(), pos, state, 500, 5);
+		super(PepsiMcBlockEntity.AUTOMATED_CENTRIFUGE_BLOCK_ENTITY.get(), pos, state, CommonConfig.CENTRIFUGE_FE_STORAGE.get(), CommonConfig.CENTRIFUGE_CONDUCTIVITY.get(),CommonConfig.CENTRIFUGE_FE_USAGE_PER_TICK.get());
 	}
 
 
@@ -61,6 +62,8 @@ public class AutomatedCentrifugeEntity extends AutomatedProcessingBlockEntity im
 	public void tickServer() {
 		super.tickServer();
 		level.setBlock(worldPosition,getBlockState().setValue(BlockStateProperties.ENABLED,isActive()), Block.UPDATE_ALL);
+		energyStorage.consumeEnergy(CommonConfig.CENTRIFUGE_FE_USAGE_PER_TICK.get());
+
 	}
 
 	@Override

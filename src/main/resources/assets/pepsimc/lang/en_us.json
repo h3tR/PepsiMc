@@ -48,8 +48,8 @@
 	"item.pepsimc.pepsi_man_tune_disc.desc":"James Shimoji - Pepsi Man Theme Song",
 	"item.pepsimc.stevia_seeds":"Stevia Rebaudiana Seeds",
 	 "item.minecraft.potion.effect.insomnia_potion": "Potion of Insomnia",
-	 "item.minecraft.lingering_potion.effect.insomnia_potion": "Potion of Insomnia",
-	 "item.minecraft.splash_potion.effect.insomnia_potion": "Potion of Insomnia",
+	 "item.minecraft.lingering_potion.effect.insomnia_potion": "Lingering Potion of Insomnia",
+	 "item.minecraft.splash_potion.effect.insomnia_potion": "Splash Potion of Insomnia",
 	 "item.pepsimc.pepsite_shard":"Hardened Pepsite Shard",
 	 "item.pepsimc.shard_helmet":"Pepsite Shard Helmet Pattern",
 	 "item.pepsimc.shard_chestplate":"Pepsite Shard Chestplate Pattern",
@@ -62,6 +62,7 @@
 	 "item.pepsimc.pepsite_boots":"Pepsite Boots",
 	 "item.pepsimc.pepsite_core":"Pepsite Core",
 	 "item.minecraft.tipped_arrow.effect.insomnia_potion": "Arrow of Insomnia",
+	 "item.pepsimc.pepsite_infused_machine_frame": "Pepsite Infused Machine Frame",
 
 	//Blocks
 	 "block.pepsimc.pepsite_block":"Block of Pepsite",

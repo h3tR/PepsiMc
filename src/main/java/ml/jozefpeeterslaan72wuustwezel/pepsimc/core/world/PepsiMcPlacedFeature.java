@@ -1,5 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.core.world;
 
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.configuration.CommonConfig;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -14,7 +15,7 @@ public class PepsiMcPlacedFeature {
 
 
     public static final Holder<PlacedFeature> PEPSITE_ORE_PLACED = PlacementUtils.register("pepsite_ore_placed",
-            PepsiMcConfiguredFeature.PEPSITE_ORE_CONFIG, List.of(CountPlacement.of(8),
+            PepsiMcConfiguredFeature.PEPSITE_ORE_CONFIG, List.of(CountPlacement.of(CommonConfig.PEPSITE_ORE_SPAWNRATE.get()),
                     InSquarePlacement.spread(),
                     HeightRangePlacement.triangle(
                             VerticalAnchor.aboveBottom(-80),

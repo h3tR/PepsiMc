@@ -1,0 +1,7 @@
+{
+  "parent": "pepsimc:block/automated_processing_machine",
+  "textures": {
+    "top":"pepsimc:blocks/automated_processing_machine/side",
+    "bottom":"pepsimc:blocks/automated_processing_machine/side"
+  }
+}

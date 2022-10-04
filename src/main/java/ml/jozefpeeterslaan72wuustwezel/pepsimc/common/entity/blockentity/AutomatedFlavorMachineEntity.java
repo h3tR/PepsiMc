@@ -1,10 +1,10 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity;
 
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlockStateProperties;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.FlavoringRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedFlavorMachineMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.configuration.CommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -28,7 +28,7 @@ import java.util.Optional;
 public class AutomatedFlavorMachineEntity extends AutomatedProcessingBlockEntity implements MenuProvider {
 
 	public AutomatedFlavorMachineEntity(BlockPos pos, BlockState state) {
-		super(PepsiMcBlockEntity.AUTOMATED_FLAVOR_MACHINE_BLOCK_ENTITY.get(), pos, state,1000, 10);
+		super(PepsiMcBlockEntity.AUTOMATED_FLAVOR_MACHINE_BLOCK_ENTITY.get(), pos, state, CommonConfig.FLAVOR_MACHINE_FE_STORAGE.get(), CommonConfig.FLAVOR_MACHINE_CONDUCTIVITY.get(),CommonConfig.FLAVOR_MACHINE_FE_USAGE_PER_TICK.get());
 	}
 
 

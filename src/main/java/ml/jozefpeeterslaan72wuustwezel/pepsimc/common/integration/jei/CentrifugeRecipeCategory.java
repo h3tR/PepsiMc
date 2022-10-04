@@ -3,19 +3,26 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.integration.jei;
 
 
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.configuration.CommonConfig;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.CentrifugeRecipe;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.util.FEValueHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+
+import static net.minecraft.client.gui.GuiComponent.drawString;
 
 public class CentrifugeRecipeCategory implements IRecipeCategory<CentrifugeRecipe>{
 	public static final ResourceLocation UID = new ResourceLocation("pepsimc","centrifuge");
@@ -45,6 +52,16 @@ public class CentrifugeRecipeCategory implements IRecipeCategory<CentrifugeRecip
 	@Override
 	public IDrawable getIcon() {
 		return this.Icon;
+	}
+
+	@Override
+	public void draw(CentrifugeRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+		IRecipeCategory.super.draw(recipe, recipeSlotsView, stack, mouseX, mouseY);
+		stack.scale(.5f,.5f,.5f);
+		drawString(stack, Minecraft.getInstance().font,"FE/t: "+ FEValueHelper.getFEValue(CommonConfig.CENTRIFUGE_FE_USAGE_PER_TICK.get()), 10, 138, 0xffffff);
+		drawString(stack, Minecraft.getInstance().font,"Total ticks: "+ recipe.ticks, 10, 150, 0xffffff);
+		drawString(stack, Minecraft.getInstance().font, "Total FE usage: "+FEValueHelper.getFEValue(CommonConfig.CENTRIFUGE_FE_USAGE_PER_TICK.get()*recipe.ticks), 10, 162, 0xffffff);
+
 	}
 
     @Override

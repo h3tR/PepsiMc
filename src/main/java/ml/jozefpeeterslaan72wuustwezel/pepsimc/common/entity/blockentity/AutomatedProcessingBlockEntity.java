@@ -21,7 +21,6 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import org.apache.logging.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -32,6 +31,7 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
 
     public int Progress;
     public int Goal;
+    private final int UsagePerTick;
     private Optional<? extends ProcessingRecipe> PreviousRecipe;
     public final CustomEnergyStorage energyStorage;
 
@@ -67,13 +67,14 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
         }
     };
     private boolean Powered=false;
-    public AutomatedProcessingBlockEntity(BlockEntityType<?> in, BlockPos pos, BlockState state, int EnergyCapacity, int EnergyMaxTransfer) {
+    public AutomatedProcessingBlockEntity(BlockEntityType<?> in, BlockPos pos, BlockState state, int energyCapacity, int energyMaxTransfer,  int usagePerTick) {
         super(in, pos, state);
+        this.UsagePerTick = usagePerTick;
         this.itemHandler = createHandler();
         this.handler = LazyOptional.of(()->itemHandler);
 
         this.type = in;
-        this.energyStorage = new CustomEnergyStorage(EnergyCapacity, EnergyMaxTransfer) {
+        this.energyStorage = new CustomEnergyStorage(energyCapacity, energyMaxTransfer) {
             @Override
             protected void onEnergyChanged() {
                 boolean nextPowered = this.hasSufficientPower();
@@ -123,7 +124,7 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
                 Progress = 0;
                finishProduct();
             }
-            energyStorage.consumeEnergy(1);
+            energyStorage.consumeEnergy(this.UsagePerTick);
         }else{
             Progress = 0;
         }

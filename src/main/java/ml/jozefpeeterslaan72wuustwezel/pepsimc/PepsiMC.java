@@ -12,12 +12,15 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcVil
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.PepsimcNetwork;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.soundevent.PepsiMcSoundEvent;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.configuration.CommonConfig;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -42,6 +45,7 @@ public class PepsiMC {
 		bus.addListener(this::doClientStuff);
 		GeckoLib.initialize();
         MinecraftForge.EVENT_BUS.register(this);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC, "pepsimc-common.toml");
 
 
 	}

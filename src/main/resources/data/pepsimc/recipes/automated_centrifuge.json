@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "pbp",
+    "ifi",
+    "rpr"
+  ],
+  "key": {
+    "p": {
+      "item": "pepsimc:pepsite_ingot"
+    },
+    "i": {
+      "item": "minecraft:piston"
+    },
+    "r": {
+      "item": "minecraft:iron_bars"
+    },
+    "b": {
+      "item": "pepsimc:centrifuge"
+    },
+    "f": {
+      "item": "pepsimc:pepsite_infused_machine_frame"
+    }
+  },
+  "result": {
+    "item": "pepsimc:automated_centrifuge",
+    "count": 1
+  }
+}

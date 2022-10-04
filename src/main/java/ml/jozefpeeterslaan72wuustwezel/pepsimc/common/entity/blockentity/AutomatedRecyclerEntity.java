@@ -4,6 +4,7 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.RecyclerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedRecyclerMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.configuration.CommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -18,7 +19,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import org.apache.logging.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,7 +29,7 @@ import java.util.Optional;
 public class AutomatedRecyclerEntity extends AutomatedProcessingBlockEntity implements MenuProvider {
 
 	public AutomatedRecyclerEntity(BlockPos pos, BlockState state) {
-		super(PepsiMcBlockEntity.AUTOMATED_RECYCLER_BLOCK_ENTITY.get(), pos, state,500,50);
+		super(PepsiMcBlockEntity.AUTOMATED_RECYCLER_BLOCK_ENTITY.get(), pos, state, CommonConfig.RECYCLER_FE_STORAGE.get(), CommonConfig.RECYCLER_CONDUCTIVITY.get(),CommonConfig.RECYCLER_FE_USAGE_PER_TICK.get());
 	}
 
 	@Override

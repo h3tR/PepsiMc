@@ -5,6 +5,7 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcPro
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcTrades;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -26,9 +27,10 @@ public class pepsiMcEvents {
             },{
                     new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_LABEL.get(), 10, 2, 15),
                     new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_LABEL.get(), 10, 2, 15),
-                    new PepsiMcTrades.EmeraldForItemsTrade(PepsiMcItem.STEVIA.get(), 10, 2, 15)//,
-                    //TODO new EmeraldForMapTrade(32, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get(), MapDecoration.Type.TARGET_POINT, 1, 15)
+                    new PepsiMcTrades.EmeraldForItemsTrade(PepsiMcItem.STEVIA.get(), 10, 2, 15)
+                    //TODO new PepsiMcTrades.TreasureMapForEmeralds(32, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get(), MapDecoration.Type.TARGET_POINT, 1, 15)
             },{
+
                     new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.CARAMEL.get(), 1, 8, 12),
                     new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_FLUID_BUCKET.get(), 10, 2, 15),
                     new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_FLUID_BUCKET.get(), 10, 2, 15),

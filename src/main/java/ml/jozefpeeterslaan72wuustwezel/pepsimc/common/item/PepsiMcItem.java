@@ -19,6 +19,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.lwjgl.system.CallbackI;
 
 public class PepsiMcItem {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "pepsimc");
@@ -515,7 +516,9 @@ public class PepsiMcItem {
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB),PepsiMcItem.PEPSITE_LEGGINGS.get())); 
 	
 	public static final RegistryObject<Item> SHARD_BOOTS = ITEMS.register("shard_boots", ()-> new  PepsiteShardArmorItem(new Item.Properties()
-			.tab(PepsiMcItemGroup.PEPSIMC_TAB),PepsiMcItem.PEPSITE_BOOTS.get())); 
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB),PepsiMcItem.PEPSITE_BOOTS.get()));
+
+	public static final RegistryObject<Item> PEPSITE_INFUSED_MACHINE_FRAME = ITEMS.register("pepsite_infused_machine_frame", ()-> new Item(new Item.Properties().tab(PepsiMcItemGroup.PEPSIMC_TAB)));
 	
 	//blockItems
 	public static final RegistryObject<Item> STEVIA_SEEDS = ITEMS.register("stevia_seeds", ()-> new BlockItem(PepsiMcBlock.STEVIA_CROP.get(),new Item.Properties()
@@ -535,7 +538,19 @@ public class PepsiMcItem {
 	
 	public static final RegistryObject<BlockItem> DEEPSLATE_PEPSITE_ORE = ITEMS.register("deepslate_pepsite_ore", ()-> new BlockItem(PepsiMcBlock.DEEPSLATE_PEPSITE_ORE.get(), new Item.Properties()
 			.tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
-	
+
+
+	public static final RegistryObject<BlockItem> BOTTLER = ITEMS.register("bottler", ()-> new BlockItem(PepsiMcBlock.BOTTLER.get(), new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
+
+	public static final RegistryObject<BlockItem> FLAVOR_MACHINE = ITEMS.register("flavor_machine", ()-> new BlockItem(PepsiMcBlock.FLAVOR_MACHINE.get(), new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
+
+	public static final RegistryObject<BlockItem> RECYCLER = ITEMS.register("recycler", ()-> new RecyclerBlockItem(PepsiMcBlock.RECYCLER.get(), new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
+
+	public static final RegistryObject<BlockItem> CENTRIFUGE = ITEMS.register("centrifuge", ()-> new CentrifugeBlockItem(PepsiMcBlock.CENTRIFUGE.get(), new Item.Properties()
+			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
 
 
 	public static final RegistryObject<BlockItem> AUTOMATED_BOTTLER = ITEMS.register("automated_bottler", ()-> new BlockItem(PepsiMcBlock.AUTOMATED_BOTTLER.get(), new Item.Properties()
@@ -548,21 +563,10 @@ public class PepsiMcItem {
 	public static final RegistryObject<BlockItem> AUTOMATED_RECYCLER = ITEMS.register("automated_recycler", ()-> new BlockItem(PepsiMcBlock.AUTOMATED_RECYCLER.get(), new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
 
-	public static final RegistryObject<BlockItem> BOTTLER = ITEMS.register("bottler", ()-> new BlockItem(PepsiMcBlock.BOTTLER.get(), new Item.Properties()
-			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
-	
-	public static final RegistryObject<BlockItem> FLAVOR_MACHINE = ITEMS.register("flavor_machine", ()-> new BlockItem(PepsiMcBlock.FLAVOR_MACHINE.get(), new Item.Properties()
-			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
-	
-	public static final RegistryObject<BlockItem> RECYCLER = ITEMS.register("recycler", ()-> new RecyclerBlockItem(PepsiMcBlock.RECYCLER.get(), new Item.Properties()
-			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
-	
-	public static final RegistryObject<BlockItem> CENTRIFUGE = ITEMS.register("centrifuge", ()-> new CentrifugeBlockItem(PepsiMcBlock.CENTRIFUGE.get(), new Item.Properties()
-			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
 
 
-	public static final RegistryObject<BlockItem> GENERATOR = ITEMS.register("generator", ()-> new BlockItem(PepsiMcBlock.GENERATOR.get(), new Item.Properties()
-			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
+
+	public static final RegistryObject<BlockItem> GENERATOR = ITEMS.register("generator", ()-> new BlockItem(PepsiMcBlock.GENERATOR.get(), new Item.Properties()));
 	
 	
 	public static void register(IEventBus bus) {

@@ -46,7 +46,7 @@ public class GeneratorBE extends BlockEntity {
     public void tickServer(BlockState state) {
         if (counter > 0) {
             counter--;
-            energyStorage.addEnergy(10);
+            energyStorage.addEnergy(256);
             setChanged();
         }
 

@@ -5,6 +5,7 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedBottlerMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.configuration.CommonConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -20,18 +21,16 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import org.apache.logging.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.Objects;
 import java.util.Optional;
 
 public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity implements MenuProvider {
 
     public AutomatedBottlerEntity(BlockPos pos, BlockState state) {
-        super(PepsiMcBlockEntity.AUTOMATED_BOTTLER_BLOCK_ENTITY.get(), pos, state, 1000, 5);
+        super(PepsiMcBlockEntity.AUTOMATED_BOTTLER_BLOCK_ENTITY.get(), pos, state, CommonConfig.BOTTLER_FE_STORAGE.get(), CommonConfig.BOTTLER_CONDUCTIVITY.get(),CommonConfig.BOTTLER_FE_USAGE_PER_TICK.get());
     }
 
     protected Optional<BottlerRecipe> getRecipe(){

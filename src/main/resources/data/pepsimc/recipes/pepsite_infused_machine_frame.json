@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "php",
+    "bib",
+    "psp"
+  ],
+  "key": {
+    "p": {
+      "item": "pepsimc:pepsite_ingot"
+    },
+    "s": {
+      "item": "minecraft:smooth_stone_slab"
+    },
+    "h": {
+      "item": "minecraft:hopper"
+    },
+    "i": {
+      "item": "minecraft:iron_block"
+    },
+    "b": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "result": {
+    "item": "pepsimc:pepsite_infused_machine_frame",
+    "count": 1
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "pbp",
+    "rfr",
+    "pup"
+  ],
+  "key": {
+    "p": {
+      "item": "pepsimc:pepsite_ingot"
+    },
+    "u": {
+      "item": "minecraft:bucket"
+    },
+    "r": {
+      "item": "minecraft:iron_bars"
+    },
+    "b": {
+      "item": "pepsimc:bottler"
+    },
+    "f": {
+      "item": "pepsimc:pepsite_infused_machine_frame"
+    }
+  },
+  "result": {
+    "item": "pepsimc:automated_bottler",
+    "count": 1
+  }
+}
