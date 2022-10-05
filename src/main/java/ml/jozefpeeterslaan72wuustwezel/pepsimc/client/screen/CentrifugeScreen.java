@@ -9,7 +9,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.ConfirmButton;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.CentrifugeMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.CentrifugeRecipe;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.CentrifugeEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity.CentrifugeEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

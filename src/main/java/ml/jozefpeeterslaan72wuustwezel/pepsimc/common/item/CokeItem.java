@@ -24,4 +24,6 @@ public class CokeItem extends BeverageItem {
 		 }
 		return super.finishUsingItem(itemStack, world, plr);
 	}
+
+
 }

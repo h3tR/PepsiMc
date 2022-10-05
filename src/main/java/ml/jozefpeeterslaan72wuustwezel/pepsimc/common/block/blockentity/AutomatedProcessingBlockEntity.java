@@ -1,4 +1,4 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.ProcessingRecipe;
 import net.minecraft.core.BlockPos;

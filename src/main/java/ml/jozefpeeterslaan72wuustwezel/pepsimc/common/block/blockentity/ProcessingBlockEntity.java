@@ -1,4 +1,4 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

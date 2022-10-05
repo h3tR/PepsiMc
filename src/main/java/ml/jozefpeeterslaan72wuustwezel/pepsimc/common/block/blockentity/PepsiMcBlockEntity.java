@@ -1,4 +1,4 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;

@@ -20,8 +20,9 @@ public class PepsiMcTags {
 		public static final TagKey<Item> RECYCLED = createTag("recycled");
 		public static final TagKey<Item> RECYCLING_CATALYST = createTag("recycling_catalyst");
 
+		public static final TagKey<Item> PEPSI_VARIANT = createTag("pepsi_unflavored");
 		public static final TagKey<Item> FLAVOR = createTag("flavor");
-		public static final TagKey<Item> FLAVORED = createTag("flavored");
+		public static final TagKey<Item> PEPSI_VARIANT_FLAVOR = createTag("flavored");
 		
 		public static final TagKey<Item> EXTRACTED = createTag("extracted");
 		public static final TagKey<Item> EXTRACTION_BYPRODUCT = createTag("extraction_byproduct");

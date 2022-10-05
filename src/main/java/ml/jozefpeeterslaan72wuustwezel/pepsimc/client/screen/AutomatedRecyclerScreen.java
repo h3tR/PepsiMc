@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.BatteryDisplay;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.ProgressBar;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.RecyclerRecipe;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.AutomatedRecyclerEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity.AutomatedRecyclerEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedRecyclerMenu;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;

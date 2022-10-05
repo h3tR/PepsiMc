@@ -1,6 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.GeneratorBE;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity.GeneratorBE;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.GeneratorContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

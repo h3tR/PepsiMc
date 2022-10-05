@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.BatteryDisplay;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.ProgressBar;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.FlavoringRecipe;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.AutomatedFlavorMachineEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity.AutomatedFlavorMachineEntity;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedFlavorMachineMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;

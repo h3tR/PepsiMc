@@ -1,11 +1,13 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.AutomatedProcessingBlockEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity.AutomatedProcessingBlockEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -26,6 +28,7 @@ public class AutomatedCentrifugeMenu extends AutomatedProcessingMenu {
 
 	@Override
 	public ItemStack quickMoveStack(Player plr, int index) {
+
 		AutomatedProcessingBlockEntity rEntity = (AutomatedProcessingBlockEntity)entity;
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.slots.get(index);

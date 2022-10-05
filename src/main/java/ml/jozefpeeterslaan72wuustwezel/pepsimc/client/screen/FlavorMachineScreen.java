@@ -10,7 +10,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.ConfirmButton;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.FlavorMachineMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.FlavoringRecipe;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.FlavorMachineEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity.FlavorMachineEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

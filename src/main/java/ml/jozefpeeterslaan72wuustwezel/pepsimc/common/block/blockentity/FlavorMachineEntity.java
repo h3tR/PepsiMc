@@ -1,4 +1,4 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity;
 
 
 import java.util.Optional;
@@ -74,11 +74,9 @@ public class FlavorMachineEntity extends ProcessingBlockEntity implements MenuPr
 			@Override
 			public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
 				return switch (slot) {
-					case 0 -> true;
-					case 1 ->
-							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.FLAVOR);
-					case 2 ->
-							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.FLAVORED);
+					case 0 -> stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.PEPSI_VARIANT);
+					case 1 -> stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.FLAVOR);
+					case 2 -> stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.PEPSI_VARIANT_FLAVOR);
 					default -> false;
 				};
 			}

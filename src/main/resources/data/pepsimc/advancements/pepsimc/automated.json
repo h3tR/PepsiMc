@@ -1,0 +1,82 @@
+{
+  "parent": "pepsimc:pepsimc/automation",
+  "display": {
+    "icon": {
+      "item": "pepsimc:automated_bottler"
+    },
+    "title": {
+      "translate": "advancements.pepsimc.automation.title"
+    },
+    "description": {
+      "translate": "advancements.pepsimc.automation.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "bottler": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pepsimc:automated_bottler"
+            ]
+          }
+        ]
+      }
+    },
+    "centrifuge": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pepsimc:automated_centrifuge"
+            ]
+          }
+        ]
+      }
+    },
+    "flavor_machine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pepsimc:automated_flavor_machine"
+            ]
+          }
+        ]
+      }
+    },
+    "recycler": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pepsimc:automated_recycler"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "bottler"
+    ],
+    [
+      "recycler"
+    ],
+    [
+      "flavor_machine"
+    ],
+    [
+      "centrifuge"
+    ]
+  ]
+}

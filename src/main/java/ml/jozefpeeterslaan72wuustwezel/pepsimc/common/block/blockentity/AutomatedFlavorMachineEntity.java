@@ -1,8 +1,8 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity;
 
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.RecyclerRecipe;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedRecyclerMenu;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.FlavoringRecipe;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedFlavorMachineMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.configuration.CommonConfig;
 import net.minecraft.core.BlockPos;
@@ -26,20 +26,21 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 import java.util.Optional;
 
-public class AutomatedRecyclerEntity extends AutomatedProcessingBlockEntity implements MenuProvider {
+public class AutomatedFlavorMachineEntity extends AutomatedProcessingBlockEntity implements MenuProvider {
 
-	public AutomatedRecyclerEntity(BlockPos pos, BlockState state) {
-		super(PepsiMcBlockEntity.AUTOMATED_RECYCLER_BLOCK_ENTITY.get(), pos, state, CommonConfig.RECYCLER_FE_STORAGE.get(), CommonConfig.RECYCLER_CONDUCTIVITY.get(),CommonConfig.RECYCLER_FE_USAGE_PER_TICK.get());
+	public AutomatedFlavorMachineEntity(BlockPos pos, BlockState state) {
+		super(PepsiMcBlockEntity.AUTOMATED_FLAVOR_MACHINE_BLOCK_ENTITY.get(), pos, state, CommonConfig.FLAVOR_MACHINE_FE_STORAGE.get(), CommonConfig.FLAVOR_MACHINE_CONDUCTIVITY.get(),CommonConfig.FLAVOR_MACHINE_FE_USAGE_PER_TICK.get());
 	}
 
+
 	@Override
-	protected Optional<RecyclerRecipe> getRecipe() {
-		return Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(RecyclerRecipe.RecyclerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
+	protected Optional<FlavoringRecipe> getRecipe() {
+		return  Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(FlavoringRecipe.FlavoringRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
 	}
 
 	@Override
 	protected void finishProduct() {
-		Optional<RecyclerRecipe> recipe = getRecipe();
+		Optional<FlavoringRecipe> recipe = getRecipe();
 
 		recipe.ifPresent(iRecipe->{
 			itemHandler.extractItem(0, 1, false);
@@ -48,12 +49,21 @@ public class AutomatedRecyclerEntity extends AutomatedProcessingBlockEntity impl
 			setChanged();
 		});
 	}
+
 	@Override
 	public void tickServer() {
 		super.tickServer();
+		boolean Powered = false;
+		boolean Enabled = false;
 
-		if (!getBlockState().equals(getBlockState().setValue(BlockStateProperties.ENABLED, isActive())))
-			level.setBlock(worldPosition, getBlockState().setValue(BlockStateProperties.ENABLED, isActive()), Block.UPDATE_ALL);
+		if (isActive()) {
+			Powered = true; Enabled = true;
+		} else if (energyStorage.getEnergyStored()>0)
+			Powered = true;
+		if (!getBlockState().equals(getBlockState().setValue(BlockStateProperties.ENABLED, Enabled).setValue(BlockStateProperties.POWERED, Powered))) {
+			assert level != null;
+			level.setBlock(worldPosition, getBlockState().setValue(BlockStateProperties.ENABLED, Enabled).setValue(BlockStateProperties.POWERED, Powered), Block.UPDATE_ALL);
+		}
 
 	}
 
@@ -66,6 +76,7 @@ public class AutomatedRecyclerEntity extends AutomatedProcessingBlockEntity impl
 	protected int getByProductSlot() {
 		return -1;
 	}
+
 
 	@Override
 	protected ItemStackHandler createHandler() {
@@ -82,19 +93,16 @@ public class AutomatedRecyclerEntity extends AutomatedProcessingBlockEntity impl
 				return 64;	
 			}
 			
+
 			@Override
 			public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
 				return switch (slot) {
-					case 0 ->
-							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.RECYCLABLE);
-					case 1 ->
-							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.RECYCLING_CATALYST);
-					case 2 ->
-							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.RECYCLED);
+					case 0 -> stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.PEPSI_VARIANT);
+					case 1 -> stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.FLAVOR);
+					case 2 -> stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.PEPSI_VARIANT_FLAVOR);
 					default -> false;
 				};
 			}
-			
 			@Override
 			@Nonnull
 			public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
@@ -118,41 +126,41 @@ public class AutomatedRecyclerEntity extends AutomatedProcessingBlockEntity impl
 			@NotNull
 			@Override
 			public ItemStack getStackInSlot(int slot) {
-				return itemHandler.getStackInSlot(slot+1);
+				return itemHandler.getStackInSlot(slot+2);
 			}
 
 			@NotNull
 			@Override
 			public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-				return itemHandler.insertItem(slot+1, stack, simulate);
+				return itemHandler.insertItem(slot+2, stack, simulate);
 			}
 
 			@NotNull
 			@Override
 			public ItemStack extractItem(int slot, int amount, boolean simulate) {
-				return itemHandler.extractItem(slot+1,amount,simulate);
+				return itemHandler.extractItem(slot+2,amount,simulate);
 			}
 
 			@Override
 			public int getSlotLimit(int slot) {
-				return itemHandler.getSlotLimit(slot+1);
+				return itemHandler.getSlotLimit(slot+2);
 			}
 
 			@Override
 			public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-				return itemHandler.isItemValid(slot+1,stack);
+				return itemHandler.isItemValid(slot+2,stack);
 			}
-		});	}
-
+		});
+	}
 
 	@Override
 	public @NotNull Component getDisplayName() {
-		return new TranslatableComponent("block.pepsimc.automated_recycler");
+		return new TranslatableComponent("block.pepsimc.automated_flavor_machine");
 	}
 
 	@Nullable
 	@Override
 	public AbstractContainerMenu createMenu(int id, @NotNull Inventory inv, @NotNull Player plr) {
-		return new AutomatedRecyclerMenu(id,inv,this,dataAccess);
+		return new AutomatedFlavorMachineMenu(id,inv,this,dataAccess);
 	}
 }

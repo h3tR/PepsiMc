@@ -1,0 +1,30 @@
+{
+  "replace": false,
+  "values": [
+    "pepsimc:pepsi_can",
+    "pepsimc:pepsi_bottle",
+    "pepsimc:pepsi_max_can",
+    "pepsimc:pepsi_max_bottle",
+    "pepsimc:coke_can",
+    "pepsimc:coke_bottle",
+    "pepsimc:pepsi_cherry_can",
+    "pepsimc:pepsi_max_cherry_can",
+    "pepsimc:pepsi_cherry_bottle",
+    "pepsimc:pepsi_max_cherry_bottle",
+    "pepsimc:pepsi_lemon_can",
+    "pepsimc:pepsi_max_lemon_can",
+    "pepsimc:pepsi_lemon_bottle",
+    "pepsimc:pepsi_max_lemon_bottle",
+    "pepsimc:pepsi_mango_can",
+    "pepsimc:pepsi_max_mango_can",
+    "pepsimc:pepsi_mango_bottle",
+    "pepsimc:pepsi_max_mango_bottle",
+    "pepsimc:pepsi_boom_can",
+    "pepsimc:pepsi_boom_bottle",
+    "pepsimc:pepsi_fire_can",
+    "pepsimc:pepsi_fire_bottle",
+    "pepsimc:pepsi_berry_can",
+    "pepsimc:pepsi_berry_bottle",
+    "pepsimc:pepsi_crystal_bottle"
+  ]
+}

@@ -88,7 +88,7 @@
 	 "advancements.pepsimc.bottler.title":"Bottler acquired!",
 	 "advancements.pepsimc.bottler.description":"Craft a bottler, you can use it to craft pepsi",
 	 "advancements.pepsimc.recycler.title":"Ecologist",
-	 "advancements.pepsimc.recycler.description":"Use the recycler to make new cans and bottles for much cheaper and good fot the environment! ;D",
+	 "advancements.pepsimc.recycler.description":"Use the recycler to make new cans and bottles for much cheaper and good for the environment! ;D",
 	 "advancements.pepsimc.pepsi.title":"The Sacred Drink",
 	 "advancements.pepsimc.pepsi.description":"Experienced the godlike taste of pepsi",
 	 "advancements.pepsimc.flavors.title":"Immortality!",
@@ -109,6 +109,10 @@
 	 "advancements.pepsimc.pepsite_armor.description":"Mend a pepsite armor pattern using some pepsi and feel the power in your virtual veins",
 	 "advancements.pepsimc.powered_pepsite_armor.title":"Godlike",
 	 "advancements.pepsimc.powered_pepsite_armor.description":"Power a pepsite chestplate using a pepsite core and get godlike abilities when using a full set of pepsite armor",
+	 "advancements.pepsimc.automation.title":"Industrial Revolution",
+	 "advancements.pepsimc.automation.description":"Obtain a Pepsite Infused Machine Frame",
+	 "advancements.pepsimc.automated.title":"Let them do it for you",
+	 "advancements.pepsimc.automated.description":"Obtain all automated versions of the machines",
 
 	 //Other
 	 "entity.minecraft.villager.pepsimc.bottling_plant_operator":"Bottling Plant Operator",

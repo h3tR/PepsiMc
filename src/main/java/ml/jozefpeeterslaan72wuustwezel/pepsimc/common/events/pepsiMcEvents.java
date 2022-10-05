@@ -1,5 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.events;
 
+import com.mojang.logging.LogUtils;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcProfession;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcTrades;
@@ -8,16 +9,18 @@ import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 
+@Mod.EventBusSubscriber(modid = "pepsimc")
 public class pepsiMcEvents {
     @SubscribeEvent
     public static void addTrades(VillagerTradesEvent event){
         //TODO
         if(event.getType()== PepsiMcProfession.BOTTLING_OPERATOR.get()){
             VillagerTrades.ItemListing[][] TradeList = {{
-                    new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.PEPSITE_INGOT.get(), 1, 2, 2),
+                    new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.PEPSITE_INGOT.get(), 8, 1, 2),
                     new PepsiMcTrades.EmeraldForItemsTrade(PepsiMcItem.CAFFEINE.get(), 16, 1, 2),
                     new PepsiMcTrades.EmeraldForItemsTrade(PepsiMcItem.EMPTY_BOTTLE.get(), 5, 16, 2)
             },{
@@ -32,8 +35,8 @@ public class pepsiMcEvents {
             },{
 
                     new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.CARAMEL.get(), 1, 8, 12),
-                    new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_FLUID_BUCKET.get(), 10, 2, 15),
-                    new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_FLUID_BUCKET.get(), 10, 2, 15),
+                    new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_FLUID_BUCKET.get(), 26, 2, 15),
+                    new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_FLUID_BUCKET.get(), 26, 2, 15),
                     new PepsiMcTrades.EmeraldForItemsTrade(PepsiMcItem.BOTTLER.get(), 1, 32, 15)
             },{
                     new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_BOTTLE.get(), 48, 1, 20),
@@ -42,9 +45,9 @@ public class pepsiMcEvents {
                     new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_CAN.get(), 48, 1, 20)
             }};
             Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
-            for(int i=0;i<TradeList.length;i++){
-                for(int j =0;j<TradeList[i].length;j++){
-                    trades.get(i).add(TradeList[i][j]);
+            for(int i=1;i<TradeList.length+1;i++){
+                for(int j =0;j<TradeList[i-1].length;j++){
+                    trades.get(i).add(TradeList[i-1][j]);
                 }
             }
         }

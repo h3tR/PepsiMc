@@ -3,7 +3,7 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.client;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.animation.render.CentrifugeRender;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.animation.render.RecyclerRender;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.PepsiMcBlockEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity.PepsiMcBlockEntity;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;

@@ -1,4 +1,4 @@
-package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity;
+package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity;
 
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.CentrifugeRecipe;
@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.Optional;
 
 public class AutomatedCentrifugeEntity extends AutomatedProcessingBlockEntity implements MenuProvider {
@@ -33,7 +34,7 @@ public class AutomatedCentrifugeEntity extends AutomatedProcessingBlockEntity im
 
 	@Override
 	protected Optional<CentrifugeRecipe> getRecipe() {
-		return this.getLevel().getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, getSimpleInv(),this.getLevel());
+		return Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, getSimpleInv(),this.getLevel());
 	}
 
 	@Override
@@ -43,7 +44,7 @@ public class AutomatedCentrifugeEntity extends AutomatedProcessingBlockEntity im
 		recipe.ifPresent(iRecipe->{
 			itemHandler.extractItem(0, 1, false);
 			itemHandler.insertItem(1, iRecipe.getResultItem(), false);
-			itemHandler.insertItem(2, iRecipe.getByproductItem(), false);
+			itemHandler.insertItem(2, Objects.requireNonNull(iRecipe.getByproductItem()), false);
 			setChanged();
 		});
 	}
@@ -61,6 +62,7 @@ public class AutomatedCentrifugeEntity extends AutomatedProcessingBlockEntity im
 	@Override
 	public void tickServer() {
 		super.tickServer();
+		assert level != null;
 		level.setBlock(worldPosition,getBlockState().setValue(BlockStateProperties.ENABLED,isActive()), Block.UPDATE_ALL);
 		energyStorage.consumeEnergy(CommonConfig.CENTRIFUGE_FE_USAGE_PER_TICK.get());
 
@@ -144,7 +146,7 @@ public class AutomatedCentrifugeEntity extends AutomatedProcessingBlockEntity im
 	}
 
 	@Override
-	public Component getDisplayName() {
+	public @NotNull Component getDisplayName() {
 		return new TranslatableComponent("block.pepsimc.automated_centrifuge");
 	}
 

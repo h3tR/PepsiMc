@@ -2,7 +2,7 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.packet;
 
 import java.util.function.Supplier;
 
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.blockentity.ProcessingBlockEntity;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity.ProcessingBlockEntity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.block.entity.BlockEntity;

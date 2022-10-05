@@ -1,0 +1,37 @@
+{
+  "parent": "pepsimc:pepsimc/root",
+  "display": {
+    "icon": {
+      "item": "pepsimc:pepsite_infused_machine_frame"
+    },
+    "title": {
+      "translate": "advancements.pepsimc.automation.title"
+    },
+    "description": {
+      "translate": "advancements.pepsimc.automation.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "pepsite_infused_machine_frame": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pepsimc:pepsite_infused_machine_frame"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "pepsite_infused_machine_frame"
+    ]
+  ]
+}
