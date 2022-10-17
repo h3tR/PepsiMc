@@ -1,10 +1,10 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.events;
 
-import com.mojang.logging.LogUtils;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcProfession;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager.PepsiMcTrades;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -17,21 +17,22 @@ import java.util.List;
 public class pepsiMcEvents {
     @SubscribeEvent
     public static void addTrades(VillagerTradesEvent event){
-        //TODO
         if(event.getType()== PepsiMcProfession.BOTTLING_OPERATOR.get()){
             VillagerTrades.ItemListing[][] TradeList = {{
+                    //new PepsiMcTrades.TreasureMapForEmeralds(32, PepsiMcTags.Structures.ABANDONED_BOTTLING_PLANT, "filled_map.pepsimc:abandoned_bottling_plant", MapDecoration.Type.TARGET_POINT, 1, 15),
+
                     new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.PEPSITE_INGOT.get(), 8, 1, 2),
                     new PepsiMcTrades.EmeraldForItemsTrade(PepsiMcItem.CAFFEINE.get(), 16, 1, 2),
                     new PepsiMcTrades.EmeraldForItemsTrade(PepsiMcItem.EMPTY_BOTTLE.get(), 5, 16, 2)
             },{
                     new PepsiMcTrades.EmeraldForItemsTrade(PepsiMcItem.EMPTY_CAN.get(), 4, 16, 5),
-                    new PepsiMcTrades.EmeraldForItemsTrade(PepsiMcItem.EMPTY_BOTTLE.get(), 5, 16, 5),
-                    new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.CARAMEL.get(), 5, 1, 5)
+                   new PepsiMcTrades.EmeraldForItemsTrade(PepsiMcItem.EMPTY_BOTTLE.get(), 5, 16, 5),
+                   new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.CARAMEL.get(), 5, 1, 5)
             },{
                     new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_MAX_LABEL.get(), 10, 2, 15),
                     new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.PEPSI_LABEL.get(), 10, 2, 15),
-                    new PepsiMcTrades.EmeraldForItemsTrade(PepsiMcItem.STEVIA.get(), 10, 2, 15)
-                    //TODO new PepsiMcTrades.TreasureMapForEmeralds(32, PepsiMcStructure.ABANDONED_BOTTLING_PLANT.get(), MapDecoration.Type.TARGET_POINT, 1, 15)
+                    new PepsiMcTrades.EmeraldForItemsTrade(PepsiMcItem.STEVIA.get(), 10, 2, 15),
+                    new PepsiMcTrades.TreasureMapForEmeralds(32, PepsiMcTags.Structures.ABANDONED_BOTTLING_PLANT, "filled_map.pepsimc:abandoned_bottling_plant", MapDecoration.Type.TARGET_POINT, 1, 15)
             },{
 
                     new PepsiMcTrades.ItemsForEmeraldsTrade(PepsiMcItem.CARAMEL.get(), 1, 8, 12),

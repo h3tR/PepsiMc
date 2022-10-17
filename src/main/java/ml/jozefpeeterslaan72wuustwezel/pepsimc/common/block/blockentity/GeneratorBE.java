@@ -18,6 +18,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class GeneratorBE extends BlockEntity {
@@ -66,7 +67,7 @@ public class GeneratorBE extends BlockEntity {
         AtomicInteger capacity = new AtomicInteger(energyStorage.getEnergyStored());
         if (capacity.get() > 0) {
             for (Direction direction : Direction.values()) {
-                BlockEntity te = level.getBlockEntity(worldPosition.relative(direction));
+                BlockEntity te = Objects.requireNonNull(level).getBlockEntity(worldPosition.relative(direction));
                 if (te != null) {
                     boolean doContinue = te.getCapability(CapabilityEnergy.ENERGY, direction).map(handler -> {
                                 if (handler.canReceive()) {

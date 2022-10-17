@@ -19,6 +19,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+import org.jetbrains.annotations.NotNull;
 
 public class FlavoringRecipe extends ProcessingRecipe{
 	static ResourceLocation TYPE_ID = new ResourceLocation("pepsimc", "flavor");
@@ -34,17 +35,17 @@ public class FlavoringRecipe extends ProcessingRecipe{
 	}
 
 	@Override
-	public boolean matches(Container inv, Level Win) {
+	public boolean matches(Container inv, @NotNull Level Win) {
 		return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1));
 	}
 	
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public @NotNull RecipeSerializer<?> getSerializer() {
 		return PepsiMcRecipeType.FLAVORING_SERIALIZER.get();
 	}
 	
 	@Override
-	public ItemStack getToastSymbol() {
+	public @NotNull ItemStack getToastSymbol() {
 		return new ItemStack(PepsiMcBlock.FLAVOR_MACHINE.get());
 	}
 	
@@ -59,7 +60,7 @@ public class FlavoringRecipe extends ProcessingRecipe{
 	
 	public static class Serializer  extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<FlavoringRecipe>{
 		@Override
-		public FlavoringRecipe fromJson(ResourceLocation Id, JsonObject json) {
+		public @NotNull FlavoringRecipe fromJson(@NotNull ResourceLocation Id, @NotNull JsonObject json) {
 			ItemStack Out = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
 			JsonObject Flavor = GsonHelper.getAsJsonObject(json, "flavor");
 			JsonObject Product = GsonHelper.getAsJsonObject(json, "product");
@@ -72,7 +73,7 @@ public class FlavoringRecipe extends ProcessingRecipe{
 
 		@Nullable
 		@Override
-		public FlavoringRecipe fromNetwork(ResourceLocation Id, FriendlyByteBuf buffer) {
+		public FlavoringRecipe fromNetwork(@NotNull ResourceLocation Id, FriendlyByteBuf buffer) {
 			NonNullList<Ingredient> In = NonNullList.withSize(buffer.readInt(), Ingredient.EMPTY);
 
 			In.replaceAll(ignored -> Ingredient.fromNetwork(buffer));
@@ -97,7 +98,7 @@ public class FlavoringRecipe extends ProcessingRecipe{
 	}
 
 	@Override
-	public RecipeType<?> getType() {
+	public @NotNull RecipeType<?> getType() {
 		return FlavoringRecipeType.INSTANCE;
 	}
 

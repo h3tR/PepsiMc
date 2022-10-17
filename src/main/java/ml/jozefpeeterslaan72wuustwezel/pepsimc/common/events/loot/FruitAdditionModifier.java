@@ -1,6 +1,7 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.events.loot;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.google.gson.JsonObject;
 
@@ -44,7 +45,7 @@ public class FruitAdditionModifier extends LootModifier {
         @Override
         public JsonObject write(FruitAdditionModifier instance) {
             JsonObject json = makeConditions(instance.conditions);
-            json.addProperty("addition", ForgeRegistries.ITEMS.getKey(instance.addition).toString());
+            json.addProperty("addition", Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(instance.addition)).toString());
             json.addProperty("count", instance.count);
             return json;
         }

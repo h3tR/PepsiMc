@@ -1,5 +1,6 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.packet;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity.ProcessingBlockEntity;
@@ -30,7 +31,7 @@ public class ProcessingCraftPacket {
 		NetworkEvent.Context ctx = context.get();
 		ctx.enqueueWork(()->{
 			ServerPlayer plrEntity = ctx.getSender();
-			Level world = plrEntity.level;
+			Level world = Objects.requireNonNull(plrEntity).level;
 			BlockEntity TE = world.getBlockEntity(message.pos);
 			if(TE instanceof ProcessingBlockEntity PT) {
 				if(message.shift) {

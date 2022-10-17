@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.BlockGetter;
+import org.jetbrains.annotations.NotNull;
 
 public class SteviaCrop extends CropBlock{
 
@@ -22,18 +23,18 @@ public class SteviaCrop extends CropBlock{
 	            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D),
 	            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D),
 	            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
-	
-	public SteviaCrop(Properties builder) {
-		super(builder);
-		// TODO Auto-generated constructor stub
+
+	public SteviaCrop(Properties properties) {
+		super(properties);
 	}
+
 
 	protected ItemLike getSeedsItem() {
 		return PepsiMcItem.STEVIA_SEEDS.get();
 	}
 	
 	@Override
-    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+    public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
     }
 	

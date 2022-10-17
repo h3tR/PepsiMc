@@ -8,6 +8,8 @@ public class CommonConfig {
 
     public static final int defaultFEUsage = 100;
     public static final int defaultFEStorage = 16384;
+    public static final int defaultFluidStorage = 8000;
+
     public static final int defaultFETransferRate = 256;
 
 
@@ -17,6 +19,8 @@ public class CommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> RECYCLER_FE_USAGE_PER_TICK;
 
     public static final ForgeConfigSpec.ConfigValue<Integer> BOTTLER_FE_STORAGE;
+    public static final ForgeConfigSpec.ConfigValue<Integer> BOTTLER_FLUID_STORAGE;
+
     public static final ForgeConfigSpec.ConfigValue<Integer> CENTRIFUGE_FE_STORAGE;
     public static final ForgeConfigSpec.ConfigValue<Integer> FLAVOR_MACHINE_FE_STORAGE;
     public static final ForgeConfigSpec.ConfigValue<Integer> RECYCLER_FE_STORAGE;
@@ -42,6 +46,8 @@ public class CommonConfig {
         RECYCLER_FE_USAGE_PER_TICK = BUILDER.define("FE/t for Automated Recycler", defaultFEUsage);
 
         BOTTLER_FE_STORAGE = BUILDER.define("FE Storage for Automated Bottler", defaultFEStorage);
+        BOTTLER_FLUID_STORAGE = BUILDER.define("Fluid Storage for Automated Bottler", defaultFluidStorage);
+
         CENTRIFUGE_FE_STORAGE = BUILDER.define("FE Storage for Automated Centrifuge", defaultFEStorage);
         FLAVOR_MACHINE_FE_STORAGE = BUILDER.define("FE Storage for Automated Flavor Machine", defaultFEStorage);
         RECYCLER_FE_STORAGE = BUILDER.define("FE Storage for Automated Recycler", defaultFEStorage);

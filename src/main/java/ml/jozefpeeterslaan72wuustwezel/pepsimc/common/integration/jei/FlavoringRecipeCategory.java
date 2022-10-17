@@ -14,7 +14,6 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.configuration.CommonConfig;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.CentrifugeRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.FlavoringRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.util.FEValueHelper;
 import net.minecraft.client.Minecraft;
@@ -22,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 import static net.minecraft.client.gui.GuiComponent.drawString;
 
@@ -36,27 +36,27 @@ public class FlavoringRecipeCategory implements IRecipeCategory<FlavoringRecipe>
 	}
 	
 	@Override
-	public ResourceLocation getUid() {
+	public @NotNull ResourceLocation getUid() {
 		return UID;
 	}
 
 	@Override
-	public Class<? extends FlavoringRecipe> getRecipeClass() {
+	public @NotNull Class<? extends FlavoringRecipe> getRecipeClass() {
 		return FlavoringRecipe.class;
 	}
 
 	@Override
-	public IDrawable getBackground() {
+	public @NotNull IDrawable getBackground() {
 		return this.Background;
 	}
 
 	@Override
-	public IDrawable getIcon() {
+	public @NotNull IDrawable getIcon() {
 		return this.Icon;
 	}
 
 	@Override
-	public void draw(FlavoringRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+	public void draw(@NotNull FlavoringRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull PoseStack stack, double mouseX, double mouseY) {
 		IRecipeCategory.super.draw(recipe, recipeSlotsView, stack, mouseX, mouseY);
 		stack.scale(.5f,.5f,.5f);
 		drawString(stack, Minecraft.getInstance().font,"FE/t: "+ FEValueHelper.getFEValue(CommonConfig.FLAVOR_MACHINE_FE_USAGE_PER_TICK.get()), 10, 138, 0xffffff);
@@ -66,11 +66,11 @@ public class FlavoringRecipeCategory implements IRecipeCategory<FlavoringRecipe>
 	}
 
 	@Override
-	public Component getTitle() {
+	public @NotNull Component getTitle() {
 		return new TranslatableComponent("block.pepsimc.flavor_machine");
 	}
     @Override
-    public void setRecipe(IRecipeLayoutBuilder LayoutBuilder, FlavoringRecipe recipe, IFocusGroup focusGroup) {
+    public void setRecipe(IRecipeLayoutBuilder LayoutBuilder, FlavoringRecipe recipe, @NotNull IFocusGroup focusGroup) {
         LayoutBuilder.addSlot(RecipeIngredientRole.INPUT,80,20).addIngredients(recipe.getIngredients().get(0));
         LayoutBuilder.addSlot(RecipeIngredientRole.INPUT,42,42).addIngredients(recipe.getIngredients().get(1));
         LayoutBuilder.addSlot(RecipeIngredientRole.OUTPUT,80,64).addItemStack(recipe.getResultItem());

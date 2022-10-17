@@ -6,7 +6,6 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import com.google.common.collect.ImmutableSet;
 
 import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

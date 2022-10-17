@@ -1,12 +1,9 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu;
 
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
 
 public abstract class AutomatedProcessingMenu extends ProcessingMenu {
     protected final ContainerData data;

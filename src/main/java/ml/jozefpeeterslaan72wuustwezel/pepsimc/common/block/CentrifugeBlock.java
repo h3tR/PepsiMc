@@ -26,6 +26,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 public class CentrifugeBlock extends HorizontalFacedBlock implements EntityBlock{
 			
@@ -94,7 +95,7 @@ public class CentrifugeBlock extends HorizontalFacedBlock implements EntityBlock
 	
 	
 	@SuppressWarnings("deprecation")
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState secondState, boolean what) {
+	public void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState secondState, boolean what) {
 	      if (!state.is(secondState.getBlock())) {
 	         BlockEntity TE = level.getBlockEntity(pos);
 	         if (TE instanceof CentrifugeEntity CT) {
@@ -107,8 +108,8 @@ public class CentrifugeBlock extends HorizontalFacedBlock implements EntityBlock
 	   }
 
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos,
-								 Player plr, InteractionHand hand, BlockHitResult hit) {
+	public @NotNull InteractionResult use(@NotNull BlockState state, Level world, @NotNull BlockPos pos,
+										  @NotNull Player plr, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
 		if (!world.isClientSide()) {
 			BlockEntity entity = world.getBlockEntity(pos);
 			if(entity instanceof CentrifugeEntity) {
@@ -123,17 +124,17 @@ public class CentrifugeBlock extends HorizontalFacedBlock implements EntityBlock
 
 
 	@Override
-	public RenderShape getRenderShape(BlockState p_60550_) {
+	public @NotNull RenderShape getRenderShape(@NotNull BlockState p_60550_) {
 		return RenderShape.ENTITYBLOCK_ANIMATED;
 	}
 	
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+	public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
 		return PepsiMcBlockEntity.CENTRIFUGE_BLOCK_ENTITY.get().create(pos, state);
 	}
 
 	@Override 
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos p, CollisionContext context) {
+	public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos p, @NotNull CollisionContext context) {
 		return switch (state.getValue(FACING)) {
 			case NORTH -> N;
 			case EAST -> E;

@@ -3,7 +3,6 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.integration.jei;
 
 
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -18,14 +17,12 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.configuration.CommonC
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.util.FEValueHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.font.FontManager;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import org.lwjgl.opengl.GL11;
+import org.jetbrains.annotations.NotNull;
 
 import static net.minecraft.client.gui.GuiComponent.drawString;
 
@@ -40,17 +37,17 @@ public class BottlerRecipeCategory implements IRecipeCategory<BottlerRecipe>{
     }
     public static final ResourceLocation UID = new ResourceLocation("pepsimc","bottler");
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return new TranslatableComponent("block.pepsimc.bottler");
     }
 
     @Override
-    public IDrawable getBackground() {
+    public @NotNull IDrawable getBackground() {
         return Background;
     }
 
     @Override
-    public void draw(BottlerRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+    public void draw(@NotNull BottlerRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull PoseStack stack, double mouseX, double mouseY) {
         IRecipeCategory.super.draw(recipe, recipeSlotsView, stack, mouseX, mouseY);
         stack.scale(.5f,.5f,.5f);
         drawString(stack, Minecraft.getInstance().font,"FE/t: "+ FEValueHelper.getFEValue(CommonConfig.BOTTLER_FE_USAGE_PER_TICK.get()), 10, 138, 0xffffff);
@@ -60,24 +57,24 @@ public class BottlerRecipeCategory implements IRecipeCategory<BottlerRecipe>{
     }
 
     @Override
-    public IDrawable getIcon() {
+    public @NotNull IDrawable getIcon() {
         return Icon;
     }
 
     @Override
-    public ResourceLocation getUid() {
+    public @NotNull ResourceLocation getUid() {
         return UID;
     }
 
     @Override
-    public Class<? extends BottlerRecipe> getRecipeClass() {
+    public @NotNull Class<? extends BottlerRecipe> getRecipeClass() {
         return BottlerRecipe.class;
     }
 
 
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder LayoutBuilder, BottlerRecipe recipe, IFocusGroup focusGroup) {
+    public void setRecipe(IRecipeLayoutBuilder LayoutBuilder, BottlerRecipe recipe, @NotNull IFocusGroup focusGroup) {
         LayoutBuilder.addSlot(RecipeIngredientRole.INPUT,12,15).addIngredients(recipe.getIngredients().get(0));
         LayoutBuilder.addSlot(RecipeIngredientRole.INPUT,30,15).addIngredients(recipe.getIngredients().get(1));
         LayoutBuilder.addSlot(RecipeIngredientRole.INPUT,12,43).addIngredients(recipe.getIngredients().get(2));

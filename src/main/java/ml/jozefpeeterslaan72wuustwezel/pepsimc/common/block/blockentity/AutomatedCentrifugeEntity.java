@@ -152,7 +152,7 @@ public class AutomatedCentrifugeEntity extends AutomatedProcessingBlockEntity im
 
 	@Nullable
 	@Override
-	public AbstractContainerMenu createMenu(int id, Inventory inv, Player plr) {
+	public AbstractContainerMenu createMenu(int id, @NotNull Inventory inv, @NotNull Player plr) {
 		return new AutomatedCentrifugeMenu(id,inv,this,dataAccess);
 	}
 }

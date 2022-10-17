@@ -1,6 +1,7 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -20,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
+import org.jetbrains.annotations.NotNull;
 
 
 public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeMenu>{
@@ -44,7 +46,7 @@ public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeMenu>{
 	   }
 	
 	@Override
-	public void render(PoseStack stack, int mouseX, int mouseY, float Ptick) {
+	public void render(@NotNull PoseStack stack, int mouseX, int mouseY, float Ptick) {
 		this.renderBackground(stack);
 		super.render(stack, mouseX, mouseY, Ptick);
 		this.renderTooltip(stack, mouseX, mouseY);
@@ -53,7 +55,7 @@ public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeMenu>{
 
 				if(this.createTooltip()!=null) {
 
-					this.renderTooltip(stack, this.createTooltip(), mouseX,mouseY);
+					this.renderTooltip(stack, Objects.requireNonNull(this.createTooltip()), mouseX,mouseY);
 				}
 			}			
 			if(!this.menu.slotHasItem(1))
@@ -93,7 +95,7 @@ public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeMenu>{
 			inv.setItem(i, entity.itemHandler.getStackInSlot(i));
 		}
 		
-		Optional<CentrifugeRecipe> recipe = world.getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, inv, world);
+		Optional<CentrifugeRecipe> recipe = Objects.requireNonNull(world).getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, inv, world);
 
 		return recipe.isPresent();
 		
@@ -125,7 +127,7 @@ public class CentrifugeScreen extends AbstractContainerScreen<CentrifugeMenu>{
 	}
 	
 	@Override
-	protected void renderBg(PoseStack stack, float Ptick, int X, int Y) {
+	protected void renderBg(@NotNull PoseStack stack, float Ptick, int X, int Y) {
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 		RenderSystem.setShaderTexture(0, GUI);

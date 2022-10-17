@@ -1,7 +1,12 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.entity.villager;
 
+import java.util.Optional;
 import java.util.Random;
 
+import com.mojang.logging.LogUtils;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -18,6 +23,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
@@ -38,7 +44,7 @@ public class PepsiMcTrades {
 	            this.priceMultiplier = 0.05F;
 	         }
 
-	        public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
+	        public MerchantOffer getOffer(@NotNull Entity p_221182_1_, @NotNull Random p_221182_2_) {
 	           ItemStack itemstack = new ItemStack(this.item, this.cost);
 	           return new MerchantOffer(itemstack, new ItemStack(Items.EMERALD), this.maxUses, this.villagerXp, this.priceMultiplier);
 	        }
@@ -77,11 +83,11 @@ public class PepsiMcTrades {
 	           this.priceMultiplier = mult;
 	        }
 
-	        public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
+	        public MerchantOffer getOffer(@NotNull Entity p_221182_1_, @NotNull Random p_221182_2_) {
 	           return new MerchantOffer(new ItemStack(Items.EMERALD, this.emeraldCost), new ItemStack(this.itemStack.getItem(), this.numberOfItems), this.maxUses, this.villagerXp, this.priceMultiplier);
 	        }
 	     }
-		 public static class TreasureMapForEmeralds implements VillagerTrades.ItemListing {
+	public static class TreasureMapForEmeralds implements VillagerTrades.ItemListing {
 		private final int emeraldCost;
 		private final TagKey<ConfiguredStructureFeature<?, ?>> destination;
 		private final String displayName;
@@ -89,21 +95,21 @@ public class PepsiMcTrades {
 		private final int maxUses;
 		private final int villagerXp;
 
-		public TreasureMapForEmeralds(int p_207767_, TagKey<ConfiguredStructureFeature<?, ?>> p_207768_, String p_207769_, MapDecoration.Type p_207770_, int p_207771_, int p_207772_) {
-			this.emeraldCost = p_207767_;
-			this.destination = p_207768_;
-			this.displayName = p_207769_;
-			this.destinationType = p_207770_;
-			this.maxUses = p_207771_;
-			this.villagerXp = p_207772_;
+		public TreasureMapForEmeralds(int cost, TagKey<ConfiguredStructureFeature<?, ?>> destination, String displayName, MapDecoration.Type destinationType, int maxUses, int Xp) {
+			this.emeraldCost = cost;
+			this.destination = destination;
+			this.displayName = displayName;
+			this.destinationType = destinationType;
+			this.maxUses = maxUses;
+			this.villagerXp = Xp;
 		}
 
 		@Nullable
-		public MerchantOffer getOffer(Entity p_35817_, Random p_35818_) {
-			if (!(p_35817_.level instanceof ServerLevel serverlevel)) {
+		public MerchantOffer getOffer(Entity plr, @NotNull Random random) {
+			if (!(plr.level instanceof ServerLevel serverlevel)) {
 				return null;
 			} else {
-                BlockPos blockpos = serverlevel.findNearestMapFeature(this.destination, p_35817_.blockPosition(), 100, true);
+				BlockPos blockpos = serverlevel.findNearestMapFeature(this.destination, plr.blockPosition(), 100, true);
 				if (blockpos != null) {
 					ItemStack itemstack = MapItem.create(serverlevel, blockpos.getX(), blockpos.getZ(), (byte)2, true, true);
 					MapItem.renderBiomePreviewMap(serverlevel, itemstack);

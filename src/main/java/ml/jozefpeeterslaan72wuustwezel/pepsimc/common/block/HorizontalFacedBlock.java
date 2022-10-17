@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import org.jetbrains.annotations.NotNull;
 
 public class HorizontalFacedBlock extends Block{
 	
@@ -28,14 +29,14 @@ public class HorizontalFacedBlock extends Block{
 	}
 	
 	@Override
-	public BlockState rotate(BlockState state, Rotation rot)
+	public @NotNull BlockState rotate(BlockState state, Rotation rot)
 	{
 	 return state.setValue(FACING, rot.rotate(state.getValue(FACING)));	
 	}
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public BlockState mirror(BlockState state, Mirror mirror)
+	public @NotNull BlockState mirror(BlockState state, Mirror mirror)
 	{
 	 return state.rotate(mirror.getRotation(state.getValue(FACING)));
 	}

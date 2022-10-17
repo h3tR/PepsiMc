@@ -1,7 +1,5 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.util;
 
-import org.apache.logging.log4j.LogManager;
-
 import java.util.HashMap;
 import java.util.Map;
 

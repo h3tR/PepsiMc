@@ -27,6 +27,8 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class AutomatedFlavorMachineBlock extends HorizontalFacedBlock implements EntityBlock{
 
 
@@ -76,7 +78,7 @@ public class AutomatedFlavorMachineBlock extends HorizontalFacedBlock implements
 
 	@Nullable
 	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
 		if (level.isClientSide()) {
 			return null;
 		} else {
@@ -98,7 +100,7 @@ public class AutomatedFlavorMachineBlock extends HorizontalFacedBlock implements
 	@Nullable
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return super.getStateForPlacement(context)
+		return Objects.requireNonNull(super.getStateForPlacement(context))
 				.setValue(BlockStateProperties.POWERED,false)
 				.setValue(BlockStateProperties.ENABLED,false);
 	}

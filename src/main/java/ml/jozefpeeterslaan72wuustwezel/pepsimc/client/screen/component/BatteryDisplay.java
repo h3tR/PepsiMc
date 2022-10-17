@@ -7,7 +7,6 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -57,10 +56,10 @@ public class BatteryDisplay extends AbstractWidget {
 
     //Override so it doesn't render the button when super.render() is called
     @Override
-    public void renderButton(PoseStack p_93676_, int p_93677_, int p_93678_, float p_93679_) {}
+    public void renderButton(@NotNull PoseStack p_93676_, int p_93677_, int p_93678_, float p_93679_) {}
 
     @Override
-    public void renderToolTip(PoseStack stack, int MouseX, int MouseY) {
+    public void renderToolTip(@NotNull PoseStack stack, int MouseX, int MouseY) {
         if(Screen.hasShiftDown())
             this.screen.renderTooltip(stack,new TextComponent(getFEValue(menu.getEnergy())+" / "+getFEValue(menu.getMaxEnergy())),MouseX,MouseY);
         else
@@ -69,5 +68,5 @@ public class BatteryDisplay extends AbstractWidget {
     }
 
     @Override
-    public void updateNarration(NarrationElementOutput NEO) {}
+    public void updateNarration(@NotNull NarrationElementOutput NEO) {}
 }

@@ -1,13 +1,17 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags;
 
+import net.minecraft.core.Registry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class PepsiMcTags {
 	public static class Items{
@@ -29,6 +33,7 @@ public class PepsiMcTags {
 
 		
 		public static final TagKey<Fluid> SHARD_MENDABLE = createFluidTag("shard_mendable");
+		public static final TagKey<Fluid> PEPSI_TYPE_FLUID = createFluidTag("pepsi_type_fluid");
 
 		
 		private static TagKey<Item> createTag(String name){
@@ -44,5 +49,11 @@ public class PepsiMcTags {
 			return FluidTags.create(new ResourceLocation("pepsimc", name));
 		}
 
+	}
+	public static class Structures{
+		public static final TagKey<ConfiguredStructureFeature<?, ?>> ABANDONED_BOTTLING_PLANT = createStructureTag("on_abandoned_bottling_plant_maps");
+		private static TagKey<ConfiguredStructureFeature<?, ?>> createStructureTag(String name){
+			return TagKey.create(Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY, new ResourceLocation(name));
+		}
 	}
 }

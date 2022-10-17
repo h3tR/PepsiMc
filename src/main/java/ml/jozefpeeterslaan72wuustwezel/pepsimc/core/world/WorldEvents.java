@@ -13,11 +13,8 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.mixin.SingleJigsawAccess;
 import net.minecraft.core.Holder;
 import net.minecraft.core.WritableRegistry;
-import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.levelgen.feature.VillageFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import net.minecraft.resources.ResourceKey;
@@ -43,7 +40,7 @@ public class WorldEvents {
 				event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES);
 
 		OreStep.add(PepsiMcPlacedFeature.PEPSITE_ORE_PLACED);
-		ResourceKey<Biome> key = ResourceKey.create(Registry.BIOME_REGISTRY, event.getName());
+		ResourceKey<Biome> key = ResourceKey.create(Registry.BIOME_REGISTRY, Objects.requireNonNull(event.getName()));
 		Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
 
 		if (types.contains(BiomeDictionary.Type.PLAINS)) {

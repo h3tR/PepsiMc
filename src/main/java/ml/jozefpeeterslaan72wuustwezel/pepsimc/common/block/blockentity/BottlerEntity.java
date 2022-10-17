@@ -1,6 +1,7 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity;
 
 
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.annotation.Nonnull;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BottlerEntity extends ProcessingBlockEntity implements MenuProvider {
@@ -29,7 +31,7 @@ public class BottlerEntity extends ProcessingBlockEntity implements MenuProvider
 
 	@Override
 	public void process() {
-		Optional<BottlerRecipe> recipe = this.getLevel().getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
+		Optional<BottlerRecipe> recipe = Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
 
 		recipe.ifPresent(iRecipe->{
 			itemHandler.extractItem(0, 1, false);
@@ -44,14 +46,14 @@ public class BottlerEntity extends ProcessingBlockEntity implements MenuProvider
 
 	@Override
 	public void processAll() {
-		Optional<BottlerRecipe> recipe = this.getLevel().getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
+		Optional<BottlerRecipe> recipe = Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
 		while (recipe.isPresent()) {
 			recipe.ifPresent(iRecipe->{
 				itemHandler.extractItem(0, 1, false);
 				itemHandler.extractItem(1, 1, false);
 				itemHandler.extractItem(2, 1, false);
 				itemHandler.insertItem(3, iRecipe.getResultItem(), false);
-				itemHandler.insertItem(4, iRecipe.getByproductItem(), false);
+				itemHandler.insertItem(4, Objects.requireNonNull(iRecipe.getByproductItem()), false);
 				setChanged();
 			});
 			recipe = this.getLevel().getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
@@ -102,13 +104,13 @@ public class BottlerEntity extends ProcessingBlockEntity implements MenuProvider
 		};
 	}
 	@Override
-	public Component getDisplayName() {
+	public @NotNull Component getDisplayName() {
 		return new TranslatableComponent("block.pepsimc.bottler");
 	}
 
 	@Nullable
 	@Override
-	public AbstractContainerMenu createMenu(int id, Inventory inv, Player plr) {
+	public AbstractContainerMenu createMenu(int id, @NotNull Inventory inv, @NotNull Player plr) {
 		return new BottlerMenu(id,inv,this);
 	}
 }

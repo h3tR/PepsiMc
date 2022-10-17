@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 public class BeverageItem extends Item{
 
@@ -18,12 +19,12 @@ public class BeverageItem extends Item{
 	}
 	
 	@Override
-	 public UseAnim getUseAnimation(ItemStack p_77661_1_) {
+	 public @NotNull UseAnim getUseAnimation(@NotNull ItemStack p_77661_1_) {
 	      return UseAnim.DRINK;
 	   }
 	
 	@Override
-	public ItemStack finishUsingItem(ItemStack itemStack, Level world, LivingEntity plr) {
+	public @NotNull ItemStack finishUsingItem(@NotNull ItemStack itemStack, @NotNull Level world, @NotNull LivingEntity plr) {
 		Player player = plr instanceof Player ? (Player)plr : null;
 		
 		 if (player != null) {

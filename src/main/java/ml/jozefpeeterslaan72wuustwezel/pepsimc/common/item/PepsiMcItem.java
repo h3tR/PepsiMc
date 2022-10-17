@@ -2,16 +2,12 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item;
 
 
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlock;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.fluid.PepsiMcFluid;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.effect.PepsiMcEffect;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.PepsiMcItemGroup;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.soundevent.PepsiMcSoundEvent;
-import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.RecordItem;
-import net.minecraft.world.item.Rarity;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -19,15 +15,13 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.lwjgl.system.CallbackI;
 
 public class PepsiMcItem {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "pepsimc");
 
 	public static final RegistryObject<Item> TOKEN = ITEMS.register("token", ()-> new Item(new Item.Properties())); 
 	
-	public static final RegistryObject<Item> USED_CAN = ITEMS.register("used_can", ()-> new Item(new Item.Properties()
-			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
+	public static final RegistryObject<Item> USED_CAN = ITEMS.register("used_can", ()-> new Item(new Item.Properties().tab(PepsiMcItemGroup.PEPSIMC_TAB)));
 	
 	public static final RegistryObject<Item> USED_BOTTLE = ITEMS.register("used_bottle", ()-> new Item(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB))); 
@@ -478,10 +472,10 @@ public class PepsiMcItem {
 	public static final RegistryObject<Item> EMPTY_CAN = ITEMS.register("empty_can", ()-> new Item(new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)));
 
-	public static final RegistryObject<Item> PEPSI_FLUID_BUCKET = ITEMS.register("pepsi_bucket", ()-> new /*Bucket*/Item(/*()->PepsiMcFluid.PEPSI_FLUID.get(),*/new Item.Properties()
+	public static final RegistryObject<Item> PEPSI_FLUID_BUCKET = ITEMS.register("pepsi_bucket", ()-> new BucketItem(()->PepsiMcFluid.PEPSI_FLUID.get(),new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
 			.stacksTo(16)));
-	public static final RegistryObject<Item> PEPSI_MAX_FLUID_BUCKET = ITEMS.register("pepsi_max_bucket", ()-> new /*Bucket*/Item(/*()->PepsiMcFluid.PEPSI_MAX_FLUID.get(),*/new Item.Properties()
+	public static final RegistryObject<Item> PEPSI_MAX_FLUID_BUCKET = ITEMS.register("pepsi_max_bucket", ()-> new BucketItem(()-> PepsiMcFluid.PEPSI_MAX_FLUID.get(),new Item.Properties()
 			.tab(PepsiMcItemGroup.PEPSIMC_TAB)
 			.stacksTo(16)));
 	

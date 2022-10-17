@@ -2,8 +2,11 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import com.mojang.logging.LogUtils;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.BatteryDisplay;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.FluidTankComponent;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.ProgressBar;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.configuration.CommonConfig;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedBottlerMenu;
 import net.minecraft.client.Minecraft;
@@ -41,6 +44,7 @@ public class AutomatedBottlerScreen extends AutomatedProcessingScreen<AutomatedB
 		super.init();
 		this.addRenderableWidget(new BatteryDisplay(this.getGuiLeft()+152,this.getGuiTop()+9,this.menu,this));
 		this.addRenderableWidget(new ProgressBar(this.getGuiLeft()+68,this.getGuiTop()+33,this.menu,this));
+		//this.addRenderableWidget(new FluidTankComponent(this.getGuiLeft()+152,this.getGuiTop()+40,this.menu,this, CommonConfig.BOTTLER_FLUID_STORAGE.get()));
 	}
 
 
@@ -135,7 +139,6 @@ public class AutomatedBottlerScreen extends AutomatedProcessingScreen<AutomatedB
 			this.blit(stack,x+73,y+38,177,4,(int)ProgressPixels,1);
 		}
 	}
-
 }
 	 
 

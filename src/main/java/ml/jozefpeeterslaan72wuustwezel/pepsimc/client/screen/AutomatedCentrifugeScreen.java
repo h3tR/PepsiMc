@@ -15,8 +15,10 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -37,7 +39,7 @@ public class AutomatedCentrifugeScreen extends AutomatedProcessingScreen<Automat
 
 	
 	@Override
-	public void render(PoseStack stack, int mouseX, int mouseY, float Ptick) {
+	public void render(@NotNull PoseStack stack, int mouseX, int mouseY, float Ptick) {
 		this.renderBackground(stack);
 		super.render(stack, mouseX, mouseY, Ptick);
 		this.renderTooltip(stack, mouseX, mouseY);
@@ -68,7 +70,7 @@ public class AutomatedCentrifugeScreen extends AutomatedProcessingScreen<Automat
 			inv.setItem(i, entity.itemHandler.getStackInSlot(i));
 		}
 		
-		Optional<CentrifugeRecipe> recipe = world.getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, inv, world);
+		Optional<CentrifugeRecipe> recipe = Objects.requireNonNull(world).getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, inv, world);
 
 		return recipe.isPresent();
 		
@@ -102,7 +104,7 @@ public class AutomatedCentrifugeScreen extends AutomatedProcessingScreen<Automat
 	}
 	
 	@Override
-	protected void renderBg(PoseStack stack, float Ptick, int X, int Y) {
+	protected void renderBg(@NotNull PoseStack stack, float Ptick, int X, int Y) {
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 		RenderSystem.setShaderTexture(0, GUI);

@@ -1,6 +1,7 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity;
 
 
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.annotation.Nonnull;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -38,7 +40,7 @@ public class RecyclerEntity extends ProcessingBlockEntity implements IAnimatable
 
 	@Override
 	public void process() {
-		Optional<RecyclerRecipe> recipe = this.getLevel().getRecipeManager().getRecipeFor(RecyclerRecipe.RecyclerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
+		Optional<RecyclerRecipe> recipe = Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(RecyclerRecipe.RecyclerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
 
 		recipe.ifPresent(iRecipe->{
 			itemHandler.extractItem(0, 1, false);
@@ -51,7 +53,7 @@ public class RecyclerEntity extends ProcessingBlockEntity implements IAnimatable
 	
 	@Override
 	public void processAll() {
-		Optional<RecyclerRecipe> recipe = this.getLevel().getRecipeManager().getRecipeFor(RecyclerRecipe.RecyclerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
+		Optional<RecyclerRecipe> recipe = Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(RecyclerRecipe.RecyclerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
 		while (recipe.isPresent()) {
 			recipe.ifPresent(iRecipe->{
 				itemHandler.extractItem(0, 1, false);
@@ -121,13 +123,13 @@ public class RecyclerEntity extends ProcessingBlockEntity implements IAnimatable
 	}
 
 	@Override
-	public Component getDisplayName() {
+	public @NotNull Component getDisplayName() {
 		return new TranslatableComponent("block.pepsimc.recycler");
 	}
 
 	@Nullable
 	@Override
-	public AbstractContainerMenu createMenu(int id, Inventory inv, Player plr) {
+	public AbstractContainerMenu createMenu(int id, @NotNull Inventory inv, @NotNull Player plr) {
 		return new RecyclerMenu(id,inv,this);
 	}
 }

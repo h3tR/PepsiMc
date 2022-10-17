@@ -93,8 +93,8 @@ public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 	   }
 
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos,
-								 Player plr, InteractionHand hand, BlockHitResult hit) {
+	public @NotNull InteractionResult use(@NotNull BlockState state, Level world, @NotNull BlockPos pos,
+										  @NotNull Player plr, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
 		if (!world.isClientSide()) {
 			BlockEntity entity = world.getBlockEntity(pos);
 			if(entity instanceof BottlerEntity) {
@@ -109,7 +109,7 @@ public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 
 	
 	@Override 
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos p, CollisionContext context) {
+	public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos p, @NotNull CollisionContext context) {
         return switch (state.getValue(FACING)) {
             case NORTH -> ShW;
             case EAST -> ShL;
@@ -120,7 +120,7 @@ public class BottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 	}
 
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+	public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
 		return PepsiMcBlockEntity.BOTTLER_BLOCK_ENTITY.get().create(pos, state);
 	}
 

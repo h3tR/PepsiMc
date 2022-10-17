@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Optional;
 
 public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
@@ -35,10 +36,10 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
     private Optional<? extends ProcessingRecipe> PreviousRecipe;
     public final CustomEnergyStorage energyStorage;
 
-    private final LazyOptional<IEnergyStorage> energy;
-
     public final ItemStackHandler itemHandler;
-    private final LazyOptional<IItemHandler> handler;
+
+    private final LazyOptional<IEnergyStorage> energy;
+    private final LazyOptional<IItemHandler> itemLazyOptional;
 
     private final BlockEntityType<?> type;
 
@@ -71,7 +72,7 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
         super(in, pos, state);
         this.UsagePerTick = usagePerTick;
         this.itemHandler = createHandler();
-        this.handler = LazyOptional.of(()->itemHandler);
+        this.itemLazyOptional = LazyOptional.of(()->itemHandler);
 
         this.type = in;
         this.energyStorage = new CustomEnergyStorage(energyCapacity, energyMaxTransfer) {
@@ -96,7 +97,6 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
 
     protected abstract int getOutputSlot();
 
-    @Nonnull
     protected abstract int getByProductSlot();
     protected abstract ItemStackHandler createHandler();
     protected abstract LazyOptional<IItemHandler> getOutHandler();
@@ -107,7 +107,7 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
     }
 
     protected boolean isActive(){
-        return energyStorage.getEnergyStored()>0 && getRecipe().isPresent() && (isSlotEmpty(getOutputSlot()) || (isSlotFull(getOutputSlot())) && getRecipe().get().getResultItem().sameItem(itemHandler.getStackInSlot(getOutputSlot())) &&  (getByProductSlot() < 0 ||isSlotEmpty(getByProductSlot()) || (isSlotFull(getByProductSlot())) && getRecipe().get().getByproductItem().sameItem(itemHandler.getStackInSlot(getByProductSlot()))));
+        return energyStorage.getEnergyStored()>0 && getRecipe().isPresent() && (isSlotEmpty(getOutputSlot()) || (isSlotFull(getOutputSlot())) && getRecipe().get().getResultItem().sameItem(itemHandler.getStackInSlot(getOutputSlot())) &&  (getByProductSlot() < 0 ||isSlotEmpty(getByProductSlot()) || (isSlotFull(getByProductSlot())) && Objects.requireNonNull(getRecipe().get().getByproductItem()).sameItem(itemHandler.getStackInSlot(getByProductSlot()))));
     }
     private boolean isSlotEmpty(int slotIndex){
         return itemHandler.getStackInSlot(slotIndex).getCount()<1;
@@ -131,9 +131,10 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void setRemoved() {
-        super.setRemoved();
+    public void invalidateCaps() {
+        super.invalidateCaps();
         energy.invalidate();
+        itemLazyOptional.invalidate();
     }
 
     // getUpdatePacket() and onDataPacket() are for synchronizing on block updates
@@ -230,7 +231,7 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
             if(side == Direction.DOWN)
                 return getOutHandler().cast();
             else
-                return handler.cast();
+                return itemLazyOptional.cast();
         }
         return super.getCapability(cap, side);
     }

@@ -20,6 +20,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+import org.jetbrains.annotations.NotNull;
 
 public class BottlerRecipe extends ProcessingRecipe{
 	static ResourceLocation TYPE_ID = new ResourceLocation("pepsimc", "bottler");
@@ -29,7 +30,7 @@ public class BottlerRecipe extends ProcessingRecipe{
 	}
 	
 	@Override
-	public boolean matches(Container inv, Level Win) {
+	public boolean matches(Container inv, @NotNull Level Win) {
 		return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1))&&in.get(2).test(inv.getItem(2));
 	}
 
@@ -39,14 +40,14 @@ public class BottlerRecipe extends ProcessingRecipe{
 
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public @NotNull RecipeSerializer<?> getSerializer() {
 		return PepsiMcRecipeType.BOTTLER_SERIALIZER.get();
 	}
 	
 
 	
 	@Override
-	public ItemStack getToastSymbol() {
+	public @NotNull ItemStack getToastSymbol() {
 		return new ItemStack(PepsiMcBlock.BOTTLER.get());
 	}
 	
@@ -63,7 +64,7 @@ public class BottlerRecipe extends ProcessingRecipe{
 
 
 		@Override
-		public BottlerRecipe fromJson(ResourceLocation Id, JsonObject json) {
+		public @NotNull BottlerRecipe fromJson(@NotNull ResourceLocation Id, @NotNull JsonObject json) {
 			ItemStack Out = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
 			JsonObject Label = GsonHelper.getAsJsonObject(json, "label");
 			JsonObject Container = GsonHelper.getAsJsonObject(json, "container");
@@ -78,7 +79,7 @@ public class BottlerRecipe extends ProcessingRecipe{
 
 		@Nullable
 		@Override
-		public BottlerRecipe fromNetwork(ResourceLocation Id, FriendlyByteBuf buffer) {
+		public BottlerRecipe fromNetwork(@NotNull ResourceLocation Id, FriendlyByteBuf buffer) {
 			NonNullList<Ingredient> In = NonNullList.withSize(buffer.readInt(), Ingredient.EMPTY);
 
             In.replaceAll(ignored -> Ingredient.fromNetwork(buffer));
@@ -103,7 +104,7 @@ public class BottlerRecipe extends ProcessingRecipe{
 
 
 	@Override
-	public RecipeType<?> getType() {
+	public @NotNull RecipeType<?> getType() {
 		return BottlerRecipeType.INSTANCE;
 	}
 	

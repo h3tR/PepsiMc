@@ -19,6 +19,9 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class CentrifugeRecipe extends ProcessingRecipe{
 	static ResourceLocation TYPE_ID = new ResourceLocation("pepsimc", "centrifuge");
@@ -30,7 +33,7 @@ public class CentrifugeRecipe extends ProcessingRecipe{
 	}
 	
 	@Override
-	public boolean matches(Container inv, Level Win) {
+	public boolean matches(Container inv, @NotNull Level Win) {
 		return in.get(0).test(inv.getItem(0));
 	}
 
@@ -39,13 +42,13 @@ public class CentrifugeRecipe extends ProcessingRecipe{
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public @NotNull RecipeSerializer<?> getSerializer() {
 		return PepsiMcRecipeType.CENTRIFUGE_SERIALIZER.get();
 	}
 
 	
 	@Override
-	public ItemStack getToastSymbol() {
+	public @NotNull ItemStack getToastSymbol() {
 		return new ItemStack(PepsiMcBlock.CENTRIFUGE.get());
 	}
 	
@@ -62,7 +65,7 @@ public class CentrifugeRecipe extends ProcessingRecipe{
 
 
 		@Override
-		public CentrifugeRecipe fromJson(ResourceLocation Id, JsonObject json) {
+		public @NotNull CentrifugeRecipe fromJson(@NotNull ResourceLocation Id, @NotNull JsonObject json) {
 			ItemStack Out = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
 			ItemStack Extra = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "byproduct"));
 			JsonObject Extract = GsonHelper.getAsJsonObject(json, "extract");
@@ -74,7 +77,7 @@ public class CentrifugeRecipe extends ProcessingRecipe{
 
 		@Nullable
 		@Override
-		public CentrifugeRecipe fromNetwork(ResourceLocation Id, FriendlyByteBuf buffer) {
+		public CentrifugeRecipe fromNetwork(@NotNull ResourceLocation Id, FriendlyByteBuf buffer) {
 			NonNullList<Ingredient> In = NonNullList.withSize(buffer.readInt(), Ingredient.EMPTY);
 
             In.replaceAll(ignored -> Ingredient.fromNetwork(buffer));
@@ -92,7 +95,7 @@ public class CentrifugeRecipe extends ProcessingRecipe{
 			for(Ingredient ing : Recipe.getIngredients()) {
 				ing.toNetwork(buffer);
 			}
-			buffer.writeItemStack(Recipe.getByproductItem(), false);
+			buffer.writeItemStack(Objects.requireNonNull(Recipe.getByproductItem()), false);
 			buffer.writeItemStack(Recipe.getResultItem(), false);
 			buffer.writeInt(Recipe.ticks);
 
@@ -102,7 +105,7 @@ public class CentrifugeRecipe extends ProcessingRecipe{
 
 
 	@Override
-	public RecipeType<?> getType() {
+	public @NotNull RecipeType<?> getType() {
 		return CentrifugeRecipeType.INSTANCE;
 	}
 	

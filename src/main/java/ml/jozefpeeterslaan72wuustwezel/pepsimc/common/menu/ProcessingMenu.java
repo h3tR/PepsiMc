@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -14,12 +15,14 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class ProcessingMenu extends AbstractContainerMenu{
 	
 	public final BlockEntity entity;
 	private final IItemHandler inv;
 	public final int Size;
+
     protected final ArrayList<SlotItemHandler> SlotHandlers;
 
 
@@ -29,12 +32,12 @@ public abstract class ProcessingMenu extends AbstractContainerMenu{
 		this.inv = new InvWrapper(inv);
 		this.Size = Size;
         this.SlotHandlers = new ArrayList<>();
+
         layoutPlayerInventorySlots(8, 86);
 		
 		if(entity !=null) {
             entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(this::addSlots);
 		}
-
 	}
 
 	public boolean slotHasItem(int slotIndex) {
@@ -75,11 +78,11 @@ public abstract class ProcessingMenu extends AbstractContainerMenu{
 
 
     @Override
-    public abstract ItemStack quickMoveStack(Player playerIn, int index);
+    public abstract @NotNull ItemStack quickMoveStack(@NotNull Player playerIn, int index);
 
     @Override
-    public boolean stillValid(Player playerIn) {
-        return stillValid(ContainerLevelAccess.create(entity.getLevel(), entity.getBlockPos()), playerIn,entity.getBlockState().getBlock());
+    public boolean stillValid(@NotNull Player playerIn) {
+        return stillValid(ContainerLevelAccess.create(Objects.requireNonNull(entity.getLevel()), entity.getBlockPos()), playerIn,entity.getBlockState().getBlock());
     }
 
     protected static class OutputSlot extends SlotItemHandler{

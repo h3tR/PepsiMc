@@ -19,6 +19,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+import org.jetbrains.annotations.NotNull;
 
 public class RecyclerRecipe extends ProcessingRecipe{
 	static final ResourceLocation TYPE_ID = new ResourceLocation("pepsimc", "recycler");
@@ -34,17 +35,17 @@ public class RecyclerRecipe extends ProcessingRecipe{
 	}
 
 	@Override
-	public boolean matches(Container inv, Level Win) {
+	public boolean matches(Container inv, @NotNull Level Win) {
 		return in.get(0).test(inv.getItem(0))&&in.get(1).test(inv.getItem(1));
 	}
 	
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public @NotNull RecipeSerializer<?> getSerializer() {
 		return PepsiMcRecipeType.RECYCLER_SERIALIZER.get();
 	}
 	
 	@Override
-	public ItemStack getToastSymbol() {
+	public @NotNull ItemStack getToastSymbol() {
 		return new ItemStack(PepsiMcBlock.RECYCLER.get());
 	}
 	
@@ -60,7 +61,7 @@ public class RecyclerRecipe extends ProcessingRecipe{
 	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<RecyclerRecipe>{
 
 		@Override
-		public RecyclerRecipe fromJson(ResourceLocation Id, JsonObject json) {
+		public @NotNull RecyclerRecipe fromJson(@NotNull ResourceLocation Id, @NotNull JsonObject json) {
 			ItemStack Out = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
 			JsonObject Catalyst = GsonHelper.getAsJsonObject(json, "catalyst");
 			JsonObject Recycle = GsonHelper.getAsJsonObject(json, "recycle");
@@ -72,7 +73,7 @@ public class RecyclerRecipe extends ProcessingRecipe{
 
 		@Nullable
 		@Override
-		public RecyclerRecipe fromNetwork(ResourceLocation Id, FriendlyByteBuf buffer) {
+		public RecyclerRecipe fromNetwork(@NotNull ResourceLocation Id, FriendlyByteBuf buffer) {
 			NonNullList<Ingredient> In = NonNullList.withSize(buffer.readInt(), Ingredient.EMPTY);
 
 			In.replaceAll(ignored -> Ingredient.fromNetwork(buffer));
@@ -96,7 +97,7 @@ public class RecyclerRecipe extends ProcessingRecipe{
 
 
 	@Override
-	public RecipeType<?> getType() {
+	public @NotNull RecipeType<?> getType() {
 		return RecyclerRecipeType.INSTANCE;
 	}
 	

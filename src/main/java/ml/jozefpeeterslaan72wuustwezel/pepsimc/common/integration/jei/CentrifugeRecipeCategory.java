@@ -21,6 +21,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 import static net.minecraft.client.gui.GuiComponent.drawString;
 
@@ -35,27 +38,27 @@ public class CentrifugeRecipeCategory implements IRecipeCategory<CentrifugeRecip
 	}
 	
 	@Override
-	public ResourceLocation getUid() {
+	public @NotNull ResourceLocation getUid() {
 		return UID;
 	}
 
 	@Override
-	public Class<? extends CentrifugeRecipe> getRecipeClass() {
+	public @NotNull Class<? extends CentrifugeRecipe> getRecipeClass() {
 		return CentrifugeRecipe.class;
 	}
 
 	@Override
-	public IDrawable getBackground() {
+	public @NotNull IDrawable getBackground() {
 		return this.Background;
 	}
 
 	@Override
-	public IDrawable getIcon() {
+	public @NotNull IDrawable getIcon() {
 		return this.Icon;
 	}
 
 	@Override
-	public void draw(CentrifugeRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+	public void draw(@NotNull CentrifugeRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull PoseStack stack, double mouseX, double mouseY) {
 		IRecipeCategory.super.draw(recipe, recipeSlotsView, stack, mouseX, mouseY);
 		stack.scale(.5f,.5f,.5f);
 		drawString(stack, Minecraft.getInstance().font,"FE/t: "+ FEValueHelper.getFEValue(CommonConfig.CENTRIFUGE_FE_USAGE_PER_TICK.get()), 10, 138, 0xffffff);
@@ -65,14 +68,14 @@ public class CentrifugeRecipeCategory implements IRecipeCategory<CentrifugeRecip
 	}
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder LayoutBuilder, CentrifugeRecipe recipe, IFocusGroup focusGroup) {
+    public void setRecipe(IRecipeLayoutBuilder LayoutBuilder, CentrifugeRecipe recipe, @NotNull IFocusGroup focusGroup) {
         LayoutBuilder.addSlot(RecipeIngredientRole.INPUT,80,9).addIngredients(recipe.getIngredients().get(0));
         LayoutBuilder.addSlot(RecipeIngredientRole.OUTPUT,66,53).addItemStack(recipe.getResultItem());
-        LayoutBuilder.addSlot(RecipeIngredientRole.OUTPUT,94,53).addItemStack(recipe.getByproductItem());
+        LayoutBuilder.addSlot(RecipeIngredientRole.OUTPUT,94,53).addItemStack(Objects.requireNonNull(recipe.getByproductItem()));
     }
 
 	@Override
-	public Component getTitle() {
+	public @NotNull Component getTitle() {
 		return new TranslatableComponent("block.pepsimc.centrifuge");
 	}
 	

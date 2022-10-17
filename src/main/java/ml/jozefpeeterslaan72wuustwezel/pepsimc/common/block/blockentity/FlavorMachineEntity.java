@@ -1,6 +1,7 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity;
 
 
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.annotation.Nonnull;
@@ -18,6 +19,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class FlavorMachineEntity extends ProcessingBlockEntity implements MenuProvider {
@@ -28,7 +30,7 @@ public class FlavorMachineEntity extends ProcessingBlockEntity implements MenuPr
 
 	@Override
 	public void process() {
-		Optional<FlavoringRecipe> recipe = this.getLevel().getRecipeManager().getRecipeFor(FlavoringRecipe.FlavoringRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
+		Optional<FlavoringRecipe> recipe = Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(FlavoringRecipe.FlavoringRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
 
 		recipe.ifPresent(iRecipe->{
 			itemHandler.extractItem(0, 1, false);
@@ -41,7 +43,7 @@ public class FlavorMachineEntity extends ProcessingBlockEntity implements MenuPr
 	
 	@Override
 	public void processAll() {
-		Optional<FlavoringRecipe> recipe = this.getLevel().getRecipeManager().getRecipeFor(FlavoringRecipe.FlavoringRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
+		Optional<FlavoringRecipe> recipe = Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(FlavoringRecipe.FlavoringRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
 		while (recipe.isPresent()) {
 			recipe.ifPresent(iRecipe->{
 				itemHandler.extractItem(0, 1, false);
@@ -92,13 +94,13 @@ public class FlavorMachineEntity extends ProcessingBlockEntity implements MenuPr
 	}
 
 	@Override
-	public Component getDisplayName() {
+	public @NotNull Component getDisplayName() {
 		return new TranslatableComponent("block.pepsimc.flavor_machine");
 	}
 
 	@Nullable
 	@Override
-	public AbstractContainerMenu createMenu(int id, Inventory inv, Player plr) {
+	public AbstractContainerMenu createMenu(int id, @NotNull Inventory inv, @NotNull Player plr) {
 		return new FlavorMachineMenu(id,inv,this);
 	}
 }

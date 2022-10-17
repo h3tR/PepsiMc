@@ -53,7 +53,7 @@ public class AutomatedRecyclerEntity extends AutomatedProcessingBlockEntity impl
 		super.tickServer();
 
 		if (!getBlockState().equals(getBlockState().setValue(BlockStateProperties.ENABLED, isActive())))
-			level.setBlock(worldPosition, getBlockState().setValue(BlockStateProperties.ENABLED, isActive()), Block.UPDATE_ALL);
+			Objects.requireNonNull(level).setBlock(worldPosition, getBlockState().setValue(BlockStateProperties.ENABLED, isActive()), Block.UPDATE_ALL);
 
 	}
 

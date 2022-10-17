@@ -26,6 +26,8 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class AutomatedBottlerBlock extends HorizontalFacedBlock implements EntityBlock {
 
 	public AutomatedBottlerBlock() {
@@ -39,7 +41,7 @@ public class AutomatedBottlerBlock extends HorizontalFacedBlock implements Entit
 	
 	
 	@SuppressWarnings("deprecation")
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState secondState, boolean p_196243_5_) {
+	public void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState secondState, boolean p_196243_5_) {
 	      if (!state.is(secondState.getBlock())) {
 	         BlockEntity blockEntity = level.getBlockEntity(pos);
 	         if (blockEntity instanceof AutomatedBottlerEntity automatedbottlerentity) {
@@ -52,8 +54,8 @@ public class AutomatedBottlerBlock extends HorizontalFacedBlock implements Entit
 	   }
 
 	@Override
-	public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos,
-										  Player plr, InteractionHand hand, BlockHitResult hit) {
+	public @NotNull InteractionResult use(@NotNull BlockState state, Level world, @NotNull BlockPos pos,
+										  @NotNull Player plr, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
 		if (!world.isClientSide()) {
 			BlockEntity entity = world.getBlockEntity(pos);
 			if(entity instanceof AutomatedBottlerEntity) {
@@ -68,13 +70,13 @@ public class AutomatedBottlerBlock extends HorizontalFacedBlock implements Entit
 
 
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+	public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
 		return PepsiMcBlockEntity.AUTOMATED_BOTTLER_BLOCK_ENTITY.get().create(pos, state);
 	}
 
 	@Nullable
 	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
 		if (level.isClientSide()) {
 			return null;
 		} else {
@@ -97,7 +99,7 @@ public class AutomatedBottlerBlock extends HorizontalFacedBlock implements Entit
 	@Nullable
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return super.getStateForPlacement(context)
+		return Objects.requireNonNull(super.getStateForPlacement(context))
 				.setValue(BlockStateProperties.POWERED,false)
 				.setValue(PepsiMcBlockStateProperties.BOTTLING, PepsiMcBlockStateProperties.BottlerActivity.NONE);
 	}

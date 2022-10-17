@@ -22,6 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import org.jetbrains.annotations.NotNull;
 
 public class PepsiteShardArmorItem extends Item {	
 
@@ -33,7 +34,7 @@ public class PepsiteShardArmorItem extends Item {
     
 
    @Override
-   public InteractionResultHolder<ItemStack> use(Level lvl, Player plr, InteractionHand hand) {
+   public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level lvl, Player plr, @NotNull InteractionHand hand) {
 	   LogManager.getLogger().debug("use");
 	      ItemStack itemstack = plr.getItemInHand(hand);
 	      BlockHitResult blockhitresult = getPlayerPOVHitResult(lvl, plr,ClipContext.Fluid.SOURCE_ONLY);

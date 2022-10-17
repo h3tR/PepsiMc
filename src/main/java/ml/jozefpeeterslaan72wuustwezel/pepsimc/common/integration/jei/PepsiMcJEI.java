@@ -23,16 +23,15 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.NotNull;
 
 @JeiPlugin
 public class PepsiMcJEI implements IModPlugin{
 	@Override
-	public ResourceLocation getPluginUid() {
+	public @NotNull ResourceLocation getPluginUid() {
 		return new ResourceLocation("pepsimc","jei_plugin");
 	}
 	
@@ -76,7 +75,7 @@ public class PepsiMcJEI implements IModPlugin{
 	}
 
 	@Override
-	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+	public void registerRecipeCatalysts(@NotNull IRecipeCatalystRegistration registration) {
 		IModPlugin.super.registerRecipeCatalysts(registration);
 		registration.addRecipeCatalyst(new ItemStack(PepsiMcBlock.BOTTLER.get()),new RecipeType<>(BottlerRecipeCategory.UID, BottlerRecipe.class));
 		registration.addRecipeCatalyst(new ItemStack(PepsiMcBlock.AUTOMATED_BOTTLER.get()),new RecipeType<>(BottlerRecipeCategory.UID, BottlerRecipe.class));
@@ -91,7 +90,7 @@ public class PepsiMcJEI implements IModPlugin{
 	}
 
 	@Override
-	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
+	public void registerRecipeTransferHandlers(@NotNull IRecipeTransferRegistration registration) {
 		IModPlugin.super.registerRecipeTransferHandlers(registration);
 		registration.addRecipeTransferHandler(BottlerMenu.class,new RecipeType<>(BottlerRecipeCategory.UID, BottlerRecipe.class),36,3,0,36);
 		registration.addRecipeTransferHandler(AutomatedBottlerMenu.class,new RecipeType<>(BottlerRecipeCategory.UID, BottlerRecipe.class),36,3,0,36);

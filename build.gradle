@@ -6,7 +6,7 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.7.+'
 
     }
 }
@@ -148,16 +148,26 @@ dependencies {
 
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // JEI API
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // JEI
     implementation fg.deobf("software.bernie.geckolib:geckolib-${mc_version_minor}-forge:${geckolib_version}")// Geckolib
+
 
 
 }
 
 mixin {
     // MixinGradle Settings
-    add sourceSets.main, "mixins.${mod_id}.refmap.json"
+    config "${mod_id}.mixins.json"
+    add sourceSets.main, "mixins.${mod_id}-refmap.json"
+
+    debug = true
+    debug.verbose = true
+    debug.export = true
+    dumpTargetOnFailure = true
+
 }
 
 jar {
@@ -173,7 +183,7 @@ jar {
 
                 "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
                 "TweakOrder": 0,
-                "MixinConfigs" : "${mod_id}.mixin.json"
+                "MixinConfigs" : "${mod_id}.mixins.json"
         ])
     }
 }

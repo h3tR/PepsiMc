@@ -47,7 +47,7 @@ public class PepsiMcBlock {
 			()-> new Block(
 					BlockBehaviour.Properties.of(Material.STONE)
 						.strength(4.5f, 15)
-						.sound(SoundType.STONE)
+						.sound(SoundType.DEEPSLATE)
 						.requiresCorrectToolForDrops()));
 
 	

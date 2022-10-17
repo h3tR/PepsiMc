@@ -21,7 +21,10 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public class AutomatedCentrifugeBlock extends HorizontalFacedBlock implements EntityBlock{
 
@@ -36,7 +39,7 @@ public class AutomatedCentrifugeBlock extends HorizontalFacedBlock implements En
 	
 	
 	@SuppressWarnings("deprecation")
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState secondState, boolean what) {
+	public void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState secondState, boolean what) {
 	      if (!state.is(secondState.getBlock())) {
 	         BlockEntity TE = level.getBlockEntity(pos);
 	         if (TE instanceof AutomatedCentrifugeEntity CT) {
@@ -49,8 +52,8 @@ public class AutomatedCentrifugeBlock extends HorizontalFacedBlock implements En
 	   }
 
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos,
-								 Player plr, InteractionHand hand, BlockHitResult hit) {
+	public @NotNull InteractionResult use(@NotNull BlockState state, Level world, @NotNull BlockPos pos,
+										  @NotNull Player plr, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
 		if (!world.isClientSide()) {
 			BlockEntity entity = world.getBlockEntity(pos);
 			if(entity instanceof AutomatedCentrifugeEntity) {
@@ -65,7 +68,7 @@ public class AutomatedCentrifugeBlock extends HorizontalFacedBlock implements En
 
 
 	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+	public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
 		return PepsiMcBlockEntity.AUTOMATED_CENTRIFUGE_BLOCK_ENTITY.get().create(pos, state);
 	}
 
@@ -78,12 +81,12 @@ public class AutomatedCentrifugeBlock extends HorizontalFacedBlock implements En
 	@Nullable
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return super.getStateForPlacement(context).setValue(BlockStateProperties.ENABLED,false);
+		return Objects.requireNonNull(super.getStateForPlacement(context)).setValue(BlockStateProperties.ENABLED,false);
 	}
 
 	@Nullable
 	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
 		if (level.isClientSide()) {
 			return null;
 		} else {

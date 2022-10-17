@@ -28,7 +28,7 @@ public class CentrifugeMenu extends ProcessingMenu {
 		ProcessingBlockEntity rEntity = (ProcessingBlockEntity)entity;
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.slots.get(index);
-		if (slot != null && slot.hasItem()) {
+		if (slot.hasItem()) {
 			ItemStack itemstack1 = slot.getItem();
 			itemstack = itemstack1.copy();
 			if (index < 36) {

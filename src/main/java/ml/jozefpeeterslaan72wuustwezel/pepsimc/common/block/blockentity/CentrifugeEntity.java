@@ -1,6 +1,7 @@
 package ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.blockentity;
 
 
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.annotation.Nonnull;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -37,12 +39,12 @@ public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatab
 
 	@Override
 	public void process() {
-		Optional<CentrifugeRecipe> recipe = this.getLevel().getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
+		Optional<CentrifugeRecipe> recipe = Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
 
 		recipe.ifPresent(iRecipe->{
 			itemHandler.extractItem(0, 1, false);
 			itemHandler.insertItem(1, iRecipe.getResultItem(), false);
-			itemHandler.insertItem(2, iRecipe.getByproductItem(), false);
+			itemHandler.insertItem(2, Objects.requireNonNull(iRecipe.getByproductItem()), false);
 			setChanged();
 		});	
 
@@ -50,12 +52,12 @@ public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatab
 	
 	@Override
 	public void processAll() {
-		Optional<CentrifugeRecipe> recipe = this.getLevel().getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
+		Optional<CentrifugeRecipe> recipe = Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(CentrifugeRecipe.CentrifugeRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
 		while (recipe.isPresent()) {
 			recipe.ifPresent(iRecipe->{
 				itemHandler.extractItem(0, 1, false);
 				itemHandler.insertItem(1, iRecipe.getResultItem(), false);
-				itemHandler.insertItem(2, iRecipe.getByproductItem(), false);
+				itemHandler.insertItem(2, Objects.requireNonNull(iRecipe.getByproductItem()), false);
 
 				setChanged();
 			});	
@@ -122,13 +124,13 @@ public class CentrifugeEntity extends ProcessingBlockEntity implements IAnimatab
 	}
 
 	@Override
-	public Component getDisplayName() {
+	public @NotNull Component getDisplayName() {
 		return new TranslatableComponent("block.pepsimc.centrifuge");
 	}
 
 	@Nullable
 	@Override
-	public AbstractContainerMenu createMenu(int id, Inventory inv, Player plr) {
+	public AbstractContainerMenu createMenu(int id, @NotNull Inventory inv, @NotNull Player plr) {
 		return new CentrifugeMenu(id,inv,this);
 	}
 }

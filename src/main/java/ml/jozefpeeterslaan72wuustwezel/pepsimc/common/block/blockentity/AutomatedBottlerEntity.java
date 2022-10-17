@@ -4,9 +4,13 @@ import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.block.PepsiMcBlockStatePro
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.recipes.BottlerRecipe;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.item.PepsiMcItem;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedBottlerMenu;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.PepsimcNetwork;
+import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.packet.FluidSynchronizationPacket;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.configuration.CommonConfig;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.MenuProvider;
@@ -18,23 +22,49 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.Optional;
 
-public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity implements MenuProvider {
+import static ml.jozefpeeterslaan72wuustwezel.pepsimc.core.util.tags.PepsiMcTags.Items.PEPSI_TYPE_FLUID;
+
+public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity implements MenuProvider, TankOwner {
+    public final FluidTank fluidTank;
+
+    private final LazyOptional<IFluidHandler> fluid;
 
     public AutomatedBottlerEntity(BlockPos pos, BlockState state) {
         super(PepsiMcBlockEntity.AUTOMATED_BOTTLER_BLOCK_ENTITY.get(), pos, state, CommonConfig.BOTTLER_FE_STORAGE.get(), CommonConfig.BOTTLER_CONDUCTIVITY.get(),CommonConfig.BOTTLER_FE_USAGE_PER_TICK.get());
+        fluidTank = new FluidTank(CommonConfig.BOTTLER_FLUID_STORAGE.get()){
+            @Override
+            protected void onContentsChanged() {
+                assert AutomatedBottlerEntity.this.level != null;
+                setChanged(AutomatedBottlerEntity.this.level,AutomatedBottlerEntity.this.worldPosition,AutomatedBottlerEntity.this.getBlockState());
+                super.onContentsChanged();
+            }
+
+            @Override
+            public boolean isFluidValid(FluidStack stack) {
+                return stack.getFluid().is(PEPSI_TYPE_FLUID);
+            }
+        };
+        fluid = LazyOptional.of(()->fluidTank);
     }
 
     protected Optional<BottlerRecipe> getRecipe(){
-      return this.getLevel().getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, getSimpleInv(),this.getLevel());
+      return Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, getSimpleInv(),this.getLevel());
     }
 
     protected void finishProduct() {
@@ -44,9 +74,16 @@ public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity imple
             itemHandler.extractItem(1, 1, false);
             itemHandler.extractItem(2, 1, false);
             itemHandler.insertItem(3, iRecipe.getResultItem(), false);
-            itemHandler.insertItem(4, iRecipe.getByproductItem(), false);
+            itemHandler.insertItem(4, Objects.requireNonNull(iRecipe.getByproductItem()), false);
             setChanged();
         });
+    }
+    public void setFluidStack(FluidStack fluidStack){
+        this.fluidTank.setFluid(fluidStack);
+    }
+
+    public FluidStack getFluidStack(){
+        return this.fluidTank.getFluid();
     }
 
     @Override
@@ -79,7 +116,7 @@ public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity imple
                 activity = PepsiMcBlockStateProperties.BottlerActivity.NONE;
         }
         if (!getBlockState().equals(getBlockState().setValue(PepsiMcBlockStateProperties.BOTTLING, activity).setValue(BlockStateProperties.POWERED, Powered)))
-            level.setBlock(worldPosition, getBlockState().setValue(PepsiMcBlockStateProperties.BOTTLING, activity).setValue(BlockStateProperties.POWERED, Powered), Block.UPDATE_ALL);
+            Objects.requireNonNull(level).setBlock(worldPosition, getBlockState().setValue(PepsiMcBlockStateProperties.BOTTLING, activity).setValue(BlockStateProperties.POWERED, Powered), Block.UPDATE_ALL);
     }
 
     @Override
@@ -112,7 +149,7 @@ public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity imple
                     case 3 ->
                             stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLED_LIQUID);
                     case 4 -> stack.getItem() == Items.BUCKET;
-                    default -> false;
+                    default -> super.isItemValid(slot,stack);
                 };
             }
             @Override
@@ -173,6 +210,35 @@ public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity imple
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, @NotNull Inventory inv, @NotNull Player p_39956_) {
+        PepsimcNetwork.CHANNEL.send(PacketDistributor.ALL.noArg(), new FluidSynchronizationPacket(worldPosition,this.getFluidStack()));
+
         return new AutomatedBottlerMenu(id,inv,this,dataAccess);
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag nbt) {
+        nbt = fluidTank.writeToNBT(nbt);
+        super.saveAdditional(nbt);
+
+    }
+
+    @Override
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
+        fluidTank.readFromNBT(nbt);
+    }
+
+    @NotNull
+    @Override
+    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+       // if(side != Direction.DOWN && side != Direction.UP && cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+        //    return fluid.cast();
+        return super.getCapability(cap, side);
+    }
+
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        fluid.invalidate();
     }
 }
