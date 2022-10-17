@@ -1,0 +1,33 @@
+{
+    "item.pepsimc.pepsi_can":"一罐百事可乐",
+    "item.pepsimc.pepsi_bottle":"一瓶百事可乐",
+    "item.pepsimc.pepsi_max_bottle":"一瓶极度百事可乐",
+    "item.pepsimc.pepsi_max_can":"一罐极度百事可乐",
+    "item.pepsimc.caramel":"焦糖",
+    "item.pepsimc.phosphoric_acid":"磷酸",
+    "item.pepsimc.stevia":"甜叶菊甜味剂",
+    "item.pepsimc.caffeine":"咖啡因",
+    "item.pepsimc.pepsite_ingot":"百事可乐锭",
+    "item.pepsimc.pepsi_bucket":"百事可乐桶",
+    "item.pepsimc.pepsi_max_bucket":"极度百事可乐桶",
+    "item.pepsimc.pepsi_label":"百事可乐标签",
+    "item.pepsimc.pepsi_max_label":"极度百事可乐标签",
+    "item.pepsimc.empty_bottle":"空瓶",
+    "item.pepsimc.empty_can":"空罐",
+    "item.pepsimc.pepsi_man_tune_disc":"音乐唱片",
+    "item.pepsimc.pepsi_man_tune_disc.desc":"James Shimoji - Pepsi Man Theme Song",
+    "item.pepsimc.stevia_seeds":"甜叶菊种子",
+
+    "block.pepsimc.pepsite_block":"百事可乐块",
+    "block.pepsimc.pepsite_ore":"百事可乐矿石",
+    "block.pepsimc.bottler":"装瓶器",
+    "block.pepsimc.stevia_plant":"甜叶菊",
+    "block.pepsimc.stevia_crop":"甜叶菊种子",
+
+    "entity.minecraft.villager.pepsimc.bottling_plant_operator":"装瓶厂操作员",
+    "fluid.pepsimc.pepsi_fluid":"百事可乐",
+    "fluid.pepsimc.pepsi_max_fluid":"极度百事可乐",
+    "screen.pepsimc.bottler":"装瓶器",
+    "filled_map.pepsimc:abandoned_bottling_plant":"废弃的百事可乐工厂位置",
+    "effect.pepsimc.insomnia":"失眠"
+}
