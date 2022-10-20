@@ -18,7 +18,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -28,7 +27,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
@@ -50,8 +49,10 @@ public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity imple
         fluidTank = new FluidTank(CommonConfig.BOTTLER_FLUID_STORAGE.get()){
             @Override
             protected void onContentsChanged() {
-                assert AutomatedBottlerEntity.this.level != null;
-                setChanged(AutomatedBottlerEntity.this.level,AutomatedBottlerEntity.this.worldPosition,AutomatedBottlerEntity.this.getBlockState());
+                assert level != null;
+                setChanged(level,AutomatedBottlerEntity.this.worldPosition,AutomatedBottlerEntity.this.getBlockState());
+                if(!level.isClientSide())
+                    PepsimcNetwork.CHANNEL.send(PacketDistributor.ALL.noArg(), new FluidSynchronizationPacket(worldPosition,this.fluid));
                 super.onContentsChanged();
             }
 
@@ -62,19 +63,27 @@ public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity imple
         };
         fluid = LazyOptional.of(()->fluidTank);
     }
-
+    @Override
     protected Optional<BottlerRecipe> getRecipe(){
       return Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, getSimpleInv(),this.getLevel());
     }
 
+    @Override
+    protected boolean isActive() {
+        return super.isActive() &&
+                getRecipe().get().getFluid().getFluid() == this.getFluidStack().getFluid()
+                && getRecipe().get().getFluid().getAmount() <= this.getFluidStack().getAmount();
+
+    }
+
+    @Override
     protected void finishProduct() {
         Optional<BottlerRecipe> recipe = getRecipe();
         recipe.ifPresent(iRecipe->{
             itemHandler.extractItem(0, 1, false);
             itemHandler.extractItem(1, 1, false);
-            itemHandler.extractItem(2, 1, false);
-            itemHandler.insertItem(3, iRecipe.getResultItem(), false);
-            itemHandler.insertItem(4, Objects.requireNonNull(iRecipe.getByproductItem()), false);
+            fluidTank.drain(recipe.get().getFluid().getAmount(), IFluidHandler.FluidAction.EXECUTE);
+            itemHandler.insertItem(2, iRecipe.getResultItem(), false);
             setChanged();
         });
     }
@@ -82,18 +91,19 @@ public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity imple
         this.fluidTank.setFluid(fluidStack);
     }
 
+
     public FluidStack getFluidStack(){
         return this.fluidTank.getFluid();
     }
 
     @Override
     protected int getOutputSlot() {
-        return 3;
+        return 2;
     }
 
     @Override
     protected int getByProductSlot() {
-        return 4;
+        return -1;
     }
 
     @Override
@@ -101,7 +111,6 @@ public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity imple
         super.tickServer();
         PepsiMcBlockStateProperties.BottlerActivity activity;
         boolean Powered;
-
 
         if (energyStorage.getEnergyStored() <= 0) {
             Powered = false;
@@ -122,7 +131,7 @@ public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity imple
     @Override
     protected ItemStackHandler createHandler() {
 
-        return new ItemStackHandler(5) {
+        return new ItemStackHandler(3) {
 
             @Override
             protected void onContentsChanged(int slot) {
@@ -131,8 +140,6 @@ public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity imple
 
             @Override
             public int getSlotLimit(int slot){
-                if(slot == 4)
-                    return 16;
                 return 64;
             }
 
@@ -140,15 +147,9 @@ public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity imple
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 return switch (slot) {
-                    case 0 ->
-                            stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_CONTAINER);
-                    case 1 ->
-                            stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_LABEL);
-                    case 2 ->
-                            stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_LIQUID);
-                    case 3 ->
-                            stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLED_LIQUID);
-                    case 4 -> stack.getItem() == Items.BUCKET;
+                    case 0 -> stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_CONTAINER);
+                    case 1 -> stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_LABEL);
+                    case 2 -> stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.PEPSI_VARIANT);
                     default -> super.isItemValid(slot,stack);
                 };
             }
@@ -164,40 +165,45 @@ public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity imple
 }
 
     @Override
-    protected LazyOptional<IItemHandler> getOutHandler() {
-        return LazyOptional.of(()->new IItemHandler(){
+    protected LazyOptional<IItemHandlerModifiable> getOutHandler() {
+        return LazyOptional.of(()->new IItemHandlerModifiable(){
+
+            @Override
+            public void setStackInSlot(int slot, @NotNull ItemStack stack) {
+                itemHandler.setStackInSlot(slot+2,stack);
+            }
 
             @Override
             public int getSlots() {
-                return 2;
+                return 1;
             }
 
             @NotNull
             @Override
             public ItemStack getStackInSlot(int slot) {
-                return itemHandler.getStackInSlot(slot+3);
+                return itemHandler.getStackInSlot(slot+2);
             }
 
             @NotNull
             @Override
             public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-                return itemHandler.insertItem(slot+3, stack, simulate);
+                return itemHandler.insertItem(slot+2, stack, simulate);
             }
 
             @NotNull
             @Override
             public ItemStack extractItem(int slot, int amount, boolean simulate) {
-                return itemHandler.extractItem(slot+3,amount,simulate);
+                return itemHandler.extractItem(slot+2,amount,simulate);
             }
 
             @Override
             public int getSlotLimit(int slot) {
-                return itemHandler.getSlotLimit(slot+3);
+                return itemHandler.getSlotLimit(slot+2);
             }
 
             @Override
             public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-                return itemHandler.isItemValid(slot+3,stack);
+                return itemHandler.isItemValid(slot+2,stack);
             }
         });
     }
@@ -231,8 +237,8 @@ public class AutomatedBottlerEntity extends AutomatedProcessingBlockEntity imple
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-       // if(side != Direction.DOWN && side != Direction.UP && cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
-        //    return fluid.cast();
+        if(side != Direction.DOWN && side != Direction.UP && cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+           return fluid.cast();
         return super.getCapability(cap, side);
     }
 

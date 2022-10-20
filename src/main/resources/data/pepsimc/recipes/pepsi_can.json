@@ -1,11 +1,14 @@
 {
-    "type": "pepsimc:bottler",
-    "label": { "item": "pepsimc:pepsi_label" },
-   "container": { "item": "pepsimc:empty_can" }, 
-    "fluid": { "item": "pepsimc:pepsi_bucket" },  
-    "result": {
+  "type": "pepsimc:bottler",
+  "label": { "item": "pepsimc:pepsi_label" },
+  "container": { "item": "pepsimc:empty_can" },
+  "fluid": {
+    "FluidName": "pepsimc:pepsi_fluid",
+    "Amount": 1000
+  },
+  "result": {
         "item": "pepsimc:pepsi_can"
-    },
+  },
   "ticks": 100
 
 }

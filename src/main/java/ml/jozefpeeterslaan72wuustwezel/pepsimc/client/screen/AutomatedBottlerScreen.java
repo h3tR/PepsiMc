@@ -2,7 +2,6 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.mojang.logging.LogUtils;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.BatteryDisplay;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.FluidTankComponent;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.ProgressBar;
@@ -17,7 +16,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -43,8 +41,8 @@ public class AutomatedBottlerScreen extends AutomatedProcessingScreen<AutomatedB
 	protected void init() {
 		super.init();
 		this.addRenderableWidget(new BatteryDisplay(this.getGuiLeft()+152,this.getGuiTop()+9,this.menu,this));
-		this.addRenderableWidget(new ProgressBar(this.getGuiLeft()+68,this.getGuiTop()+33,this.menu,this));
-		//this.addRenderableWidget(new FluidTankComponent(this.getGuiLeft()+152,this.getGuiTop()+40,this.menu,this, CommonConfig.BOTTLER_FLUID_STORAGE.get()));
+		this.addRenderableWidget(new ProgressBar(this.getGuiLeft()+66,this.getGuiTop()+33,this.menu,this));
+		this.addRenderableWidget(new FluidTankComponent(this.getGuiLeft()+8,this.getGuiTop()+28,this.menu,this, CommonConfig.BOTTLER_FLUID_STORAGE.get()));
 	}
 
 
@@ -56,16 +54,12 @@ public class AutomatedBottlerScreen extends AutomatedProcessingScreen<AutomatedB
 		this.renderTooltip(stack, mouseX, mouseY);
 		//Render crafting related stuff
 		if (hasRecipe()) {
-			if(!this.menu.slotHasItem(3))
-				Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(RecipeResult(), this.getGuiLeft()+menu.slots.get(3+36).x, this.getGuiTop()+menu.slots.get(3+36).y);
-			if(!this.menu.slotHasItem(4))
-				Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(new ItemStack(Items.BUCKET), this.getGuiLeft()+menu.slots.get(4+36).x, this.getGuiTop()+menu.slots.get(4+36).y);
+			if(!this.menu.slotHasItem(2))
+				Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(RecipeResult(), this.getGuiLeft()+menu.slots.get(2+36).x, this.getGuiTop()+menu.slots.get(2+36).y);
 			for (int i = 0; i < 3; i++) {
-		        RenderSystem.depthFunc(516+i);
-				if(!this.menu.slotHasItem(3))
-					GuiComponent.fill(stack, this.getGuiLeft()+menu.slots.get(3+36).x, this.getGuiTop()+menu.slots.get(3+36).y, this.getGuiLeft()+menu.slots.get(3+36).x+16, this.getGuiTop()+menu.slots.get(3+36).y+16,822083583);
-				if(!this.menu.slotHasItem(4))
-					GuiComponent.fill(stack, this.getGuiLeft()+menu.slots.get(4+36).x, this.getGuiTop()+menu.slots.get(4+36).y, this.getGuiLeft()+menu.slots.get(4+36).x+16, this.getGuiTop()+menu.slots.get(4+36).y+16,822083583);
+				RenderSystem.depthFunc(516+i);
+				if(!this.menu.slotHasItem(2))
+					GuiComponent.fill(stack, this.getGuiLeft()+menu.slots.get(2+36).x, this.getGuiTop()+menu.slots.get(2+36).y, this.getGuiLeft()+menu.slots.get(2+36).x+16, this.getGuiTop()+menu.slots.get(2+36).y+16,822083583);
 			}
 	        RenderSystem.depthFunc(515);
 		}
@@ -109,13 +103,10 @@ public class AutomatedBottlerScreen extends AutomatedProcessingScreen<AutomatedB
         int y = this.getGuiTop();
         this.blit(stack, x, y, 0, 0, 176, 167);
 		if(this.menu.slotHasItem(0)) {
-			this.blit(stack, x+12, y+56, 176, 0, 3, 3);
+			this.blit(stack, x+38, y+50, 176, 0, 3, 3);
 		}
 		if (this.menu.slotHasItem(1)) {
-			this.blit(stack, x+20, y+56, 176, 0, 3, 3);
-		}
-		if (this.menu.slotHasItem(2)) {
-			this.blit(stack, x+28, y+56, 176, 0, 3, 3);
+			this.blit(stack, x+47, y+50, 176, 0, 3, 3);
 		}
 		if(menu.getGoal()>0) {
 			float ProgressPixels = (float)47 / menu.getGoal() * menu.getProgress();
@@ -123,7 +114,6 @@ public class AutomatedBottlerScreen extends AutomatedProcessingScreen<AutomatedB
 			//brackets
 			if(hasRecipe()) {
 				this.blit(stack, x + 71, y + 35, 176, 3, 2, 5);
-				this.blit(stack, x + 120, y + 35, 177, 3, 2, 5);
 			}
 			//Bar
 			if(TotalPixels%3>0)

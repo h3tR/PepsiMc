@@ -1,8 +1,11 @@
 {
     "type": "pepsimc:bottler",
     "label": { "item": "pepsimc:pepsi_label" },
-    "container": { "item": "pepsimc:empty_bottle" }, 
-    "fluid": { "item": "pepsimc:pepsi_bucket" },  
+    "container": { "item": "pepsimc:empty_bottle" },
+    "fluid": {
+        "FluidName": "pepsimc:pepsi_fluid",
+        "Amount": 1000
+    },
     "result": {
         "item": "pepsimc:pepsi_bottle"
     },

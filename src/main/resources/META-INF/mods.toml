@@ -9,7 +9,7 @@ license="All rights reserved"
 
 modId="pepsimc" #mandatory
 
-version="2.1.0" #mandatory
+version="2.1.2" #mandatory
 
 displayName="PepsiMc" #mandatory
 

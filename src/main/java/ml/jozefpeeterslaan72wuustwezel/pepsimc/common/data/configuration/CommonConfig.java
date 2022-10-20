@@ -8,7 +8,7 @@ public class CommonConfig {
 
     public static final int defaultFEUsage = 100;
     public static final int defaultFEStorage = 16384;
-    public static final int defaultFluidStorage = 8000;
+    public static final int defaultFluidStorage = 32000;
 
     public static final int defaultFETransferRate = 256;
 

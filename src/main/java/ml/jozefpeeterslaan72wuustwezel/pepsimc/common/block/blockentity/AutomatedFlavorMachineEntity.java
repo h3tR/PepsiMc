@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -115,8 +115,13 @@ public class AutomatedFlavorMachineEntity extends AutomatedProcessingBlockEntity
 	}
 
 	@Override
-	protected LazyOptional<IItemHandler> getOutHandler() {
-		return LazyOptional.of(()->new IItemHandler(){
+	protected LazyOptional<IItemHandlerModifiable> getOutHandler() {
+		return LazyOptional.of(()->new IItemHandlerModifiable(){
+
+			@Override
+			public void setStackInSlot(int slot, @NotNull ItemStack stack) {
+				itemHandler.setStackInSlot(slot+2,stack);
+			}
 
 			@Override
 			public int getSlots() {

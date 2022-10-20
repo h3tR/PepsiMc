@@ -1,8 +1,11 @@
 {
     "type": "pepsimc:bottler",
     "label": { "item": "pepsimc:pepsi_max_label" },
-    "container": { "item": "pepsimc:empty_can" }, 
-    "fluid": { "item": "pepsimc:pepsi_max_bucket" },  
+    "container": { "item": "pepsimc:empty_can" },
+    "fluid": {
+        "FluidName": "pepsimc:pepsi_max_fluid",
+        "Amount": 1000
+    },
     "result": {
         "item": "pepsimc:pepsi_max_can"
     },

@@ -48,15 +48,19 @@ public class BottlerEntity extends ProcessingBlockEntity implements MenuProvider
 	public void processAll() {
 		Optional<BottlerRecipe> recipe = Objects.requireNonNull(this.getLevel()).getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
 		while (recipe.isPresent()) {
-			recipe.ifPresent(iRecipe->{
-				itemHandler.extractItem(0, 1, false);
-				itemHandler.extractItem(1, 1, false);
-				itemHandler.extractItem(2, 1, false);
-				itemHandler.insertItem(3, iRecipe.getResultItem(), false);
-				itemHandler.insertItem(4, Objects.requireNonNull(iRecipe.getByproductItem()), false);
-				setChanged();
-			});
-			recipe = this.getLevel().getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
+			if(recipe.get().isBucketFluid(itemHandler.getStackInSlot(2))) {
+				recipe.ifPresent(iRecipe -> {
+					itemHandler.extractItem(0, 1, false);
+					itemHandler.extractItem(1, 1, false);
+					itemHandler.extractItem(2, 1, false);
+					itemHandler.insertItem(3, iRecipe.getResultItem(), false);
+					itemHandler.insertItem(4, Objects.requireNonNull(iRecipe.getByproductItem()), false);
+					setChanged();
+				});
+				recipe = this.getLevel().getRecipeManager().getRecipeFor(BottlerRecipe.BottlerRecipeType.INSTANCE, getSimpleInv(), this.getLevel());
+			}else
+				break;
+
 		}
 		
 
@@ -80,16 +84,12 @@ public class BottlerEntity extends ProcessingBlockEntity implements MenuProvider
 			@Override
 			public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
 				return switch (slot) {
-					case 0 ->
-							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_CONTAINER);
-					case 1 ->
-							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_LABEL);
-					case 2 ->
-							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_LIQUID);
-					case 3 ->
-							stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLED_LIQUID);
+					case 0 -> stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_CONTAINER);
+					case 1 -> stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_LABEL);
+					case 2 -> stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.BOTTLING_LIQUID);
+					case 3 -> stack.getItem().getDefaultInstance().getTags().toList().contains(PepsiMcTags.Items.PEPSI_VARIANT);
 					case 4 -> stack.getItem() == Items.BUCKET;
-					default -> false;
+					default -> super.isItemValid(slot,stack);
 				};
 			}
 			

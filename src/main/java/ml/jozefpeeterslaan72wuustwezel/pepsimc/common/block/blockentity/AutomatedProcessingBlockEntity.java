@@ -20,6 +20,7 @@ import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
@@ -99,17 +100,22 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
 
     protected abstract int getByProductSlot();
     protected abstract ItemStackHandler createHandler();
-    protected abstract LazyOptional<IItemHandler> getOutHandler();
+    protected abstract LazyOptional<IItemHandlerModifiable> getOutHandler();
 
 
-    private boolean isSlotFull(int slotIndex){
+
+    protected boolean isSlotFull(int slotIndex){
         return itemHandler.getStackInSlot(slotIndex).getCount() < itemHandler.getSlotLimit(slotIndex);
     }
 
     protected boolean isActive(){
-        return energyStorage.getEnergyStored()>0 && getRecipe().isPresent() && (isSlotEmpty(getOutputSlot()) || (isSlotFull(getOutputSlot())) && getRecipe().get().getResultItem().sameItem(itemHandler.getStackInSlot(getOutputSlot())) &&  (getByProductSlot() < 0 ||isSlotEmpty(getByProductSlot()) || (isSlotFull(getByProductSlot())) && Objects.requireNonNull(getRecipe().get().getByproductItem()).sameItem(itemHandler.getStackInSlot(getByProductSlot()))));
+        return energyStorage.getEnergyStored()>0 && getRecipe().isPresent()
+                && (isSlotEmpty(getOutputSlot()) || (isSlotFull(getOutputSlot()))
+                && getRecipe().get().getResultItem().sameItem(itemHandler.getStackInSlot(getOutputSlot()))
+                &&  (getByProductSlot() < 0 ||isSlotEmpty(getByProductSlot()) || (isSlotFull(getByProductSlot()))
+                && Objects.requireNonNull(getRecipe().get().getByproductItem()).sameItem(itemHandler.getStackInSlot(getByProductSlot()))));
     }
-    private boolean isSlotEmpty(int slotIndex){
+    protected boolean isSlotEmpty(int slotIndex){
         return itemHandler.getStackInSlot(slotIndex).getCount()<1;
     }
 
@@ -228,8 +234,8 @@ public abstract class AutomatedProcessingBlockEntity extends BlockEntity {
             return energy.cast();
         }
         if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            if(side == Direction.DOWN)
-                return getOutHandler().cast();
+            if(side == Direction.DOWN){
+                return getOutHandler().cast();}
             else
                 return itemLazyOptional.cast();
         }

@@ -26,21 +26,19 @@ import org.jetbrains.annotations.NotNull;
 public class AutomatedBottlerMenu extends AutomatedProcessingMenu implements FluidHandlerMenu{
 
 	public AutomatedBottlerMenu(int ID, Inventory inv, BlockEntity entity, ContainerData data) {
-		super(ID,  inv, entity, PepsiMcMenu.AUTOMATED_BOTTLER_MENU.get(), 5, data);
+		super(ID,  inv, entity, PepsiMcMenu.AUTOMATED_BOTTLER_MENU.get(), 3, data);
 	}
 
 	@Override
 	protected void addSlots(IItemHandler h) {
-		SlotHandlers.add(new SlotItemHandler(h,0,12,29));
-		SlotHandlers.add(new SlotItemHandler(h,1,30,29));
-		SlotHandlers.add(new SlotItemHandler(h,2,48,29));
-		SlotHandlers.add(new OutputSlot(h,3,129,29));
-		SlotHandlers.add(new OutputSlot(h,4,129,50));
+		SlotHandlers.add(new SlotItemHandler(h,0,28,29));
+		SlotHandlers.add(new SlotItemHandler(h,1,46,29));
+		SlotHandlers.add(new OutputSlot(h,2,129,29));
 		SlotHandlers.forEach(this::addSlot);
 	}
 
 	@Override
-	public ItemStack quickMoveStack(Player plr, int index) {
+	public @NotNull ItemStack quickMoveStack(@NotNull Player plr, int index) {
 		AutomatedProcessingBlockEntity rEntity = (AutomatedProcessingBlockEntity)entity;
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.slots.get(index);
@@ -55,10 +53,6 @@ public class AutomatedBottlerMenu extends AutomatedProcessingMenu implements Flu
 					}
 				}else if (this.slots.get(37).mayPlace(itemstack)&&rEntity.itemHandler.isItemValid(1,itemstack)) {
 					if (this.moveItemStackTo(itemstack1, 37, 38, false)) {
-						return ItemStack.EMPTY;
-					}
-				}else if (this.slots.get(38).mayPlace(itemstack)&&rEntity.itemHandler.isItemValid(2,itemstack)) {
-					if (this.moveItemStackTo(itemstack1, 38, 39, false)) {
 						return ItemStack.EMPTY;
 					}
 				} else if (index >= 0 && index < 27) {

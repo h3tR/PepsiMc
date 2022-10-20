@@ -10,8 +10,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class PepsiMcTags {
 	public static class Items{
@@ -19,7 +17,6 @@ public class PepsiMcTags {
 		public static final TagKey<Item> BOTTLING_LIQUID = createTag("bottling_liquid");
 		public static final TagKey<Item> BOTTLING_CONTAINER = createTag("bottling_container");
 		public static final TagKey<Item> BOTTLING_LABEL = createTag("bottling_label");
-		public static final TagKey<Item> BOTTLED_LIQUID = createTag("bottled_liquid");
 		public static final TagKey<Item> RECYCLABLE = createTag("recyclable");
 		public static final TagKey<Item> RECYCLED = createTag("recycled");
 		public static final TagKey<Item> RECYCLING_CATALYST = createTag("recycling_catalyst");

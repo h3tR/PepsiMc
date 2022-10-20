@@ -2,9 +2,7 @@ package ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.logging.LogUtils;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.client.screen.component.helper.FluidTankRenderer;
-import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.AutomatedProcessingMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.FluidHandlerMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.common.menu.ProcessingMenu;
 import ml.jozefpeeterslaan72wuustwezel.pepsimc.core.network.PepsimcNetwork;
@@ -15,20 +13,16 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
-
-import static ml.jozefpeeterslaan72wuustwezel.pepsimc.common.data.util.FEValueHelper.getFEValue;
-
 
 @OnlyIn(Dist.CLIENT)
 public class FluidTankComponent extends AbstractWidget {
@@ -89,10 +83,11 @@ public class FluidTankComponent extends AbstractWidget {
 
     @Override
     public void renderToolTip(@NotNull PoseStack stack, int MouseX, int MouseY) {
+
         if(Screen.hasShiftDown())
-            this.screen.renderTooltip(stack,new TextComponent(menu.getFluidStack().getAmount()+" mB / "+ renderer.capacity+ "mB"),MouseX,MouseY);
+            this.screen.renderTooltip(stack,new TextComponent( new TranslatableComponent(menu.getFluidStack().getFluid().getAttributes().getTranslationKey()).getString()+": "+menu.getFluidStack().getAmount()+" mB / "+ renderer.capacity+ "mB"),MouseX,MouseY);
         else
-            this.screen.renderTooltip(stack,new TextComponent(menu.getFluidStack().getAmount()+" mB"),MouseX,MouseY);
+            this.screen.renderTooltip(stack,new TextComponent(new TranslatableComponent(menu.getFluidStack().getFluid().getAttributes().getTranslationKey()).getString()+": "+menu.getFluidStack().getAmount()+" mB"),MouseX,MouseY);
 
     }
 
